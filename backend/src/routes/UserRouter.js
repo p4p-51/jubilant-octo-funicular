@@ -5,13 +5,42 @@ const userRouter = Router();
 const userController = new UserController();
 
 /**
- * @swagger
- * /user:
+ * @openapi
+ * /user/{userId}:
  *   get:
- *     description: Returns user
- *     responses:
+ *      description: Deisc
+ *      parameters:
+ *          - in: path
+ *            name: userId
+ *            required: true
+ *            description: Numeric ID of the user to retrieve.
+ *            schema:
+ *              type: integer
+ *      responses:
  *       200:
- *         description: hello world
+ *         description: A single user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               required:
+ *                  - userName
+ *                  - progress
+ *               properties:
+ *                  userName:
+ *                      type: string
+ *                  avatar:
+ *                      type: string
+ *                  progress:
+ *                      type: object
+ *                      required:
+ *                          - module
+ *                          - stage
+ *                      properties:
+ *                          module:
+ *                              type: string
+ *                          stage:
+ *                              type: integer
  */
 userRouter.get('/:userId', userController.getUser)
 

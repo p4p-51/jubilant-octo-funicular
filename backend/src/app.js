@@ -1,5 +1,6 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
+import * as OpenApiValidator from 'express-openapi-validator'
 import router from "./routes/Router";
 import spec from "./utils/SwaggerDoc";
 
@@ -7,10 +8,21 @@ const app = express();
 const port = 3000;
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended: false}))
+
+console.log(JSON.stringify(spec))
 
 // Serve up the api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
+
+app.use(
+    OpenApiValidator.middleware({
+        apiSpec: spec,
+        validateRequests: true,
+        validateResponses: true
+    })
+)
+
 // Send request to mainRouter
 app.use('/', router)
 
