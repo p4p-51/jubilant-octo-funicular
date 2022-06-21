@@ -1,16 +1,16 @@
-class SituationController {
-    GetAllSituations = async (req, res) => {
-        const situations = [{
-            "situationId": "situation-1",
+class ExperienceController {
+    GetAllExperiences = async (req, res) => {
+        const experiences = [{
+            "_id": "situation-1",
             "name": "ENGGEN 115 Group Project",
             "labels": [
                 {
-                    "labelId": "label-1",
+                    "_id": "label-1",
                     "labelString": "I experienced a conflict",
                     "questions":
                         [
                             {
-                                "questionId": "question-1",
+                                "_id": "question-1",
                                 "questionText": "Tell me about a time when you experienced a conflict",
                                 "answer": {
                                     "s": "Bacon ipsum dolor amet shoulder shankle landjaeger, jowl drumstick fatback boudin pork belly. Chislic filet mignon short ribs porchetta shoulder flank corned beef, fatback venison biltong ground round jerky shank.",
@@ -20,18 +20,18 @@ class SituationController {
                                 }
                             },
                             {
-                                "questionId": "question-2",
+                                "_id": "question-2",
                                 "questionText": "Tell me about a time when you disagreed with a superior",
                             }
                         ]
                 },
                 {
-                    "labelId": "label-2",
+                    "_id": "label-2",
                     "labelString": "I demonstrated leadership",
                     "questions":
                         [
                             {
-                                "questionId": "question-2",
+                                "_id": "question-2",
                                 "questionText": "Tell me about a time when you demonstrated leadership",
                                 "answer": {
                                     "s": "Brisket sausage burgdoggen tongue bacon, beef buffalo pastrami frankfurter. Pork chop bacon flank kielbasa ham hock landjaeger, shankle ground round filet mignon pig pork loin porchetta hamburger.",
@@ -45,27 +45,27 @@ class SituationController {
             ]
         },
         {
-            "situationId": "situation-2",
+            "_id": "situation-2",
             "name": "Summer Camp at Teapot Valley",
             "labels": [
                 {
-                    "labelId": "label-3",
+                    "_id": "label-3",
                     "labelString": "I experienced a failure",
                     "questions":
                         [
                             {
-                                "questionId": "question-3",
+                                "_id": "question-3",
                                 "questionText": "Tell me about a time when you experienced a setback or failure",
                             }
                         ]
                 },
                 {
-                    "labelId": "label-1",
+                    "_id": "label-1",
                     "labelString": "I experienced a conflict",
                     "questions":
                         [
                             {
-                                "questionId": "question-1",
+                                "_id": "question-1",
                                 "questionText": "Tell me about a time when you experienced a conflict",
                                 "answer": {
                                     "s": "Cow frankfurter turkey, pork shank ball tip prosciutto kielbasa kevin boudin drumstick meatball doner meatloaf alcatra. Pancetta pig shankle ball tip bresaola swine. Capicola pancetta fatback pastrami jerky frankfurter. ",
@@ -75,15 +75,15 @@ class SituationController {
                                 }
                             },
                             {
-                                "questionId": "question-2",
+                                "_id": "question-2",
                                 "questionText": "Tell me about a time when you disagreed with a superior",
                             }
                         ]
                 }
             ]
         }]
-        res.send(200, situations)
+        res.send(200, experiences)
     }
 }
 
-export { SituationController }
+export { ExperienceController }

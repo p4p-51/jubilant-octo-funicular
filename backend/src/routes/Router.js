@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import UserRouter from "./UserRouter";
 import ContentRouter from "./ContentRouter";
-import SituationRouter from "./SituationRouter";
+import SituationRouter from "./ExperienceRouter";
 import StatsRouter from "./StatsRouter";
 import QuestionRouter from "./QuestionRouter";
 

@@ -1,8 +1,8 @@
 import Router from 'express'
-import { SituationController } from "../controllers/Situation";
+import { ExperienceController } from "../controllers/Experience";
 
-const situationRouter = Router()
-const situationController = new SituationController()
+const router = Router()
+const controller = new ExperienceController()
 
 /**
  * @openapi
@@ -19,11 +19,11 @@ const situationController = new SituationController()
  *                          items:
  *                              type: object
  *                              required:
- *                                  - situationId
+ *                                  - _id
  *                                  - name
  *                                  - labels
  *                              properties:
- *                                  situationId:
+ *                                  _id:
  *                                      type: string
  *                                  name:
  *                                      type: string
@@ -33,11 +33,11 @@ const situationController = new SituationController()
  *                                      items:
  *                                          type: object
  *                                          required:
- *                                              - labelId
+ *                                              - _id
  *                                              - labelString
  *                                              - questions
  *                                          properties:
- *                                              labelId:
+ *                                              _id:
  *                                                  type: string
  *                                              labelString:
  *                                                  type: string
@@ -46,10 +46,10 @@ const situationController = new SituationController()
  *                                                  items:
  *                                                      type: object
  *                                                      required:
- *                                                          - questionId
+ *                                                          - _id
  *                                                          - questionText
  *                                                      properties:
- *                                                          questionId:
+ *                                                          _id:
  *                                                              type: string
  *                                                          questionText:
  *                                                              type: string
@@ -71,8 +71,8 @@ const situationController = new SituationController()
  *                                                                      type: string
  * 
 */
-situationRouter.get('/', situationController.GetAllSituations)
+router.get('/', controller.GetAllExperiences)
 
-export default situationRouter
+export default router
 
 
