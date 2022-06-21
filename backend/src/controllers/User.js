@@ -1,8 +1,6 @@
-import {Request, Response} from 'express'
-
 class UserController {
     async get(req, res){
-        res.send({"asdf": "sadf"})
+        res.send(200, {"hello": "world"})
     }
 }
 

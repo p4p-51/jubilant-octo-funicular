@@ -1,5 +1,7 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 import router from "./routes/Router";
+import spec from "./utils/SwaggerDoc";
 
 const app = express();
 const port = 3000;
@@ -7,6 +9,8 @@ const port = 3000;
 app.use(express.json())
 app.use(express.urlencoded())
 
+// Serve up the api-docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
 // Send request to mainRouter
 app.use('/', router)
 
