@@ -41,9 +41,51 @@ const contentController = new ContentController()
  *                                              name:
  *                                                  type: string
  *                                              id:
- *                                                  type: string
+ *                                                  type: integer
  */
-contentRouter.get('/', contentController.getAllContent)
+contentRouter.get('/', contentController.GetAllContent)
+
+/**
+ * @openapi
+ * /content/{moduleId}/{stageId}:
+ *  get:
+ *      description: Get the content of a modules stage
+ *      parameters:
+ *          - in: path
+ *            name: moduleId
+ *            required: true
+ *            description: The module ID
+ *            schema:
+ *                type: integer
+ *          - in: path
+ *            name: stageId
+ *            required: true
+ *            description: The stage ID
+ *            schema:
+ *                type: integer
+ *      responses:
+ *          200:
+ *              description: The content of a module stage
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              subtitle:
+ *                                  type: string
+ *                              description:
+ *                                  type: string
+ *                              sections:
+ *                                  type: array
+ *                                  items:
+ *                                      type: object
+ *                                      properties:
+ *                                          sectionTitle:
+ *                                              type: string
+ *                                          content:
+ *                                              type: string
+ */
+contentRouter.get('/:moduleId/:stageId', contentController.GetModuleStage)
 
 export default contentRouter
 

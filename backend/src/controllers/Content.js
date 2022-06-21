@@ -1,5 +1,5 @@
 class ContentController {
-    getAllContent = async(req, res) => {
+    GetAllContent = async(req, res) => {
         const content = [{
             "moduleId": "SOMEID",
             "moduleName": "self-into",
@@ -21,15 +21,34 @@ class ContentController {
             "stages": [
                 {
                     "name": "quiz 1",
-                    "id": "asdf2"
+                    "id": "1"
                 },
                 {
                     "name": "lecture",
-                    "id": "sadf2"
+                    "id": "2"
                 }]
         }]
 
         res.send(200, content)
+    }
+
+    GetModuleStage = async (req, res) => {
+        const stage = {
+            "subtitle": "This is a sub",
+            "description": "desc",
+            "sections": [
+                {
+                    "heading": "Providing basics",
+                    "subtitle": "this  is also a sub",
+                    "type": "text",
+                    "data": {
+                        "sectionTitle": "hi",
+                        "content": "blahahahadfdashfhsdf"
+                    }
+                }
+            ]
+        };
+        res.status(200).send(stage);
     }
 }
 
