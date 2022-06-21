@@ -3,16 +3,34 @@
   "version": "1.0.0",
   "description": "Backend",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon -e js,json,ts --watch src --exec babel-node src/index.js --extensions .ts,.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "chalk": "^4.1.2",
     "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mongodb": "^4.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "@babel/node": "^7.18.5",
+    "@babel/preset-env": "^7.18.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   }
 }
