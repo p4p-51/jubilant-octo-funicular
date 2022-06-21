@@ -1,5 +1,5 @@
 import express from 'express';
-import router from "./routes/router";
+import router from "./routes/Router";
 
 const app = express();
 const port = 3000;
@@ -7,7 +7,7 @@ const port = 3000;
 app.use(express.json())
 app.use(express.urlencoded())
 
-// Send request to router
+// Send request to mainRouter
 app.use('/', router)
 
 // Error handler
