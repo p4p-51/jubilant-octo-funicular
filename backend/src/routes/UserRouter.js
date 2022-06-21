@@ -13,6 +13,6 @@ const userController = new UserController();
  *       200:
  *         description: hello world
  */
-userRouter.get('/', userController.get)
+userRouter.get('/:userId', userController.getUser)
 
 export default userRouter;
