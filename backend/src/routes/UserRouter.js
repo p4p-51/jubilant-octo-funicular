@@ -32,15 +32,7 @@ const userController = new UserController();
  *                  avatar:
  *                      type: string
  *                  progress:
- *                      type: object
- *                      required:
- *                          - module
- *                          - stage
- *                      properties:
- *                          module:
- *                              type: string
- *                          stage:
- *                              type: integer
+ *                      $ref: '#/components/schemas/ModuleStage'
  */
 userRouter.get('/:userId', userController.getUser)
 

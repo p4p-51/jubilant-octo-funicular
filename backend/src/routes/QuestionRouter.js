@@ -6,6 +6,29 @@ const controller = new QuestionController()
 
 /**
  * @openapi
+ * components:
+ *      schemas:
+ *          Answer:
+ *              type: object
+ *              required:
+ *                  - s
+ *                  - t
+ *                  - a
+ *                  - r
+ *              properties:
+ *                  s:
+ *                      type: string
+ *                  t:
+ *                      type: string
+ *                  a:
+ *                      type: string
+ *                  r:
+ *                      type: string
+ */
+
+
+/**
+ * @openapi
  * /question/experience:
  *  get:
  *      description: Get all the questions each with the user's relevant experiences for that question
@@ -91,21 +114,7 @@ router.get('/experience', controller.GetQuestionsWithExperiences)
  *                                                      - _id
  *                                                      - value
  *                                              answer:
- *                                                  type: object
- *                                                  required:
- *                                                      - s
- *                                                      - t
- *                                                      - a
- *                                                      - r
- *                                                  properties:
- *                                                      s:
- *                                                          type: string
- *                                                      t:
- *                                                          type: string
- *                                                      a:
- *                                                          type: string
- *                                                      r:
- *                                                          type: string
+ *                                                  $ref: '#/components/schemas/Answer'
 */
 router.get('/response', controller.GetQuestionsWithResponses)
 
