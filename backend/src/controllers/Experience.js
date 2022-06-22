@@ -84,6 +84,10 @@ class ExperienceController {
         }]
         res.send(200, experiences)
     }
+
+    AddExperience = async (req, res) => {
+        res.status(200).send({'success': true})
+    }
 }
 
 export { ExperienceController }

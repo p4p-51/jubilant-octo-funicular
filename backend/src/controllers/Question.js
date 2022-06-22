@@ -6,11 +6,11 @@ class QuestionController {
             "experiences": [
                 {
                     "_id": "exp-1",
-                    "value": "I volunteered for charity"
+                    "name": "I volunteered for charity"
                 },
                 {
                     "_id": "exp-2",
-                    "value": "Summer camp tramping"
+                    "name": "Summer camp tramping"
                 },
             ]
         }, {
@@ -19,11 +19,11 @@ class QuestionController {
             "experiences": [
                 {
                     "_id": "exp-2",
-                    "value": "Summer camp tramping"
+                    "name": "Summer camp tramping"
                 },
                 {
                     "_id": "exp-3",
-                    "value": "ENGGEN 115 group project"
+                    "name": "ENGGEN 115 group project"
                 },
             ]
         }
@@ -92,6 +92,10 @@ class QuestionController {
         ]
 
         res.send(200, questionsWithResponses)
+    }
+
+    Answer = async (req, res) => {
+        res.status(200)
     }
 }
 

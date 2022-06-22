@@ -6,7 +6,27 @@ const controller = new ExperienceController()
 
 /**
  * @openapi
- * /situation:
+ * components:
+ *      schemas:
+ *          experience:
+ *              type: object
+ *              required:
+ *                  - _id
+ *                  - name
+ *              properties:
+ *                  _id:
+ *                      type: string
+ *                  name:
+ *                      type: string
+ *                  labels:
+ *                      type: array
+ *                      items:
+ *                          $ref: '#/components/schemas/label'
+ */
+
+/**
+ * @openapi
+ * /experience:
  *  get:
  *      description: Get all of the situations that the user has created
  *      responses:
@@ -17,61 +37,30 @@ const controller = new ExperienceController()
  *                      schema:
  *                          type: array
  *                          items:
- *                              type: object
- *                              required:
- *                                  - _id
- *                                  - name
- *                                  - labels
- *                              properties:
- *                                  _id:
- *                                      type: string
- *                                  name:
- *                                      type: string
- *                                      example: ENGGEN 115 group project
- *                                  labels:
- *                                      type: array
- *                                      items:
- *                                          type: object
- *                                          required:
- *                                              - _id
- *                                              - labelString
- *                                              - questions
- *                                          properties:
- *                                              _id:
- *                                                  type: string
- *                                              labelString:
- *                                                  type: string
- *                                              questions:
- *                                                  type: array
- *                                                  items:
- *                                                      type: object
- *                                                      required:
- *                                                          - _id
- *                                                          - questionText
- *                                                      properties:
- *                                                          _id:
- *                                                              type: string
- *                                                          questionText:
- *                                                              type: string
- *                                                          answer:
- *                                                              type: object
- *                                                              required:
- *                                                                  - s
- *                                                                  - t
- *                                                                  - a
- *                                                                  - r
- *                                                              properties:
- *                                                                  s: 
- *                                                                      type: string
- *                                                                  t: 
- *                                                                      type: string
- *                                                                  a: 
- *                                                                      type: string
- *                                                                  r: 
- *                                                                      type: string
- * 
+ *                              $ref: '#/components/schemas/experience'
+ *  post:
+ *      description: Add an experiance for the user
+ *      requestBody:
+ *          description: The experience
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/experience'
+ *      responses:
+ *          200:
+ *              description: success
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              success:
+ *                                  type: boolean
+ *
 */
 router.get('/', controller.GetAllExperiences)
+router.post('/', controller.AddExperience)
 
 export default router
 

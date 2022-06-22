@@ -24,8 +24,23 @@ const controller = new QuestionController()
  *                      type: string
  *                  r:
  *                      type: string
+ *          Question:
+ *              type: object
+ *              required:
+ *                  - _id
+ *                  - questionText
+ *              properties:
+ *                  _id:
+ *                      type: string
+ *                  questionText:
+ *                      type: string
+ *                  answer:
+ *                      oneOf:
+ *                         - $ref: '#/components/schemas/Answer'
+ *                         - type: array
+ *                           items:
+ *                              $ref: '#/components/schemas/Answer'
  */
-
 
 /**
  * @openapi
@@ -40,28 +55,15 @@ const controller = new QuestionController()
  *                      schema:
  *                          type: array
  *                          items:
- *                              type: object
- *                              required:
- *                                  - _id
- *                                  - questionText
- *                              properties:
- *                                  _id:
- *                                      type: string
- *                                  questionText:
- *                                      type: string
- *                                      example: Tell me about a time when you experienced a conflict
- *                                  experiences:
- *                                      type: array
- *                                      items:
- *                                          type: object
- *                                          required:
- *                                              - _id
- *                                              - value
- *                                          properties:
- *                                              _id:
- *                                                  type: string
- *                                              value:
- *                                                  type: string
+ *                              allOf:
+ *                                  - $ref: '#/components/schemas/Question'
+ *                                  - type: object
+ *                                    properties:
+ *                                      experiences:
+ *                                          type: array
+ *                                          items:
+ *                                              $ref: '#/components/schemas/experience'
+ *
 */
 router.get('/experience', controller.GetQuestionsWithExperiences)
 
@@ -117,6 +119,42 @@ router.get('/experience', controller.GetQuestionsWithExperiences)
  *                                                  $ref: '#/components/schemas/Answer'
 */
 router.get('/response', controller.GetQuestionsWithResponses)
+
+/**
+ * @openapi
+ * /question/answer:
+ *  post:
+ *      description: Answer a question
+ *      requestBody:
+ *          description: answer
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      allOf:
+ *                          -   type: object
+ *                              required:
+ *                                  - questionId
+ *                                  - situationId
+ *                              properties:
+ *                                  questionId:
+ *                                      type: string
+ *                                  situationId:
+ *                                      type: string
+ *                          -   $ref: '#/components/schemas/Answer'
+ *      responses:
+ *          200:
+ *              description: success
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              success:
+ *                                  type: boolean
+ *
+ */
+router.post('/answer', controller.Answer)
 
 export default router
 

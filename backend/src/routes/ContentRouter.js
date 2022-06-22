@@ -25,6 +25,7 @@ const contentController = new ContentController()
  * /content:
  *  get:
  *      description: get all available content
+ *      deprecated: true
  *      responses:
  *          200:
  *              description: A list of all responses
@@ -66,6 +67,7 @@ contentRouter.get('/', contentController.GetAllContent)
  * /content/{moduleId}/{stageId}:
  *  get:
  *      description: Get the content of a modules stage
+ *      deprecated: true
  *      parameters:
  *          - in: path
  *            name: moduleId
