@@ -1,3 +1,5 @@
+import {MongoAdapter} from "../models/mongodb/MongoClient";
+
 class ContentController {
     GetAllContent = async(req, res) => {
         const content = [{
@@ -48,6 +50,9 @@ class ContentController {
                 }
             ]
         };
+
+        const mongodb = MongoAdapter.getInstance()
+        console.log(mongodb)
         res.status(200).send(stage);
     }
 }

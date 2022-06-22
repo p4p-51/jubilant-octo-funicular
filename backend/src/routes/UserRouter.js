@@ -166,7 +166,7 @@ userRouter.post('/:userId/self-intro', userController.PostIntro)
  *  get:
  *      description: Get user stats
  *      parameters:
- *          - $ref: '#/components/parameters/userIdPram'
+ *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *          200:
  *              description: A users stats

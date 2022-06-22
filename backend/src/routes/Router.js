@@ -83,9 +83,9 @@ router.post('/feedback', new FeedbackController().SubmitFeedback)
  * /labels:
  *  get:
  *      description: Get all the labels
- *      response:
+ *      responses:
  *          200:
- *              descriptions: labels
+ *              description: labels
  *              content:
  *                  application/json:
  *                      schema:
