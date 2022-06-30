@@ -6,3 +6,27 @@ html, body {
   font-family: $f-poppins;
 
 }
+
+button {
+    font-family: $f-poppins;
+    font-size: 14px;
+    font-weight: 500;
+
+    color: $c-primary;
+    text-transform: capitalize;
+
+    background: none;
+    border: none;
+
+    border-radius: 10px;
+    padding: 8px 20px;
+
+    border: 1px solid $c-primary;
+
+    cursor: pointer;
+    transition: $animation;
+
+    &:hover {
+        transform: scale(1.05);        
+    }
+}
