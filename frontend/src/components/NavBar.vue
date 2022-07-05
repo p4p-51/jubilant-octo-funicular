@@ -17,9 +17,7 @@
     </div>
     <div class="user-info-container">
       <img src="../assets/user.svg" class="avatar" />
-      <div class="link">
-        <img src="../assets/icons/cog.svg" class="icon" />
-      </div>
+      <img src="../assets/icons/logout.svg" class="icon" />
     </div>
   </nav>
 </template>
@@ -90,7 +88,7 @@
   width: 100%;
 
   align-items: center;
-  row-gap: 30px;
+  row-gap: 50px;
 
   .avatar {
     height: 45px;
@@ -98,6 +96,28 @@
 
     border-radius: 100%;
     border: solid 1px $c-grey-dark;
+    box-shadow: border-box;
+    margin: 1px;
+
+    cursor: pointer;
+    transition: 0.1s linear;
+
+    &:hover {
+      margin: 0px;
+      border: solid 2px $c-primary;
+    }
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+    transition: $animation;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 }
 </style>
