@@ -9,11 +9,17 @@
         <img src="../assets/icons/hat.svg" class="icon" />
       </router-link>
       <router-link to="/about" class="link">
-        <img src="../assets/icons/hat.svg" class="icon" />
+        <img src="../assets/icons/note.svg" class="icon" />
       </router-link>
       <router-link to="/lecture" class="link">
-        <img src="../assets/icons/hat.svg" class="icon" />
+        <img src="../assets/icons/cog.svg" class="icon" />
       </router-link>
+    </div>
+    <div class="user-info-container">
+      <img src="../assets/user.svg" class="avatar" />
+      <div class="link">
+        <img src="../assets/icons/cog.svg" class="icon" />
+      </div>
     </div>
   </nav>
 </template>
@@ -66,6 +72,8 @@
   justify-content: center;
   align-items: center;
 
+  border: none;
+
   .icon {
     width: 24px;
     height: 24px;
@@ -73,6 +81,23 @@
 
   &:hover {
     background-color: rgba($c-primary, 0.15);
+  }
+}
+
+.user-info-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  align-items: center;
+  row-gap: 30px;
+
+  .avatar {
+    height: 45px;
+    width: 45px;
+
+    border-radius: 100%;
+    border: solid 1px $c-grey-dark;
   }
 }
 </style>
