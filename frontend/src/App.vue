@@ -24,8 +24,9 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
 
-  background: lightblue;
   height: 100vh;
   width: 100vw;
+
+  overflow: hidden;
 }
 </style>

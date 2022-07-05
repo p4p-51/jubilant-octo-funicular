@@ -30,3 +30,26 @@ button {
         transform: scale(1.05);        
     }
 }
+
+::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: $c-bg-grey;
+}
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color:  $c-bg-grey;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: rgba($c-primary, 0.3);
+
+  &:hover {
+	  background-color: rgba($c-primary, 1);
+  }
+}
+
