@@ -1,14 +1,35 @@
 <template>
-  <div class="container">
-    <img alt="Vue logo" src="../assets/logo.png" />
+  <div class="lecture-view">
+    <TitleBlock
+      module="Self introduction"
+      title="Building your interview
+    profile"
+      subtitle="blah blah something something"
+      description="Pig fatback
+    jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim
+    flank pork loin pig meatloaf brisket turkey ham hock swine strip steak.
+    Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short
+    loin chuck salami pork chop fatback. Pork loin short loin pastrami short
+    ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin
+    pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter
+    swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork
+    chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison
+    spare ribs. Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami
+    jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky
+    shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef
+    pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille
+    venison porchetta, jowl chislic pork loin filet mignon short ribs rump
+    sausage kielbasa ground round alcatra shank."
+    />
   </div>
 </template>
 
 <script lang="ts">
+import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LectureView",
-  components: {},
+  components: { TitleBlock },
 });
 </script>

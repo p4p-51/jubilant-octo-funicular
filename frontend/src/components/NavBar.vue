@@ -26,6 +26,7 @@
 @import "../assets/css/theme.scss";
 .nav-bar {
   width: 120px;
+  min-width: 120px;
   height: 97%;
 
   background: $c-bg-grey;
