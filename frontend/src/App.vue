@@ -6,16 +6,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "@vue/runtime-core";
 import "./assets/css/styles.scss";
 import NavBar from "./components/NavBar.vue";
 
-export default {
+export default defineComponent({
   name: "App",
   components: {
     NavBar,
   },
-};
+});
 </script>
 
 <style scoped lang="scss">
