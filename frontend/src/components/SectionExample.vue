@@ -15,6 +15,13 @@
           </p>
           <div class="quote bottom">"</div>
         </div>
+        <p class="good">Good</p>
+        <ul>
+          <li>Hello</li>
+          <li>Hello</li>
+          <li>Hello</li>
+          <li>Hello</li>
+        </ul>
       </div>
       <div class="example-box">
         <p>helo</p>
@@ -56,7 +63,14 @@
       .quote {
         font-size: 50px;
         font-style: italic;
-        width: 40px;
+
+        width: 30px;
+
+        color: $c-grey-dark;
+
+        &.top {
+          line-height: 1.2;
+        }
 
         &.bottom {
           align-self: flex-end;
@@ -66,7 +80,39 @@
 
       p {
         flex: 1;
+
+        font-size: 14px;
+
+        color: $c-grey-dark;
+
+        margin: 0;
+        margin-top: 10px;
       }
+    }
+
+    .good,
+    .bad {
+      font-size: 20px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    .good {
+      color: green;
+    }
+
+    .bad {
+      color: red;
+    }
+
+    ul {
+      margin: 0;
+      margin-bottom: 10px;
+
+      align-self: stretch;
+      text-align: left;
+
+      font-size: 12px;
     }
   }
 }
