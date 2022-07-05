@@ -39,6 +39,8 @@
   p {
     margin-top: 40px;
     font-size: 14px;
+
+    margin-left: $m-p-indent;
   }
 }
 </style>
