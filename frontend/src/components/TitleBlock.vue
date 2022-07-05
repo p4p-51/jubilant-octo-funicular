@@ -4,7 +4,7 @@
     <h1>{{ title }}</h1>
     <h3>{{ subtitle }}</h3>
 
-    <p>{{ description }}</p>
+    <p><slot /></p>
   </div>
 </template>
 
@@ -16,6 +16,29 @@
     font-weight: 400;
 
     color: $c-secondary;
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 400;
+
+    color: $c-black;
+
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: $c-grey-dark;
+
+    margin: 0;
+  }
+
+  p {
+    margin-top: 40px;
+    font-size: 14px;
   }
 }
 </style>
@@ -34,9 +57,6 @@ export default defineComponent({
       required: true,
     },
     subtitle: {
-      type: String as PropType<string>,
-    },
-    description: {
       type: String as PropType<string>,
     },
   },
