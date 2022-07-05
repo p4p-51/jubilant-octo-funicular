@@ -14,7 +14,6 @@
 p {
   font-size: 14px;
 
-  margin-top: 20px;
   margin-left: $m-p-indent;
 }
 </style>

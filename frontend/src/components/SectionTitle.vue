@@ -19,6 +19,8 @@ h2 {
   height: 3px;
 
   background-color: $c-primary;
+
+  margin-bottom: 25px;
 }
 </style>
 

@@ -44,6 +44,8 @@
       swine. Andouille venison porchetta, jowl chislic pork loin filet mignon
       short ribs rump sausage kielbasa ground round alcatra shank.
     </SectionParagraph>
+
+    <SectionExample title="Example!!!" />
   </div>
 </template>
 
@@ -58,12 +60,14 @@
 </style>
 
 <script lang="ts">
+import SectionExample from "@/components/SectionExample.vue";
 import SectionParagraph from "@/components/SectionParagraph.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
+
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LectureView",
-  components: { TitleBlock, SectionParagraph },
+  components: { TitleBlock, SectionParagraph, SectionExample },
 });
 </script>
