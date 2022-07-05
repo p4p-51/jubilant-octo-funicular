@@ -13,10 +13,7 @@
         <div class="description-container">
           <p class="bad">Bad</p>
           <ul>
-            <li>Hello</li>
-            <li>Hello</li>
-            <li>Hello</li>
-            <li>Hello</li>
+            <li v-for="exp in bad.explanations" :key="exp">{{ exp }}</li>
           </ul>
         </div>
       </div>
@@ -31,10 +28,7 @@
         <div class="description-container">
           <p class="good">Good</p>
           <ul>
-            <li>Hello</li>
-            <li>Hello</li>
-            <li>Hello</li>
-            <li>Hello</li>
+            <li v-for="exp in good.explanations" :key="exp">{{ exp }}</li>
           </ul>
         </div>
       </div>

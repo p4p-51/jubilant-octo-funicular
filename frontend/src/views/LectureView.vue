@@ -86,6 +86,7 @@ export default defineComponent({
         explanations: [
           "Ground round salami beef short ribs",
           "Tenderloin andouille shank, pork cow alcatra spare ribs salami strip",
+          "Andouille meatball filet mignon rump doner short loin ",
         ],
       } as Example,
     };
