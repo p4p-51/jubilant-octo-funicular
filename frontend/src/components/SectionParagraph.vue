@@ -8,6 +8,14 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+@import "../assets/css/theme.scss";
+
+p {
+  font-size: 14px;
+}
+</style>
+
 <script lang="ts">
 import { defineComponent } from "vue";
 import SectionTitle from "./SectionTitle.vue";
