@@ -6,43 +6,37 @@
         <div class="example-text">
           <div class="quote top">"</div>
           <p>
-            Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
-            tail salami cupim flank pork loin pig meatloaf brisket turkey ham
-            hock swine strip steak. Sirloin chicken ground round bacon, kielbasa
-            chuck kevin short ribs. Short loin chuck salami pork chop fatback.
-            Pork loin short loin pastrami short ribs frankfurter salami strip
-            steak brisket leberkas sirloin shoulder boudin pig.
+            {{ bad.text }}
           </p>
           <div class="quote bottom">"</div>
         </div>
-        <p class="bad">Bad</p>
-        <ul>
-          <li>Hello</li>
-          <li>Hello</li>
-          <li>Hello</li>
-          <li>Hello</li>
-        </ul>
+        <div class="description-container">
+          <p class="bad">Bad</p>
+          <ul>
+            <li>Hello</li>
+            <li>Hello</li>
+            <li>Hello</li>
+            <li>Hello</li>
+          </ul>
+        </div>
       </div>
       <div class="example-box">
         <div class="example-text">
           <div class="quote top">"</div>
           <p>
-            Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
-            tail salami cupim flank pork loin pig meatloaf brisket turkey ham
-            hock swine strip steak. Sirloin chicken ground round bacon, kielbasa
-            chuck kevin short ribs. Short loin chuck salami pork chop fatback.
-            Pork loin short loin pastrami short ribs frankfurter salami strip
-            steak brisket leberkas sirloin shoulder boudin pig.
+            {{ good.text }}
           </p>
           <div class="quote bottom">"</div>
         </div>
-        <p class="good">Good</p>
-        <ul>
-          <li>Hello</li>
-          <li>Hello</li>
-          <li>Hello</li>
-          <li>Hello</li>
-        </ul>
+        <div class="description-container">
+          <p class="good">Good</p>
+          <ul>
+            <li>Hello</li>
+            <li>Hello</li>
+            <li>Hello</li>
+            <li>Hello</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 
     .example-text {
       display: flex;
@@ -107,34 +102,41 @@
         margin-top: 10px;
       }
     }
-
-    .good,
-    .bad {
-      font-size: 20px;
-      font-weight: 500;
-      margin-top: 10px;
-
-      margin-bottom: 10px;
-    }
-
-    .good {
-      color: green;
-    }
-
-    .bad {
-      color: red;
-    }
-
-    ul {
-      margin: 0;
-      margin-bottom: 10px;
-
+    .description-container {
+      display: flex;
+      flex-direction: column;
       align-self: stretch;
-      text-align: left;
 
-      font-size: 12px;
+      align-items: center;
 
-      color: $c-black;
+      .good,
+      .bad {
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 10px;
+
+        margin-bottom: 10px;
+      }
+
+      .good {
+        color: green;
+      }
+
+      .bad {
+        color: red;
+      }
+
+      ul {
+        margin: 0;
+        margin-bottom: 10px;
+
+        align-self: stretch;
+        text-align: left;
+
+        font-size: 12px;
+
+        color: $c-black;
+      }
     }
   }
 }
