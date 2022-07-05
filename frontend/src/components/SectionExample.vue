@@ -1,7 +1,28 @@
 <template>
   <div class="section-example">
-    <SectionTitle title="Example" />
+    <SectionTitle> {{ title }} </SectionTitle>
     <div class="examples-container">
+      <div class="example-box">
+        <div class="example-text">
+          <div class="quote top">"</div>
+          <p>
+            Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
+            tail salami cupim flank pork loin pig meatloaf brisket turkey ham
+            hock swine strip steak. Sirloin chicken ground round bacon, kielbasa
+            chuck kevin short ribs. Short loin chuck salami pork chop fatback.
+            Pork loin short loin pastrami short ribs frankfurter salami strip
+            steak brisket leberkas sirloin shoulder boudin pig.
+          </p>
+          <div class="quote bottom">"</div>
+        </div>
+        <p class="bad">Bad</p>
+        <ul>
+          <li>Hello</li>
+          <li>Hello</li>
+          <li>Hello</li>
+          <li>Hello</li>
+        </ul>
+      </div>
       <div class="example-box">
         <div class="example-text">
           <div class="quote top">"</div>
@@ -22,9 +43,6 @@
           <li>Hello</li>
           <li>Hello</li>
         </ul>
-      </div>
-      <div class="example-box">
-        <p>helo</p>
       </div>
     </div>
   </div>
@@ -95,6 +113,8 @@
       font-size: 20px;
       font-weight: 500;
       margin-top: 10px;
+
+      margin-bottom: 10px;
     }
 
     .good {
@@ -113,13 +133,33 @@
       text-align: left;
 
       font-size: 12px;
+
+      color: $c-black;
     }
   }
 }
 </style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import Example from "@/types/Example.interface";
+import { defineComponent, PropType } from "vue";
 import SectionTitle from "./SectionTitle.vue";
-export default defineComponent({ components: { SectionTitle } });
+export default defineComponent({
+  name: "SectionExample",
+  components: { SectionTitle },
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    good: {
+      type: Object as PropType<Example>,
+      required: true,
+    },
+    bad: {
+      type: Object as PropType<Example>,
+      required: true,
+    },
+  },
+});
 </script>

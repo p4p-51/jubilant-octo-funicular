@@ -1,6 +1,6 @@
 <template>
   <div class="section-paragraph">
-    <SectionTitle title="Section title here" />
+    <SectionTitle> {{ title }} </SectionTitle>
 
     <p>
       <slot />

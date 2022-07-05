@@ -45,7 +45,7 @@
       short ribs rump sausage kielbasa ground round alcatra shank.
     </SectionParagraph>
 
-    <SectionExample title="Example!!!" />
+    <SectionExample title="Example" />
   </div>
 </template>
 

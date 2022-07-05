@@ -1,5 +1,5 @@
 <template>
-  <h2>{{ title }}</h2>
+  <h2><slot /></h2>
   <div class="underline"></div>
 </template>
 
@@ -28,11 +28,5 @@ h2 {
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "SectionTitle",
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
 });
 </script>
