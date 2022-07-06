@@ -5,10 +5,21 @@
       <h3>Finished module: <span>Module name</span></h3>
     </div>
     <div class="content">
-      <ModuleItem name="Finding the right examples" moduleType="past" />
-      <ModuleItem name="Listening for the correct cues" moduleType="current" />
-      <ModuleItem name="Structuring responses" moduleType="next" />
-      <ModuleItem name="Bacon ipsum dolor amet" moduleType="future" />
+      <div class="progress">
+        <ModuleItem name="Finding the right examples" moduleType="past" />
+        <ModuleItem name="Listening for the correct cues" moduleType="past" />
+        <ModuleItem name="Structuring responses" moduleType="current" />
+        <ModuleItem name="Bacon ipsum dolor amet" moduleType="next" />
+        <ModuleItem
+          name="Porchetta capicola ham, brisket jerky"
+          moduleType="future"
+        />
+        <ModuleItem name="Frankfurter pig ham hock" moduleType="future" />
+        <ModuleItem
+          name="Bacon venison tenderloin salami"
+          moduleType="future"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +30,11 @@
 .module-end-view {
   padding: 20px 40px;
 
-  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
 
   h1 {
     font-size: 36px;
@@ -39,6 +54,26 @@
     > span {
       color: $c-secondary;
     }
+  }
+}
+
+.content {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+
+  .progress {
+    width: 50%;
+
+    border-right: solid 1px $c-grey-light;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    row-gap: 20px;
   }
 }
 </style>

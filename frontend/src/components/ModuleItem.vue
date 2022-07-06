@@ -8,7 +8,7 @@
       future: moduleType === 'future',
     }"
   >
-    <p>hello</p>
+    <p>{{ name }}</p>
     <span>Up next!</span>
   </div>
 </template>
@@ -27,9 +27,8 @@
 
   height: 40px;
   width: 500px;
+  max-width: 90%;
   border-radius: 6px;
-
-  margin: 15px 0;
 
   p {
     font-size: 14px;
