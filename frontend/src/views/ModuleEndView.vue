@@ -20,6 +20,22 @@
           moduleType="future"
         />
       </div>
+      <div class="survey">
+        <h3>How helpful did you find this module?</h3>
+        <p>
+          Something something give feedback so it can help us improve the
+          learning material for you
+        </p>
+        <div class="stars">
+          <img src="@/assets/icons/stars/star-outline.svg" />
+          <img src="@/assets/icons/stars/star-outline.svg" />
+          <img src="@/assets/icons/stars/star-outline.svg" />
+          <img src="@/assets/icons/stars/star-outline.svg" />
+          <img src="@/assets/icons/stars/star-outline.svg" />
+        </div>
+        <h4>Any other feedback? (Optional)</h4>
+        <textarea />
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +90,63 @@
     align-items: center;
 
     row-gap: 20px;
+  }
+
+  .survey {
+    width: 50%;
+
+    box-sizing: border-box;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      font-size: 20px;
+      font-weight: 400;
+
+      color: $c-black;
+    }
+
+    > p {
+      font-size: 14px;
+      font-weight: 400;
+
+      color: $c-grey-dark;
+
+      width: 380px;
+
+      margin: 0;
+    }
+
+    .stars {
+      display: flex;
+
+      height: 180px;
+
+      align-items: center;
+      column-gap: 5px;
+
+      > img {
+        height: 36px;
+        width: 36px;
+
+        cursor: pointer;
+      }
+    }
+
+    > h4 {
+      font-size: 16px;
+      font-weight: 400;
+
+      color: $c-black;
+
+      margin: 10px;
+    }
+
+    > textarea {
+    }
   }
 }
 </style>
