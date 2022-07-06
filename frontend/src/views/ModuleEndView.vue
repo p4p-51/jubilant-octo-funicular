@@ -37,6 +37,10 @@
         <textarea />
       </div>
     </div>
+    <div class="footer">
+      <p>Up Next: <span>Next Module Name</span></p>
+      <button>Next lesson -></button>
+    </div>
   </div>
 </template>
 
@@ -146,7 +150,51 @@
     }
 
     > textarea {
+      width: 380px;
+      height: 50px;
+      max-width: 90%;
+
+      border: solid 1px $c-grey-light;
+      border-radius: 6px;
+
+      padding: 10px;
+
+      font-size: 14px;
+      font-weight: 400;
+
+      color: $c-grey-dark;
+
+      &:focus {
+        outline: solid 2px $c-primary;
+      }
     }
+  }
+}
+
+.footer {
+  align-self: flex-end;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  margin-bottom: 60px;
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+
+    color: $c-grey-dark;
+
+    > span {
+      color: $c-secondary;
+    }
+  }
+
+  button {
+    background-color: $c-primary;
+
+    color: $c-background;
   }
 }
 </style>
