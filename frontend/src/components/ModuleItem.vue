@@ -9,6 +9,7 @@
     }"
   >
     <p>hello</p>
+    <span>Up next!</span>
   </div>
 </template>
 
@@ -19,6 +20,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 
   box-sizing: border-box;
   padding: 0 20px;
@@ -27,9 +29,21 @@
   width: 500px;
   border-radius: 6px;
 
+  margin: 15px 0;
+
   p {
     font-size: 14px;
     margin: 0;
+  }
+
+  span {
+    font-size: 12px;
+
+    color: $c-secondary;
+
+    padding-left: 20px;
+
+    visibility: hidden;
   }
 
   &.past {
@@ -57,6 +71,18 @@
 
     p {
       color: $c-black;
+    }
+
+    span {
+      visibility: visible;
+    }
+  }
+
+  &.future {
+    border: solid 1px $c-grey-light;
+
+    p {
+      color: $c-grey-dark;
     }
   }
 }
