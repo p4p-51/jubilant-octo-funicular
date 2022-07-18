@@ -1,8 +1,8 @@
-import Router from 'express'
+import Router from "express";
 import { QuestionController } from "../controllers/Question";
 
-const router = Router()
-const controller = new QuestionController()
+const router = Router();
+const controller = new QuestionController();
 
 /**
  * @openapi
@@ -11,19 +11,24 @@ const controller = new QuestionController()
  *          Answer:
  *              type: object
  *              required:
- *                  - s
- *                  - t
- *                  - a
- *                  - r
+ *                  - answer
  *              properties:
- *                  s:
- *                      type: string
- *                  t:
- *                      type: string
- *                  a:
- *                      type: string
- *                  r:
- *                      type: string
+ *                  answer:
+ *                      type: object
+ *                      required:
+ *                          - s
+ *                          - t
+ *                          - a
+ *                          - r
+ *                      properties:
+ *                          s:
+ *                              type: string
+ *                          t:
+ *                              type: string
+ *                          a:
+ *                              type: string
+ *                          r:
+ *                              type: string
  *          Question:
  *              type: object
  *              required:
@@ -34,22 +39,26 @@ const controller = new QuestionController()
  *                      type: string
  *                  questionText:
  *                      type: string
- *                  answer:
- *                      oneOf:
- *                         - $ref: '#/components/schemas/Answer'
- *                         - type: array
- *                           items:
- *                              $ref: '#/components/schemas/Answer'
+ *      parameters:
+ *          questionIdParam:
+ *              name: questionId
+ *              in: path
+ *              required: true
+ *              description: The id of the question
+ *              schema:
+ *                  type: integer
  */
 
 /**
  * @openapi
- * /question/experience:
+ * /questions:
  *  get:
- *      description: Get all the questions each with the user's relevant experiences for that question
+ *      tags:
+ *          - Questions
+ *      description: Get all the questions available, along with a list of the current user's relevant experiences
  *      responses:
  *          200:
- *              description: A list of questions, each with a list of relevant expriences
+ *              description: A list of questions, each with a list of relevant experiences
  *              content:
  *                  application/json:
  *                      schema:
@@ -64,69 +73,47 @@ const controller = new QuestionController()
  *                                          items:
  *                                              $ref: '#/components/schemas/experience'
  *
-*/
-router.get('/experience', controller.GetQuestionsWithExperiences)
+ */
+router.get("/", controller.GetQuestionsWithExperiences);
 
 /**
  * @openapi
- * /question/response:
+ * /questions/{questionId}/answers:
  *  get:
- *      description: Get all the questions each with the user's relevant experiences and saved responses for that question
+ *      tags:
+ *          - Questions
+ *      description: Get the answers by the user to a given question
  *      responses:
  *          200:
- *              description: A list of questions, each with a list of relevant expriences and saved responses
+ *              description: A list of answers and experiences relating to the question (grouped by label id)
  *              content:
  *                  application/json:
  *                      schema:
  *                          type: array
  *                          items:
- *                              type: object
- *                              required:
- *                                  - _id
- *                                  - questionText
- *                              properties:
- *                                  _id:
- *                                      type: string
- *                                  questionText:
- *                                      type: string
- *                                      example: Tell me about a time when you experienced a conflict
- *                                  experiences:
- *                                      type: array
- *                                      items:
- *                                          type: object
- *                                          required:
- *                                              - _id
- *                                              - value
- *                                          properties:
- *                                              _id:
- *                                                  type: string
- *                                              value:
- *                                                  type: string
- *                                  responses:
- *                                      type: array
- *                                      items:
- *                                          type: object
- *                                          required:
- *                                              - experience
- *                                              - answer
- *                                          properties:
- *                                              experience:
- *                                                  type: object
- *                                                  required:
- *                                                      - _id
- *                                                      - value
- *                                              answer:
- *                                                  $ref: '#/components/schemas/Answer'
-*/
-router.get('/response', controller.GetQuestionsWithResponses)
+ *                              allOf:
+ *                                  - type: object
+ *                                    required:
+ *                                      - experience
+ *                                    properties:
+ *                                          experience:
+ *                                              $ref: '#/components/schemas/experience'
+ *
+ *                                  - $ref: '#/components/schemas/Answer'
+ */
+router.get("/:questionId/answer", controller.GetQuestionsWithResponses);
 
 /**
  * @openapi
- * /question/answer:
+ * /questions/{questionId}/answers:
  *  post:
- *      description: Answer a question
+ *      tags:
+ *          - Questions
+ *      description: Submit an answer to a specific question
+ *      parameters:
+ *          - $ref: '#/components/parameters/questionIdParam'
  *      requestBody:
- *          description: answer
+ *          description: An answer to a given question and response
  *          required: true
  *          content:
  *              application/json:
@@ -134,11 +121,8 @@ router.get('/response', controller.GetQuestionsWithResponses)
  *                      allOf:
  *                          -   type: object
  *                              required:
- *                                  - questionId
  *                                  - situationId
  *                              properties:
- *                                  questionId:
- *                                      type: string
  *                                  situationId:
  *                                      type: string
  *                          -   $ref: '#/components/schemas/Answer'
@@ -154,8 +138,6 @@ router.get('/response', controller.GetQuestionsWithResponses)
  *                                  type: boolean
  *
  */
-router.post('/answer', controller.Answer)
+router.post("/:questionId/answers", controller.Answer);
 
-export default router
-
-
+export default router;

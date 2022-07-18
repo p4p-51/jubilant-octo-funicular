@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router } from "express";
 import { UserController } from "../controllers/User";
 
 const userRouter = Router();
@@ -60,16 +60,16 @@ const userController = new UserController();
  *                      type: array
  *                      items:
  *                          type: string
- *
- *
- *
+ *                      example: ["Self Introduction", "Organising Situations", "Structuring Responses", "Allocating Situations", "Mannerisms"]
  */
 
 /**
  * @openapi
- * /user/{userId}:
+ * /users/{userId}:
  *   get:
- *      description: Deisc
+ *      description: Get the profile and progress of a user
+ *      tags:
+ *          - User
  *      parameters:
  *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
@@ -90,13 +90,15 @@ const userController = new UserController();
  *                  progress:
  *                      $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.get('/:userId', userController.GetUser)
+userRouter.get("/:userId", userController.GetUser);
 
 /**
  * @openapi
- * /user/{userId}/complete:
+ * /users/{userId}/complete:
  *  post:
  *      description: Mark a module/stage as complete for a given using
+ *      tags:
+ *          - User
  *      parameters:
  *          - $ref: '#/components/parameters/userIdParam'
  *      requestBody:
@@ -122,13 +124,15 @@ userRouter.get('/:userId', userController.GetUser)
  *                              nextStage:
  *                                  $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.post('/:userId/complete', userController.CompleteStage)
+userRouter.post("/:userId/complete", userController.CompleteStage);
 
 /**
  * @openapi
- * /user/{userId}/self-intro:
+ * /users/{userId}/self-intro:
  *  post:
  *      description: Set a user  self introduction
+ *      tags:
+ *          - User
  *      parameters:
  *          - $ref: '#/components/parameters/userIdParam'
  *      requestBody:
@@ -150,6 +154,8 @@ userRouter.post('/:userId/complete', userController.CompleteStage)
  *                                  type: boolean
  *  get:
  *      description: Get a user's self introduction
+ *      tags:
+ *          - User
  *      responses:
  *          200:
  *              description: Get a users self intro
@@ -158,13 +164,15 @@ userRouter.post('/:userId/complete', userController.CompleteStage)
  *                      schema:
  *                          $ref: '#/components/schemas/selfIntro'
  */
-userRouter.post('/:userId/self-intro', userController.PostIntro)
+userRouter.post("/:userId/self-intro", userController.PostIntro);
 
 /**
  * @openapi
- * /{userId}/stats:
+ * /users/{userId}/stats:
  *  get:
  *      description: Get user stats
+ *      tags:
+ *          - User
  *      parameters:
  *          - $ref: '#/components/parameters/userIdParam'
  *      responses:

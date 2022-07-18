@@ -1,8 +1,8 @@
-import Router from 'express'
+import Router from "express";
 import { ExperienceController } from "../controllers/Experience";
 
-const router = Router()
-const controller = new ExperienceController()
+const router = Router();
+const controller = new ExperienceController();
 
 /**
  * @openapi
@@ -26,12 +26,14 @@ const controller = new ExperienceController()
 
 /**
  * @openapi
- * /experience:
+ * /experiences:
  *  get:
- *      description: Get all of the situations that the user has created
+ *      tags:
+ *          - Experience
+ *      description: Get all the experiences that the user has created
  *      responses:
  *          200:
- *              description: All of the situations that the user has created
+ *              description: All the situations that the user has created
  *              content:
  *                  application/json:
  *                      schema:
@@ -39,7 +41,9 @@ const controller = new ExperienceController()
  *                          items:
  *                              $ref: '#/components/schemas/experience'
  *  post:
- *      description: Add an experiance for the user
+ *      tags:
+ *          - Experience
+ *      description: Add an experience for the user
  *      requestBody:
  *          description: The experience
  *          required: true
@@ -57,11 +61,8 @@ const controller = new ExperienceController()
  *                          properties:
  *                              success:
  *                                  type: boolean
- *
-*/
-router.get('/', controller.GetAllExperiences)
-router.post('/', controller.AddExperience)
+ */
+router.get("/", controller.GetAllExperiences);
+router.post("/", controller.AddExperience);
 
-export default router
-
-
+export default router;
