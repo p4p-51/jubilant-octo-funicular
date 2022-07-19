@@ -12,7 +12,13 @@
         sections that you already know!
       </p>
 
-      <div class="multiselect-container">mut</div>
+      <div class="multiselect-container">
+        <module-select name="Hello" isSelected="false" />
+        <module-select name="Hello" isSelected="false" />
+        <module-select name="Hello" isSelected="true" />
+        <module-select name="Hello" isSelected="false" />
+        <module-select name="Hello" isSelected="false" />
+      </div>
     </div>
 
     <button class="go-button">Next</button>
@@ -41,8 +47,6 @@
   flex-direction: column;
   flex: 1;
 
-  margin: 50px;
-
   width: 600px;
   max-width: 80%;
 
@@ -62,16 +66,26 @@
     font-weight: 400;
 
     color: $c-grey-dark;
+
+    margin: 10px 0;
   }
 
   .multiselect-container {
     flex: 1;
-    background: lightblue;
 
     overflow-y: scroll;
 
-    margin-top: 50px;
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    row-gap: 15px;
+
+    min-height: 200px;
   }
+
+  margin-bottom: 50px;
 }
 
 .go-button {
@@ -85,12 +99,13 @@
 </style>
 
 <script lang="ts">
+import ModuleSelect from "@/components/ModuleSelect.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HomeView",
-  components: { TitleBlock },
+  components: { TitleBlock, ModuleSelect },
   data() {
     return {
       modules: [
