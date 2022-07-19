@@ -41,7 +41,7 @@ export default defineComponent({
 
 .progress-side-bar {
   min-width: 250px;
-  margin: 40px 0;
+  margin: 70px 0;
   margin-left: 15px;
   padding-right: 30px;
   height: 90%;
