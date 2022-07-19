@@ -1,0 +1,175 @@
+<template>
+  <div class="intro-view">
+    <title-block
+      title="Introduction to Behavioural interviews"
+      subtitle="We’ve made a study plan tailored just for you based on your preferences! Take a minute to look through the agenda."
+    />
+
+    <div class="content-container">
+      <h2>Difference between different types of inteviews</h2>
+      <div class="comparison-blocks">
+        <div class="single-block">
+          <img
+            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
+          />
+          <h5>Tail fatback shank porchetta prosciutto</h5>
+          <p>
+            Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
+            kielbasa salami pork chop boudin.
+          </p>
+          <ul>
+            <li>Tongue meatloaf bacon boudin ham hock venison</li>
+            <li>
+              Kevin porchetta ribeye doner shankle burgdoggen fatback meatloaf
+              venison tail pork belly.
+            </li>
+            <li>
+              Jowl rump andouille short loin kevin, buffalo ham corned beef
+              prosciutto chicken ground round chuck
+            </li>
+          </ul>
+        </div>
+        <div class="single-block">
+          <img
+            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
+          />
+          <h5>Tail fatback shank porchetta prosciutto</h5>
+          <p>
+            Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
+            kielbasa salami pork chop boudin.
+          </p>
+          <ul>
+            <li>Tongue meatloaf bacon boudin ham hock venison</li>
+            <li>
+              Kevin porchetta ribeye doner shankle burgdoggen fatback meatloaf
+              venison tail pork belly.
+            </li>
+            <li>
+              Jowl rump andouille short loin kevin, buffalo ham corned beef
+              prosciutto chicken ground round chuck
+            </li>
+          </ul>
+        </div>
+        <div class="single-block">
+          <img
+            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
+          />
+          <h5>Tail fatback shank porchetta prosciutto</h5>
+          <p>
+            Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
+            kielbasa salami pork chop boudin.
+          </p>
+          <ul>
+            <li>Tongue meatloaf bacon boudin ham hock venison</li>
+            <li>
+              Kevin porchetta ribeye doner shankle burgdoggen fatback meatloaf
+              venison tail pork belly.
+            </li>
+            <li>
+              Jowl rump andouille short loin kevin, buffalo ham corned beef
+              prosciutto chicken ground round chuck
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button class="go-button">Gotcha! -></button>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@import "../assets/css/theme.scss";
+
+.intro-view {
+  width: 100%;
+  height: 100%;
+
+  padding: 20px 40px;
+
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+}
+
+.content-container {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 50px;
+  margin-bottom: 50px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+
+    margin-bottom: 100px;
+  }
+
+  .comparison-blocks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 150px;
+
+    width: 100%;
+
+    .single-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      img {
+        height: 150px;
+        align-self: center;
+      }
+
+      h5 {
+        font-size: 16px;
+        font-weight: 500;
+
+        color: $c-black;
+        margin-bottom: 10px;
+        margin-top: 50px;
+      }
+
+      p,
+      ul {
+        font-size: 14px;
+        font-weight: 400;
+
+        color: $c-grey-dark;
+
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+.go-button {
+  background-color: $c-primary;
+  color: $c-background;
+
+  align-self: flex-end;
+
+  margin-bottom: 100px;
+}
+</style>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import TitleBlock from "@/components/TitleBlock.vue";
+
+export default defineComponent({
+  name: "HomeView",
+  components: { TitleBlock },
+  data() {
+    return {};
+  },
+});
+</script>

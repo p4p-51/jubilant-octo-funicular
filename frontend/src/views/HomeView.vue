@@ -2,6 +2,8 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <router-link to="/plan/done">Study Plan</router-link>
+    <br />
+    <router-link to="/lecture/intro">lecture intro</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

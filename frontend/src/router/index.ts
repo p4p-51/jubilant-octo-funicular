@@ -28,6 +28,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "study-plan" */ "../views/StudyPlanView.vue"),
   },
+  {
+    path: "/lecture/intro",
+    name: "introduction to behavioural interviews",
+    component: () =>
+      import(
+        /* webpackChunkName: "study-plan" */ "../views/LectureIntroView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
