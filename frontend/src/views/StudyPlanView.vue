@@ -31,8 +31,6 @@
 
   overflow-y: scroll;
 
-  background: lavender;
-
   display: flex;
   flex-direction: column;
 
@@ -42,9 +40,9 @@
 .content-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  grid-gap: 100px;
+  grid-gap: 150px 120px;
 
-  margin: 0 50px;
+  margin: 50px;
 }
 
 .go-button {
