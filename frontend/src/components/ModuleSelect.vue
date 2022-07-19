@@ -1,7 +1,7 @@
 <template>
   <div class="module-select">
     <p>{{ name }}</p>
-    <button>hello</button>
+    <button><img src="@/assets/icons/check.svg" /></button>
   </div>
 </template>
 
@@ -12,8 +12,7 @@
   height: 40px;
 
   display: flex;
-
-  border: solid 1px $c-grey-light;
+  border: solid 0.5px $c-grey-light;
 
   justify-content: space-between;
   align-items: center;
@@ -25,10 +24,32 @@
 
   margin-right: 25px;
 
+  cursor: pointer;
+  transition: $animation;
+
+  &:hover {
+    border: solid 0.5px $c-primary;
+  }
+
   p {
     font-size: 14px;
 
     color: $c-black;
+  }
+
+  button {
+    border-radius: 100%;
+
+    border: solid 1px $c-grey-dark;
+    background: $c-primary;
+
+    height: 20px;
+    width: 20px;
+
+    margin: 0;
+    padding: 0;
+
+    cursor: pointer;
   }
 }
 </style>
