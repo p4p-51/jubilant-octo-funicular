@@ -5,7 +5,16 @@
       subtitle="We’ve made a study plan tailored just for you based on your preferences! Take a minute to look through the agenda."
     />
 
-    <div class="content-container">hello</div>
+    <div class="content-container">
+      <module-block
+        v-for="(module, index) in modules"
+        :key="index"
+        :number="index + 1"
+        :title="module.title"
+        :description="module.description"
+        :image="module.image"
+      />
+    </div>
 
     <button class="go-button">Let's go</button>
   </div>
@@ -30,6 +39,14 @@
   justify-content: space-between;
 }
 
+.content-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 100px;
+
+  margin: 0 50px;
+}
+
 .go-button {
   background-color: $c-primary;
   color: $c-background;
@@ -43,9 +60,65 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TitleBlock from "@/components/TitleBlock.vue";
+import ModuleBlock from "@/components/ModuleBlock.vue";
 
 export default defineComponent({
   name: "HomeView",
-  components: { TitleBlock },
+  components: { TitleBlock, ModuleBlock },
+  data() {
+    return {
+      modules: [
+        {
+          number: 1,
+          title: "Module 1",
+          description:
+            "This is the first module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 2,
+          title: "Module 2",
+          description:
+            "This is the second module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 3,
+          title: "Module 3",
+          description:
+            "This is the third module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 4,
+          title: "Module 4",
+          description:
+            "This is the fourth module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 5,
+          title: "Module 5",
+          description:
+            "This is the fifth module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 6,
+          title: "Module 6",
+          description:
+            "This is the sixth module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+        {
+          number: 7,
+          title: "Module 7",
+          description:
+            "This is the seventh module. It’s a little bit more complicated than the others, but it’s a good start.",
+          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        },
+      ],
+    };
+  },
 });
 </script>
