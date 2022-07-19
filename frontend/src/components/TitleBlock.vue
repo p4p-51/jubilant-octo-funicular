@@ -1,6 +1,6 @@
 <template>
   <div class="title-block">
-    <h2>{{ module }} ></h2>
+    <h2 :class="{ hidden: !module }">{{ module }} ></h2>
     <h1>{{ title }}</h1>
     <h3>{{ subtitle }}</h3>
 
@@ -41,6 +41,10 @@
     font-size: 14px;
 
     margin-left: $m-p-indent;
+  }
+
+  .hidden {
+    visibility: hidden;
   }
 }
 </style>
