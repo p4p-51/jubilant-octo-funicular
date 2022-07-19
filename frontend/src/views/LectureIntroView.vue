@@ -9,9 +9,7 @@
       <h2>Difference between different types of inteviews</h2>
       <div class="comparison-blocks">
         <div class="single-block">
-          <img
-            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
-          />
+          <img src="@/assets/illustrations/business-chat.svg" />
           <h5>Tail fatback shank porchetta prosciutto</h5>
           <p>
             Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
@@ -30,9 +28,7 @@
           </ul>
         </div>
         <div class="single-block">
-          <img
-            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
-          />
+          <img src="@/assets/illustrations/woman-sitting.svg" />
           <h5>Tail fatback shank porchetta prosciutto</h5>
           <p>
             Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
@@ -51,9 +47,7 @@
           </ul>
         </div>
         <div class="single-block">
-          <img
-            src="https://icon-library.com/images/grey-icon/grey-icon-11.jpg"
-          />
+          <img src="@/assets/illustrations/people-font.svg" />
           <h5>Tail fatback shank porchetta prosciutto</h5>
           <p>
             Ham hock cow meatball beef, pork belly burgdoggen jowl brisket
@@ -111,13 +105,15 @@
   }
 
   .comparison-blocks {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 150px;
+    display: flex;
 
+    gap: 150px;
+    justify-content: space-evenly;
     width: 100%;
 
     .single-block {
+      max-width: 500px;
+
       display: flex;
       flex-direction: column;
       align-items: flex-start;
