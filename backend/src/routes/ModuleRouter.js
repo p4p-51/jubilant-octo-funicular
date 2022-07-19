@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import { ModuleController} from "../controllers/Module";
+import { Router } from 'express';
+import { ModuleController } from '../controllers/Module';
 
-const moduleRouter = Router()
-const moduleController = new ModuleController()
+const moduleRouter = Router();
+const moduleController = new ModuleController();
 
 /**
  * @openapi
@@ -16,8 +16,6 @@ const moduleController = new ModuleController()
  *              schema:
  *                  type: integer
  */
-
-
 
 /**
  * @openapi
@@ -61,7 +59,6 @@ const moduleController = new ModuleController()
  *                              nextStage:
  *                                  $ref: '#/components/schemas/ModuleStage'
  */
-moduleRouter.post("/:moduleId/feedback", moduleController.SubmitFeedback);
-
+moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
 
 export default moduleRouter;

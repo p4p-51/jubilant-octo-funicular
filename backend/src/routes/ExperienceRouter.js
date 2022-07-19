@@ -1,5 +1,5 @@
-import Router from "express";
-import { ExperienceController } from "../controllers/Experience";
+import Router from 'express';
+import { ExperienceController } from '../controllers/Experience';
 
 const router = Router();
 const controller = new ExperienceController();
@@ -62,7 +62,7 @@ const controller = new ExperienceController();
  *                              success:
  *                                  type: boolean
  */
-router.get("/", controller.GetAllExperiences);
-router.post("/", controller.AddExperience);
+router.get('/', controller.GetAllExperiences);
+router.post('/', controller.AddExperience);
 
 export default router;

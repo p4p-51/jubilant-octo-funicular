@@ -1,30 +1,30 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import * as OpenApiValidator from 'express-openapi-validator'
-import router from "./routes/Router";
-import spec from "./utils/SwaggerDoc";
+import * as OpenApiValidator from 'express-openapi-validator';
+import router from './routes/Router';
+import spec from './utils/SwaggerDoc';
 
 const app = express();
 const port = 3000;
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // console.log(JSON.stringify(spec))
 
 // Serve up the api-docs
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
 
 app.use(
-    OpenApiValidator.middleware({
-        apiSpec: spec,
-        validateRequests: true,
-        validateResponses: true
-    })
-)
+  OpenApiValidator.middleware({
+    apiSpec: spec,
+    validateRequests: true,
+    validateResponses: true,
+  })
+);
 
 // Send request to mainRouter
-app.use('/', router)
+app.use('/', router);
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -38,4 +38,4 @@ app.use((err, req, res, next) => {
   `);
 });
 
-export default app
+export default app;

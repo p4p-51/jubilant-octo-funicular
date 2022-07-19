@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { UserController } from "../controllers/User";
+import { Router } from 'express';
+import { UserController } from '../controllers/User';
 
 const userRouter = Router();
 const userController = new UserController();
@@ -90,7 +90,7 @@ const userController = new UserController();
  *                  progress:
  *                      $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.get("/:userId", userController.GetUser);
+userRouter.get('/:userId', userController.GetUser);
 
 /**
  * @openapi
@@ -124,7 +124,7 @@ userRouter.get("/:userId", userController.GetUser);
  *                              nextStage:
  *                                  $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.post("/:userId/complete", userController.CompleteStage);
+userRouter.post('/:userId/complete', userController.CompleteStage);
 
 /**
  * @openapi
@@ -164,7 +164,7 @@ userRouter.post("/:userId/complete", userController.CompleteStage);
  *                      schema:
  *                          $ref: '#/components/schemas/selfIntro'
  */
-userRouter.post("/:userId/self-intro", userController.PostIntro);
+userRouter.post('/:userId/self-intro', userController.PostIntro);
 
 /**
  * @openapi

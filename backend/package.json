@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Backend",
   "scripts": {
-    "dev": "nodemon -e js,json,ts --watch src --exec babel-node src/index.js --extensions .ts,.js"
+    "dev": "nodemon -e js,json,ts --watch src --exec babel-node src/index.js --extensions .ts,.js",
+    "format": "yarn prettier --write ."
   },
   "author": "",
   "license": "ISC",

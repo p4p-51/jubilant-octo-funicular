@@ -11,5 +11,5 @@ const PORT = process.env.PORT || 9002;
 
 export default {
   PORT,
-  MONGODB_URI
+  MONGODB_URI,
 };

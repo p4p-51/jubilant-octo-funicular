@@ -1,5 +1,5 @@
-import Router from "express";
-import { QuestionController } from "../controllers/Question";
+import Router from 'express';
+import { QuestionController } from '../controllers/Question';
 
 const router = Router();
 const controller = new QuestionController();
@@ -74,7 +74,7 @@ const controller = new QuestionController();
  *                                              $ref: '#/components/schemas/experience'
  *
  */
-router.get("/", controller.GetQuestionsWithExperiences);
+router.get('/', controller.GetQuestionsWithExperiences);
 
 /**
  * @openapi
@@ -101,7 +101,7 @@ router.get("/", controller.GetQuestionsWithExperiences);
  *
  *                                  - $ref: '#/components/schemas/Answer'
  */
-router.get("/:questionId/answer", controller.GetQuestionsWithResponses);
+router.get('/:questionId/answer', controller.GetQuestionsWithResponses);
 
 /**
  * @openapi
@@ -138,6 +138,6 @@ router.get("/:questionId/answer", controller.GetQuestionsWithResponses);
  *                                  type: boolean
  *
  */
-router.post("/:questionId/answers", controller.Answer);
+router.post('/:questionId/answers', controller.Answer);
 
 export default router;

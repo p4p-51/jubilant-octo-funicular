@@ -1,20 +1,17 @@
-import { Router } from "express";
-import UserRouter from "./UserRouter";
-import ContentRouter from "./ContentRouter";
-import ExperienceRouter from "./ExperienceRouter";
-import QuestionRouter from "./QuestionRouter";
-import ModuleRouter from "./ModuleRouter";
+import { Router } from 'express';
+import UserRouter from './UserRouter';
+import ContentRouter from './ContentRouter';
+import ExperienceRouter from './ExperienceRouter';
+import QuestionRouter from './QuestionRouter';
+import ModuleRouter from './ModuleRouter';
 
 const router = Router();
 
-router.use("/users", UserRouter);
-router.use("/modules", ModuleRouter)
-router.use("/content", ContentRouter);
-router.use("/experiences", ExperienceRouter);
-router.use("/questions", QuestionRouter);
-
-
-
+router.use('/users', UserRouter);
+router.use('/modules', ModuleRouter);
+router.use('/content', ContentRouter);
+router.use('/experiences', ExperienceRouter);
+router.use('/questions', QuestionRouter);
 
 /**
  * @openapi
@@ -49,12 +46,12 @@ router.use("/questions", QuestionRouter);
  *                          items:
  *                              $ref: '#/components/schemas/label'
  */
-router.get("/labels", (req, res) => {
+router.get('/labels', (req, res) => {
   const labels = [
     {
-      _id: "asdfasdf",
-      labelString: "dsfsaf",
-      questions: "oioi???",
+      _id: 'asdfasdf',
+      labelString: 'dsfsaf',
+      questions: 'oioi???',
     },
   ];
   res.status(200).send(labels);
