@@ -1,7 +1,9 @@
 <template>
   <div class="module-select">
     <p>{{ name }}</p>
-    <button><img src="@/assets/icons/check.svg" /></button>
+    <button :class="{ isSelected: isSelected }">
+      <img src="@/assets/icons/check.svg" />
+    </button>
   </div>
 </template>
 
@@ -41,7 +43,6 @@
     border-radius: 100%;
 
     border: solid 1px $c-grey-dark;
-    background: $c-primary;
 
     height: 20px;
     width: 20px;
@@ -50,6 +51,11 @@
     padding: 0;
 
     cursor: pointer;
+
+    &.isSelected {
+      background-color: $c-primary;
+      border: solid 1px $c-primary;
+    }
   }
 }
 </style>

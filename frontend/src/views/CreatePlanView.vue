@@ -13,11 +13,11 @@
       </p>
 
       <div class="multiselect-container">
-        <module-select name="Hello" isSelected="false" />
-        <module-select name="Hello" isSelected="false" />
-        <module-select name="Hello" isSelected="true" />
-        <module-select name="Hello" isSelected="false" />
-        <module-select name="Hello" isSelected="false" />
+        <module-select name="Hello" :isSelected="false" />
+        <module-select name="Hello" :isSelected="false" />
+        <module-select name="Selected" :isSelected="true" />
+        <module-select name="Hello" :isSelected="false" />
+        <module-select name="Hello" :isSelected="false" />
       </div>
     </div>
 
