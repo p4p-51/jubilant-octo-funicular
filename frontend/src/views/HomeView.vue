@@ -4,13 +4,15 @@
     <router-link to="/plan/done">Study Plan</router-link>
     <br />
     <router-link to="/lecture/intro">lecture intro</router-link>
+    <br />
+    <router-link to="/plan/create">create pl;lan</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HomeView",
