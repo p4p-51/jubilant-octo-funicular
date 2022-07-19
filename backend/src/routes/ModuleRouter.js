@@ -61,4 +61,46 @@ const moduleController = new ModuleController();
  */
 moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
 
+/**
+ * @openapi
+ * /modules/{moduleId}/quiz:
+ *  post:
+ *    description: Submit the score for a module's quiz
+ *    tags:
+ *      - Module
+ *      - Quiz
+ *    parameters:
+ *      - $ref: '#/components/parameters/moduleIdParam'
+ *    requestBody:
+ *      description: Which quiz they're submitting and their score
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - stage
+ *              - numQuestion
+ *              - numCorrect
+ *            properties:
+ *              stage:
+ *                type: string
+ *                enum: [prelim, end]
+ *              numQuestion:
+ *                type: integer
+ *              numCorrect:
+ *                type: integer
+ *
+ *    responses:
+ *          200:
+ *              description: success
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              success:
+ *                                  type: boolean
+ */
+
 export default moduleRouter;
