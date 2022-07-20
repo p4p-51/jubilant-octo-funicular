@@ -75,22 +75,6 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
   }
-
-  > a {
-    text-decoration: none;
-
-    font-size: 12px;
-
-    color: $c-primary;
-
-    align-self: flex-end;
-
-    transition: $animation;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
 }
 </style>
 

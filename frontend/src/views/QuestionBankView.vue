@@ -94,13 +94,11 @@
           flex-grow: 1;
           flex-basis: 0;
 
-          background: lightyellow;
-
           display: flex;
           flex-direction: column;
           row-gap: 20px;
 
-          padding: 0 20px;
+          padding: 10px 20px;
         }
       }
     }
