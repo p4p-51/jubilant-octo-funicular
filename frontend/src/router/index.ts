@@ -60,6 +60,14 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
       ),
   },
+  {
+    path: "/questions/:id",
+    name: "question detail",
+    component: () =>
+      import(
+        /* webpackChunkName: "question-detail" */ "../views/QuestionDetailView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
