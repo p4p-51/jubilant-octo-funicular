@@ -13,6 +13,7 @@
             :numResponses="question.responses.length"
             :title="question.title"
             :id="question.id"
+            :isSelected="question.id === selected.id"
           />
         </div>
       </div>
@@ -40,6 +41,10 @@
 
     .questions-container {
       width: 350px;
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
 
       .search-bar {
         margin-left: 20px;
@@ -201,6 +206,9 @@ export default defineComponent({
           ],
         },
       ] as Question[],
+      selected: {
+        id: "3",
+      },
     };
   },
 });
