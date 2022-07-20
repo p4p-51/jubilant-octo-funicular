@@ -1,21 +1,21 @@
 class Logger {
-    logInfo(message) {
-        console.log(Logger.generateLogString(message));
-    }
+  logInfo(message) {
+    console.log(Logger.generateLogString(message));
+  }
 
-    logWarn(message) {
-        console.log(Logger.generateLogString(message));
-    }
+  logWarn(message) {
+    console.log(Logger.generateLogString(message));
+  }
 
-    logError(message) {
+  logError(message) {
     console.error(
-        Logger.generateLogString(message || 'An unknown error occurred')
-);
-}
+      Logger.generateLogString(message || 'An unknown error occurred')
+    );
+  }
 
-static generateLogString(message) {
+  static generateLogString(message) {
     return `[Server] ${message}`;
-}
+  }
 }
 
 const logger = new Logger();

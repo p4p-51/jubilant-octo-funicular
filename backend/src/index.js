@@ -7,6 +7,7 @@ import http from 'http';
 import Config from './utils/config';
 import { logger } from './utils/logger';
 import chalk from 'chalk';
+import { MongoAdapter } from './models/mongodb/MongoClient';
 
 // Get the port
 const port = normalizePort(Config.PORT);
@@ -19,45 +20,47 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+// MongoAdapter.build(Config.MONGODB_URI, '<db-name>');
+
 /**
  * Normalizes a port into a number, string, or false.
  */
 function normalizePort(val) {
-    const port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
-    return isNaN(port) ? val : port >= 0 ? port : false;
+  return isNaN(port) ? val : port >= 0 ? port : false;
 }
 
 /**
  * Event listener for HTTP server "error" event.
  */
 function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
 
-    const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 }
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 function onListening() {
-    const addr = server.address();
-    const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+  debug('Listening on ' + bind);
 }
