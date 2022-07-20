@@ -24,13 +24,20 @@
   cursor: pointer;
   &:hover {
     transform: scale(1.02);
+
+    margin-right: 0;
+    margin-left: 20px;
   }
 
+  margin-right: 20px;
   &.isSelected {
     border: solid 1px $c-primary;
 
     background: rgba($c-primary, 0.1);
     transform: scale(1.02);
+
+    margin-right: 0;
+    margin-left: 20px;
   }
 
   .number {
