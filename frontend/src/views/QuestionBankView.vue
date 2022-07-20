@@ -2,7 +2,9 @@
   <div class="question-bank-view">
     <title-block title="My question bank" />
     <div class="content-container">
-      <div class="search-bar">searc bar</div>
+      <div class="search-bar">
+        <qb-search-bar />
+      </div>
       <div class="questions-container">
         <div class="question-set completed">
           <div class="title-container">
@@ -42,7 +44,7 @@
     flex-direction: column;
 
     .search-bar {
-      background: lightpink;
+      margin-bottom: 30px;
     }
 
     .questions-container {
@@ -85,11 +87,12 @@
 </style>
 
 <script lang="ts">
+import QbSearchBar from "@/components/QbSearchBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "QuestionBankView",
-  components: { TitleBlock },
+  components: { TitleBlock, QbSearchBar },
 });
 </script>
