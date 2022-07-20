@@ -77,6 +77,8 @@
 
       overflow: none;
 
+      padding: 10px 15px;
+
       &:focus {
         outline: solid 2px $c-primary;
       }
