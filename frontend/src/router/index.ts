@@ -60,6 +60,12 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
       ),
   },
+  {
+    path: "/add",
+    name: "Add answer",
+    component: () =>
+      import(/* webpackChunkName: "add" */ "../views/AddAnswerView.vue"),
+  },
 ];
 
 const router = createRouter({
