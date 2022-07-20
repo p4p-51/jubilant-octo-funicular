@@ -38,27 +38,22 @@
   .content-container {
     flex: 1;
     width: 100%;
-    background: lightblue;
 
     display: flex;
     flex-direction: column;
 
     .search-bar {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .questions-container {
       flex: 1;
-
-      background: lightcoral;
 
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: 120px;
 
       .question-set {
-        background: lightblue;
-
         display: flex;
         flex-direction: column;
 
