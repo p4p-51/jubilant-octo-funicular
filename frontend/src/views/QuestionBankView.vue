@@ -8,11 +8,13 @@
           <div class="title-container">
             <h2>Completed questions</h2>
           </div>
+          <div class="list">list</div>
         </div>
         <div class="question-set other">
           <div class="title-container">
             <h2>Other questions</h2>
           </div>
+          <div class="list">list</div>
         </div>
       </div>
     </div>
@@ -50,10 +52,13 @@
 
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: 150px;
+      column-gap: 120px;
 
       .question-set {
         background: lightblue;
+
+        display: flex;
+        flex-direction: column;
 
         .title-container {
           display: flex;
@@ -67,6 +72,11 @@
 
             flex: 1;
           }
+        }
+
+        .list {
+          flex: 1;
+          background: lightyellow;
         }
       }
     }
