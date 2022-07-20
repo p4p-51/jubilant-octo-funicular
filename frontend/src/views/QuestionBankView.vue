@@ -13,6 +13,7 @@
           <div class="list">
             <completed-question
               v-for="question in completedQuestions"
+              :id="question.id"
               :key="question.id"
               :title="question.title"
               :responses="question.responses"
@@ -26,6 +27,7 @@
           <div class="list">
             <other-question
               v-for="question in otherQuestions"
+              :id="question.id"
               :key="question.id"
               :title="question.title"
             />
@@ -70,6 +72,7 @@
         display: flex;
         flex-direction: column;
 
+        flex: 1;
         .title-container {
           display: flex;
           justify-content: space-between;
@@ -85,8 +88,19 @@
         }
 
         .list {
+          overflow-y: scroll;
+
           flex: 1;
+          flex-grow: 1;
+          flex-basis: 0;
+
           background: lightyellow;
+
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+
+          padding: 0 20px;
         }
       }
     }
@@ -212,6 +226,23 @@ export default defineComponent({
         },
         {
           id: "7",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          responses: [
+            {
+              situationId: "faiodfjw3238ih",
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "8",
           title:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",

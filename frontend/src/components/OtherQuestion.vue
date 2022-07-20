@@ -1,5 +1,11 @@
 <template>
-  <div class="other-question">o</div>
+  <div class="other-question">
+    <div class="title-container">
+      <h5>{{ title }}</h5>
+      <p>answer</p>
+    </div>
+    <a href="#">dsasa</a>
+  </div>
 </template>
 
 <style lang="scss" scoped>
