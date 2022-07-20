@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 
 .module-select {
   height: 40px;

@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "ProgressSideBar",
@@ -37,7 +37,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 
 .progress-side-bar {
   min-width: 250px;

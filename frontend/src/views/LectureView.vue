@@ -51,7 +51,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 
 .lecture-view {
   padding: 20px 40px;
@@ -61,14 +61,14 @@
 </style>
 
 <script lang="ts">
+import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import SectionExample from "@/components/SectionExample.vue";
 import SectionParagraph from "@/components/SectionParagraph.vue";
-import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Example from "@/types/Example.interface";
 
-import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LectureView",

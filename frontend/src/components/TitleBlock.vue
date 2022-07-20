@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 .title-block {
   h2 {
     font-size: 16px;
