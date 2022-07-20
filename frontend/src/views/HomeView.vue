@@ -6,6 +6,8 @@
     <router-link to="/lecture/intro">lecture intro</router-link>
     <br />
     <router-link to="/plan/create">create pl;lan</router-link>
+    <br />
+    <router-link to="/diy">diy</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

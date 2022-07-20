@@ -44,6 +44,14 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "study-plan" */ "../views/CreatePlanView.vue"
       ),
   },
+  {
+    path: "/diy", // TODO: to refactor into module routes
+    name: "diy",
+    component: () =>
+      import(
+        /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
