@@ -45,6 +45,7 @@
 
   .hidden {
     visibility: hidden;
+    font-size: 6px;
   }
 }
 </style>
