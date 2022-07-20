@@ -1,5 +1,5 @@
 <template>
-  <div class="module-select">
+  <div class="module-select" @click="$emit('select')">
     <p>{{ name }}</p>
     <button :class="{ isSelected: isSelected }">
       <img src="@/assets/icons/check.svg" />

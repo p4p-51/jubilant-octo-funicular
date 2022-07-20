@@ -13,11 +13,13 @@
       </p>
 
       <div class="multiselect-container">
-        <module-select name="Hello" :isSelected="false" />
-        <module-select name="Hello" :isSelected="false" />
-        <module-select name="Selected" :isSelected="true" />
-        <module-select name="Hello" :isSelected="false" />
-        <module-select name="Hello" :isSelected="false" />
+        <module-select
+          v-for="(module, index) in modules"
+          :name="module.name"
+          :key="index"
+          :isSelected="module.isSelected"
+          @select="onModuleSelected(module.name)"
+        />
       </div>
     </div>
 
@@ -106,57 +108,41 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "HomeView",
   components: { TitleBlock, ModuleSelect },
+  methods: {
+    onModuleSelected(module: string) {
+      this.$data.modules.map((m) => {
+        if (m.name === module) {
+          m.isSelected = !m.isSelected;
+        }
+      });
+    },
+  },
   data() {
     return {
       modules: [
         {
-          number: 1,
-          title: "Module 1",
-          description:
-            "This is the first module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 1",
+          isSelected: false,
         },
         {
-          number: 2,
-          title: "Module 2",
-          description:
-            "This is the second module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 2",
+          isSelected: false,
         },
         {
-          number: 3,
-          title: "Module 3",
-          description:
-            "This is the third module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 3",
+          isSelected: false,
         },
         {
-          number: 4,
-          title: "Module 4",
-          description:
-            "This is the fourth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 4",
+          isSelected: false,
         },
         {
-          number: 5,
-          title: "Module 5",
-          description:
-            "This is the fifth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 5",
+          isSelected: false,
         },
         {
-          number: 6,
-          title: "Module 6",
-          description:
-            "This is the sixth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
-        },
-        {
-          number: 7,
-          title: "Module 7",
-          description:
-            "This is the seventh module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          name: "Module 6",
+          isSelected: false,
         },
       ],
     };
