@@ -23,7 +23,7 @@
 </template>
 
 <style scoped lang="scss">
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 .nav-bar {
   width: 120px;
   min-width: 120px;

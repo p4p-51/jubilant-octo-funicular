@@ -4,7 +4,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 
 h2 {
   font-size: 20px;

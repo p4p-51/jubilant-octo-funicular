@@ -1,6 +1,6 @@
 <template>
   <div class="title-block">
-    <h2>{{ module }} ></h2>
+    <h2 :class="{ hidden: !module }">{{ module }} ></h2>
     <h1>{{ title }}</h1>
     <h3>{{ subtitle }}</h3>
 
@@ -9,7 +9,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 .title-block {
   h2 {
     font-size: 16px;
@@ -41,6 +41,11 @@
     font-size: 14px;
 
     margin-left: $m-p-indent;
+  }
+
+  .hidden {
+    visibility: hidden;
+    font-size: 6px;
   }
 }
 </style>
