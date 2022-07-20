@@ -1,6 +1,9 @@
 <template>
   <div class="qb-search-bar">
-    <input placeholder="Conflicts" /><img src="@/assets/icons/magnify.svg" />
+    <input
+      placeholder="Conflicts"
+      @change="$emit('change', $event.target.value)"
+    /><img src="@/assets/icons/magnify.svg" />
   </div>
 </template>
 
