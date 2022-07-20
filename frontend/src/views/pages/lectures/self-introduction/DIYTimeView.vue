@@ -93,6 +93,17 @@
 
     textarea {
       flex: 1;
+
+      background: $c-bg-grey;
+
+      border: none;
+      box-sizing: border-box;
+
+      overflow: none;
+
+      &:focus {
+        outline: solid 2px $c-primary;
+      }
     }
   }
 
