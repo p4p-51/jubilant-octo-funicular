@@ -7,6 +7,11 @@ const options = {
       title: 'Backend Docs',
       version: '1.0.0',
     },
+    security: [
+      {
+        BearerAuth: []
+      }
+    ]
   },
   apis: ['./src/**/*Router.js'], // files containing annotations as above
 };

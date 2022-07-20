@@ -13,6 +13,32 @@ router.use('/content', ContentRouter);
 router.use('/experiences', ExperienceRouter);
 router.use('/questions', QuestionRouter);
 
+
+
+/**
+ * @openapi
+ * components:
+ *  securitySchemes:
+ *    BearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *  responses:
+ *    Unauthorized:
+ *      description: Unauthorized
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              code:
+ *                type: string
+ *              message:
+ *                type: string
+ *            required:
+ *              - code
+ *              - message
+ */
+
 /**
  * @openapi
  *  components:

@@ -3,6 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 import * as OpenApiValidator from 'express-openapi-validator';
 import router from './routes/Router';
 import spec from './utils/SwaggerDoc';
+import { isAuthenticated } from './middleware/Authentication';
 
 const app = express();
 const port = 3000;
@@ -20,8 +21,16 @@ app.use(
     apiSpec: spec,
     validateRequests: true,
     validateResponses: { removeAdditional: 'failing' }, //Not sure why this isn't working :(
-  })
+    // validateSecurity: {
+    //   handlers: {
+    //     BearerAuth: [],
+    //   },
+    // },
+  }),
 );
+
+// Authentication Middleware
+app.use(isAuthenticated);
 
 // Send request to mainRouter
 app.use('/', router);
