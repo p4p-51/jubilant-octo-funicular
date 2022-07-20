@@ -2,16 +2,14 @@
   <div class="content-container">
     <div class="header"><h2>Lets get Started!</h2></div>
     <div class="experience-selector">
-      <div
+      <question-item
         v-for="question in questions"
+        :question="question.questionText"
         :key="question.id"
         :class="question.id === selectedId ? 'selected' : null"
-        class="question-item"
-        v-on:click="onClickEvent(question.id)"
+        @select="onQuestionEvent(question.id)"
       >
-        <p>{{ question.questionText }}</p>
-        <img src="@/assets/icons/arrow.svg" />
-      </div>
+      </question-item>
     </div>
     <div class="box"></div>
   </div>
@@ -45,44 +43,25 @@
   grid-area: other;
   background-color: #dddddd;
 }
-
-.question-item {
-  border-bottom: solid 1px $c-grey-light;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  img {
-    margin-left: 10px;
-  }
-
-  &.selected {
-    img {
-      transform: rotate(180deg);
-      transform-origin: center;
-      transition: 0.5s ease-in-out;
-    }
-  }
-}
 </style>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Question from "@/types/Question.interface";
+import QuestionInterface from "@/types/Question.interface";
+import QuestionItem from "@/components/Question.vue";
 
 export default defineComponent({
   name: "AddAnswer",
   props: {},
-  components: {},
+  components: { QuestionItem },
   methods: {
-    onClickEvent(questionId: string) {
+    onQuestionEvent(questionId: string) {
       this.selectedId = questionId;
     },
   },
   data() {
     return {
-      selectedId: null,
+      selectedId: "" as string,
       questions: [
         {
           id: "question_id_1",
@@ -92,7 +71,7 @@ export default defineComponent({
           id: "question_id_2",
           questionText: "What is the best group project you've ever had",
         },
-      ] as Question[],
+      ] as QuestionInterface[],
     };
   },
 });
