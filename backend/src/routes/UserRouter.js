@@ -16,7 +16,7 @@ const userController = new UserController();
  *              schema:
  *                  type: integer
  *      schemas:
- *          selfIntro:
+ *          SelfIntro:
  *              type: object
  *              required:
  *                  - body
@@ -24,16 +24,18 @@ const userController = new UserController();
  *              properties:
  *                  body:
  *                      type: string
+ *                      example: my name is Bob, and I am a 3rd year SE student...
  *                  attributes:
  *                      type: array
  *                      items:
  *                          type: string
- *          stats:
+ *                      example: [name, education, experience]
+ *          Stats:
  *              type: object
  *              required:
  *                  - accuracy
  *                  - numExperiences
- *                  - numQuestions
+ *                  - numQuestionsAnswered
  *                  - completedModules
  *              properties:
  *                  accuracy:
@@ -53,7 +55,7 @@ const userController = new UserController();
  *                  numExperiences:
  *                      type: integer
  *                      minimum: 0
- *                  numQuestions:
+ *                  numQuestionsAnswered:
  *                      type: integer
  *                      minimum: 0
  *                  completedModules:
@@ -89,6 +91,12 @@ const userController = new UserController();
  *                      type: string
  *                  progress:
  *                      $ref: '#/components/schemas/ModuleStage'
+ *               example:
+ *                userName: doge
+ *                avatar: https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png
+ *                progress:
+ *                  module: self-intro
+ *                  stage: 1
  */
 userRouter.get('/:userId', userController.GetUser);
 
@@ -141,7 +149,7 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/selfIntro'
+ *                      $ref: '#/components/schemas/SelfIntro'
  *      responses:
  *          200:
  *              description: submit self-intro
@@ -156,15 +164,18 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *      description: Get a user's self introduction
  *      tags:
  *          - User
+ *      parameters:
+ *        - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *          200:
  *              description: Get a users self intro
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/selfIntro'
+ *                          $ref: '#/components/schemas/SelfIntro'
  */
 userRouter.post('/:userId/self-intro', userController.PostIntro);
+userRouter.get('/:userId/self-intro', userController.GetIntro);
 
 /**
  * @openapi
@@ -181,7 +192,8 @@ userRouter.post('/:userId/self-intro', userController.PostIntro);
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/stats'
+ *                          $ref: '#/components/schemas/Stats'
  */
+userRouter.get('/:userId/stats', userController.GetStats);
 
 export default userRouter;

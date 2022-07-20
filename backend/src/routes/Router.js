@@ -17,16 +17,14 @@ router.use('/questions', QuestionRouter);
  * @openapi
  *  components:
  *      schemas:
- *          label:
+ *          Label:
  *              type: object
  *              required:
- *                  - _id
  *                  - labelString
  *              properties:
- *                  _id:
+ *                  labelText:
  *                      type: string
- *                  labelString:
- *                      type: string
+ *                      example: leadership
  */
 
 /**
@@ -44,14 +42,50 @@ router.use('/questions', QuestionRouter);
  *                      schema:
  *                          type: array
  *                          items:
- *                              $ref: '#/components/schemas/label'
+ *                            allOf:
+ *                              - $ref: '#/components/schemas/Label'
+ *                              - type: object
+ *                                required:
+ *                                  - questions
+ *                                properties:
+ *                                  questions:
+ *                                    type: array
+ *                                    items:
+ *                                      $ref: '#/components/schemas/Question'
+ *                                    example:
+ *                                      - _id: leadership_question_id_1
+ *                                        questionText: tell me about a time when you took charge of a project
+ *
  */
 router.get('/labels', (req, res) => {
   const labels = [
     {
-      _id: 'asdfasdf',
-      labelString: 'dsfsaf',
-      questions: 'oioi???',
+      _id: 'label_id_1',
+      labelString: 'leadership',
+      questions: [
+        {
+          _id: 'question_id_1',
+          questionText:
+            'Tell me about a time when you took charge of a project',
+        },
+        {
+          _id: 'question_id_2',
+          questionText:
+            'Tell me about a time when your leadership position was challenged',
+        },
+      ],
+    },
+    {
+      _id: 'label_id_2',
+      labelString: 'conflict',
+      questions: [
+        {
+          _id: 'question_id_3',
+          questionText:
+            'Tell me about a time when there was conflict in your group',
+          something: 'dsaf',
+        },
+      ],
     },
   ];
   res.status(200).send(labels);

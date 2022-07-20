@@ -15,6 +15,19 @@ const moduleController = new ModuleController();
  *              description: The ID of the module
  *              schema:
  *                  type: integer
+ *      schemas:
+ *          ModuleStage:
+ *              type: object
+ *              required:
+ *                  - module
+ *                  - stage
+ *              properties:
+ *                  module:
+ *                      type: string
+ *                      example: self-intro
+ *                  stage:
+ *                      type: integer
+ *                      example: 1
  */
 
 /**
@@ -43,6 +56,9 @@ const moduleController = new ModuleController();
  *                              maximum: 5
  *                          feedback:
  *                              type: string
+ *                      example:
+ *                        rating: 4
+ *                        feedback: I really liked this module, but I think it's too long
  *      responses:
  *          200:
  *              description: Successfully submitted Feedback
@@ -90,6 +106,10 @@ moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
  *                type: integer
  *              numCorrect:
  *                type: integer
+ *            example:
+ *              stage: prelim
+ *              numQuestion: 5
+ *              numCorrect: 4
  *
  *    responses:
  *          200:
@@ -102,5 +122,6 @@ moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
  *                              success:
  *                                  type: boolean
  */
+moduleRouter.post('/:moduleId/quiz', moduleController.SubmitQuiz);
 
 export default moduleRouter;

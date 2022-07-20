@@ -16,8 +16,10 @@ const contentController = new ContentController();
  *              properties:
  *                  module:
  *                      type: string
+ *                      example: self-intro
  *                  stage:
  *                      type: integer
+ *                      example: 1
  */
 
 /**

@@ -8,7 +8,7 @@ const controller = new ExperienceController();
  * @openapi
  * components:
  *      schemas:
- *          experience:
+ *          Experience:
  *              type: object
  *              required:
  *                  - _id
@@ -16,12 +16,14 @@ const controller = new ExperienceController();
  *              properties:
  *                  _id:
  *                      type: string
+ *                      example: exp_id_1
  *                  name:
  *                      type: string
+ *                      example: ENGGEN115
  *                  labels:
  *                      type: array
  *                      items:
- *                          $ref: '#/components/schemas/label'
+ *                          $ref: '#/components/schemas/Label'
  */
 
 /**
@@ -39,7 +41,7 @@ const controller = new ExperienceController();
  *                      schema:
  *                          type: array
  *                          items:
- *                              $ref: '#/components/schemas/experience'
+ *                              $ref: '#/components/schemas/Experience'
  *  post:
  *      tags:
  *          - Experience
@@ -50,7 +52,7 @@ const controller = new ExperienceController();
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/experience'
+ *                      $ref: '#/components/schemas/Experience'
  *      responses:
  *          200:
  *              description: success

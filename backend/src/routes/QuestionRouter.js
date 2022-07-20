@@ -2,7 +2,7 @@ import Router from 'express';
 import { QuestionController } from '../controllers/Question';
 
 const router = Router();
-const controller = new QuestionController();
+const questionController = new QuestionController();
 
 /**
  * @openapi
@@ -23,12 +23,16 @@ const controller = new QuestionController();
  *                      properties:
  *                          s:
  *                              type: string
+ *                              example: <Description of Situation>
  *                          t:
  *                              type: string
+ *                              example: <Description of Task>
  *                          a:
  *                              type: string
+ *                              example: <Description of Action>
  *                          r:
  *                              type: string
+ *                              example: <Description of Result>
  *          Question:
  *              type: object
  *              required:
@@ -37,8 +41,10 @@ const controller = new QuestionController();
  *              properties:
  *                  _id:
  *                      type: string
+ *                      example: question_id
  *                  questionText:
  *                      type: string
+ *                      example: tell me about a time...
  *      parameters:
  *          questionIdParam:
  *              name: questionId
@@ -71,10 +77,10 @@ const controller = new QuestionController();
  *                                      experiences:
  *                                          type: array
  *                                          items:
- *                                              $ref: '#/components/schemas/experience'
+ *                                              $ref: '#/components/schemas/Experience'
  *
  */
-router.get('/', controller.GetQuestionsWithExperiences);
+router.get('/', questionController.GetQuestionsWithExperiences);
 
 /**
  * @openapi
@@ -83,6 +89,8 @@ router.get('/', controller.GetQuestionsWithExperiences);
  *      tags:
  *          - Questions
  *      description: Get the answers by the user to a given question
+ *      parameters:
+ *        - $ref: '#/components/parameters/questionIdParam'
  *      responses:
  *          200:
  *              description: A list of answers and experiences relating to the question (grouped by label id)
@@ -97,15 +105,8 @@ router.get('/', controller.GetQuestionsWithExperiences);
  *                                      - experience
  *                                    properties:
  *                                          experience:
- *                                              $ref: '#/components/schemas/experience'
- *
+ *                                              $ref: '#/components/schemas/Experience'
  *                                  - $ref: '#/components/schemas/Answer'
- */
-router.get('/:questionId/answer', controller.GetQuestionsWithResponses);
-
-/**
- * @openapi
- * /questions/{questionId}/answers:
  *  post:
  *      tags:
  *          - Questions
@@ -138,6 +139,11 @@ router.get('/:questionId/answer', controller.GetQuestionsWithResponses);
  *                                  type: boolean
  *
  */
-router.post('/:questionId/answers', controller.Answer);
+
+router.get(
+  '/:questionId/answers',
+  questionController.GetQuestionsWithResponses
+);
+router.post('/:questionId/answers', questionController.Answer);
 
 export default router;

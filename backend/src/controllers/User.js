@@ -20,8 +20,36 @@ class UserController {
 
     res.status(200).send({ success: true, nextStage: next });
   };
+
   PostIntro = async (req, res) => {
     res.status(200).send({ success: true });
+  };
+
+  GetIntro = async (req, res) => {
+    const body = {
+      body: 'my intro',
+      attributes: ['name', 'education'],
+    };
+
+    res.status(200).send(body);
+  };
+
+  GetStats = async (req, res) => {
+    const body = {
+      accuracy: {
+        before: 90,
+        after: 100,
+      },
+      numExperiences: 4,
+      numQuestionsAnswered: 16,
+      completedModules: [
+        'Self Introduction',
+        'Thinking of Experiences',
+        'Organising Situations',
+        'Mannerisms',
+      ],
+    };
+    res.status(200).send(body);
   };
 }
 
