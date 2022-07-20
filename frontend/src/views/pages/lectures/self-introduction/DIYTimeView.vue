@@ -1,10 +1,12 @@
 <template>
+  <progress-side-bar :modules="modules"></progress-side-bar>
+
   <div class="diy-time-view">
     <title-block
       title="Introduction to Behavioural interviews"
       subtitle="We’ve made a study plan tailored just for you based on your preferences! Take a minute to look through the agenda."
+      module="Self introduction"
     />
-    ???
     <div class="content-container"></div>
 
     <button class="go-button">Gotcha! -></button>
@@ -40,7 +42,7 @@
     font-size: 20px;
     font-weight: 400;
 
-    margin-bottom: 100px;
+    margin-bottom: 70px;
   }
 
   .comparison-blocks {
@@ -92,19 +94,43 @@
 
   align-self: flex-end;
 
-  margin-bottom: 100px;
+  margin-bottom: 70px;
 }
 </style>
 
 <script lang="ts">
+import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DIYTimeView",
-  components: { TitleBlock },
+  components: { TitleBlock, ProgressSideBar },
   data() {
-    return {};
+    return {
+      modules: [
+        {
+          name: "Self introduction",
+          id: "fjisaljio",
+          status: "done",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+          ],
+        },
+      ],
+    };
   },
 });
 </script>

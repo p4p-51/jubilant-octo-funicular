@@ -153,13 +153,13 @@
 
   align-self: flex-end;
 
-  margin-bottom: 100px;
+  margin-bottom: 70px;
 }
 </style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
 import TitleBlock from "@/components/TitleBlock.vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HomeView",
