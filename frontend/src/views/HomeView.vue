@@ -8,6 +8,8 @@
     <router-link to="/plan/create">create pl;lan</router-link>
     <br />
     <router-link to="/diy">diy</router-link>
+    <br />
+    <router-link to="/questions">qb</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

@@ -52,6 +52,14 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
       ),
   },
+  {
+    path: "/questions",
+    name: "question bank",
+    component: () =>
+      import(
+        /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
