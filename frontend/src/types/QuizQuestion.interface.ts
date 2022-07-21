@@ -6,5 +6,6 @@ export default interface QuizQuestion {
 export interface QuizOption {
   id: string;
   text: string;
-  isCorrect: true;
+  isCorrect: boolean;
+  explanation: string;
 }

@@ -11,6 +11,7 @@
         :optionNumber="i + 1"
         :isSelected="opt.id === selectedOption"
         :key="i"
+        :showIsWrongResult="true"
       />
     </div>
 
@@ -80,7 +81,7 @@ export default defineComponent({
   components: { QuizOption },
   data() {
     return {
-      selectedOption: "2" as string,
+      selectedOption: "2",
     };
   },
 });

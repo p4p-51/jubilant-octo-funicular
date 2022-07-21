@@ -1,7 +1,17 @@
 <template>
-  <div class="quiz-option" :class="{ isSelected: isSelected }">
+  <div
+    class="quiz-option"
+    :class="{
+      isSelected: isSelected,
+      showIsCorrect: showIsCorrectResult,
+      showIsWrong: showIsWrongResult,
+    }"
+  >
     <div class="letter">{{ convertNumberToLetter(optionNumber) }}</div>
     <p>{{ option.text }}</p>
+    <div v-if="showIsCorrectResult || showIsWrongResult" class="explanation">
+      {{ option.explanation }}
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -22,6 +32,12 @@ export default defineComponent({
     isSelected: {
       type: Boolean,
     },
+    showIsCorrectResult: {
+      type: Boolean,
+    },
+    showIsWrongResult: {
+      type: Boolean,
+    },
   },
   methods: {
     convertNumberToLetter(number: number): string {
@@ -35,6 +51,8 @@ export default defineComponent({
 @import "@/assets/css/theme.scss";
 
 .quiz-option {
+  position: relative;
+
   display: flex;
   align-items: flex-start;
   margin-right: 20px;
@@ -104,6 +122,73 @@ export default defineComponent({
     &:hover {
       pointer-events: none;
     }
+  }
+
+  &.showIsCorrect {
+    .letter {
+      background-color: #00b412;
+
+      color: $c-background;
+
+      border: none;
+    }
+
+    p {
+      color: #00b412;
+    }
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+
+  &.showIsWrong {
+    .letter {
+      background-color: red;
+
+      color: $c-background;
+
+      border: none;
+    }
+
+    p {
+      color: red;
+    }
+
+    &:hover {
+      pointer-events: none;
+    }
+  }
+}
+
+.explanation {
+  position: absolute;
+  z-index: 5;
+
+  top: 50%;
+  transform: translate(0, -50%);
+
+  right: -330px;
+
+  font-size: 12px;
+
+  padding: 10px 20px;
+
+  background: white;
+
+  width: 250px;
+
+  border: solid 1px $c-grey-light;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    width: 30px;
+    height: 1.5px;
+    background: $c-grey-light;
+    transform: translate(0, -50%);
   }
 }
 </style>
