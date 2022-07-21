@@ -8,12 +8,7 @@
         <section-title>What you've learnt</section-title>
 
         <div class="modules">
-          <ModuleItem name="Finding the right examples" moduleType="" />
-          <ModuleItem name="Listening for the correct cues" moduleType="" />
-          <ModuleItem name="Listening for the correct cues" moduleType="" />
-          <ModuleItem name="Listening for the correct cues" moduleType="" />
-          <ModuleItem name="Listening for the correct cues" moduleType="" />
-          <ModuleItem name="Listening for the correct cues" moduleType="" />
+          <ModuleItem v-for="m in modules" :name="m" :key="m" moduleType="" />
         </div>
       </div>
       <div class="achievements">
@@ -183,6 +178,14 @@ export default defineComponent({
       numExperiences: 8,
       numResponses: 16,
       hasSelfIntro: true,
+      modules: [
+        "Module 1",
+        "Module 2",
+        "Module 3",
+        "Module 4",
+        "Module 5",
+        "Module 6",
+      ],
     };
   },
 });
