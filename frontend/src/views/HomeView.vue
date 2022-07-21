@@ -12,6 +12,8 @@
     <router-link to="/questions">qb</router-link>
     <br />
     <router-link to="/add">mine</router-link>
+    <br />
+    <router-link to="/questions/1">qb det</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

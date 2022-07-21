@@ -10,13 +10,28 @@
           <div class="title-container">
             <h2>Completed questions</h2>
           </div>
-          <div class="list">list</div>
+          <div class="list">
+            <completed-question
+              v-for="question in completedQuestions"
+              :id="question.id"
+              :key="question.id"
+              :title="question.title"
+              :responses="question.responses"
+            />
+          </div>
         </div>
         <div class="question-set other">
           <div class="title-container">
             <h2>Other questions</h2>
           </div>
-          <div class="list">list</div>
+          <div class="list">
+            <other-question
+              v-for="question in otherQuestions"
+              :id="question.id"
+              :key="question.id"
+              :title="question.title"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -57,6 +72,7 @@
         display: flex;
         flex-direction: column;
 
+        flex: 1;
         .title-container {
           display: flex;
           justify-content: space-between;
@@ -72,8 +88,17 @@
         }
 
         .list {
+          overflow-y: scroll;
+
           flex: 1;
-          background: lightyellow;
+          flex-grow: 1;
+          flex-basis: 0;
+
+          display: flex;
+          flex-direction: column;
+          row-gap: 20px;
+
+          padding: 10px 20px;
         }
       }
     }
@@ -82,12 +107,398 @@
 </style>
 
 <script lang="ts">
+import CompletedQuestion from "@/components/CompletedQuestion.vue";
+import OtherQuestion from "@/components/OtherQuestion.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
+import Question from "@/types/Question.interface";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "QuestionBankView",
-  components: { TitleBlock, QbSearchBar },
+  components: { TitleBlock, QbSearchBar, CompletedQuestion, OtherQuestion },
+  data() {
+    return {
+      completedQuestions: [
+        {
+          id: "1",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "2",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "3",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "1",
+                title: "ENGGEN 115 leadership",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "5",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "6",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "7",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+        {
+          id: "8",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [
+            {
+              experience: {
+                id: "3",
+                title: "Summer internship 2022",
+                labels: ["Conflict", "Teamwork"],
+              },
+              response: {
+                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+              },
+            },
+          ],
+        },
+      ] as Question[],
+      otherQuestions: [
+        {
+          id: "5",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [],
+        },
+        {
+          id: "6",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [],
+        },
+        {
+          id: "7",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [],
+        },
+        {
+          id: "8",
+          title:
+            "Tell me about a time when you experienced a conflict in a team",
+          label: "Conflict",
+          experiences: [
+            {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "2",
+              title: "Software camp for engineers",
+              labels: ["Conflict", "Teamwork"],
+            },
+            {
+              id: "3",
+              title: "Summer internship 2022",
+              labels: ["Conflict", "Teamwork"],
+            },
+          ],
+          responses: [],
+        },
+      ] as Question[],
+    };
+  },
 });
 </script>
