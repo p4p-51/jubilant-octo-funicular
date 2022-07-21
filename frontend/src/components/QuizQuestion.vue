@@ -9,6 +9,7 @@
         v-for="(opt, i) in question.options"
         :option="opt"
         :optionNumber="i + 1"
+        :isSelected="opt.id === selectedOption"
         :key="i"
       />
     </div>
@@ -25,7 +26,7 @@
   border: solid 1px $c-grey-light;
   box-sizing: border-box;
 
-  padding: 35px 125px;
+  padding: 35px 100px;
 
   max-width: 1000px;
 
@@ -64,5 +65,10 @@ export default defineComponent({
     },
   },
   components: { QuizOption },
+  data() {
+    return {
+      selectedOption: "2" as string,
+    };
+  },
 });
 </script>
