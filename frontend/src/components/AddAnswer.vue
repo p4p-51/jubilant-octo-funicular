@@ -1,6 +1,7 @@
 <template>
   <div class="content-container">
     <div class="header"><h2>Lets get Started!</h2></div>
+    <!--    todo: refactor this-->
     <div class="experience-selector">
       <question-item
         v-for="question in questions"
@@ -11,7 +12,11 @@
       >
       </question-item>
     </div>
-    <div class="box"></div>
+    <exp-selection
+      class="box"
+      :question="questions.find((o) => o.id === selectedId)"
+    >
+    </exp-selection>
   </div>
 </template>
 
@@ -41,7 +46,6 @@
 
 .box {
   grid-area: other;
-  background-color: #dddddd;
 }
 </style>
 
@@ -49,11 +53,12 @@
 import { defineComponent } from "vue";
 import QuestionInterface from "@/types/Question.interface";
 import QuestionItem from "@/components/Question.vue";
+import ExpSelection from "@/components/ExpSelection.vue";
 
 export default defineComponent({
   name: "AddAnswer",
   props: {},
-  components: { QuestionItem },
+  components: { ExpSelection, QuestionItem },
   methods: {
     onQuestionEvent(questionId: string) {
       this.selectedId = questionId;
@@ -61,7 +66,7 @@ export default defineComponent({
   },
   data() {
     return {
-      selectedId: "" as string,
+      selectedId: "question_id_1" as string,
       questions: [
         {
           id: "question_id_1",

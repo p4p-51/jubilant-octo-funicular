@@ -44,7 +44,6 @@ import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 import AddAnswer from "@/components/AddAnswer.vue";
-import QuestionInterface from "@/types/Question.interface";
 
 export default defineComponent({
   name: "AddAnswerView",
@@ -73,16 +72,6 @@ export default defineComponent({
           ],
         },
       ] as ModuleStatus[],
-      questions: [
-        {
-          id: "question_id_1",
-          questionText: "What is bacon",
-        },
-        {
-          id: "question_id_2",
-          questionText: "What is the best group project you've ever had",
-        },
-      ] as QuestionInterface[],
     };
   },
 });
