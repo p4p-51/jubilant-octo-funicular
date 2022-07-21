@@ -55,7 +55,7 @@
       :key="i"
     />
 
-    <add-experiences />
+    <button @click="goToBuild" class="go-button">Gotcha! -></button>
   </div>
 </template>
 
@@ -64,8 +64,16 @@
 
 .lecture-view {
   padding: 20px 40px;
-
   overflow-y: scroll;
+}
+
+.go-button {
+  background-color: $c-primary;
+  color: $c-background;
+
+  align-self: flex-end;
+
+  margin-bottom: 70px;
 }
 </style>
 
@@ -90,9 +98,12 @@ export default defineComponent({
     SectionExample,
     ProgressSideBar,
     QuizQuestion,
-    AddExperiences,
   },
-
+  methods: {
+    goToBuild() {
+      this.$router.push("/lecture/build-profile");
+    },
+  },
   data() {
     return {
       quizQuestions: [

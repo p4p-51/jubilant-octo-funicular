@@ -18,10 +18,15 @@
           />
         </div>
       </div>
-      <add-question-response
-        v-bind="getSelectedQuestion(selectedQuestionId)"
-        :key="addQuestionKey"
-      />
+      <div class="answer-column">
+        <add-question-response
+          v-bind="getSelectedQuestion(selectedQuestionId)"
+          :key="addQuestionKey"
+        />
+        <button @click="goToGrad" class="go-button">
+          Save and continue ->
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -77,6 +82,12 @@
     }
   }
 }
+
+.go-button {
+  background-color: $c-primary;
+  color: $c-background;
+  margin-left: 500px;
+}
 </style>
 
 <script lang="ts">
@@ -98,6 +109,9 @@ export default defineComponent({
     AddQuestionResponse,
   },
   methods: {
+    goToGrad() {
+      this.$router.push("/about");
+    },
     getSelectedQuestion(id: string) {
       return this.questions.find((q) => q.id == id);
     },

@@ -6,9 +6,9 @@
 
     <div class="links-container">
       <router-link
-        to="/lecture"
+        to="/plan/create"
         class="link"
-        :class="{ isActive: currentRouteName.includes('lecture') }"
+        :class="{ isActive: currentRouteName.includes('plan') }"
       >
         <img src="../assets/icons/hat.svg" class="icon" />
       </router-link>

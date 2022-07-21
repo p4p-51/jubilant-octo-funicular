@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <button class="go-button">Gotcha! -></button>
+    <button @click="goToLect" class="go-button">Gotcha! -></button>
   </div>
 </template>
 
@@ -164,6 +164,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "HomeView",
   components: { TitleBlock },
+  methods: {
+    goToLect() {
+      this.$router.push("/lecture");
+    },
+  },
   data() {
     return {};
   },

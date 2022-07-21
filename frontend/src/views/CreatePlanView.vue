@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <button class="go-button">Next</button>
+    <button @click="goToPlan" class="go-button">Next</button>
   </div>
 </template>
 
@@ -109,6 +109,9 @@ export default defineComponent({
   name: "HomeView",
   components: { TitleBlock, ModuleSelect },
   methods: {
+    goToPlan() {
+      this.$router.push("/plan/done");
+    },
     onModuleSelected(module: string) {
       this.$data.modules.map((m) => {
         if (m.name === module) {

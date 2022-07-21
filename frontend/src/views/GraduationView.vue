@@ -44,7 +44,7 @@
         sirloin shoulder boudin pig.
       </p>
     </div>
-    <button class="next">Go to question bank -></button>
+    <button @click="goToGrad" class="next">Go to question bank -></button>
   </div>
 </template>
 
@@ -169,6 +169,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "GraduationView",
   components: { ModuleItem, SectionTitle },
+  methods: {
+    goToGrad() {
+      this.$router.push("/questions");
+    },
+  },
   data() {
     return {
       accuracy: {

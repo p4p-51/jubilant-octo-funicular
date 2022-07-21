@@ -43,17 +43,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { ButtonHTMLAttributes, defineComponent, PropType } from "vue";
 import { Experience, Label } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "ExperienceModal",
   methods: {
-    updateTitle(event) {
-      this.experienceTitle = event.target.value;
+    updateTitle(event: Event) {
+      this.experienceTitle = (event.target as HTMLTextAreaElement).value;
     },
-    updateLabel(event, label: string) {
-      const add = event.target.value;
+    updateLabel(event: Event, label: string) {
+      const add = (event.target as ButtonHTMLAttributes).value;
       if (add === "true") {
         this.experienceLabels.push(label);
       } else {
@@ -68,7 +68,7 @@ export default defineComponent({
     saveExperience() {
       const newExp: Experience = {
         id: this.experience?.id,
-        title: this.experienceTitle,
+        title: this.experienceTitle!,
         labels: this.experienceLabels,
       };
       this.$emit("saveExperience", newExp);
@@ -91,6 +91,7 @@ export default defineComponent({
   props: {
     experience: {
       type: Object as PropType<Experience>,
+      required: true,
     },
     labels: {
       type: Array as PropType<Label[]>,
@@ -99,7 +100,7 @@ export default defineComponent({
   },
   data() {
     return {
-      experienceTitle: null as string | null,
+      experienceTitle: "" as string,
       experienceLabels: [] as string[],
     };
   },
