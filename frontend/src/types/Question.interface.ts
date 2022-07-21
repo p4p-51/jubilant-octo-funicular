@@ -25,3 +25,8 @@ export interface Response {
     r: string;
   };
 }
+
+export interface Label {
+  key: string;
+  statement: string;
+}
