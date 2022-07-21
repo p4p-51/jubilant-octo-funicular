@@ -6,7 +6,17 @@
         <button class="box" @click="isModalOpen = true">
           + Add a new experience
         </button>
-        <div>somethign</div>
+        <div v-for="e in experiences" :key="e.title" class="box experience">
+          <p>{{ e.title }}</p>
+          <div class="actions">
+            <div class="edit-icon" @click="isModalOpen = true">
+              <img src="@/assets/icons/edit.svg" />
+            </div>
+            <div class="edit-icon">
+              <img src="@/assets/icons/delete.svg" />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="checklist">
         <h3>Your experiences</h3>
@@ -100,18 +110,69 @@
 
       margin-top: 30px;
 
+      row-gap: 20px;
+
       .box {
         border: solid 1px $c-grey-light;
         border-radius: 0;
 
+        width: 65%;
         max-width: 1000px;
 
-        padding: 20px 25px;
+        padding: 20px 35px;
+
+        box-sizing: border-box;
+
+        cursor: pointer;
+        transition: $animation;
 
         &:hover {
           background: rgba($c-primary, 0.1);
           border: solid 1px $c-primary;
           transform: none;
+        }
+      }
+
+      .experience {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+          background: none;
+          border: solid 1px $c-primary;
+        }
+
+        .actions {
+          display: flex;
+          align-items: center;
+
+          .edit-icon {
+            height: 30px;
+            width: 30px;
+
+            border-radius: 50%;
+            border: 2px solid rgba(34, 34, 34, 0.2);
+            border-style: outset;
+
+            background-color: white;
+            background-clip: padding-box;
+            transition: $animation;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-left: 20px;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+
+            > img {
+              height: 50%;
+            }
+          }
         }
       }
     }
