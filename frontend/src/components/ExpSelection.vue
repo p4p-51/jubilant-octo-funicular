@@ -94,8 +94,11 @@ export default defineComponent({
 @import "@/assets/css/theme.scss";
 
 .exp-container {
-  padding: 0 20px 0 20px;
-  height: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
 
   .answer-input {
     display: flex;
@@ -103,9 +106,6 @@ export default defineComponent({
     gap: 12px;
 
     flex: 1;
-
-    height: 100%;
-    overflow: auto;
 
     .input-nav {
       display: flex;
