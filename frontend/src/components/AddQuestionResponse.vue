@@ -1,9 +1,20 @@
 <template>
   <div class="add-question-response">
     <h2>{{ title }}</h2>
-    <!-- <experience-select :experiences="experiences" /> -->
-    <!-- <collapsible-responses :responses="responses" /> -->
-    <response-inputs :experience="selectedExperience" />
+    <experience-select
+      v-if="selectedExperienceId === null"
+      :experiences="experiences"
+      @onExperienceClick="(id) => (this.selectedExperienceId = id)"
+    />
+    <collapsible-responses
+      v-else-if="editMode === false"
+      :responses="responses"
+      @newResponse="createNewResponse"
+    />
+    <response-inputs
+      v-else-if="editMode === true"
+      :experience="getSelectedQuestion(selectedExperienceId)"
+    />
   </div>
 </template>
 
@@ -44,17 +55,22 @@ import ResponseInputs from "./ResponseInputs.vue";
 export default defineComponent({
   name: "AddQuestionResponse",
   components: {
-    // ExperienceSelect,
-    // CollapsibleResponses,
+    ExperienceSelect,
+    CollapsibleResponses,
     ResponseInputs,
+  },
+  methods: {
+    getSelectedQuestion(id: string) {
+      return this.experiences.find((q) => q.id == id);
+    },
+    createNewResponse() {
+      this.editMode = true;
+    },
   },
   data() {
     return {
-      selectedExperience: {
-        id: "1",
-        title: "ENGGEN 115 leadership",
-        labels: ["Conflict", "Teamwork"],
-      },
+      selectedExperienceId: null as unknown as string,
+      editMode: false as boolean,
     };
   },
   props: {

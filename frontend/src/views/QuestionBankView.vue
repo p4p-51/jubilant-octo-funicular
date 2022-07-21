@@ -73,6 +73,7 @@
         flex-direction: column;
 
         flex: 1;
+
         .title-container {
           display: flex;
           justify-content: space-between;

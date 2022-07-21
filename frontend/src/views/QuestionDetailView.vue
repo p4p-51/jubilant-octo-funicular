@@ -13,11 +13,15 @@
             :numResponses="question.responses.length"
             :title="question.title"
             :id="question.id"
-            :isSelected="question.id === selectedQuestion.id"
+            :isSelected="question.id === selectedQuestionId"
+            @onQuestionClick="onQuestionClick"
           />
         </div>
       </div>
-      <add-question-response v-bind="selectedQuestion" />
+      <add-question-response
+        v-bind="getSelectedQuestion(selectedQuestionId)"
+        :key="addQuestionKey"
+      />
     </div>
   </div>
 </template>
@@ -93,8 +97,18 @@ export default defineComponent({
     QbSideBarQuestion,
     AddQuestionResponse,
   },
+  methods: {
+    getSelectedQuestion(id: string) {
+      return this.questions.find((q) => q.id == id);
+    },
+    onQuestionClick(id: string) {
+      this.addQuestionKey++;
+      this.selectedQuestionId = id;
+    },
+  },
   data() {
     return {
+      addQuestionKey: 0,
       questions: [
         {
           id: "1",
@@ -142,17 +156,17 @@ export default defineComponent({
           experiences: [
             {
               id: "1",
-              title: "ENGGEN 115 leadership",
+              title: "2ENGGEN 115 leadership",
               labels: ["Conflict", "Teamwork"],
             },
             {
               id: "2",
-              title: "Software camp for engineers",
+              title: "2Software camp for engineers",
               labels: ["Conflict", "Teamwork"],
             },
             {
               id: "3",
-              title: "Summer internship 2022",
+              title: "2Summer internship 2022",
               labels: ["Conflict", "Teamwork"],
             },
           ],
@@ -306,43 +320,7 @@ export default defineComponent({
           responses: [],
         },
       ] as Question[],
-      selectedQuestion: {
-        id: "3",
-        title: "Tell me about a time when you experienced a conflict in a team",
-        label: "Conflict",
-        experiences: [
-          {
-            id: "1",
-            title: "ENGGEN 115 leadership",
-            labels: ["Conflict", "Teamwork"],
-          },
-          {
-            id: "2",
-            title: "Software camp for engineers",
-            labels: ["Conflict", "Teamwork"],
-          },
-          {
-            id: "3",
-            title: "Summer internship 2022",
-            labels: ["Conflict", "Teamwork"],
-          },
-        ],
-        responses: [
-          {
-            experience: {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            response: {
-              s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
-              t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
-              a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
-              r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
-            },
-          },
-        ],
-      } as Question,
+      selectedQuestionId: "1" as string,
     };
   },
 });

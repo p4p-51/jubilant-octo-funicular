@@ -1,27 +1,37 @@
 <template>
   <div class="content-container">
     <div class="header"><h2>Lets get Started!</h2></div>
+    <experience-select
+      :experiences="experiences"
+      @onExperinceClick="selectExperince()"
+    />
     <!--    todo: refactor this-->
-    <div class="experience-selector">
-      <question-item
-        v-for="question in questions"
-        :question="question.questionText"
-        :key="question.id"
-        :class="question.id === selectedId ? 'selected' : null"
-        @select="onQuestionEvent(question.id)"
-      >
-      </question-item>
-    </div>
-    <exp-selection
-      class="box"
-      :question="questions.find((o) => o.id === selectedId)"
-    >
-    </exp-selection>
+    <!--    <div class="experience-selector">-->
+    <!--      <question-item-->
+    <!--        v-for="question in questions"-->
+    <!--        :question="question.questionText"-->
+    <!--        :key="question.id"-->
+    <!--        :class="question.id === selectedId ? 'selected' : null"-->
+    <!--        @select="onQuestionEvent(question.id)"-->
+    <!--      >-->
+    <!--      </question-item>-->
+    <!--    </div>-->
+    <!--    <experience-select :experiences="">-->
+    <!--    </experience-select>-->
+    <!--    <exp-selection-->
+    <!--      class="box"-->
+    <!--      :question="questions.find((o) => o.id === selectedId)"-->
+    <!--    >-->
+    <!--    </exp-selection>-->
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
+experience-select {
+  grid-area: experience;
+}
 
 .content-container {
   display: grid;
@@ -50,14 +60,21 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import QuestionInterface from "@/types/Question.interface";
+import { QuestionInterface } from "@/types/Question.interface";
 import QuestionItem from "@/components/Question.vue";
 import ExpSelection from "@/components/ExpSelection.vue";
+import ExperienceSelect from "@/components/ExperienceSelect.vue";
+import { Experience } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "AddAnswer",
   props: {},
-  components: { ExpSelection, QuestionItem },
+  components: {
+    ExperienceSelect,
+    // ExperienceSelect,
+    // ExpSelection,
+    // QuestionItem,
+  },
   methods: {
     onQuestionEvent(questionId: string) {
       this.selectedId = questionId;
@@ -66,6 +83,28 @@ export default defineComponent({
   data() {
     return {
       selectedId: "question_id_1" as string,
+      experiences: [
+        {
+          id: "exp_id_1",
+          title: "enggen115",
+          labels: ["leadership", "conflict"],
+        },
+        {
+          id: "exp_id_2",
+          title: "enggen204",
+          labels: ["leadership", "conflict"],
+        },
+        {
+          id: "exp_id_3",
+          title: "enggen303",
+          labels: ["leadership", "conflict"],
+        },
+        {
+          id: "exp_id_4",
+          title: "enggen403",
+          labels: ["leadership", "conflict"],
+        },
+      ] as Experience[],
       questions: [
         {
           id: "question_id_1",

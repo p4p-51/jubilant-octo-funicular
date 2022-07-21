@@ -1,7 +1,12 @@
 <template>
   <div class="experience-selection">
     <h5>Your relevant experiences:</h5>
-    <div class="option" v-for="experience in experiences" :key="experience.id">
+    <div
+      class="option"
+      v-for="experience in experiences"
+      :key="experience.id"
+      @click="$emit('onExperienceClick', experience.id)"
+    >
       <p>{{ experience.title }}</p>
     </div>
     <p>I want to talk about a different experience</p>
