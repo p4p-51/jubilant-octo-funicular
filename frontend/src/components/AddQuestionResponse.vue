@@ -7,12 +7,12 @@
       @onExperienceClick="(id) => (this.selectedExperienceId = id)"
     />
     <collapsible-responses
-      v-else-if="editMode === false"
+      v-else-if="editMode === false && responses.length > 0"
       :responses="responses"
       @newResponse="createNewResponse"
     />
     <response-inputs
-      v-else-if="editMode === true"
+      v-else
       :experience="getSelectedQuestion(selectedExperienceId)"
       @savedAnswer="savedAnswer"
     />
