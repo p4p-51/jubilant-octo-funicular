@@ -1,11 +1,13 @@
 <template>
   <div class="collapsible-responses">
     <h5>My responses</h5>
+
     <collapsible-response
       v-for="res in responses"
       :key="res.id"
       :response="res"
     ></collapsible-response>
+    <button class="add-response">+ Add a new response</button>
   </div>
 </template>
 
@@ -16,7 +18,7 @@
 
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: 20px;
 
   align-self: flex-start;
   width: 95%;
@@ -29,6 +31,17 @@
     color: $c-black;
 
     margin: 0;
+  }
+
+  .add-response {
+    height: 60px;
+    border-radius: 0;
+    border: solid 1px $c-grey-light;
+
+    &:hover {
+      border: solid 1px $c-primary;
+      transform: none;
+    }
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="collapsible-response">
     <div class="header" @click="isOpen = !isOpen">
-      <h6>heading</h6>
+      <h6>{{ response.experience.title }}</h6>
       <img src="@/assets/icons/chevron-left.svg" :class="{ isOpen: isOpen }" />
     </div>
     <div :class="{ hidden: !isOpen }" class="content">
