@@ -13,24 +13,11 @@
             :numResponses="question.responses.length"
             :title="question.title"
             :id="question.id"
-            :isSelected="question.id === selected.id"
+            :isSelected="question.id === selectedQuestion.id"
           />
         </div>
       </div>
-      <div class="detail-container">
-        <h2>{{ selected.title }}</h2>
-        <div class="body-content">
-          <!-- <h5>Your relevant experiences:</h5>
-          <div
-            class="option"
-            v-for="experience in selected.experiences"
-            :key="experience"
-          >
-            <p>{{ experience }}</p>
-          </div>
-          <p>I want to talk about a different experience</p> -->
-        </div>
-      </div>
+      <add-question-response v-bind="selectedQuestion" />
     </div>
   </div>
 </template>
@@ -84,81 +71,12 @@
         padding: 10px 20px;
       }
     }
-
-    .detail-container {
-      flex: 1;
-
-      height: 100%;
-
-      margin-left: 80px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-
-      h2 {
-        font-size: 20px;
-        font-weight: 400;
-      }
-
-      .body-content {
-        margin-top: 50px;
-
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-
-        align-self: flex-start;
-        width: 95%;
-        max-width: 800px;
-
-        h5 {
-          font-size: 14px;
-          font-weight: 400;
-
-          color: $c-black;
-
-          margin: 0;
-        }
-
-        .option {
-          border: solid 1px $c-grey-light;
-
-          font-size: 14px;
-
-          padding: 0 20px;
-
-          margin-right: 15px;
-
-          cursor: pointer;
-          transition: $animation;
-          &:hover {
-            border: solid 1px $c-primary;
-            margin-right: 0;
-            margin-left: 15px;
-          }
-        }
-
-        > p {
-          margin: 0;
-          font-size: 12px;
-
-          align-self: flex-end;
-
-          cursor: pointer;
-          transition: $animation;
-          &:hover {
-            color: $c-primary;
-            transform: scale(1.02);
-          }
-        }
-      }
-    }
   }
 }
 </style>
 
 <script lang="ts">
+import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
 import CompletedQuestion from "@/components/CompletedQuestion.vue";
 import OtherQuestion from "@/components/OtherQuestion.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
@@ -169,7 +87,12 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "QuestionDetailView",
-  components: { TitleBlock, QbSearchBar, QbSideBarQuestion },
+  components: {
+    TitleBlock,
+    QbSearchBar,
+    QbSideBarQuestion,
+    AddQuestionResponse,
+  },
   data() {
     return {
       questions: [
@@ -383,7 +306,7 @@ export default defineComponent({
           responses: [],
         },
       ] as Question[],
-      selected: {
+      selectedQuestion: {
         id: "3",
         title: "Tell me about a time when you experienced a conflict in a team",
         label: "Conflict",
