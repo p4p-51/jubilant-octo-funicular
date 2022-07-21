@@ -4,12 +4,14 @@
 
     <h3>What is the best way to learn Vue?</h3>
 
-    <quiz-option
-      v-for="(opt, i) in question.options"
-      :option="opt"
-      :optionNumber="i"
-      :key="i"
-    />
+    <div class="options">
+      <quiz-option
+        v-for="(opt, i) in question.options"
+        :option="opt"
+        :optionNumber="i + 1"
+        :key="i"
+      />
+    </div>
   </div>
 </template>
 
@@ -39,6 +41,12 @@
     font-size: 20px;
     font-weight: 400;
     margin: 0;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
   }
 }
 </style>
