@@ -1,7 +1,11 @@
 <template>
   <div class="collapsible-responses">
     <h5>My responses</h5>
-    <div v-for="res in responses" :key="res.id">res</div>
+    <collapsible-response
+      v-for="res in responses"
+      :key="res.id"
+      :response="res"
+    ></collapsible-response>
   </div>
 </template>
 
@@ -38,10 +42,11 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import { Experience, Response } from "@/types/Question.interface";
+import CollapsibleResponse from "./CollapsibleResponse.vue";
 
 export default defineComponent({
   name: "CollapsibleResponses",
-  components: {},
+  components: { CollapsibleResponse },
   data() {
     return {};
   },
