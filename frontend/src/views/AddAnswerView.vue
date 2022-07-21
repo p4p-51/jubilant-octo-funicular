@@ -1,3 +1,4 @@
+//Deprecated
 <template>
   <progress-side-bar :modules="modules"></progress-side-bar>
   <div class="add-answer-view">

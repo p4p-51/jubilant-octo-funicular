@@ -16,7 +16,7 @@
       />
     </div>
 
-    <button class="go-button">Let's go</button>
+    <button @click="goToLecture" class="go-button">Let's go</button>
   </div>
 </template>
 
@@ -63,6 +63,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "HomeView",
   components: { TitleBlock, ModuleBlock },
+  methods: {
+    goToLecture() {
+      this.$router.push("/lecture/intro");
+    },
+  },
   data() {
     return {
       modules: [

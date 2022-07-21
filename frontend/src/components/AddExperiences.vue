@@ -14,7 +14,7 @@
         >
           <p>{{ e.title }}</p>
           <div class="actions">
-            <div class="edit-icon">
+            <div @click.stop="deleteExperience($event, e)" class="edit-icon">
               <img src="@/assets/icons/delete.svg" />
             </div>
           </div>
@@ -198,6 +198,13 @@ export default defineComponent({
         this.experiences.push(newExperience);
       }
       this.isModalOpen = false;
+    },
+    deleteExperience(event: Event, experience: Experience) {
+      this.experiences = this.experiences.filter((e) => {
+        if (e !== experience) {
+          return e;
+        }
+      });
     },
   },
   computed: {

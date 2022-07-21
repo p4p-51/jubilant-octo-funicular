@@ -26,7 +26,7 @@
       sausage kielbasa ground round alcatra shank.
     </TitleBlock>
     <add-experiences />
-    <button class="next">Save and continue</button>
+    <button @click="goToQuestions" class="next">Save and continue</button>
   </div>
 </template>
 
@@ -73,7 +73,11 @@ export default defineComponent({
 
     ProgressSideBar,
   },
-
+  methods: {
+    goToQuestions() {
+      this.$router.push("/questions/1");
+    },
+  },
   data() {
     return {
       modules: [
