@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-bar">
     <router-link to="/">
-      <img src="../assets/logo.png" alt="logo" class="logo" />
+      <img src="../assets/logo.svg" alt="logo" class="logo" />
     </router-link>
 
     <div class="links-container">
