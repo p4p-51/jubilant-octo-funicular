@@ -1,10 +1,10 @@
 <template>
   <div class="collapsible-response">
-    <div class="header">
+    <div class="header" @click="isOpen = !isOpen">
       <h6>heading</h6>
-      <img src="@/assets/icons/chevron-left.svg" />
+      <img src="@/assets/icons/chevron-left.svg" :class="{ isOpen: isOpen }" />
     </div>
-    <div class="content">
+    <div :class="{ hidden: !isOpen }" class="content">
       <p class="star-title"><b>S</b>ituation</p>
       <p class="star-content">{{ response.response.s }}</p>
       <p class="star-title"><b>T</b>ask</p>
@@ -41,6 +41,14 @@
 
       margin: 0;
     }
+
+    img {
+      transition: $animation;
+
+      &.isOpen {
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   .content {
@@ -52,6 +60,16 @@
     column-gap: 30px;
     row-gap: 20px;
     align-items: center;
+
+    transition: $animation;
+    overflow: hidden;
+
+    &.hidden {
+      visibility: hidden;
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
     .star-title {
       font-size: 14px;
@@ -83,7 +101,9 @@ export default defineComponent({
   name: "CollapsibleResponse",
   components: {},
   data() {
-    return {};
+    return {
+      isOpen: false,
+    };
   },
   props: {
     response: {
