@@ -26,7 +26,6 @@
       sausage kielbasa ground round alcatra shank.
     </TitleBlock>
     <add-experiences />
-
     <button class="next">Save and continue</button>
   </div>
 </template>
