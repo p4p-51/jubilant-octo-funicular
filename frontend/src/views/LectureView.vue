@@ -54,6 +54,8 @@
       :questionNumber="i + 1"
       :key="i"
     />
+
+    <add-experiences />
   </div>
 </template>
 
@@ -78,6 +80,7 @@ import Example from "@/types/Example.interface";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
+import AddExperiences from "@/components/AddExperiences.vue";
 
 export default defineComponent({
   name: "LectureView",
@@ -87,6 +90,7 @@ export default defineComponent({
     SectionExample,
     ProgressSideBar,
     QuizQuestion,
+    AddExperiences,
   },
 
   data() {
