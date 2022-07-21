@@ -18,13 +18,38 @@
       </div>
       <div class="achievements">
         <section-title>Your achievements</section-title>
+        <div class="items">
+          <p>
+            Your quiz accuracy has improved from
+            <span>{{ accuracy.before }}</span
+            >% to <span>{{ accuracy.after }}</span
+            >%
+          </p>
+          <p>
+            You have documented <span>{{ numExperiences }}</span> experiences
+          </p>
+          <p>
+            You have added answers to <span>{{ numResponses }}</span> interview
+            questions to your interview portfolio
+          </p>
+          <p v-if="hasSelfIntro">
+            You have written one hella awesome self introduction
+          </p>
+        </div>
       </div>
     </div>
     <div class="footer">
       <section-title>Further practice</section-title>
-      <p>Up Next: <span>Next Module Name</span></p>
-      <button>Next lesson -></button>
+      <p>
+        Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail
+        salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine
+        strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin
+        short ribs. Short loin chuck salami pork chop fatback. Pork loin short
+        loin pastrami short ribs frankfurter salami strip steak brisket leberkas
+        sirloin shoulder boudin pig.
+      </p>
     </div>
+    <button class="next">Go to question bank -></button>
   </div>
 </template>
 
@@ -67,24 +92,77 @@
   display: flex;
   width: 100%;
 
-  flex: 1;
-
   > div {
     width: 45%;
   }
 
   .progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+
     .modules {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      flex: 1;
       row-gap: 20px;
 
       > div {
         border: solid 1px $c-primary;
         background: rgba($c-primary, 0.1);
+        width: 70%;
       }
     }
   }
+
+  .achievements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+
+    .items {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+
+      margin-top: 30px;
+
+      p {
+        font-size: 20px;
+        color: $c-black;
+
+        height: 90px;
+        line-height: 0;
+
+        margin: 0;
+
+        span {
+          font-size: 40px;
+          color: $c-primary;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  p {
+    font-size: 16px;
+  }
+}
+
+.next {
+  align-self: flex-end;
+
+  background: $c-primary;
+  color: $c-background;
+  margin-bottom: 60px;
 }
 </style>
 
@@ -102,8 +180,8 @@ export default defineComponent({
         before: 20,
         after: 80,
       },
-      numExperience: 8,
-      responses: 16,
+      numExperiences: 8,
+      numResponses: 16,
       hasSelfIntro: true,
     };
   },
