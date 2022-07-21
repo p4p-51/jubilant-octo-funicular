@@ -3,7 +3,9 @@
     <h2>List down some of your past teamwork experiences</h2>
     <div class="content">
       <div class="create-experiences">
-        <button class="box">+ Add a new experience</button>
+        <button class="box" @click="isModalOpen = true">
+          + Add a new experience
+        </button>
         <div>somethign</div>
       </div>
       <div class="checklist">
@@ -16,7 +18,7 @@
     </div>
   </div>
 
-  <div class="modal">
+  <div class="modal" v-if="isModalOpen">
     <div class="popup">
       <input class="title-input" placeholder="Your experience here" />
       <div class="radio-line">
@@ -60,7 +62,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button class="cancel">Cancel</button>
+        <button class="cancel" @click="isModalOpen = false">Cancel</button>
         <button class="save">Save</button>
       </div>
     </div>
@@ -192,7 +194,7 @@
 
       .radio-group {
         input {
-          margin-right: 25px;
+          margin-right: 35px;
         }
       }
     }
@@ -226,6 +228,7 @@ export default defineComponent({
   components: {},
   data() {
     return {
+      isModalOpen: false,
       checklist: [
         {
           label: "Conflict",
