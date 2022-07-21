@@ -48,6 +48,8 @@
 
   background: $c-primary;
   color: $c-background;
+
+  margin-top: 60px;
 }
 </style>
 
@@ -69,10 +71,35 @@ export default defineComponent({
   components: {
     TitleBlock,
     AddExperiences,
+
+    ProgressSideBar,
   },
 
   data() {
-    return {};
+    return {
+      modules: [
+        {
+          name: "Self introduction",
+          id: "fjisaljio",
+          status: "done",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+          ],
+        },
+      ] as ModuleStatus[],
+    };
   },
 });
 </script>

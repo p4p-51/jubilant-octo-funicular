@@ -116,7 +116,7 @@
         border: solid 1px $c-grey-light;
         border-radius: 0;
 
-        width: 65%;
+        width: 100%;
         max-width: 1000px;
 
         padding: 20px 35px;
