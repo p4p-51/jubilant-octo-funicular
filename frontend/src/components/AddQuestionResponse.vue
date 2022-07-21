@@ -1,7 +1,7 @@
 <template>
   <div class="add-question-response">
     <h2>{{ title }}</h2>
-    <div>dsadsa</div>
+    <experience-select :experiences="experiences" />
   </div>
 </template>
 
@@ -35,10 +35,11 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import { Experience, Response } from "@/types/Question.interface";
+import ExperienceSelect from "@/components/ExperienceSelect.vue";
 
 export default defineComponent({
   name: "AddQuestionResponse",
-  components: {},
+  components: { ExperienceSelect },
   data() {
     return {};
   },
