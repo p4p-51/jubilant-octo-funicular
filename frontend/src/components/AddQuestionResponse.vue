@@ -2,7 +2,8 @@
   <div class="add-question-response">
     <h2>{{ title }}</h2>
     <!-- <experience-select :experiences="experiences" /> -->
-    <collapsible-responses :responses="responses" />
+    <!-- <collapsible-responses :responses="responses" /> -->
+    <response-inputs :experience="selectedExperience" />
   </div>
 </template>
 
@@ -38,15 +39,23 @@ import { defineComponent, PropType } from "vue";
 import { Experience, Response } from "@/types/Question.interface";
 import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import CollapsibleResponses from "./CollapsibleResponses.vue";
+import ResponseInputs from "./ResponseInputs.vue";
 
 export default defineComponent({
   name: "AddQuestionResponse",
   components: {
     // ExperienceSelect,
-    CollapsibleResponses,
+    // CollapsibleResponses,
+    ResponseInputs,
   },
   data() {
-    return {};
+    return {
+      selectedExperience: {
+        id: "1",
+        title: "ENGGEN 115 leadership",
+        labels: ["Conflict", "Teamwork"],
+      },
+    };
   },
   props: {
     id: {
