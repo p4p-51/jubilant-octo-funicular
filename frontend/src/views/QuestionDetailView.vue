@@ -4,11 +4,11 @@
     <div class="content-container">
       <div class="questions-container">
         <div class="search-bar">
-          <qb-search-bar />
+          <qb-search-bar @onChange="(s) => (this.filter = s.toLowerCase())" />
         </div>
         <div class="list">
           <qb-side-bar-question
-            v-for="question in questions"
+            v-for="question in filterQuestions()"
             :key="question.id"
             :numResponses="question.responses.length"
             :title="question.title"
@@ -105,10 +105,23 @@ export default defineComponent({
       this.addQuestionKey++;
       this.selectedQuestionId = id;
     },
+    filterQuestions() {
+      if (this.filter === "") {
+        return this.questions;
+      } else {
+        return this.questions.filter((q) => {
+          return (
+            q.label.toLowerCase().includes(this.filter) ||
+            q.title.includes(this.filter)
+          );
+        });
+      }
+    },
   },
   data() {
     return {
       addQuestionKey: 0,
+      filter: "" as string,
       questions: [
         {
           id: "1",
@@ -151,8 +164,8 @@ export default defineComponent({
         {
           id: "2",
           title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
+            "Tell me about a time when you experienced a conflict in a team SPECIAL",
+          label: "Special",
           experiences: [
             {
               id: "1",

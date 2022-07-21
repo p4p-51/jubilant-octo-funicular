@@ -2,7 +2,7 @@
   <div class="qb-search-bar">
     <input
       placeholder="Conflicts"
-      @change="$emit('change', $event.target.value)"
+      @change="$emit('onChange', $event.target.value)"
     /><img src="@/assets/icons/magnify.svg" />
   </div>
 </template>
