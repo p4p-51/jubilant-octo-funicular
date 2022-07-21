@@ -15,6 +15,56 @@
       </div>
     </div>
   </div>
+
+  <div class="modal">
+    <div class="popup">
+      <input class="title-input" placeholder="Your experience here" />
+      <div class="radio-line">
+        <p>I experienced a conflict</p>
+        <div class="radio-group">
+          <label>Yes</label>
+          <input type="radio" name="conflict" value="yes" />
+
+          <label>No</label>
+          <input type="radio" name="conflict" value="no" checked="true" />
+        </div>
+      </div>
+      <div class="radio-line">
+        <p>I was the leader</p>
+        <div class="radio-group">
+          <label>Yes</label>
+          <input type="radio" name="leadership" value="yes" />
+
+          <label>No</label>
+          <input type="radio" name="leadership" value="no" checked="true" />
+        </div>
+      </div>
+      <div class="radio-line">
+        <p>I experienced teamwork</p>
+        <div class="radio-group">
+          <label>Yes</label>
+          <input type="radio" name="teamwork" value="yes" />
+
+          <label>No</label>
+          <input type="radio" name="teamwork" value="no" checked="true" />
+        </div>
+      </div>
+      <div class="radio-line">
+        <p>I experienced a failure</p>
+        <div class="radio-group">
+          <label>Yes</label>
+          <input type="radio" name="failure" value="yes" />
+
+          <label>No</label>
+          <input type="radio" name="failure" value="no" checked="true" />
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="cancel">Cancel</button>
+        <button class="save">Save</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -91,9 +141,84 @@
     }
   }
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .popup {
+    width: 800px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    box-sizing: border-box;
+    padding: 40px 50px;
+
+    .title-input {
+      font-family: $f-poppins;
+      font-size: 16px;
+      padding: 5px 10px;
+      font-weight: 500;
+
+      border: solid 1px $c-grey-light;
+      align-self: flex-start;
+
+      width: 60%;
+      margin-bottom: 30px;
+
+      &:focus {
+        outline: solid 1px $c-primary;
+      }
+    }
+
+    .radio-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin: 0 35px;
+
+      .radio-group {
+        input {
+          margin-right: 25px;
+        }
+      }
+    }
+  }
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+    button {
+      margin-left: 20px;
+    }
+
+    .save {
+      color: $c-background;
+      background: $c-primary;
+    }
+  }
+}
 </style>
 
 <script lang="ts">
+import { Experience } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
@@ -127,6 +252,18 @@ export default defineComponent({
           isFilled: false,
         },
       ],
+      experiences: [
+        {
+          id: "23",
+          title: "ENGGEN 115 bridge",
+          labels: ["Conflict", "Leadership"],
+        },
+        {
+          id: "24213",
+          title: "My summer camp",
+          labels: ["Teamwork", "Leadership"],
+        },
+      ] as Experience[],
     };
   },
   props: {},
