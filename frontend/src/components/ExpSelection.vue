@@ -13,7 +13,7 @@
       </div>
     </div>
     <div v-else class="answer-input">
-      <p>Tell me about {{ selectedExp.name }}!</p>
+      <h5>Tell me about {{ selectedExp.name }}!</h5>
       <div class="s star">
         <p>Situation:</p>
         <textarea name="s-input" />
@@ -31,7 +31,7 @@
         <textarea />
       </div>
       <div class="input-nav">
-        <button>Back</button>
+        <button @click="onBackClick()">Back</button>
         <button>Next</button>
       </div>
     </div>
@@ -58,6 +58,9 @@ export default defineComponent({
   methods: {
     onExpClick(exp: Experience) {
       this.selectedExp = exp;
+    },
+    onBackClick() {
+      this.selectedExp = null as any;
     },
   },
   data() {

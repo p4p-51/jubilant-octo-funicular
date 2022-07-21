@@ -15,13 +15,30 @@
   justify-content: space-between;
   align-items: center;
 
+  cursor: pointer;
+  padding-left: 5px;
+
   img {
     margin-left: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    border-bottom-color: $c-primary;
+
+    img {
+      transform: scale(1.5) rotate(180deg);
+      transition: $animation;
+      transform-origin: center;
+      fill: $c-primary;
+    }
   }
 
   &.selected {
+    border-bottom-color: $c-primary;
+    background-color: $c-primary;
     img {
-      transform: rotate(180deg);
+      transform: rotate(180deg) scale(1.5);
       transform-origin: center;
       transition: $animation;
     }

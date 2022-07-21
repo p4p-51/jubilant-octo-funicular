@@ -37,7 +37,6 @@
 
 .header {
   grid-area: header;
-  background-color: #68a972;
 }
 
 .experience-selector {
