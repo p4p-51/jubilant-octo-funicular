@@ -6,6 +6,7 @@
       showIsCorrect: showIsCorrectResult,
       showIsWrong: showIsWrongResult,
     }"
+    @click="$emit('onOptionClick', option.id)"
   >
     <div class="letter">{{ convertNumberToLetter(optionNumber) }}</div>
     <p>{{ option.text }}</p>
