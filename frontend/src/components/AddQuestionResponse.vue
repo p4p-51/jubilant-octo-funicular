@@ -14,6 +14,7 @@
     <response-inputs
       v-else-if="editMode === true"
       :experience="getSelectedQuestion(selectedExperienceId)"
+      @savedAnswer="savedAnswer"
     />
   </div>
 </template>
@@ -66,10 +67,14 @@ export default defineComponent({
     createNewResponse() {
       this.editMode = true;
     },
+    savedAnswer() {
+      this.editMode = false;
+      this.selectedExperienceId = null;
+    },
   },
   data() {
     return {
-      selectedExperienceId: null as unknown as string,
+      selectedExperienceId: null as string | null,
       editMode: false as boolean,
     };
   },
