@@ -1,21 +1,24 @@
 <template>
-  <div class="quiz-question">
+  <div class="quiz-question" :class="{ disable: show }">
     <h6>Question {{ questionNumber }}</h6>
 
     <h3>What is the best way to learn Vue?</h3>
 
     <div class="options">
       <quiz-option
-        v-for="(opt, i) in question.options"
+        v-for="(opt, i) in options"
         :option="opt"
         :optionNumber="i + 1"
         :isSelected="opt.id === selectedOption"
         :key="i"
-        :showIsWrongResult="true"
+        :show-is-correct-result="show && opt.id === question.answer"
+        :show-is-wrong-result="
+          show && opt.id === selectedOption && !(opt.id === question.answer)
+        "
+        @onOptionClick="selectOption"
       />
     </div>
-
-    <button>Submit</button>
+    <button @click="submitAnswer">Submit</button>
   </div>
 </template>
 
@@ -32,6 +35,14 @@
   padding: 35px 100px;
 
   max-width: 1000px;
+
+  &.disable {
+    pointer-events: none;
+    button {
+      color: $c-grey-light;
+      border-color: $c-grey-light;
+    }
+  }
 
   > h6 {
     font-size: 12px;
@@ -66,8 +77,22 @@
 import QuizQuestion from "@/types/QuizQuestion.interface";
 import { defineComponent, PropType } from "vue";
 import QuizOption from "./QuizOption.vue";
+
 export default defineComponent({
   name: "QuizQuestion",
+  methods: {
+    selectOption(id: string) {
+      if (!this.show) {
+        this.selectedOption = id;
+      }
+    },
+    getOption(id: string) {
+      return this.options.find((o) => o.id == id);
+    },
+    submitAnswer() {
+      this.show = true;
+    },
+  },
   props: {
     question: {
       type: Object as PropType<QuizQuestion>,
@@ -81,7 +106,9 @@ export default defineComponent({
   components: { QuizOption },
   data() {
     return {
-      selectedOption: "2",
+      selectedOption: "2" as string | null,
+      options: this.question.options,
+      show: false,
     };
   },
 });

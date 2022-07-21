@@ -124,6 +124,7 @@ export default defineComponent({
                 "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
             },
           ],
+          answer: "1",
         },
       ] as QuestionForQuiz[],
       goodExample: {
