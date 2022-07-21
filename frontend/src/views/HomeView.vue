@@ -14,6 +14,8 @@
     <router-link to="/add">mine</router-link>
     <br />
     <router-link to="/questions/1">qb det</router-link>
+    <br />
+    <router-link to="/graduation">grad</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
