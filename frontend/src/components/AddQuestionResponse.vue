@@ -1,7 +1,8 @@
 <template>
   <div class="add-question-response">
     <h2>{{ title }}</h2>
-    <experience-select :experiences="experiences" />
+    <!-- <experience-select :experiences="experiences" /> -->
+    <collapsible-responses :responses="responses" />
   </div>
 </template>
 
@@ -36,10 +37,14 @@ import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import { Experience, Response } from "@/types/Question.interface";
 import ExperienceSelect from "@/components/ExperienceSelect.vue";
+import CollapsibleResponses from "./CollapsibleResponses.vue";
 
 export default defineComponent({
   name: "AddQuestionResponse",
-  components: { ExperienceSelect },
+  components: {
+    // ExperienceSelect,
+    CollapsibleResponses,
+  },
   data() {
     return {};
   },

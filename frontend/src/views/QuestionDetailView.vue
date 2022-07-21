@@ -327,7 +327,21 @@ export default defineComponent({
             labels: ["Conflict", "Teamwork"],
           },
         ],
-        responses: [],
+        responses: [
+          {
+            experience: {
+              id: "1",
+              title: "ENGGEN 115 leadership",
+              labels: ["Conflict", "Teamwork"],
+            },
+            response: {
+              s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
+              t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
+              a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
+              r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
+            },
+          },
+        ],
       } as Question,
     };
   },
