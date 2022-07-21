@@ -27,11 +27,15 @@
           learning material for you
         </p>
         <div class="stars">
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
+          <div
+            class="star-wrapper"
+            v-for="i in 5"
+            :key="i"
+            @click="numStars = i"
+          >
+            <img v-if="i <= numStars" src="@/assets/icons/stars/star.svg" />
+            <img v-else src="@/assets/icons/stars/star-outline.svg" />
+          </div>
         </div>
         <h4>Any other feedback? (Optional)</h4>
         <textarea />
@@ -132,11 +136,13 @@
       align-items: center;
       column-gap: 5px;
 
-      > img {
-        height: 36px;
-        width: 36px;
+      .star-wrapper {
+        > img {
+          height: 36px;
+          width: 36px;
 
-        cursor: pointer;
+          cursor: pointer;
+        }
       }
     }
 
@@ -206,5 +212,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "ModuleEndView",
   components: { ModuleItem },
+  data() {
+    return {
+      numStars: 0 as number,
+    };
+  },
 });
 </script>

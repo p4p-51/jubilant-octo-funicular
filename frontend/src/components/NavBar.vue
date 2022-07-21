@@ -1,17 +1,29 @@
 <template>
   <nav class="nav-bar">
     <router-link to="/">
-      <img src="../assets/logo.png" alt="logo" class="logo" />
+      <img src="../assets/logo.svg" alt="logo" class="logo" />
     </router-link>
 
     <div class="links-container">
-      <router-link to="/" class="link">
+      <router-link
+        to="/lecture"
+        class="link"
+        :class="{ isActive: currentRouteName.includes('lecture') }"
+      >
         <img src="../assets/icons/hat.svg" class="icon" />
       </router-link>
-      <router-link to="/about" class="link">
+      <router-link
+        to="/questions"
+        class="link"
+        :class="{ isActive: currentRouteName.includes('questions') }"
+      >
         <img src="../assets/icons/note.svg" class="icon" />
       </router-link>
-      <router-link to="/lecture" class="link">
+      <router-link
+        to="/settings"
+        class="link"
+        :class="{ isActive: currentRouteName.includes('settings') }"
+      >
         <img src="../assets/icons/cog.svg" class="icon" />
       </router-link>
     </div>
@@ -73,12 +85,19 @@
 
   border: none;
 
+  box-sizing: border-box;
+
   .icon {
     width: 24px;
     height: 24px;
   }
 
   &:hover {
+    background-color: rgba($c-primary, 0.15);
+  }
+
+  &.isActive {
+    border-left: solid 7px $c-primary;
     background-color: rgba($c-primary, 0.15);
   }
 }
@@ -129,5 +148,16 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "NavBar",
   components: {},
+  data() {
+    console.log("yoooo");
+    console.log(this.$route);
+    console.log(this.$router.currentRoute.value.path);
+    return {};
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.fullPath;
+    },
+  },
 });
 </script>
