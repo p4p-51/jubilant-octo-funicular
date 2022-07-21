@@ -1,6 +1,6 @@
 <template>
   <div class="quiz-question">
-    <h6>Question 1</h6>
+    <h6>Question {{ questionNumber }}</h6>
 
     <h3>What is the best way to learn Vue?</h3>
 
@@ -70,6 +70,10 @@ export default defineComponent({
   props: {
     question: {
       type: Object as PropType<QuizQuestion>,
+      required: true,
+    },
+    questionNumber: {
+      type: Number,
       required: true,
     },
   },

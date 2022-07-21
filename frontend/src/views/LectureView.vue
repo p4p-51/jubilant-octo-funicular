@@ -48,7 +48,12 @@
 
     <SectionExample title="Example" :good="goodExample" :bad="badExample" />
 
-    <quiz-question :question="quizQuestions[0]" />
+    <quiz-question
+      v-for="(question, i) in quizQuestions"
+      :question="quizQuestions[0]"
+      :questionNumber="i + 1"
+      :key="i"
+    />
   </div>
 </template>
 
