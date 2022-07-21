@@ -1,5 +1,9 @@
 <template>
-  <div class="qb-sidebar-question" :class="{ isSelected: isSelected }">
+  <div
+    class="qb-sidebar-question"
+    :class="{ isSelected: isSelected }"
+    @click="$emit('onQuestionClick', id)"
+  >
     <p>{{ title }}</p>
     <div class="number" :class="{ highlight: numResponses > 0 }">
       <p>{{ numResponses }}</p>

@@ -1,3 +1,7 @@
+export interface QuestionInterface {
+  questionText: string;
+  id: string;
+}
 export default interface Question {
   id: string;
   title: string;

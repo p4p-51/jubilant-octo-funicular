@@ -7,7 +7,9 @@
       :key="res.id"
       :response="res"
     ></collapsible-response>
-    <button class="add-response">+ Add a new response</button>
+    <button class="add-response" @click="$emit('newResponse')">
+      + Add a new response
+    </button>
   </div>
 </template>
 
@@ -65,7 +67,7 @@ export default defineComponent({
   },
   props: {
     responses: {
-      type: Array as PropType<Experience[]>,
+      type: Array as PropType<Response[]>,
       required: true,
     },
   },

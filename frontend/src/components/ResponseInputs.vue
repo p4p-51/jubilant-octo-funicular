@@ -14,12 +14,13 @@
       <p class="title"><b>R</b>esult</p>
       <textarea />
     </div>
-    <button>Save</button>
+    <button @click="SaveAnswer">Save</button>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
 .response-inputs {
   margin-top: 50px;
 
@@ -113,6 +114,11 @@ import CollapsibleResponse from "./CollapsibleResponse.vue";
 export default defineComponent({
   name: "ResponseInputs",
   components: {},
+  methods: {
+    SaveAnswer() {
+      this.$emit("savedAnswer");
+    },
+  },
   data() {
     return {};
   },

@@ -61,6 +61,12 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   {
+    path: "/add",
+    name: "Add answer",
+    component: () =>
+      import(/* webpackChunkName: "add" */ "../views/AddAnswerView.vue"),
+  },
+  {
     path: "/questions/:id",
     name: "question detail",
     component: () =>
