@@ -13,6 +13,8 @@
         :key="i"
       />
     </div>
+
+    <button>Submit</button>
   </div>
 </template>
 
@@ -45,9 +47,16 @@
   }
 
   .options {
+    margin-top: 30px;
+
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+  }
+
+  > button {
+    align-self: flex-end;
+    margin-top: 20px;
   }
 }
 </style>
