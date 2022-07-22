@@ -243,16 +243,16 @@ export default defineComponent({
         },
       ] as Label[],
       experiences: [
-        {
-          id: "23",
-          title: "ENGGEN 115 bridge",
-          labels: ["Conflict", "Leadership"],
-        },
-        {
-          id: "24213",
-          title: "My summer camp",
-          labels: ["Teamwork", "Leadership"],
-        },
+        // {
+        //   id: "23",
+        //   title: "ENGGEN 115 bridge",
+        //   labels: ["Conflict", "Leadership"],
+        // },
+        // {
+        //   id: "24213",
+        //   title: "My summer camp",
+        //   labels: ["Teamwork", "Leadership"],
+        // },
       ] as Experience[],
     };
   },

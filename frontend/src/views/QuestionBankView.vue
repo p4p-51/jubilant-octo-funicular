@@ -17,6 +17,7 @@
               :key="question.id"
               :title="question.title"
               :responses="question.responses"
+              @click="this.$router.push('/questions/1')"
             />
           </div>
         </div>
@@ -30,6 +31,8 @@
               :id="question.id"
               :key="question.id"
               :title="question.title"
+              @onQuestionClick="onQuestionClick"
+              @click="this.$router.push('/questions/1')"
             />
           </div>
         </div>

@@ -23,9 +23,9 @@
           v-bind="getSelectedQuestion(selectedQuestionId)"
           :key="addQuestionKey"
         />
-        <button @click="goToGrad" class="go-button">
+        <!-- <button @click="goToGrad" class="go-button">
           Save and continue ->
-        </button>
+        </button> -->
       </div>
     </div>
   </div>

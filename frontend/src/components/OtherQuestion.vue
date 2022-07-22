@@ -1,7 +1,7 @@
 <template>
   <div class="other-question">
     <h5>{{ title }}</h5>
-    <a href="#">dsasa</a>
+    <a href="#">Write a resposne</a>
   </div>
 </template>
 

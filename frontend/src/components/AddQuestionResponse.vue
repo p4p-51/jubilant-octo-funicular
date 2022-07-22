@@ -1,16 +1,17 @@
 <template>
   <div class="add-question-response">
     <h2>{{ title }}</h2>
-    <experience-select
-      v-if="selectedExperienceId === null"
-      :experiences="experiences"
-      @onExperienceClick="(id) => (this.selectedExperienceId = id)"
-    />
     <collapsible-responses
-      v-else-if="editMode === false && responses.length > 0"
+      v-if="editMode === false && responses.length > 0"
       :responses="responses"
       @newResponse="createNewResponse"
     />
+    <experience-select
+      v-else-if="selectedExperienceId === null"
+      :experiences="experiences"
+      @onExperienceClick="(id) => (this.selectedExperienceId = id)"
+    />
+
     <response-inputs
       v-else
       :experience="getSelectedQuestion(selectedExperienceId)"
