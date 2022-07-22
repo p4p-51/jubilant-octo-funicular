@@ -1,4 +1,5 @@
 <template>
+  <progress-side-bar :modules="modules" />
   <div class="intro-view">
     <title-block
       title="Introduction to Behavioural interviews"
@@ -158,19 +159,176 @@
 </style>
 
 <script lang="ts">
+import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
+import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "HomeView",
-  components: { TitleBlock },
+  components: { TitleBlock, ProgressSideBar },
   methods: {
     goToLect() {
-      this.$router.push("/lecture/quiz");
+      this.$router.push("/lecture/prem-quiz");
     },
   },
   data() {
-    return {};
+    return {
+      modules: [
+        {
+          name: "Introduction",
+          id: "fjisaljio",
+          status: "current",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Organising Past Experiences",
+          id: "fsafsafsa",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Prelimiary Quiz",
+              id: "fafwqa",
+              status: "future",
+              url: "/lecture/quiz",
+            },
+            {
+              name: "Lecture",
+              id: "fafwqa",
+              status: "future",
+              url: "/lecture",
+            },
+            {
+              name: "Build your own profile",
+              id: "fafwqa",
+              status: "future",
+              url: "/lecture/build-profile",
+            },
+            {
+              name: "Review quiz",
+              id: "fafwqa",
+              status: "future",
+              url: "/lecture/quiz",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Another module here",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Yet another module",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Graduation",
+          id: "dsadasfwqa",
+          status: "future",
+          url: "#",
+        },
+      ] as ModuleStatus[],
+    };
   },
 });
 </script>
