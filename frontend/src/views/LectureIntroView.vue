@@ -166,7 +166,7 @@ export default defineComponent({
   components: { TitleBlock },
   methods: {
     goToLect() {
-      this.$router.push("/lecture");
+      this.$router.push("/lecture/quiz");
     },
   },
   data() {
