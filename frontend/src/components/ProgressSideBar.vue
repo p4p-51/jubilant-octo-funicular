@@ -81,13 +81,6 @@ export default defineComponent({
     margin-bottom: 20px;
   }
 
-  .done {
-    color: rgba($c-primary, 0.3);
-    a {
-      color: rgba($c-primary, 0.3);
-    }
-  }
-
   .current {
     color: $c-primary;
     font-weight: 500;
@@ -103,6 +96,13 @@ export default defineComponent({
 
     a {
       color: $c-grey-dark;
+    }
+  }
+
+  .done {
+    color: rgba($c-primary, 0.3);
+    a {
+      color: rgba($c-primary, 0.3);
     }
   }
 }

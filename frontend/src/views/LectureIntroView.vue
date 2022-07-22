@@ -217,13 +217,13 @@ export default defineComponent({
           name: "Organising Past Experiences",
           id: "fsafsafsa",
           status: "future",
-          url: "#",
+          url: "/lecture/prem-quiz",
           children: [
             {
               name: "Prelimiary Quiz",
               id: "fafwqa",
               status: "future",
-              url: "/lecture/quiz",
+              url: "/lecture/prem-quiz",
             },
             {
               name: "Lecture",

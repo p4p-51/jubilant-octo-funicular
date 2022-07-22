@@ -122,31 +122,31 @@ export default defineComponent({
         {
           name: "Organising Past Experiences",
           id: "fsafsafsa",
-          status: "done",
-          url: "#",
+          status: "current",
+          url: "/lecture/prem-quiz",
           children: [
             {
               name: "Prelimiary Quiz",
               id: "fafwqa",
-              status: "current",
-              url: "/lecture/quiz",
+              status: "done",
+              url: "/lecture/prem-quiz",
             },
             {
               name: "Lecture",
               id: "fafwqa",
-              status: "future",
+              status: "done",
               url: "/lecture",
             },
             {
               name: "Build your own profile",
               id: "fafwqa",
-              status: "future",
+              status: "done",
               url: "/lecture/build-profile",
             },
             {
               name: "Review quiz",
               id: "fafwqa",
-              status: "future",
+              status: "current",
               url: "/lecture/quiz",
             },
           ] as ModuleStatus[],
