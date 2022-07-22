@@ -106,7 +106,7 @@ export default defineComponent({
   components: { QuizOption },
   data() {
     return {
-      selectedOption: "2" as string | null,
+      selectedOption: null as string | null,
       options: this.question.options,
       show: false,
     };

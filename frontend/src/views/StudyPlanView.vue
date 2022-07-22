@@ -99,13 +99,13 @@ export default defineComponent({
             "This is the fourth module. It’s a little bit more complicated than the others, but it’s a good start.",
           image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
         },
-        {
-          number: 5,
-          title: "Module 5",
-          description:
-            "This is the fifth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
-        },
+        // {
+        //   number: 5,
+        //   title: "Module 5",
+        //   description:
+        //     "This is the fifth module. It’s a little bit more complicated than the others, but it’s a good start.",
+        //   image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        // },
         {
           number: 6,
           title: "Module 6",
@@ -113,13 +113,13 @@ export default defineComponent({
             "This is the sixth module. It’s a little bit more complicated than the others, but it’s a good start.",
           image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
         },
-        {
-          number: 7,
-          title: "Module 7",
-          description:
-            "This is the seventh module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
-        },
+        // {
+        //   number: 7,
+        //   title: "Module 7",
+        //   description:
+        //     "This is the seventh module. It’s a little bit more complicated than the others, but it’s a good start.",
+        //   image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        // },
       ],
     };
   },

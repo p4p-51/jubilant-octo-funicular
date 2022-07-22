@@ -3,6 +3,8 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <router-link to="/diy">diy</router-link>
     <br />
+    <router-link to="/lecture/quiz">fdgdff</router-link>
+    <br />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

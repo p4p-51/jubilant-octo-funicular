@@ -90,6 +90,12 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "build-profile" */ "../views/BuildProfileView.vue"
       ),
   },
+  {
+    path: "/lecture/quiz",
+    name: "quiz",
+    component: () =>
+      import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
+  },
 ];
 
 const router = createRouter({

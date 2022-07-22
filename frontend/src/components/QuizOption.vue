@@ -108,6 +108,8 @@ export default defineComponent({
   }
 
   &.isSelected {
+    pointer-events: none;
+
     .letter {
       background-color: $c-primary;
 
@@ -118,10 +120,6 @@ export default defineComponent({
 
     p {
       color: $c-primary;
-    }
-
-    &:hover {
-      pointer-events: none;
     }
   }
 
