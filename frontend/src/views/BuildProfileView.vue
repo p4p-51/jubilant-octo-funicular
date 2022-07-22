@@ -75,7 +75,7 @@ export default defineComponent({
   },
   methods: {
     goToQuestions() {
-      this.$router.push("/questions/1");
+      this.$router.push("/lecture/quiz");
     },
   },
   data() {
@@ -99,7 +99,145 @@ export default defineComponent({
               status: "done",
               url: "#",
             },
-          ],
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Organising Past Experiences",
+          id: "fsafsafsa",
+          status: "done",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "current",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Another module here",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Yet another module",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Graduation",
+          id: "dsadasfwqa",
+          status: "future",
+          url: "#",
         },
       ] as ModuleStatus[],
     };

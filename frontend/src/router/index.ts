@@ -8,13 +8,13 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
+    path: "/lecture/end",
+    name: "module-end",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ModuleEndView.vue"),
+      import(/* webpackChunkName: "module-end" */ "../views/ModuleEndView.vue"),
   },
   {
     path: "/lecture",

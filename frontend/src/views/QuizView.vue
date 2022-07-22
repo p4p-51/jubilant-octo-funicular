@@ -1,4 +1,5 @@
 <template>
+  <progress-side-bar :modules="modules"></progress-side-bar>
   <div class="quiz-view">
     <title-block
       module="Self introduction"
@@ -14,7 +15,9 @@
         :key="i"
       />
     </div>
-    <button class="go-button">All done! -></button>
+    <button class="go-button" @click="this.$router.push('/lecture/end')">
+      All done! ->
+    </button>
   </div>
 </template>
 
@@ -64,16 +67,179 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import QuizQuestion from "@/components/QuizQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question, { Experience } from "@/types/Question.interface";
+import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
+import ModuleStatus from "@/types/ModuleStatus.interface";
 
 export default defineComponent({
   name: "QuizView",
   components: {
     TitleBlock,
     QuizQuestion,
+    ProgressSideBar,
   },
   data() {
     return {
+      modules: [
+        {
+          name: "Self introduction",
+          id: "fjisaljio",
+          status: "done",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Organising Past Experiences",
+          id: "fsafsafsa",
+          status: "done",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "done",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "current",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Another module here",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Yet another module",
+          id: "fjisaljio",
+          status: "future",
+          url: "#",
+          children: [
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+            {
+              name: "Some sort of child",
+              id: "fafwqa",
+              status: "future",
+              url: "#",
+            },
+          ] as ModuleStatus[],
+        },
+        {
+          name: "Graduation",
+          id: "dsadasfwqa",
+          status: "future",
+          url: "#",
+        },
+      ] as ModuleStatus[],
       quizQuestions: [
         {
           title: "What is the best way to learn Vue?",
