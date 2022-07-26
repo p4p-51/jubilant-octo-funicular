@@ -3,15 +3,19 @@ import swaggerUi from 'swagger-ui-express';
 import * as OpenApiValidator from 'express-openapi-validator';
 import router from './routes/Router';
 import spec from './utils/SwaggerDoc';
+import { initializeApp, cert } from "firebase-admin/app";
+import serviceAccount from '../firebase.json'
 import { isAuthenticated } from './middleware/Authentication';
+
+initializeApp({
+  credential: cert(serviceAccount)
+});
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// console.log(JSON.stringify(spec))
 
 // Serve up the api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
