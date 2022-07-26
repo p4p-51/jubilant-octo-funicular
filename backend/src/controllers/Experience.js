@@ -1,4 +1,6 @@
-class ExperienceController {
+import { BaseController } from "./BaseController";
+
+class ExperienceController extends BaseController{
   GetAllExperiences = async (req, res) => {
     const experiences = [
       {

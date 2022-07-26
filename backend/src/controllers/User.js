@@ -1,5 +1,19 @@
-class UserController {
+import { UserService } from "../services/UserService";
+import { BaseController } from "./BaseController";
+
+
+class UserController extends BaseController{
+  userService;
+
+  constructor() {
+    super();
+    this.userService = new UserService();
+  }
+
   GetUser = async (req, res) => {
+
+    await this.userService.getUser()
+
     const user = {
       userName: req.params.userId,
       avatar:

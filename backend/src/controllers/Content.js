@@ -1,6 +1,7 @@
 import { MongoAdapter } from '../models/mongodb/MongoClient';
+import { BaseController } from "./BaseController";
 
-class ContentController {
+class ContentController extends BaseController {
   GetAllContent = async (req, res) => {
     const content = [
       {

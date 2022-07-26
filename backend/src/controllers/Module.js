@@ -1,4 +1,6 @@
-class ModuleController {
+import { BaseController } from "./BaseController";
+
+class ModuleController extends BaseController{
   CompleteStage = async (req, res) => {};
   SubmitFeedback = async (req, res) => {
     const feedback = {

@@ -15,6 +15,8 @@ class MongoAdapter {
    */
   client = null;
 
+  _isConnected = false;
+
   static _instance = null;
 
   constructor(uri, dbName) {
@@ -26,6 +28,7 @@ class MongoAdapter {
     client.connect((err) => {
       if (err) throw err;
       this.db = client.db(dbName);
+      this._isConnected = true;
       logger.logInfo('MongoDB connected');
     });
 
@@ -52,6 +55,24 @@ class MongoAdapter {
   static getInstance() {
     if (!this._instance) throw new Error('No instance of MongoAdapter exists!');
     return this._instance;
+  }
+
+  async getCollection(collectionName) {
+    await this._isDBConnected();
+    return this.db.collection(collectionName);
+  }
+
+  async _isDBConnected(){
+    let counter = 0;
+    while (!this._isConnected) {
+      if (counter === 20) {
+        throw new Error("Connection to MongoDB Timed Out")
+      }
+      await new Promise(resolve => setTimeout(resolve, 100));
+      counter++;
+    }
+
+    return true;
   }
 }
 

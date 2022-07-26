@@ -3,9 +3,12 @@ import swaggerUi from 'swagger-ui-express';
 import * as OpenApiValidator from 'express-openapi-validator';
 import router from './routes/Router';
 import spec from './utils/SwaggerDoc';
+import { MongoAdapter } from "./models/mongodb/MongoClient";
+import Config from "./utils/config";
 
 const app = express();
 const port = 3000;
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

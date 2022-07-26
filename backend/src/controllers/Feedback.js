@@ -1,4 +1,6 @@
-class FeedbackController {
+import { BaseController } from "./BaseController";
+
+class FeedbackController extends  BaseController{
   SubmitFeedback = async (req, res) => {
     const feedback = {
       module: 'asdf',

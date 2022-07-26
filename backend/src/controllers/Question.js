@@ -1,4 +1,6 @@
-class QuestionController {
+import { BaseController } from "./BaseController";
+
+class QuestionController extends BaseController{
   GetQuestionsWithExperiences = async (req, res) => {
     const questionsWithExperiences = [
       {
