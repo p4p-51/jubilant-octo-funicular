@@ -2,14 +2,14 @@
   <div class="module-end-view">
     <div class="header">
       <h1>Yay! You did it! 🎉</h1>
-      <h3>Finished module: <span>Module name</span></h3>
+      <h3>Finished module: <span>Organising past experiences</span></h3>
     </div>
     <div class="content">
       <div class="progress">
         <ModuleItem name="Finding the right examples" moduleType="past" />
         <ModuleItem name="Listening for the correct cues" moduleType="past" />
-        <ModuleItem name="Structuring responses" moduleType="current" />
-        <ModuleItem name="Bacon ipsum dolor amet" moduleType="next" />
+        <ModuleItem name="Organising past experiences" moduleType="current" />
+        <ModuleItem name="Structuring responses" moduleType="next" />
         <ModuleItem
           name="Porchetta capicola ham, brisket jerky"
           moduleType="future"
@@ -27,11 +27,15 @@
           learning material for you
         </p>
         <div class="stars">
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
-          <img src="@/assets/icons/stars/star-outline.svg" />
+          <div
+            class="star-wrapper"
+            v-for="i in 5"
+            :key="i"
+            @click="numStars = i"
+          >
+            <img v-if="i <= numStars" src="@/assets/icons/stars/star.svg" />
+            <img v-else src="@/assets/icons/stars/star-outline.svg" />
+          </div>
         </div>
         <h4>Any other feedback? (Optional)</h4>
         <textarea />
@@ -45,7 +49,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/theme.scss";
+@import "@/assets/css/theme.scss";
 
 .module-end-view {
   padding: 20px 40px;
@@ -132,11 +136,13 @@
       align-items: center;
       column-gap: 5px;
 
-      > img {
-        height: 36px;
-        width: 36px;
+      .star-wrapper {
+        > img {
+          height: 36px;
+          width: 36px;
 
-        cursor: pointer;
+          cursor: pointer;
+        }
       }
     }
 
@@ -162,7 +168,9 @@
       font-size: 14px;
       font-weight: 400;
 
-      color: $c-grey-dark;
+      color: $c-black;
+
+      font-family: $f-poppins;
 
       &:focus {
         outline: solid 2px $c-primary;
@@ -206,5 +214,10 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "ModuleEndView",
   components: { ModuleItem },
+  data() {
+    return {
+      numStars: 0 as number,
+    };
+  },
 });
 </script>
