@@ -131,6 +131,7 @@ userRouter.get('/:userId', userController.GetUser);
  *                                  type: boolean
  *                              nextStage:
  *                                  $ref: '#/components/schemas/ModuleStage'
+ *           default:
  */
 userRouter.post('/:userId/complete', userController.CompleteStage);
 

@@ -58,7 +58,7 @@ class MongoAdapter {
 
   async getCollection(collectionName:string): Promise<Collection> {
     await this._isDBConnected();
-    return this.db.collection('users')
+    return this.db.collection(collectionName)
   }
 
   async _isDBConnected(): Promise<boolean> {

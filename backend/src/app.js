@@ -21,7 +21,7 @@ app.use(
   OpenApiValidator.middleware({
     apiSpec: spec,
     validateRequests: true,
-    validateResponses: { removeAdditional: 'failing' }, //Not sure why this isn't working :(
+    validateResponses: { removeAdditional: "all"}, //May cause unexpected behav with additionalProps
   })
 );
 
