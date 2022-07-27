@@ -1,32 +1,32 @@
-import { UserService } from "../services/UserService";
-import { BaseController } from "./BaseController";
+import { UserService } from '../services/UserService';
+import { BaseController } from './BaseController';
+import { Request, Response } from "express";
+import Error from '../utils/error'
 
-
-class UserController extends BaseController{
-  userService;
+class UserController extends BaseController {
+  userService: UserService;
 
   constructor() {
     super();
     this.userService = new UserService();
   }
 
-  GetUser = async (req, res) => {
+  GetUser = async (req: Request, res: Response) => {
+    const userId: number = parseInt(req.params["userId"])
+    const user = await this.userService.getUser(userId);
 
-    await this.userService.getUser()
-
-    const user = {
-      userName: req.params.userId,
-      avatar:
-        'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-      progress: {
-        module: 'self-intro',
-        stage: 2,
-      },
-    };
-    res.status(200).json(user);
+    if (user === null) {
+      res.status(404).send(Error(404, "User cannot be found"))
+    } else {
+      res.status(200).json(user);
+    }
   };
 
-  CompleteStage = async (req, res) => {
+  CompleteStage = async (req: Request, res: Response) => {
+    const user = req.params.userId
+    const stage = req.body['stage']
+
+
     const next = {
       module: 'asdf',
       stage: 1,

@@ -1,7 +1,8 @@
-import { BaseController } from "./BaseController";
+import { BaseController } from './BaseController';
+import { Request, Response } from 'express';
 
-class ExperienceController extends BaseController{
-  GetAllExperiences = async (req, res) => {
+class ExperienceController extends BaseController {
+  GetAllExperiences = async (req: Request, res: Response) => {
     const experiences = [
       {
         _id: 'situation-1',

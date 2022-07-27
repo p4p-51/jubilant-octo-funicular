@@ -1,7 +1,8 @@
-import { BaseController } from "./BaseController";
+import { BaseController } from './BaseController';
+import { Request, Response } from "express";
 
-class QuestionController extends BaseController{
-  GetQuestionsWithExperiences = async (req, res) => {
+class QuestionController extends BaseController {
+  GetQuestionsWithExperiences = async (req: Request, res: Response) => {
     const questionsWithExperiences = [
       {
         _id: 'question-1',
@@ -33,10 +34,10 @@ class QuestionController extends BaseController{
       },
     ];
 
-    res.send(200, questionsWithExperiences);
+    res.status(200).send(questionsWithExperiences);
   };
 
-  GetQuestionsWithResponses = async (req, res) => {
+  GetQuestionsWithResponses = async (req: Response, res: Response) => {
     const questionsWithResponses = [
       {
         experience: {
@@ -56,7 +57,7 @@ class QuestionController extends BaseController{
     res.status(200).send(questionsWithResponses);
   };
 
-  Answer = async (req, res) => {
+  Answer = async (req: Request, res: Response) => {
     res.status(200).send({ success: true });
   };
 }
