@@ -31,7 +31,7 @@ router.use('/questions', QuestionRouter);
  *            type: object
  *            properties:
  *              code:
- *                type: string
+ *                type: integer
  *              message:
  *                type: string
  *            required:
@@ -55,7 +55,7 @@ router.use('/questions', QuestionRouter);
  *      type: object
  *      properties:
  *        code:
- *          type: string
+ *          type: integer
  *        message:
  *          type: string
  *      required:

@@ -38,7 +38,7 @@ class UserController extends BaseController {
     }
 
     try {
-      const nextStage = await new ModuleService().getNextStage(moduleStage)
+      const nextStage: IModuleStage = await new ModuleService().getNextStage(moduleStage)
       const success: boolean = await this.userService.updateUser(userId, 'progress', nextStage)
       if (success) {
         res.status(200).json({success: true, nextStage: nextStage});
@@ -59,7 +59,7 @@ class UserController extends BaseController {
 
     const success: boolean = await this.userService.updateUser(userId, "intro", intro);
     if (success){
-      res.status(200).json({success: true});
+      res.status(200).json(httpResponse(200, "success"));
     } else {
       res.status(404).json(httpResponse(404, "Cannot find user"))
     }
