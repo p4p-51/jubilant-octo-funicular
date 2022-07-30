@@ -1,5 +1,6 @@
+import { Request, Response } from 'express';
+
 import { BaseController } from './BaseController';
-import { Request, Response } from "express";
 
 class QuestionController extends BaseController {
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
@@ -36,8 +37,7 @@ class QuestionController extends BaseController {
 
     res.status(200).send(questionsWithExperiences);
   };
-
-  GetQuestionsWithResponses = async (req: Response, res: Response) => {
+  GetQuestionsWithResponse = async (req: Request, res: Response) => {
     const questionsWithResponses = [
       {
         experience: {
@@ -55,8 +55,8 @@ class QuestionController extends BaseController {
     ];
 
     res.status(200).send(questionsWithResponses);
-  };
 
+  };
   Answer = async (req: Request, res: Response) => {
     res.status(200).send({ success: true });
   };

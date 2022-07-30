@@ -1,9 +1,10 @@
-import { Router, Request, Response } from 'express';
-import UserRouter from './UserRouter';
+import { Request, Response, Router } from 'express';
+
 import ContentRouter from './ContentRouter';
 import ExperienceRouter from './ExperienceRouter';
-import QuestionRouter from './QuestionRouter';
 import ModuleRouter from './ModuleRouter';
+import QuestionRouter from './QuestionRouter';
+import UserRouter from './UserRouter';
 
 const router = Router();
 
@@ -12,8 +13,6 @@ router.use('/modules', ModuleRouter);
 router.use('/content', ContentRouter);
 router.use('/experiences', ExperienceRouter);
 router.use('/questions', QuestionRouter);
-
-
 
 /**
  * @openapi
@@ -112,7 +111,7 @@ router.use('/questions', QuestionRouter);
  *                          - _id: leadership_question_id_1
  *                            questionText: tell me about a time when you took charge of a project
  */
-router.get('/labels', (req:Request, res: Response) => {
+router.get('/labels', (req: Request, res: Response) => {
   const labels = [
     {
       _id: 'label_id_1',

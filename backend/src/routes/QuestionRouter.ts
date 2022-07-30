@@ -1,4 +1,5 @@
-import Router from 'express';
+import { Router } from 'express';
+
 import { QuestionController } from '../controllers/Question';
 
 const router = Router();
@@ -142,7 +143,7 @@ router.get('/', questionController.GetQuestionsWithExperiences);
 
 router.get(
   '/:questionId/answers',
-  questionController.GetQuestionsWithResponses
+  questionController.GetQuestionsWithResponse
 );
 router.post('/:questionId/answers', questionController.Answer);
 

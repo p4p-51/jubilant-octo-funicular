@@ -1,5 +1,6 @@
-import { BaseController } from './BaseController';
 import { Request, Response } from 'express';
+
+import { BaseController } from './BaseController';
 
 class FeedbackController extends BaseController {
   SubmitFeedback = async (req: Request, res: Response) => {

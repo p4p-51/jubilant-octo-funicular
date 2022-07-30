@@ -1,16 +1,17 @@
 import express from 'express';
-import swaggerUi from 'swagger-ui-express';
 import * as OpenApiValidator from 'express-openapi-validator';
-import router from './routes/Router';
-import spec from './utils/SwaggerDoc';
-import { MongoAdapter } from './models/mongodb/MongoClient';
-import Config from './utils/config';
-import { initializeApp, cert } from "firebase-admin/app";
-import serviceAccount from '../firebase.json'
+import { cert, initializeApp } from 'firebase-admin/app';
+import swaggerUi from 'swagger-ui-express';
+
+import serviceAccount from '../firebase.json';
 import { isAuthenticated } from './middleware/Authentication';
+import { MongoAdapter } from './models/mongodb/MongoClient';
+import router from './routes/Router';
+import Config from './utils/config';
+import spec from './utils/SwaggerDoc';
 
 initializeApp({
-  credential: cert(serviceAccount)
+  credential: cert(serviceAccount),
 });
 
 const app = express();
@@ -26,7 +27,7 @@ app.use(
   OpenApiValidator.middleware({
     apiSpec: spec,
     validateRequests: true,
-    validateResponses: { removeAdditional: "all"}, //May cause unexpected behav with additionalProps
+    validateResponses: { removeAdditional: 'all' }, //May cause unexpected behav with additionalProps
   })
 );
 

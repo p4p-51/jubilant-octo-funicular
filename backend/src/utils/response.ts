@@ -1,6 +1,8 @@
 interface Response {
-  code: number,
-  message: string
+  code: number;
+  message: string;
 }
 
-export default (code:number, message:string): Response => {return { code: code, message: message}}
+export default (code: number, message: string): Response => {
+  return { code: code, message: message };
+};

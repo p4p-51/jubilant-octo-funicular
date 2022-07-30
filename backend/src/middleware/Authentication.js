@@ -13,5 +13,5 @@ export async function isAuthenticated(req, res, next) {
   //   console.error(`${err.code} -  ${err.message}`);
   //   return res.status(401).send({ code: "401", message: 'Unauthorized' });
   // }
-  next()
+  next();
 }

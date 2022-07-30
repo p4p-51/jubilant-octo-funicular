@@ -1,4 +1,5 @@
-import { Collection, Db, MongoClient } from "mongodb";
+import { Collection, Db, MongoClient } from 'mongodb';
+
 import { logger } from '../../utils/logger';
 
 /**
@@ -15,14 +16,12 @@ class MongoAdapter {
    */
   client: MongoClient = null;
 
-  _isConnected: boolean = false;
+  _isConnected = false;
 
   static _instance: MongoAdapter = null;
 
   constructor(uri: string, dbName: string) {
-    // @ts-ignore
-    const client: MongoClient = new MongoClient(uri, {
-    });
+    const client: MongoClient = new MongoClient(uri, {});
 
     client.connect((err) => {
       if (err) throw err;
@@ -41,7 +40,7 @@ class MongoAdapter {
   /**
    * Builds a MongoAdapter using a `uri` and default `dbName`.
    */
-  static build(uri: string, dbName:string): MongoAdapter {
+  static build(uri: string, dbName: string): MongoAdapter {
     if (this._instance) throw new Error('MongoAdapter already built!');
 
     this._instance = new this(uri, dbName);
@@ -56,9 +55,9 @@ class MongoAdapter {
     return this._instance;
   }
 
-  async getCollection(collectionName:string): Promise<Collection> {
+  async getCollection(collectionName: string): Promise<Collection> {
     await this._isDBConnected();
-    return this.db.collection(collectionName)
+    return this.db.collection(collectionName);
   }
 
   async _isDBConnected(): Promise<boolean> {

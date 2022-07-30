@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import app from './app';
+import chalk from 'chalk';
 import debug from 'debug';
 import http from 'http';
 
+import app from './app';
+import { MongoAdapter } from './models/mongodb/MongoClient';
 import Config from './utils/config';
 import { logger } from './utils/logger';
-import chalk from 'chalk';
-import { MongoAdapter } from './models/mongodb/MongoClient';
 
 // Get the port
 const port = normalizePort(Config.PORT);

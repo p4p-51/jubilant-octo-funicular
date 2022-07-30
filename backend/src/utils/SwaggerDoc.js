@@ -9,9 +9,9 @@ const options = {
     },
     security: [
       {
-        BearerAuth: []
-      }
-    ]
+        BearerAuth: [],
+      },
+    ],
   },
   apis: ['./src/**/*Router.ts'], // files containing annotations as above
 };
