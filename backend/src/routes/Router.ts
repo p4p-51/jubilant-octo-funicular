@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import UserRouter from './UserRouter';
 import ContentRouter from './ContentRouter';
 import ExperienceRouter from './ExperienceRouter';
@@ -112,7 +112,7 @@ router.use('/questions', QuestionRouter);
  *                          - _id: leadership_question_id_1
  *                            questionText: tell me about a time when you took charge of a project
  */
-router.get('/labels', (req, res) => {
+router.get('/labels', (req:Request, res: Response) => {
   const labels = [
     {
       _id: 'label_id_1',

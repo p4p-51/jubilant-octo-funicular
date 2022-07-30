@@ -13,7 +13,7 @@ const options = {
       }
     ]
   },
-  apis: ['./src/**/*Router.js'], // files containing annotations as above
+  apis: ['./src/**/*Router.ts'], // files containing annotations as above
 };
 
 const openapiSpecification = swaggerJsdoc(options);
