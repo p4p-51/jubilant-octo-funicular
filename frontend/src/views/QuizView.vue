@@ -70,6 +70,7 @@ import Question, { Experience } from "@/types/Question.interface";
 import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
+import QuestionForQuiz from "@/types/QuizQuestion.interface";
 
 export default defineComponent({
   name: "QuizView",
