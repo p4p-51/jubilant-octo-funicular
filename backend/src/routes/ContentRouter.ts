@@ -7,24 +7,6 @@ const contentController = new ContentController();
 
 /**
  * @openapi
- * components:
- *      schemas:
- *          ModuleStage:
- *              type: object
- *              required:
- *                  - module
- *                  - stage
- *              properties:
- *                  module:
- *                      type: string
- *                      example: self-intro
- *                  stage:
- *                      type: integer
- *                      example: 1
- */
-
-/**
- * @openapi
  * /content:
  *  get:
  *      description: get all available content

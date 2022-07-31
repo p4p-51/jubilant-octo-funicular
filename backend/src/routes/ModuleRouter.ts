@@ -7,74 +7,82 @@ const moduleController = new ModuleController();
 
 /**
  * @openapi
- * components:
- *      parameters:
- *          moduleIdParam:
- *              name: moduleId
- *              in: path
- *              required: true
- *              description: The ID of the module
- *              schema:
- *                  type: integer
- *      schemas:
- *          ModuleStage:
- *              type: object
- *              required:
- *                  - module
- *                  - stage
- *              properties:
- *                  module:
- *                      type: string
- *                      example: self-intro
- *                  stage:
- *                      type: integer
- *                      example: 1
+ *  components:
+ *    parameters:
+ *      moduleIdParam:
+ *        name: moduleId
+ *        in: path
+ *        required: true
+ *        description: The ID of the module
+ *        schema:
+ *          $ref: '#/components/schemas/Module'
+ *    schemas:
+ *      Module:
+ *        type: string
+ *        enum: [self-intro, exp, grad]
+ *      ModuleStage:
+ *        type: object
+ *        required:
+ *          - moduleId
+ *          - stage
+ *        properties:
+ *          moduleId:
+ *            $ref: '#/components/schemas/Module'
+ *          stage:
+ *            type: integer
+ *            example: 1
  */
 
 /**
  * @openapi
  * /modules/{moduleId}/feedback:
  *  post:
- *      description: submit rating and feedback for a module
- *      tags:
- *          - Module
- *      parameters:
- *          - $ref: '#/components/parameters/moduleIdParam'
- *      requestBody:
- *          description: Feedback and rating for the specific module
- *          required: true
- *          content:
- *              application/json:
- *                  schema:
- *                      type: object
- *                      required:
- *                          - rating
- *                          - feedback
- *                      properties:
- *                          rating:
- *                              type: integer
- *                              minimum: 0
- *                              maximum: 5
- *                          feedback:
- *                              type: string
- *                      example:
- *                        rating: 4
- *                        feedback: I really liked this module, but I think it's too long
- *      responses:
- *          200:
- *              description: Successfully submitted Feedback
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          required:
- *                              - success
- *                              - nextStage
- *                          properties:
- *                              success:
- *                                  type: boolean
- *                              nextStage:
- *                                  $ref: '#/components/schemas/ModuleStage'
+ *    description: submit rating and feedback for a module
+ *    tags:
+ *      - Module
+ *    parameters:
+ *      - $ref: '#/components/parameters/moduleIdParam'
+ *    requestBody:
+ *      description: Feedback and rating for the specific module
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - rating
+ *              - feedback
+ *            properties:
+ *              rating:
+ *                type: integer
+ *                minimum: 0
+ *                maximum: 5
+ *              feedback:
+ *                type: string
+ *            example:
+ *              rating: 4
+ *              feedback: I really liked this module, but I think it's too long
+ *    responses:
+ *      default:
+ *        description: Something unexpected happened
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Error'
+ *      200:
+ *        description: Successfully submitted Feedback
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required:
+ *                - success
+ *                - nextStage
+ *              properties:
+ *                success:
+ *                  type: boolean
+ *                nextStage:
+ *                  $ref: '#/components/schemas/ModuleStage'
  */
 moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
 
@@ -111,17 +119,22 @@ moduleRouter.post('/:moduleId/feedback', moduleController.SubmitFeedback);
  *              stage: prelim
  *              numQuestion: 5
  *              numCorrect: 4
- *
  *    responses:
- *          200:
- *              description: success
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          properties:
- *                              success:
- *                                  type: boolean
+ *      default:
+ *        description: Something unexpected happened
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Error'
+ *      200:
+ *        description: success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                success:
+ *                  type: boolean
  */
 moduleRouter.post('/:moduleId/quiz', moduleController.SubmitQuiz);
 

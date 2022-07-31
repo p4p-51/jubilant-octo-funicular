@@ -222,12 +222,12 @@ export interface paths {
               /**
                * @example [
                *   {
-               *     "_id": "leadership_question_id_1",
+               *     "questionId": "leadership_question_id_1",
                *     "questionText": "tell me about a time when you took charge of a project"
                *   }
                * ]
                */
-              questions: components['schemas']['Question'][];
+              questions?: components['schemas']['Question'][];
             })[];
           };
         };
@@ -381,18 +381,19 @@ export interface paths {
 
 export interface components {
   schemas: {
-    ModuleStage: {
-      /** @example self-intro */
-      module: string;
-      /** @example 1 */
-      stage: number;
-    };
     Experience: {
       /** @example exp_id_1 */
       _id: string;
       /** @example ENGGEN115 */
       name: string;
       labels?: components['schemas']['Label'][];
+    };
+    /** @enum {string} */
+    Module: 'self-intro' | 'exp' | 'grad';
+    ModuleStage: {
+      moduleId: components['schemas']['Module'];
+      /** @example 1 */
+      stage: number;
     };
     Answer: {
       answer: {
@@ -408,7 +409,7 @@ export interface components {
     };
     Question: {
       /** @example question_id */
-      questionId: string;
+      questionId: number;
       /** @example tell me about a time... */
       questionText: string;
     };
@@ -476,7 +477,7 @@ export interface components {
   };
   parameters: {
     /** @description The ID of the module */
-    moduleIdParam: number;
+    moduleIdParam: components['schemas']['Module'];
     /** @description The id of the question */
     questionIdParam: number;
     /** @description Numeric ID of the user */

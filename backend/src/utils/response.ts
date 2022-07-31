@@ -1,8 +1,7 @@
-interface Response {
-  code: number;
-  message: string;
-}
+import { Response } from "express";
 
-export default (code: number, message: string): Response => {
-  return { code: code, message: message };
+const httpResponse = (response: Response, code: number, message: string): void=> {
+  response.status(code).json({code, message})
 };
+
+export { httpResponse }
