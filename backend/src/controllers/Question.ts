@@ -55,7 +55,6 @@ class QuestionController extends BaseController {
     ];
 
     res.status(200).send(questionsWithResponses);
-
   };
   Answer = async (req: Request, res: Response) => {
     res.status(200).send({ success: true });

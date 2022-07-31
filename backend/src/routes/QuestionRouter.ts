@@ -37,11 +37,11 @@ const questionController = new QuestionController();
  *          Question:
  *              type: object
  *              required:
- *                  - _id
+ *                  - questionId
  *                  - questionText
  *              properties:
- *                  _id:
- *                      type: string
+ *                  questionId:
+ *                      type: integer
  *                      example: question_id
  *                  questionText:
  *                      type: string
@@ -141,10 +141,7 @@ router.get('/', questionController.GetQuestionsWithExperiences);
  *
  */
 
-router.get(
-  '/:questionId/answers',
-  questionController.GetQuestionsWithResponse
-);
+router.get('/:questionId/answers', questionController.GetQuestionsWithResponse);
 router.post('/:questionId/answers', questionController.Answer);
 
 export default router;

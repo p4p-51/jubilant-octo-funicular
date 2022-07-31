@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import openapiTS from 'openapi-typescript'
+import * as fs from 'fs';
+import openapiTS from 'openapi-typescript';
 import swaggerJsdoc from 'swagger-jsdoc';
 
 const options = {
@@ -11,9 +11,9 @@ const options = {
     },
     security: [
       {
-        BearerAuth: []
-      }
-    ]
+        BearerAuth: [],
+      },
+    ],
   },
   apis: ['./src/**/*.ts'], // files containing annotations as above
 };
@@ -22,14 +22,14 @@ const spec = swaggerJsdoc(options);
 
 const generate = async () => {
   const output = await openapiTS(spec, {
-    prettierConfig: './.prettierrc.json'
+    prettierConfig: './.prettierrc.json',
   });
 
-  fs.writeFile('./src/interfaces/api.ts', output, err => {
+  fs.writeFile('./src/interfaces/api.ts', output, (err) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     }
-  })
-}
+  });
+};
 
-generate()
+generate();

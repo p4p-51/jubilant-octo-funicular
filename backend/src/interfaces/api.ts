@@ -408,7 +408,7 @@ export interface components {
     };
     Question: {
       /** @example question_id */
-      _id: string;
+      questionId: string;
       /** @example tell me about a time... */
       questionText: string;
     };
@@ -418,9 +418,7 @@ export interface components {
     };
     Label: {
       /** @example leadership */
-      labelText?: string;
-    } & {
-      labelString: unknown;
+      labelText: string;
     };
     SelfIntro: {
       /** @example my name is Bob, and I am a 3rd year SE student... */

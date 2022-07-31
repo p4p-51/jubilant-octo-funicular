@@ -27,7 +27,8 @@ app.use(
   OpenApiValidator.middleware({
     apiSpec: spec,
     validateRequests: true,
-    validateResponses: { removeAdditional: 'all' }, //May cause unexpected behav with additionalProps
+    validateResponses: true,
+    // validateResponses: { removeAdditional: 'all' }, // LMAO this doesnt work when using Allof https://github.com/cdimascio/express-openapi-validator/issues/696
   })
 );
 
