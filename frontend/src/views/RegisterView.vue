@@ -6,7 +6,7 @@
       <input type="text" placeholder="Email" v-model="email" />
       <input type="password" placeholder="Password" v-model="password" />
       <button @click="register">Register</button>
-      <p>
+      <p class="redirect">
         Already have an account?
         <a><router-link to="/signin">Sign in</router-link></a>
       </p>
@@ -90,7 +90,7 @@
       border-radius: 5px;
     }
 
-    > p {
+    .redirect {
       font-size: 14px;
       margin: 0;
 
