@@ -5,10 +5,10 @@
       <h1>Create an Account</h1>
       <input type="text" placeholder="Email" v-model="email" />
       <input type="password" placeholder="Password" v-model="password" />
-      <button @click="register">Submit</button>
+      <button @click="register">Register</button>
       <p>
-        Not registered yet?
-        <a><router-link to="/register">Create an account</router-link></a>
+        Already have an account?
+        <a><router-link to="/signin">Sign in</router-link></a>
       </p>
     </div>
   </div>
@@ -48,13 +48,16 @@
     }
 
     h1 {
-      font-weight: 400;
+      font-weight: 500;
       font-size: 20px;
       text-transform: uppercase;
+      letter-spacing: 1px;
 
       margin: 0;
 
       margin-bottom: 15px;
+
+      align-self: center;
     }
 
     input {
@@ -85,6 +88,20 @@
       font-size: 16px;
 
       border-radius: 5px;
+    }
+
+    > p {
+      font-size: 14px;
+      margin: 0;
+
+      font-weight: 300;
+
+      a {
+        text-decoration: none;
+        color: $c-primary;
+
+        font-weight: 400;
+      }
     }
   }
 }

@@ -5,7 +5,7 @@
       <h1>Login to Your Account</h1>
       <input type="text" placeholder="Email" v-model="email" />
       <input type="password" placeholder="Password" v-model="password" />
-      <button @click="signIn">Submit</button>
+      <button @click="signIn">Sign in</button>
       <p>
         Not registered yet?
         <a><router-link to="/register">Create an account</router-link></a>
@@ -48,9 +48,10 @@
     }
 
     h1 {
-      font-weight: 400;
+      font-weight: 500;
       font-size: 20px;
       text-transform: uppercase;
+      letter-spacing: 1px;
 
       margin: 0;
 
