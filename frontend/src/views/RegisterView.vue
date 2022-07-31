@@ -3,8 +3,18 @@
     <div class="content-container">
       <img src="@/assets/logo.svg" alt="logo" />
       <h1>Create an Account</h1>
-      <input type="text" placeholder="Email" v-model="email" />
-      <input type="password" placeholder="Password" v-model="password" />
+      <input
+        type="text"
+        placeholder="Email"
+        v-model="email"
+        @keyup.enter="register"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        v-model="password"
+        @keyup.enter="register"
+      />
       <button @click="register">Register</button>
       <p class="redirect">
         Already have an account?
@@ -115,6 +125,7 @@ const email = ref("");
 const password = ref("");
 const router = useRouter(); // get a reference to our vue router
 const register = () => {
+  console.log("registering", email, password);
   firebase
     .auth() // get the auth api
     .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()

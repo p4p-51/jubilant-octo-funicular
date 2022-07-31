@@ -3,8 +3,18 @@
     <div class="content-container">
       <img src="@/assets/logo.svg" alt="logo" />
       <h1>Login to Your Account</h1>
-      <input type="text" placeholder="Email" v-model="email" />
-      <input type="password" placeholder="Password" v-model="password" />
+      <input
+        type="text"
+        placeholder="Email"
+        v-model="email"
+        @keyup.enter="signIn"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        v-model="password"
+        @keyup.enter="signIn"
+      />
       <p v-if="errMsg" class="error">{{ errMsg }}</p>
       <button @click="signIn">Sign in</button>
       <p class="redirect">
@@ -132,6 +142,8 @@ const router = useRouter(); // get a reference to our vue router
 
 const signIn = () => {
   // we also renamed this method
+  console.log("signing in", email, password);
+
   firebase
     .auth()
     .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
