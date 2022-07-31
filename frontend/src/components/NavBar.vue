@@ -29,7 +29,7 @@
     </div>
     <div class="user-info-container">
       <img src="../assets/user.svg" class="avatar" />
-      <img src="../assets/icons/logout.svg" class="icon" />
+      <img src="../assets/icons/logout.svg" class="icon" @click="signOut" />
     </div>
   </nav>
 </template>
@@ -157,6 +157,11 @@ export default defineComponent({
   computed: {
     currentRouteName() {
       return this.$route.fullPath;
+    },
+  },
+  methods: {
+    signOut() {
+      this.$emit("signOut");
     },
   },
 });
