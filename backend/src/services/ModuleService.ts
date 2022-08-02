@@ -1,11 +1,13 @@
-import { MongoAdapter } from "../models/mongodb/MongoClient";
-import { IFeedback, IModuleId, IModuleStage } from "../controllers/Module";
-import { Collection } from "mongodb";
+import { Collection } from 'mongodb';
+
+import { IFeedback, IModuleId, IModuleStage } from '../controllers/Module';
+import { MongoAdapter } from '../models/mongodb/MongoClient';
 
 class ModuleService {
   getNextStage = async (moduleStage: IModuleStage): Promise<IModuleStage> => {
-    const moduleStageCollection =
-      await MongoAdapter.getCollection("moduleStage");
+    const moduleStageCollection = await MongoAdapter.getCollection(
+      'moduleStage'
+    );
 
     const stage = await moduleStageCollection
       .aggregate([
@@ -14,10 +16,10 @@ class ModuleService {
         },
         {
           $lookup: {
-            from: "moduleStage",
-            localField: "nextStage",
-            foreignField: "_id",
-            as: "nextStage",
+            from: 'moduleStage',
+            localField: 'nextStage',
+            foreignField: '_id',
+            as: 'nextStage',
           },
         },
         {
@@ -25,10 +27,10 @@ class ModuleService {
             _id: 0,
             nextStage: {
               _id: 0,
-              nextStage: 0
-            }
-          }
-        }
+              nextStage: 0,
+            },
+          },
+        },
       ])
       .toArray();
 
@@ -36,40 +38,50 @@ class ModuleService {
       throw `Cannot find moduleStage ${JSON.stringify(moduleStage)}`;
     }
 
-    return stage[0]["nextStage"][0]
-      ? stage[0]["nextStage"][0]
-      : { module: "grad", stage: 1 };
+    return stage[0]['nextStage'][0]
+      ? stage[0]['nextStage'][0]
+      : { module: 'grad', stage: 1 };
   };
 
   getNextModule = async (module: IModuleId): Promise<IModuleStage> => {
-    const moduleStageCollection: Collection = await MongoAdapter.getCollection("moduleStage");
+    const moduleStageCollection: Collection = await MongoAdapter.getCollection(
+      'moduleStage'
+    );
 
-    const stages: number[] = await moduleStageCollection.aggregate([
-      {
-        $match: {
-          moduleId: module,
-        },
-      },
-      {
-        $group: {
-          _id: "$moduleId",
-          stages: {
-            $push: "$stage",
+    const stages: number[] = await moduleStageCollection
+      .aggregate([
+        {
+          $match: {
+            moduleId: module,
           },
         },
-      },
-    ]).toArray().then((res) => {
-      return res[0]['stages'];
-    });
+        {
+          $group: {
+            _id: '$moduleId',
+            stages: {
+              $push: '$stage',
+            },
+          },
+        },
+      ])
+      .toArray()
+      .then((res) => {
+        return res[0]['stages'];
+      });
 
-    const lastStage: number = Math.max(...stages)
+    const lastStage: number = Math.max(...stages);
 
     return await this.getNextStage({ moduleId: module, stage: lastStage });
   };
 
-  submitFeedback = async (feedback: IFeedback, moduleId: IModuleId): Promise<IModuleStage> => {
-    const feedbackCollection = await MongoAdapter.getCollection("moduleFeedback")
-    await feedbackCollection.insertOne({moduleId: moduleId, feedback})
+  submitFeedback = async (
+    feedback: IFeedback,
+    moduleId: IModuleId
+  ): Promise<IModuleStage> => {
+    const feedbackCollection = await MongoAdapter.getCollection(
+      'moduleFeedback'
+    );
+    await feedbackCollection.insertOne({ moduleId: moduleId, feedback });
 
     return await this.getNextModule(moduleId);
   };

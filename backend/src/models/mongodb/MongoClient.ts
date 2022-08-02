@@ -56,7 +56,7 @@ class MongoAdapter {
   }
 
   static async getCollection(collectionName: string): Promise<Collection> {
-    const adapter:MongoAdapter = this.getInstance();
+    const adapter: MongoAdapter = this.getInstance();
     await adapter._isDBConnected();
     return adapter.db.collection(collectionName);
   }

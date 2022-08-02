@@ -28,15 +28,7 @@ router.use('/questions', QuestionRouter);
  *      content:
  *        application/json:
  *          schema:
- *            type: object
- *            properties:
- *              code:
- *                type: integer
- *              message:
- *                type: string
- *            required:
- *              - code
- *              - message
+ *            $ref: '#/components/schemas/Success'
  *    NotFound:
  *      description: The specified resource was not found
  *      content:
@@ -50,7 +42,14 @@ router.use('/questions', QuestionRouter);
  *          schema:
  *            $ref: '#/components/schemas/Error'
  *  schemas:
- *     # Schema for error response body
+ *    Success:
+ *      type: object
+ *      properties:
+ *        success:
+ *          type: boolean
+ *      required:
+ *        - success
+ *    # Schema for error response body
  *    Error:
  *      type: object
  *      properties:
@@ -67,14 +66,9 @@ router.use('/questions', QuestionRouter);
  * @openapi
  *  components:
  *      schemas:
- *          Label:
- *              type: object
- *              required:
- *                  - labelText
- *              properties:
- *                  labelText:
- *                      type: string
- *                      example: leadership
+ *          Labels:
+ *            type: string
+ *            enum: [leadership, teamwork]
  */
 
 /**
@@ -98,17 +92,17 @@ router.use('/questions', QuestionRouter);
  *            schema:
  *              type: array
  *              items:
- *                allOf:
- *                  - $ref: '#/components/schemas/Label'
- *                  - type: object
- *                    properties:
- *                      questions:
- *                        type: array
- *                        items:
- *                          $ref: '#/components/schemas/Question'
- *                        example:
- *                          - questionId: leadership_question_id_1
- *                            questionText: tell me about a time when you took charge of a project
+ *                type: object
+ *                properties:
+ *                  label:
+ *                    $ref: '#/components/schemas/Labels'
+ *                  questions:
+ *                    type: array
+ *                    items:
+ *                      $ref: '#/components/schemas/Question'
+ *                    example:
+ *                      - questionId: leadership_question_id_1
+ *                        questionText: tell me about a time when you took charge of a project
  */
 router.get('/labels', new LabelController().GetLabel);
 

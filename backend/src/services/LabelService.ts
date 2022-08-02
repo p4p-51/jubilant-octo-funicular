@@ -1,10 +1,11 @@
+import { ObjectId } from 'mongodb';
+
+import { ILabels } from '../controllers/Label';
 import { MongoAdapter } from '../models/mongodb/MongoClient';
 
 class LabelService {
   getLabels = async () => {
-    const labelCollection = await MongoAdapter.getInstance().getCollection(
-      'labels'
-    );
+    const labelCollection = await MongoAdapter.getCollection('labels');
     return await labelCollection
       .aggregate([
         {
@@ -26,6 +27,27 @@ class LabelService {
         },
       ])
       .toArray();
+  };
+
+  getLabelIds = async (labels: ILabels[]): Promise<ObjectId[]> => {
+    const labelCollection = await MongoAdapter.getCollection('labels');
+
+    const labelOIds = await labelCollection
+      .aggregate([
+        {
+          $match: {
+            label: {
+              $in: labels,
+            },
+          },
+        },
+      ])
+      .toArray();
+
+    const ids: ObjectId[] = [];
+    labelOIds.forEach((e) => ids.push(e._id));
+
+    return ids;
   };
 }
 

@@ -85,6 +85,20 @@ export interface paths {
       };
     };
   };
+  '/experience/{experienceId}/labels': {
+    /** Add a label to an experience */
+    post: {
+      responses: {
+        200: components['responses']['Success'];
+      };
+      /** The label to add */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['Labels'][];
+        };
+      };
+    };
+  };
   '/modules/{moduleId}/feedback': {
     /** submit rating and feedback for a module */
     post: {
@@ -102,6 +116,12 @@ export interface paths {
               success: boolean;
               nextStage: components['schemas']['ModuleStage'];
             };
+          };
+        };
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
           };
         };
       };
@@ -132,6 +152,12 @@ export interface paths {
             'application/json': {
               success?: boolean;
             };
+          };
+        };
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
           };
         };
       };
@@ -218,7 +244,8 @@ export interface paths {
         /** labels */
         200: {
           content: {
-            'application/json': (components['schemas']['Label'] & {
+            'application/json': {
+              label?: components['schemas']['Labels'];
               /**
                * @example [
                *   {
@@ -228,7 +255,7 @@ export interface paths {
                * ]
                */
               questions?: components['schemas']['Question'][];
-            })[];
+            }[];
           };
         };
         /** Unexpected Error */
@@ -382,11 +409,9 @@ export interface paths {
 export interface components {
   schemas: {
     Experience: {
-      /** @example exp_id_1 */
-      _id: string;
       /** @example ENGGEN115 */
       name: string;
-      labels?: components['schemas']['Label'][];
+      labels?: components['schemas']['Labels'][];
     };
     /** @enum {string} */
     Module: 'self-intro' | 'exp' | 'grad';
@@ -417,10 +442,8 @@ export interface components {
       code: number;
       message: string;
     };
-    Label: {
-      /** @example leadership */
-      labelText: string;
-    };
+    /** @enum {string} */
+    Labels: 'leadership' | 'teamwork';
     SelfIntro: {
       /** @example my name is Bob, and I am a 3rd year SE student... */
       body: string;

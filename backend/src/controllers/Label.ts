@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
+import { components } from '../interfaces/api';
 import { LabelService } from '../services/LabelService';
-import {httpResponse} from '../utils/response';
+import { httpResponse } from '../utils/response';
 import { BaseController } from './BaseController';
+
+export type ILabels = components['schemas']['Labels'];
 
 class LabelController extends BaseController {
   GetLabel = async (req: Request, res: Response) => {

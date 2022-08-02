@@ -1,6 +1,7 @@
 import { getAuth } from 'firebase-admin/auth';
 
 export async function isAuthenticated(req, res, next) {
+  res.locals = { ...res.locals, uid: 1 };
   // Extract the token from "Authorization: Bearer <Token>"
   // const authToken = req.headers['authorization'].slice(7);
   // try {
