@@ -1,9 +1,19 @@
 import { Request, Response } from 'express';
 
 import { BaseController } from './BaseController';
+import { QuestionService } from "../services/QuestionService";
 
 class QuestionController extends BaseController {
+  questionService
+
+  constructor() {
+    super();
+    this.questionService = new QuestionService()
+  }
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
+    const userId: number = parseInt(res.locals['uid']);
+    const resp = await this.questionService.getAllQuestionWithExperiences(userId)
+
     const questionsWithExperiences = [
       {
         _id: 'question-1',
@@ -38,6 +48,7 @@ class QuestionController extends BaseController {
     res.status(200).send(questionsWithExperiences);
   };
   GetQuestionsWithResponse = async (req: Request, res: Response) => {
+
     const questionsWithResponses = [
       {
         experience: {
@@ -57,6 +68,8 @@ class QuestionController extends BaseController {
     res.status(200).send(questionsWithResponses);
   };
   Answer = async (req: Request, res: Response) => {
+
+    const userId: number = parseInt(res.locals['uid']);
     res.status(200).send({ success: true });
   };
 }

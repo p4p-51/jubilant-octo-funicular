@@ -68,7 +68,7 @@ router.use('/questions', QuestionRouter);
  *      schemas:
  *          Labels:
  *            type: string
- *            enum: [leadership, teamwork]
+ *            enum: [leadership, teamwork, conflict]
  */
 
 /**
