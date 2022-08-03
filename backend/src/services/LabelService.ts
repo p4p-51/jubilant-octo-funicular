@@ -11,7 +11,7 @@ class LabelService {
         {
           $lookup: {
             from: 'questions',
-            localField: '_id',
+            localField: 'label',
             foreignField: 'labelId',
             as: 'questions',
           },
@@ -30,6 +30,7 @@ class LabelService {
   };
 
   getLabelIds = async (labels: ILabels[]): Promise<ObjectId[]> => {
+    //No longer needed as no label Object ID refs are stored
     const labelCollection = await MongoAdapter.getCollection('labels');
 
     const labelOIds = await labelCollection

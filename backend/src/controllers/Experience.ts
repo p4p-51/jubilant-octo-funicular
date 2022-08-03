@@ -35,13 +35,12 @@ class ExperienceController extends BaseController {
     // But maybe lead to circular dependency, and we're not going to run out anyway...
     let experienceId: number =
       await this.experienceService.getNextExperienceId();
-    const ids = await new LabelService().getLabelIds(labels);
 
     try {
       experienceId = await new UserService().setExperience(
         userId,
         experienceId,
-        { name, labels: ids }
+        { name, labels }
       );
       res.status(200).send({ success: true, experienceId });
       return;
@@ -57,8 +56,6 @@ class ExperienceController extends BaseController {
     const labels: ILabels[] = req.body['labels'];
     const userService = new UserService();
 
-    const ids = await new LabelService().getLabelIds(labels);
-
     const user = await userService.getUser(userId, ['experiences'], {
       'experiences.experienceId': experienceId,
     });
@@ -66,7 +63,7 @@ class ExperienceController extends BaseController {
     if (user != null) {
       const count = await userService.addToSetUser(
         userId,
-        { 'experiences.$.labels': { $each: ids } },
+        { 'experiences.$.labels': { $each: labels } },
         { 'experiences.experienceId': experienceId }
       );
       res.status(200).json({ success: true });
@@ -86,17 +83,15 @@ class ExperienceController extends BaseController {
     });
 
     if (user != null) {
-      const experienceLabels = user['experiences'][0]['labels'];
-      const remainingLabels = experienceLabels.filter(
+      const experienceLabels: ILabels[] = user['experiences'][0]['labels'];
+      const remainingLabels: ILabels[] = experienceLabels.filter(
         (x) => !labels.includes(x)
       );
-
-      const ids = await new LabelService().getLabelIds(remainingLabels);
 
       //I should create function to delete from list instead of subtracting the two lists and the setting the labels to be the remainingLabls
       const count = await userService.setUser(
         userId,
-        { 'experiences.$.labels': ids },
+        { 'experiences.$.labels': remainingLabels},
         { 'experiences.experienceId': experienceId }
       );
       res.status(200).json({ success: true });

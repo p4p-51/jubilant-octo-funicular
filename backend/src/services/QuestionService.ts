@@ -4,7 +4,7 @@ class QuestionService {
   getAllQuestionWithExperiences = async (userId: number) => {
     const questionCollection = await MongoAdapter.getCollection("questions");
 
-    const rest = await questionCollection.aggregate([
+    return await questionCollection.aggregate([
       {
         $lookup: {
           from: "users",
@@ -29,19 +29,16 @@ class QuestionService {
           ],
           as: "user",
         },
-      },
-      {
+      }, {
         $project: {
           _id: 0,
           questionText: 1,
           questionId: 1,
           labelId: 1,
-          experiences: { $first: "$user.filteredExp"}
-        }
-      }
+          experiences: { $first: "$user.filteredExp" },
+        },
+      },
     ]).toArray();
-
-    console.log(rest);
   };
 }
 

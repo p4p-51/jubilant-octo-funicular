@@ -12,7 +12,7 @@ class QuestionController extends BaseController {
   }
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['uid']);
-    const resp = await this.questionService.getAllQuestionWithExperiences(userId)
+    const questions = await this.questionService.getAllQuestionWithExperiences(userId)
 
     const questionsWithExperiences = [
       {
