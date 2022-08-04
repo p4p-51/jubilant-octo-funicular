@@ -68,7 +68,7 @@ export default defineComponent({
     saveExperience() {
       const newExp: Experience = {
         id: this.experience?.id,
-        title: this.experienceTitle!,
+        title: this.experienceTitle,
         labels: this.experienceLabels,
       };
       this.$emit("saveExperience", newExp);

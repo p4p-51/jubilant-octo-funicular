@@ -97,10 +97,22 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
   },
   {
-    path: "/lecture/prem-quiz",
-    name: "prem quiz",
+    path: "/signin",
+    name: "signin",
     component: () =>
-      import(/* webpackChunkName: "build-profile" */ "../views/TempQuiz.vue"),
+      import(/* webpackChunkName: "signin" */ "../views/SignInView.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
+  },
+  {
+    path: "/landing",
+    name: "landing",
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
   },
 ];
 

@@ -1,22 +1,42 @@
 <template>
   <div class="app">
-    <NavBar />
+    <NavBar v-if="isLoggedIn" @signOut="signOut" />
 
     <router-view />
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from "@vue/runtime-core";
 import "./assets/css/styles.scss";
 import NavBar from "./components/NavBar.vue";
 
-export default defineComponent({
-  name: "App",
-  components: {
-    NavBar,
-  },
+import { ref, watchEffect } from "vue"; // used for conditional rendering
+import firebase from "firebase";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const isLoggedIn = ref(true);
+// runs after firebase is initialized
+firebase.auth().onAuthStateChanged(function (user) {
+  if (user) {
+    isLoggedIn.value = true; // if we have a user
+    router.push("/");
+  } else {
+    isLoggedIn.value = false; // if we do not
+    router.push("/landing");
+  }
 });
+const signOut = () => {
+  firebase.auth().signOut();
+  router.push("/");
+};
+
+// export default defineComponent({
+//   name: "App",
+//   components: {
+//     NavBar,
+//   },
+// });
 </script>
 
 <style scoped lang="scss">

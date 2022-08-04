@@ -73,52 +73,52 @@ export default defineComponent({
       modules: [
         {
           number: 1,
-          title: "Module 1",
+          title: "Self introduction",
           description:
             "This is the first module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          image: "@/assets/books.svg",
         },
         {
           number: 2,
-          title: "Module 2",
+          title: "Organising past experiences",
           description:
             "This is the second module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          image: "@/assets/books.svg",
         },
-        {
-          number: 3,
-          title: "Module 3",
-          description:
-            "This is the third module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
-        },
+        // {
+        //   number: 3,
+        //   title: "Structuring responses",
+        //   description:
+        //     "This is the third module. It’s a little bit more complicated than the others, but it’s a good start.",
+        //   image: "@/assets/books.svg",
+        // },
         {
           number: 4,
-          title: "Module 4",
+          title: "Mannerism",
           description:
             "This is the fourth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          image: "@/assets/books.svg",
         },
         // {
         //   number: 5,
-        //   title: "Module 5",
+        //   title: "Allocating situations",
         //   description:
         //     "This is the fifth module. It’s a little bit more complicated than the others, but it’s a good start.",
-        //   image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        //   image: "@/assets/books.svg",
         // },
         {
           number: 6,
-          title: "Module 6",
+          title: "Answering questions",
           description:
             "This is the sixth module. It’s a little bit more complicated than the others, but it’s a good start.",
-          image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+          image: "@/assets/books.svg",
         },
         // {
         //   number: 7,
         //   title: "Module 7",
         //   description:
         //     "This is the seventh module. It’s a little bit more complicated than the others, but it’s a good start.",
-        //   image: "https://icon-library.com/images/grey-icon/grey-icon-11.jpg",
+        //   image: "@/assets/books.svg",
         // },
       ],
     };

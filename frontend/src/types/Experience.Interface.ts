@@ -1,5 +1,5 @@
 export default interface Experience {
-  name: string,
-  id: string,
-  labels: string[],
+  name: string;
+  id: string;
+  labels: string[];
 }

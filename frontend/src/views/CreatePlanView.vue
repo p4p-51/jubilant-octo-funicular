@@ -124,27 +124,27 @@ export default defineComponent({
     return {
       modules: [
         {
-          name: "Module 1",
+          name: "Self introduction",
           isSelected: false,
         },
         {
-          name: "Module 2",
+          name: "Organising past experiences",
           isSelected: false,
         },
         {
-          name: "Module 3",
+          name: "Structuring responses",
           isSelected: false,
         },
         {
-          name: "Module 4",
+          name: "Mannerism",
           isSelected: false,
         },
         {
-          name: "Module 5",
+          name: "Allocating situations",
           isSelected: false,
         },
         {
-          name: "Module 6",
+          name: "Answering questions",
           isSelected: false,
         },
       ],
