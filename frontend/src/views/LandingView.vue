@@ -3,8 +3,34 @@
     <header>
       <div class="logo">
         <img src="@/assets/logo.svg" alt="logo" />
+        <p>Funicular</p>
       </div>
+      <button>Sign in</button>
     </header>
+    <div class="main-content">
+      <div class="text-container"></div>
+      <img src="@/assets/illustrations/landing.svg" />
+    </div>
+    <div class="features-list">
+      <div class="feature-small">f</div>
+      <div class="feature-small">f</div>
+      <div class="feature-small">f</div>
+      <div class="feature-small">f</div>
+    </div>
+
+    <div class="feature-block">
+      <h3>Title</h3>
+      <p>smetiing</p>
+    </div>
+    <div class="feature-block">
+      <h3>Title</h3>
+      <p>smetiing</p>
+    </div>
+    <div class="feature-block">
+      <h3>Title</h3>
+      <p>smetiing</p>
+    </div>
+    <footer>footer</footer>
   </div>
 </template>
 
