@@ -1,4 +1,5 @@
-import { Db, MongoClient } from 'mongodb';
+import { Collection, Db, MongoClient } from 'mongodb';
+
 import { logger } from '../../utils/logger';
 
 /**
@@ -8,38 +9,38 @@ class MongoAdapter {
   /**
    * The database instance.
    */
-  db = null;
+  db: Db = null;
 
   /**
    * Private MongoClient for purposes of getting another database from the same adapter instance.
    */
-  client = null;
+  client: MongoClient = null;
 
-  static _instance = null;
+  _isConnected = false;
 
-  constructor(uri, dbName) {
-    const client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+  static _instance: MongoAdapter = null;
+
+  constructor(uri: string, dbName: string) {
+    const client: MongoClient = new MongoClient(uri, {});
 
     client.connect((err) => {
       if (err) throw err;
       this.db = client.db(dbName);
+      this._isConnected = true;
       logger.logInfo('MongoDB connected');
     });
 
     this.client = client;
   }
 
-  getDb(dbName) {
+  getDb(dbName: string): Db {
     return this.client.db(dbName);
   }
 
   /**
    * Builds a MongoAdapter using a `uri` and default `dbName`.
    */
-  static build(uri, dbName) {
+  static build(uri: string, dbName: string): MongoAdapter {
     if (this._instance) throw new Error('MongoAdapter already built!');
 
     this._instance = new this(uri, dbName);
@@ -49,9 +50,28 @@ class MongoAdapter {
   /**
    * Get the current `MongoAdapter` instance if it exists, or
    */
-  static getInstance() {
+  static getInstance(): MongoAdapter {
     if (!this._instance) throw new Error('No instance of MongoAdapter exists!');
     return this._instance;
+  }
+
+  static async getCollection(collectionName: string): Promise<Collection> {
+    const adapter: MongoAdapter = this.getInstance();
+    await adapter._isDBConnected();
+    return adapter.db.collection(collectionName);
+  }
+
+  async _isDBConnected(): Promise<boolean> {
+    let counter = 0;
+    while (!this._isConnected) {
+      if (counter === 20) {
+        throw new Error('Connection to MongoDB Timed Out');
+      }
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      counter++;
+    }
+
+    return true;
   }
 }
 

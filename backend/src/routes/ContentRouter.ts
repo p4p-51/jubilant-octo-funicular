@@ -1,26 +1,9 @@
-import Router from 'express';
+import { Router } from 'express';
+
 import { ContentController } from '../controllers/Content';
 
 const contentRouter = Router();
 const contentController = new ContentController();
-
-/**
- * @openapi
- * components:
- *      schemas:
- *          ModuleStage:
- *              type: object
- *              required:
- *                  - module
- *                  - stage
- *              properties:
- *                  module:
- *                      type: string
- *                      example: self-intro
- *                  stage:
- *                      type: integer
- *                      example: 1
- */
 
 /**
  * @openapi
