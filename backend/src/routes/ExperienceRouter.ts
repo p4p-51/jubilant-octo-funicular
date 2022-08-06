@@ -17,6 +17,22 @@ const controller = new ExperienceController();
  *        schema:
  *          type: integer
  *    schemas:
+ *      ExperienceId:
+ *        type: object
+ *        required:
+ *          - name
+ *          - experienceId
+ *        properties:
+ *          name:
+ *            type: string
+ *            example: ENGGEN115
+ *          experienceId:
+ *            type: integer
+ *            example: 1
+ *          labels:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Labels'
  *      Experience:
  *        type: object
  *        required:
@@ -46,12 +62,7 @@ const controller = new ExperienceController();
  *            schema:
  *              type: array
  *              items:
- *                allOf:
- *                  - $ref: '#/components/schemas/Experience'
- *                  - type: object
- *                    properties:
- *                      experienceId:
- *                        type: integer
+ *                $ref: '#/components/schemas/ExperienceId'
  *  put:
  *    tags:
  *      - Experience

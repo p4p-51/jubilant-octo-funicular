@@ -60,19 +60,20 @@ export interface paths {
         /** All the situations that the user has created */
         200: {
           content: {
-            'application/json': components['schemas']['Experience'][];
+            'application/json': components['schemas']['ExperienceId'][];
           };
         };
       };
     };
     /** Add an experience for the user */
-    post: {
+    put: {
       responses: {
         /** success */
         200: {
           content: {
             'application/json': {
-              success?: boolean;
+              experienceId: number;
+              success: boolean;
             };
           };
         };
@@ -85,16 +86,56 @@ export interface paths {
       };
     };
   };
-  '/experience/{experienceId}/labels': {
+  '/experiences/{experienceId}/labels': {
     /** Add a label to an experience */
     post: {
+      parameters: {
+        path: {
+          /** The numeric ID of the experience */
+          experienceId: components['parameters']['experienceIdParam'];
+        };
+      };
       responses: {
         200: components['responses']['Success'];
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
+          };
+        };
       };
-      /** The label to add */
+      /** The label to delete */
       requestBody: {
         content: {
-          'application/json': components['schemas']['Labels'][];
+          'application/json': {
+            labels: components['schemas']['Labels'][];
+          };
+        };
+      };
+    };
+    /** Remove certain labels from an experience */
+    delete: {
+      parameters: {
+        path: {
+          /** The numeric ID of the experience */
+          experienceId: components['parameters']['experienceIdParam'];
+        };
+      };
+      responses: {
+        200: components['responses']['Success'];
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
+          };
+        };
+      };
+      /** The label to delete */
+      requestBody: {
+        content: {
+          'application/json': {
+            labels: components['schemas']['Labels'][];
+          };
         };
       };
     };
@@ -182,7 +223,7 @@ export interface paths {
         200: {
           content: {
             'application/json': (components['schemas']['Question'] & {
-              experiences?: components['schemas']['Experience'][];
+              experiences?: components['schemas']['ExperienceId'][];
             })[];
           };
         };
@@ -202,9 +243,10 @@ export interface paths {
         /** A list of answers and experiences relating to the question (grouped by label id) */
         200: {
           content: {
-            'application/json': ({
-              experience: components['schemas']['Experience'];
-            } & components['schemas']['Answer'])[];
+            'application/json': {
+              experience: components['schemas']['ExperienceId'];
+              answer: components['schemas']['Answer'];
+            };
           };
         };
       };
@@ -231,8 +273,9 @@ export interface paths {
       requestBody: {
         content: {
           'application/json': {
-            situationId: string;
-          } & components['schemas']['Answer'];
+            experienceId: number;
+            answer: components['schemas']['Answer'];
+          };
         };
       };
     };
@@ -408,6 +451,13 @@ export interface paths {
 
 export interface components {
   schemas: {
+    ExperienceId: {
+      /** @example ENGGEN115 */
+      name: string;
+      /** @example 1 */
+      experienceId: number;
+      labels?: components['schemas']['Labels'][];
+    };
     Experience: {
       /** @example ENGGEN115 */
       name: string;
@@ -421,29 +471,31 @@ export interface components {
       stage: number;
     };
     Answer: {
-      answer: {
-        /** @example <Description of Situation> */
-        s: string;
-        /** @example <Description of Task> */
-        t: string;
-        /** @example <Description of Action> */
-        a: string;
-        /** @example <Description of Result> */
-        r: string;
-      };
+      /** @example <Description of Situation> */
+      s: string;
+      /** @example <Description of Task> */
+      t: string;
+      /** @example <Description of Action> */
+      a: string;
+      /** @example <Description of Result> */
+      r: string;
     };
     Question: {
       /** @example question_id */
       questionId: number;
       /** @example tell me about a time... */
       questionText: string;
+      labelId: components['schemas']['Labels'];
+    };
+    Success: {
+      success: boolean;
     };
     Error: {
       code: number;
       message: string;
     };
     /** @enum {string} */
-    Labels: 'leadership' | 'teamwork';
+    Labels: 'leadership' | 'teamwork' | 'conflict';
     SelfIntro: {
       /** @example my name is Bob, and I am a 3rd year SE student... */
       body: string;
@@ -479,10 +531,7 @@ export interface components {
     /** The specified request was successful */
     Success: {
       content: {
-        'application/json': {
-          code: number;
-          message: string;
-        };
+        'application/json': components['schemas']['Success'];
       };
     };
     /** The specified resource was not found */
@@ -499,6 +548,8 @@ export interface components {
     };
   };
   parameters: {
+    /** @description The numeric ID of the experience */
+    experienceIdParam: number;
     /** @description The ID of the module */
     moduleIdParam: components['schemas']['Module'];
     /** @description The id of the question */

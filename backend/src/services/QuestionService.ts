@@ -1,6 +1,10 @@
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 
 class QuestionService {
+  getQuestionIds = async (): Promise<number[]> => {
+    const questionCollection = await MongoAdapter.getCollection("questions");
+    return await questionCollection.distinct("questionId")
+  }
   getAllQuestionWithExperiences = async (userId: number) => {
     const questionCollection = await MongoAdapter.getCollection("questions");
 

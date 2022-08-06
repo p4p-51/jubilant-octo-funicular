@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 
 import { BaseController } from './BaseController';
 import { QuestionService } from "../services/QuestionService";
+import { components } from "../interfaces/api";
+import { UserService } from "../services/UserService";
+import { httpResponse } from "../utils/response";
+import * as http from "http";
+
+export type IAnswer = components['schemas']['Answer']
 
 class QuestionController extends BaseController {
   questionService
@@ -14,63 +20,49 @@ class QuestionController extends BaseController {
     const userId: number = parseInt(res.locals['uid']);
     const questions = await this.questionService.getAllQuestionWithExperiences(userId)
 
-    const questionsWithExperiences = [
-      {
-        _id: 'question-1',
-        questionText: 'Tell me about a time when you salami steak',
-        experiences: [
-          {
-            _id: 'exp-1',
-            name: 'I volunteered for charity',
-          },
-          {
-            _id: 'exp-2',
-            name: 'Summer camp tramping',
-          },
-        ],
-      },
-      {
-        _id: 'question-2',
-        questionText: 'Tell me about a time when you experienced a conflict',
-        experiences: [
-          {
-            _id: 'exp-2',
-            name: 'Summer camp tramping',
-          },
-          {
-            _id: 'exp-3',
-            name: 'ENGGEN 115 group project',
-          },
-        ],
-      },
-    ];
-
-    res.status(200).send(questionsWithExperiences);
+    res.status(200).send(questions);
   };
-  GetQuestionsWithResponse = async (req: Request, res: Response) => {
-
-    const questionsWithResponses = [
-      {
-        experience: {
-          _id: 'exp_id_1',
-          name: 'ENGGEN115',
-          labels: [],
-        },
-        answer: {
-          s: 'Situation text',
-          t: 'Task text',
-          a: 'answer text',
-          r: 'result text',
-        },
-      },
-    ];
-
-    res.status(200).send(questionsWithResponses);
-  };
-  Answer = async (req: Request, res: Response) => {
-
+  GetAnswer = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['uid']);
-    res.status(200).send({ success: true });
+    const questionId: number = parseInt(req.params['questionId'])
+
+    const answers = await new UserService().getAnswers(userId, questionId)
+
+    if (answers.length > 0) {
+      res.status(200).json(answers);
+      return
+    } else {
+      httpResponse(res, 404, "No answers found")
+    }
+  };
+
+  AnswerQuestion = async (req: Request, res: Response) => {
+    const userId: number = parseInt(res.locals['uid']);
+    const questionId: number = parseInt(req.params['questionId'])
+    const experienceId: number = parseInt(req.body['experienceId'])
+    const answer: IAnswer = req.body['answer']
+
+    const questionIds: number[] = await this.questionService.getQuestionIds()
+    if (!questionIds.includes(questionId)) {
+      httpResponse(res, 404, `Cannot find question with Id ${questionId}`)
+      return
+    }
+
+    const experienceIds: number[] = await new UserService().getUserExperienceIds(userId)
+    if (!experienceIds.includes(experienceId)) {
+      httpResponse(res, 404, `Cannot find experience with Id ${experienceId}`)
+      return
+    }
+
+    const succ: boolean = await new UserService().findAndUpdateAnswer(userId, questionId, experienceId, answer)
+
+    if (succ) {
+      res.status(200).send({ success: true });
+      return
+    } else {
+      httpResponse(res, 500, `Update to answer not successful`)
+      return
+    }
   };
 }
 
