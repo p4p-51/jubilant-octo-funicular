@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     router.push("/");
   } else {
     isLoggedIn.value = false; // if we do not
-    router.push("/landing");
+    router.push("/signin");
   }
 });
 const signOut = () => {

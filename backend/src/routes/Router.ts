@@ -23,6 +23,12 @@ router.use('/questions', QuestionRouter);
  *      type: http
  *      scheme: bearer
  *  responses:
+ *    DefaultError:
+ *      description: The specified request was not successful
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Error'
  *    Success:
  *      description: The specified request was successful
  *      content:
@@ -42,6 +48,8 @@ router.use('/questions', QuestionRouter);
  *          schema:
  *            $ref: '#/components/schemas/Error'
  *  schemas:
+ *    Uuid:
+ *      type: string
  *    Success:
  *      type: object
  *      properties:

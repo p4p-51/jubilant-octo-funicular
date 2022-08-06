@@ -6,6 +6,7 @@ import { UserService } from '../services/UserService';
 import { httpResponse } from '../utils/response';
 import { BaseController } from './BaseController';
 import { IModuleId, IModuleStage } from './Module';
+import { CounterService } from "../services/CounterService";
 
 type IUserIntro = components['schemas']['SelfIntro'];
 
@@ -17,6 +18,7 @@ class UserController extends BaseController {
     this.userService = new UserService();
   }
 
+
   GetUser = async (req: Request, res: Response) => {
     const userId: number = parseInt(req.params['userId']);
     const user = await this.userService.getUser(userId, ['progress']);
@@ -27,6 +29,40 @@ class UserController extends BaseController {
       res.status(200).json(user);
     }
   };
+
+  Register = async (req :Request, res: Response) => {
+    const uuid = res.locals['uuid']
+    const userId: number = res.locals['userId']
+
+    if (userId === null) {
+      const newUserId = await CounterService.getNextCounter("user")
+
+      let newUser = {
+        progress: {
+          'moduleId': "self-intro",
+          'stage': 1
+        },
+        intro: {
+          body: "",
+          attributes: []
+        },
+        quizzes: [],
+        experiences: [],
+        answers: [],
+        user: {
+          uuid: uuid,
+          userId: newUserId
+        }
+      }
+
+       const succ: boolean = await this.userService.createUser(newUser);
+
+      res.status(200).json(newUser)
+      return
+    } else {
+      httpResponse(res, 400, "user already exists")
+    }
+  }
 
   CompleteStage = async (req: Request, res: Response) => {
     const userId: number = parseInt(req.params['userId']);

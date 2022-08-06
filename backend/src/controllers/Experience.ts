@@ -7,6 +7,7 @@ import { UserService } from '../services/UserService';
 import { httpResponse } from '../utils/response';
 import { BaseController } from './BaseController';
 import { ILabels } from './Label';
+import { CounterService } from "../services/CounterService";
 
 export type IExperience = components['schemas']['Experience'];
 
@@ -19,14 +20,14 @@ class ExperienceController extends BaseController {
   }
 
   GetAllExperiences = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const user = await new UserService().getUser(userId, ['experiences']);
 
     res.status(200).json(user['experiences']);
   };
 
   AddExperience = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
 
     const name = req.body['name'];
     const labels = req.body['labels'];
@@ -34,7 +35,7 @@ class ExperienceController extends BaseController {
     // This new experience Id can be moved inside the UserService's setExperience
     // But maybe lead to circular dependency, and we're not going to run out anyway...
     let experienceId: number =
-      await this.experienceService.getNextExperienceId();
+      await CounterService.getNextCounter("experience")
 
     try {
       experienceId = await new UserService().setExperience(
@@ -51,7 +52,7 @@ class ExperienceController extends BaseController {
   };
 
   addLabel = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const experienceId: number = parseInt(req.params['experienceId']);
     const labels: ILabels[] = req.body['labels'];
     const userService = new UserService();
@@ -73,7 +74,7 @@ class ExperienceController extends BaseController {
   };
 
   deleteLabel = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const experienceId: number = parseInt(req.params['experienceId']);
     const labels: ILabels[] = req.body['labels'];
     const userService = new UserService();
@@ -83,7 +84,8 @@ class ExperienceController extends BaseController {
     });
 
     if (user != null) {
-      const experienceLabels: ILabels[] = user['experiences'][0]['labels'];
+
+      const experienceLabels: ILabels[] = user['experiences'].find((experience) => (experience.experienceId == experienceId))['labels'];
       const remainingLabels: ILabels[] = experienceLabels.filter(
         (x) => !labels.includes(x)
       );

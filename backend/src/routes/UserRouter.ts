@@ -17,6 +17,20 @@ const userController = new UserController();
  *        schema:
  *          type: integer
  *    schemas:
+ *      User:
+ *        type: object
+ *        required:
+ *          - userId
+ *          - uuid
+ *        properties:
+ *          userId:
+ *            type: integer
+ *          uuid:
+ *            type: string
+ *          userName:
+ *            type: string
+ *          avatar:
+ *            type: string
  *      SelfIntro:
  *        type: object
  *        required:
@@ -89,21 +103,13 @@ const userController = new UserController();
  *              schema:
  *                type: object
  *                required:
- *                  - userName
+ *                  - user
  *                  - progress
  *                properties:
- *                  userName:
- *                    type: string
- *                  avatar:
- *                    type: string
+ *                  user:
+ *                    $ref: '#/components/schemas/User'
  *                  progress:
  *                    $ref: '#/components/schemas/ModuleStage'
- *              example:
- *                userName: doge
- *                avatar: https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png
- *                progress:
- *                  module: self-intro
- *                  stage: 1
  */
 userRouter.get('/:userId', userController.GetUser);
 
@@ -219,5 +225,33 @@ userRouter.get('/:userId/self-intro', userController.GetIntro);
  *                $ref: '#/components/schemas/Stats'
  */
 userRouter.get('/:userId/stats', userController.GetStats);
+
+/**
+ * @openapi
+ *  /users/register:
+ *    post:
+ *      description: Register a user in the database
+ *      tags:
+ *        - User
+ *      responses:
+ *        default:
+ *          $ref: '#/components/responses/DefaultError'
+ *        200:
+ *          description: A single user.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                required:
+ *                  - user
+ *                  - progress
+ *                properties:
+ *                  user:
+ *                    $ref: '#/components/schemas/User'
+ *                  progress:
+ *                    $ref: '#/components/schemas/ModuleStage'
+ */
+
+userRouter.post('/register', userController.Register);
 
 export default userRouter;

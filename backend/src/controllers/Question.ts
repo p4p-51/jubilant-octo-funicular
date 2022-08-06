@@ -17,13 +17,13 @@ class QuestionController extends BaseController {
     this.questionService = new QuestionService()
   }
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questions = await this.questionService.getAllQuestionWithExperiences(userId)
 
     res.status(200).send(questions);
   };
   GetAnswer = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questionId: number = parseInt(req.params['questionId'])
 
     const answers = await new UserService().getAnswers(userId, questionId)
@@ -37,7 +37,7 @@ class QuestionController extends BaseController {
   };
 
   AnswerQuestion = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questionId: number = parseInt(req.params['questionId'])
     const experienceId: number = parseInt(req.body['experienceId'])
     const answer: IAnswer = req.body['answer']

@@ -18,7 +18,9 @@
       <button @click="register">Register</button>
       <p class="redirect">
         Already have an account?
-        <a><router-link to="/signin">Sign in</router-link></a>
+        <a>
+          <router-link to="/signin">Sign in</router-link>
+        </a>
       </p>
     </div>
   </div>
@@ -121,6 +123,8 @@
 import { ref } from "vue";
 import firebase from "firebase";
 import { useRouter } from "vue-router"; // import router
+import axios from "../apis/api";
+
 const email = ref("");
 const password = ref("");
 const router = useRouter(); // get a reference to our vue router
@@ -130,7 +134,15 @@ const register = () => {
     .auth() // get the auth api
     .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
     .then((data) => {
-      console.log("Successfully registered!");
+      const response = axios()
+        .registerUser()
+        .then((res) => {
+          return res;
+        });
+      return { data, response };
+    })
+    .then(({ data, response }) => {
+      alert(JSON.stringify(response));
       router.push("/"); // redirect to home
     })
     .catch((error) => {

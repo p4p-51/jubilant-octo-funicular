@@ -2,6 +2,27 @@ import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
 
 class UserService {
+  getUserId = async(
+    uuid: string
+  ): Promise<number> => {
+    const userCollection = await MongoAdapter.getCollection("users");
+    const user = await userCollection.findOne({
+      "user.uuid": uuid
+    }, {
+      projection: {"user.userId": 1}
+    })
+
+    return user == null? null : user['user']['userId']
+  }
+
+  createUser = async (user): Promise<boolean> => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const newUser = await userCollection.insertOne(user)
+
+    return newUser.acknowledged
+  }
+
   getUser = async (
     userId: number,
     projection: string[] = null,
@@ -12,8 +33,7 @@ class UserService {
     const customProjection = {
       $project: {
         _id: 0,
-        userName: 1,
-        userId: 1,
+        user: 1
       },
     };
 
@@ -23,42 +43,12 @@ class UserService {
       });
     }
 
-    const customQuery = { userId, ...query };
+    const customQuery = { "user.userId": userId, ...query };
 
     const user = await userCollection
       .aggregate([
         {
           $match: customQuery,
-        },
-        {
-          $unwind: {
-            path: "$experiences",
-            preserveNullAndEmptyArrays: true,
-          },
-        },
-        {
-          $lookup: {
-            from: "labels",
-            localField: "experiences.labels",
-            foreignField: "_id",
-            as: "experiences.labels",
-          },
-        },
-        {
-          $addFields: {
-            "experiences.labels": "$experiences.labels.label",
-          },
-        },
-        {
-          $group: {
-            _id: "$_id",
-            userName: { $first: "$userName" },
-            progress: { $first: "$progress" },
-            userId: { $first: "$userId" },
-            intro: { $first: "$intro" },
-            quizzes: { $first: "$quizzes" },
-            experiences: { $push: "$experiences" },
-          },
         },
         customProjection,
       ])
@@ -76,7 +66,7 @@ class UserService {
     return await userCollection.aggregate([
       {
         $match: {
-          userId,
+          "user.userId": userId,
         },
       },
       {
@@ -99,7 +89,7 @@ class UserService {
   ): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
-    const customQuery = { userId, ...query };
+    const customQuery = { "user.userId": userId, ...query };
 
     const update = await userCollection.updateOne(customQuery, {
       $set: {
@@ -117,7 +107,7 @@ class UserService {
   ): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
-    const customQuery = { userId, ...query };
+    const customQuery = { "user.userId": userId, ...query };
     const update = await userCollection.updateOne(
       customQuery,
       {
@@ -142,18 +132,18 @@ class UserService {
     let expId: number = experienceId;
     // Find if the experience already exists
     const findExperience = await userCollection.findOne({
-      userId: userId,
+      "user.userId": userId,
       "experiences.name": newExperience.name,
     });
     // Add the experience to the list of experiences if it doesn't already exist
     if (findExperience === null) {
-      await this.addToSetUser(userId, { experiences: newExperience });
+      await this.addToSetUser(userId, { experiences: {...newExperience, experienceId}});
     } else {
       // otherwise update the labels only
       await userCollection
         .findOneAndUpdate(
           {
-            userId: userId,
+            "user.userId": userId,
             "experiences.name": newExperience.name,
           },
           {
@@ -189,7 +179,7 @@ class UserService {
     };
 
     const existingAnswer = await userCollection.findOne({
-        userId,
+        "user.userId": userId,
         answers: {
           $elemMatch: {
             questionId,
@@ -223,7 +213,7 @@ class UserService {
     return await userCollection.aggregate([
       {
         $match: {
-          userId,
+          "user.userId": userId,
         },
       }, {
         $project: {
