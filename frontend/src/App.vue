@@ -7,12 +7,11 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "@vue/runtime-core";
 import "./assets/css/styles.scss";
 import NavBar from "./components/NavBar.vue";
 
-import { ref, watchEffect } from "vue"; // used for conditional rendering
 import firebase from "firebase";
+import { ref } from "vue"; // used for conditional rendering
 import { useRouter } from "vue-router";
 const router = useRouter();
 const isLoggedIn = ref(true);
@@ -20,10 +19,10 @@ const isLoggedIn = ref(true);
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     isLoggedIn.value = true; // if we have a user
-    router.push("/");
+    // router.push("/");
   } else {
     isLoggedIn.value = false; // if we do not
-    router.push("/landing");
+    router.push("/signin");
   }
 });
 const signOut = () => {
@@ -50,3 +49,5 @@ const signOut = () => {
   overflow: hidden;
 }
 </style>
+
+<style lang="scss"></style>

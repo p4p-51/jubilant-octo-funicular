@@ -3,6 +3,48 @@ import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: "/signin",
+    name: "signin",
+    component: () =>
+      import(/* webpackChunkName: "signin" */ "../views/SignInView.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
+  },
+  {
+    path: "/landing",
+    name: "landing",
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
+  },
+  {
+    path: "/questions",
+    name: "question bank",
+    component: () =>
+      import(
+        /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
+      ),
+  },
+  {
+    path: "/lecture",
+    name: "lecture",
+    component: () =>
+      import(/* webpackChunkName: "lecture" */ "../views/LectureView.vue"),
+    children: [
+      {
+        path: "self-intro",
+        component: () =>
+          import(
+            "../views/pages/lectures/self-introduction/SelfIntroLectureView.vue"
+          ),
+      },
+    ],
+  },
+
+  {
     path: "/",
     name: "home",
     component: HomeView,
@@ -16,12 +58,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "module-end" */ "../views/ModuleEndView.vue"),
   },
-  {
-    path: "/lecture",
-    name: "lecture",
-    component: () =>
-      import(/* webpackChunkName: "lecture" */ "../views/LectureView.vue"),
-  },
+
   {
     path: "/plan/done",
     name: "study-plan",
@@ -50,14 +87,6 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
-      ),
-  },
-  {
-    path: "/questions",
-    name: "question bank",
-    component: () =>
-      import(
-        /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
       ),
   },
   {
@@ -95,24 +124,6 @@ const routes: Array<RouteRecordRaw> = [
     name: "quiz",
     component: () =>
       import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
-  },
-  {
-    path: "/signin",
-    name: "signin",
-    component: () =>
-      import(/* webpackChunkName: "signin" */ "../views/SignInView.vue"),
-  },
-  {
-    path: "/register",
-    name: "register",
-    component: () =>
-      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
-  },
-  {
-    path: "/landing",
-    name: "landing",
-    component: () =>
-      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
   },
 ];
 

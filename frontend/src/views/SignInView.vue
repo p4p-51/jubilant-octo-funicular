@@ -128,10 +128,9 @@
 </style>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import firebase from "firebase";
+import { ref } from "vue";
 import { useRouter } from "vue-router"; // import router
-import { defineComponent } from "vue";
 
 const email = ref("");
 const password = ref("");
@@ -149,7 +148,7 @@ const signIn = () => {
     .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
     .then((data) => {
       console.log("Successfully logged in!");
-      router.push("/feed"); // redirect to the feed
+      router.push("/");
     })
     .catch((error) => {
       console.log(error.code);
