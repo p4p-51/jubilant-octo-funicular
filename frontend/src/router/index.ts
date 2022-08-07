@@ -29,6 +29,14 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
   {
+    path: "/settings",
+    name: "settings",
+    component: () =>
+      import(
+        /* webpackChunkName: "settings" */ "../views/pages/SettingsView.vue"
+      ),
+  },
+  {
     path: "/lecture",
     name: "lecture",
     component: () =>
