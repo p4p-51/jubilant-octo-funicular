@@ -1,6 +1,7 @@
 <template>
   <progress-side-bar :modules="modules"></progress-side-bar>
-  <div class="lecture-view">
+  <router-view class="lecture-container" />
+  <!-- <div class="lecture-view">
     <TitleBlock
       module="Organising past experiences"
       title="Building your interview
@@ -49,18 +50,24 @@
     <SectionExample title="Example" :good="goodExample" :bad="badExample" />
 
     <button @click="goToBuild" class="go-button">Gotcha! -></button>
-  </div>
+  </div> -->
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/css/theme.scss";
 
-.lecture-view {
+.lecture-container {
+  width: 100%;
+  height: 100%;
+
   padding: 20px 40px;
+
   overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
+
+  justify-content: space-between;
 }
 
 .go-button {
@@ -70,15 +77,12 @@
   align-self: flex-end;
 
   margin: 70px 0;
+  margin-top: 50px;
 }
 </style>
 
 <script lang="ts">
 import ProgressSideBar from "@/components/ProgressSideBar.vue";
-import QuizQuestion from "@/components/QuizQuestion.vue";
-import SectionExample from "@/components/SectionExample.vue";
-import SectionParagraph from "@/components/SectionParagraph.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
 import Example from "@/types/Example.interface";
 
 import ModuleStatus from "@/types/ModuleStatus.interface";
@@ -87,9 +91,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "LectureView",
   components: {
-    TitleBlock,
-    SectionParagraph,
-    SectionExample,
     ProgressSideBar,
   },
   methods: {

@@ -19,16 +19,21 @@
       >
         <img src="../assets/icons/note.svg" class="icon" />
       </router-link>
-      <router-link
+      <!-- please keep this for now -->
+      <!-- <router-link
         to="/settings"
         class="link"
         :class="{ isActive: currentRouteName.includes('settings') }"
       >
         <img src="../assets/icons/cog.svg" class="icon" />
-      </router-link>
+      </router-link> -->
     </div>
     <div class="user-info-container">
-      <img src="../assets/user.svg" class="avatar" />
+      <img
+        src="../assets/user.svg"
+        class="avatar"
+        @click="this.$router.push('/settings')"
+      />
       <img src="../assets/icons/logout.svg" class="icon" @click="signOut" />
     </div>
   </nav>
@@ -136,7 +141,8 @@
     transition: $animation;
 
     &:hover {
-      transform: scale(1.1);
+      filter: grayscale(100%) brightness(60%) sepia(100%) hue-rotate(-50deg)
+        saturate(600%) contrast(0.8);
     }
   }
 }
