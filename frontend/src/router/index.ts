@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "build profile",
         component: () =>
           import(
-            /* webpackChunkName: "build-profile" */ "../views/BuildProfileView.vue"
+            /* webpackChunkName: "build-profile" */ "../views/pages/lectures/build-profile/BuildProfileView.vue"
           ),
       },
     ],
