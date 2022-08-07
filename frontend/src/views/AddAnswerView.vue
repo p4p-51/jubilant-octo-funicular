@@ -1,12 +1,16 @@
 //Deprecated
 <template>
-  <progress-side-bar :modules="modules"></progress-side-bar>
-  <div class="add-answer-view">
+  <div class="lecture-container">
     <TitleBlock
       module="Experience"
       title="Adding answers to your interview profile"
       subtitle="blah blac"
-    />
+    >
+      Now you understand how to answer behaviural interview questions using the
+      STAR method, it’s time for you to start praticing. First pick out a
+      question you want to answer, followed by a relevant experience. If you
+      forgot to add an experience, you can still do that as well.
+    </TitleBlock>
     <AddAnswer></AddAnswer>
     <button class="go-button">Save and continue -></button>
   </div>
@@ -14,41 +18,17 @@
 
 <style lang="scss" scoped>
 @import "../assets/css/theme.scss";
-
-.add-answer-view {
-  width: 100%;
-  height: 100%;
-
-  padding: 20px 40px;
-
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-between;
-}
-
-.go-button {
-  background-color: $c-primary;
-  color: $c-background;
-
-  align-self: flex-end;
-
-  margin-bottom: 70px;
-}
 </style>
 
 <script lang="ts">
+import AddAnswer from "@/components/AddAnswer.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
-import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
-import AddAnswer from "@/components/AddAnswer.vue";
 
 export default defineComponent({
   name: "AddAnswerView",
-  components: { AddAnswer, ProgressSideBar, TitleBlock },
+  components: { AddAnswer, TitleBlock },
   data() {
     return {
       modules: [

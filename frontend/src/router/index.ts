@@ -57,6 +57,19 @@ const routes: Array<RouteRecordRaw> = [
             /* webpackChunkName: "build-profile" */ "../views/pages/lectures/build-profile/BuildProfileView.vue"
           ),
       },
+      {
+        path: "structuring-responses",
+        component: () =>
+          import(
+            "../views/pages/lectures/structuring-responses/StructuringResponsesLectureView.vue"
+          ),
+      },
+      {
+        path: "add-answers",
+        name: "Add answer",
+        component: () =>
+          import(/* webpackChunkName: "add" */ "../views/AddAnswerView.vue"),
+      },
     ],
   },
 
@@ -98,12 +111,6 @@ const routes: Array<RouteRecordRaw> = [
       ),
   },
 
-  {
-    path: "/add",
-    name: "Add answer",
-    component: () =>
-      import(/* webpackChunkName: "add" */ "../views/AddAnswerView.vue"),
-  },
   {
     path: "/questions/:id",
     name: "question detail",
