@@ -1,8 +1,8 @@
 <template>
   <div class="lecture-container">
     <title-block
-      title="DIY Time!"
-      subtitle="Now that you’ve learnt all about how to give a good self introduction, let’s write your own!"
+      title="What makes a good self introduction?"
+      subtitle="How to introduce yourself in a hurry"
       module="Self introduction"
     />
   </div>
@@ -10,20 +10,6 @@
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
-
-.self-intro-lecture-view {
-  width: 100%;
-  height: 100%;
-
-  padding: 20px 40px;
-
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-between;
-}
 </style>
 
 <script lang="ts">
