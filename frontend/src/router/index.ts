@@ -68,7 +68,9 @@ const routes: Array<RouteRecordRaw> = [
         path: "add-answers",
         name: "Add answer",
         component: () =>
-          import(/* webpackChunkName: "add" */ "../views/AddAnswerView.vue"),
+          import(
+            /* webpackChunkName: "add" */ "../views/pages/lectures/add-answers/AddAnswerView.vue"
+          ),
       },
     ],
   },
