@@ -41,6 +41,22 @@ const routes: Array<RouteRecordRaw> = [
             "../views/pages/lectures/self-introduction/SelfIntroLectureView.vue"
           ),
       },
+      {
+        path: "self-intro/diy",
+        name: "self-intro/diy",
+        component: () =>
+          import(
+            /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
+          ),
+      },
+      {
+        path: "build-profile",
+        name: "build profile",
+        component: () =>
+          import(
+            /* webpackChunkName: "build-profile" */ "../views/BuildProfileView.vue"
+          ),
+      },
     ],
   },
 
@@ -81,14 +97,7 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "study-plan" */ "../views/CreatePlanView.vue"
       ),
   },
-  {
-    path: "/diy", // TODO: to refactor into module routes
-    name: "diy",
-    component: () =>
-      import(
-        /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
-      ),
-  },
+
   {
     path: "/add",
     name: "Add answer",
@@ -111,14 +120,7 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "graduation" */ "../views/GraduationView.vue"
       ),
   },
-  {
-    path: "/lecture/build-profile",
-    name: "build profile",
-    component: () =>
-      import(
-        /* webpackChunkName: "build-profile" */ "../views/BuildProfileView.vue"
-      ),
-  },
+
   {
     path: "/lecture/quiz",
     name: "quiz",
