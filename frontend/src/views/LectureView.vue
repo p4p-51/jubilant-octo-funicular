@@ -53,7 +53,7 @@
   </div> -->
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/assets/css/theme.scss";
 
 .lecture-container {
@@ -77,6 +77,7 @@
   align-self: flex-end;
 
   margin: 70px 0;
+  margin-top: 50px;
 }
 </style>
 

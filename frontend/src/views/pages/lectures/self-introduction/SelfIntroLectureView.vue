@@ -50,21 +50,24 @@
       work. Otherwise it’ll come off robotic and unnatural. Keep memorisation to
       the key points if necessary. <br />
       <br />
-      Additional resources.
+      Additional resources.<br />
       <a
         href="https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself"
         >https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself </a
-      ><br /><br />
+      ><br />
       <a
         href="https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples"
         >https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples</a
-      ><br /><br />
+      ><br />
       <a
         href="https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself"
       >
         https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a
-      ><br /><br />
+      ><br />
     </section-paragraph>
+    <button class="go-button" @click="this.$router.push('self-intro/diy')">
+      Gotcha! ->
+    </button>
   </div>
 </template>
 

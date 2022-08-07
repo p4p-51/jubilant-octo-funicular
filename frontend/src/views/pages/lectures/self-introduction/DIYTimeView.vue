@@ -1,6 +1,5 @@
 <template>
-  <progress-side-bar :modules="modules"></progress-side-bar>
-  <div class="diy-time-view">
+  <div class="lecture-container">
     <title-block
       title="DIY Time!"
       subtitle="Now that you’ve learnt all about how to give a good self introduction, let’s write your own!"
@@ -40,14 +39,13 @@
 
 <script lang="ts">
 import IntroDiy from "@/components/IntroDiy.vue";
-import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DIYTimeView",
-  components: { TitleBlock, ProgressSideBar, IntroDiy },
+  components: { TitleBlock, IntroDiy },
   data() {
     return {
       modules: [
