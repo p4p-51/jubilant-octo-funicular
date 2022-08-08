@@ -49,9 +49,13 @@ class QuestionService {
           questionText: 1,
           questionId: 1,
           labelId: 1,
-          experiences: { $first: "$user.filteredExp" },
-          answerCount: { $first: "$user.answerCount" },
-        }
+          experiences: {
+            $ifNull: [{ $first: "$user.filteredExp" }, []],
+          },
+          answerCount: {
+            $ifNull: [{ $first: "$user.answerCount" }, 0],
+          },
+        },
       },
     ]).toArray();
   };

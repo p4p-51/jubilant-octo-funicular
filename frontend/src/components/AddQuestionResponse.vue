@@ -15,6 +15,7 @@
       v-else
       :experience="getSelectedQuestion(selectedExperienceId)"
       :questionId="question.questionId"
+      :current-answer="currentAnswer(selectedExperienceId)"
       @savedAnswer="savedAnswer"
     />
   </div>
@@ -67,15 +68,28 @@ export default defineComponent({
         return { ...answer, experience: matchingExperience };
       });
     },
+    currentAnswer(experienceId: number) {
+      return this.question.answers?.find((answer) => {
+        return answer.experienceId == experienceId
+      })
+    },
     createNewResponse() {
       this.editMode = true;
     },
-    savedAnswer(answer: Answer) {
-      this.question.answers?.push(answer);
-      this.question.answerCount++;
+    savedAnswer(answer: Answer, isEdit: boolean) {
+      if (!isEdit) {
+        this.question.answers?.push(answer);
+        this.question.answerCount++;
+      } else {
+        this.question.answers?.forEach((ans) => {
+          if (ans.experienceId == answer.experienceId) {
+            ans.answer = answer.answer
+          }
+        })
+      }
+
       this.editMode = false;
       this.selectedExperienceId = null;
-      this.$emit("saveResponse", this.question.questionId)
     },
   },
   data() {

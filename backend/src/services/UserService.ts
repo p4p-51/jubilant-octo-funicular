@@ -2,26 +2,26 @@ import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
 
 class UserService {
-  getUserId = async(
-    uuid: string
+  getUserId = async (
+    uuid: string,
   ): Promise<number> => {
     const userCollection = await MongoAdapter.getCollection("users");
     const user = await userCollection.findOne({
-      "user.uuid": uuid
+      "user.uuid": uuid,
     }, {
-      projection: {"user.userId": 1}
-    })
+      projection: { "user.userId": 1 },
+    });
 
-    return user == null? null : user['user']['userId']
-  }
+    return user == null ? null : user["user"]["userId"];
+  };
 
   createUser = async (user): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
-    const newUser = await userCollection.insertOne(user)
+    const newUser = await userCollection.insertOne(user);
 
-    return newUser.acknowledged
-  }
+    return newUser.acknowledged;
+  };
 
   getUser = async (
     userId: number,
@@ -33,7 +33,7 @@ class UserService {
     const customProjection = {
       $project: {
         _id: 0,
-        user: 1
+        user: 1,
       },
     };
 
@@ -137,7 +137,7 @@ class UserService {
     });
     // Add the experience to the list of experiences if it doesn't already exist
     if (findExperience === null) {
-      await this.addToSetUser(userId, { experiences: {...newExperience, experienceId}});
+      await this.addToSetUser(userId, { experiences: { ...newExperience, experienceId } });
     } else {
       // otherwise update the labels only
       await userCollection
@@ -193,7 +193,7 @@ class UserService {
       return await this.addToSetUser(userId, { answers: answerDoc });
     } else {
       const res = await userCollection.findOneAndUpdate({
-        userId,
+        "user.userId": userId,
         answers: {
           $elemMatch: {
             questionId,
@@ -218,7 +218,7 @@ class UserService {
       }, {
         $project: {
           "experiences": 1,
-          "filteredAnswers": {
+          "answers": {
             $filter: {
               input: "$answers",
               as: "item",
@@ -228,10 +228,10 @@ class UserService {
         },
       },
     ]).toArray().then((users) => {
-      if (users[0]["filteredAnswers"].length < 1) {
+      if (users[0]["answers"].length < 1) {
         return [];
       }
-      return users[0]["filteredAnswers"];
+      return users[0]["answers"];
     })
   };
 }

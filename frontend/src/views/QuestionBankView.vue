@@ -3,7 +3,7 @@
     <title-block title="My question bank" />
     <div class="content-container">
       <div class="search-bar">
-        <qb-search-bar />
+        <qb-search-bar @onChange="(s) => (filter = s.toLowerCase())" />
       </div>
       <div class="questions-container">
         <div class="question-set completed">
@@ -12,12 +12,12 @@
           </div>
           <div class="list" v-if="isLoaded.loaded">
             <completed-question
-              v-for="question in completedQuestions.questions"
+              v-for="question in filtered(completedQuestions.questions)"
               :id="question.questionText"
               :key="question.questionId"
               :title="question.questionText"
               :answers="question.answerCount"
-              @click="this.$router.push('/questions/1')"
+              @click="this.$router.push(`/questions/${question.questionId}`)"
             />
           </div>
         </div>
@@ -27,11 +27,11 @@
           </div>
           <div class="list">
             <other-question
-              v-for="question in otherQuestions.questions"
+              v-for="question in filtered(otherQuestions.questions)"
               :id="question.questionId"
               :key="question.questionId"
               :title="question.questionText"
-              @click="this.$router.push('/questions/1')"
+              @click="this.$router.push(`/questions/${question.questionId}`)"
             />
           </div>
         </div>
@@ -135,11 +135,17 @@ const otherQuestions = reactive<{ questions: QuestionResponse[] }>({
   questions: [],
 });
 
+const filter = ref<string>("")
+const filtered = (questionSet: QuestionResponse[]): QuestionResponse[] => {
+  return questionSet.filter((question) => {
+    return question.labelId.toLowerCase().includes(filter.value.toLowerCase()) ||
+      question.questionText.toLowerCase().includes(filter.value.toLowerCase());
+  })
+}
+
 onMounted(async () => {
-  console.log("mounting");
   questions.questions = await getQuestions();
   isLoaded.loaded = true;
-  console.log("laoded");
   completedQuestions.questions = questions.questions.filter((question) => {
     return question["answerCount"] >= 1;
   });

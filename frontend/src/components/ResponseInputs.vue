@@ -14,7 +14,7 @@
       <p class="title"><b>R</b>esult</p>
       <textarea v-model="r" />
     </div>
-    <button @click="SaveAnswer">Save</button>
+    <button @click="SaveAnswer">{{ saveOrEdit }}</button>
   </div>
 </template>
 
@@ -111,10 +111,19 @@ import { defineComponent, PropType } from "vue";
 import { Experience, Answer } from "@/types/Question.interface";
 import CollapsibleResponse from "./CollapsibleResponse.vue";
 import { submitAnswer } from "@/apis/api";
+import router from "@/router";
 
 export default defineComponent({
   name: "ResponseInputs",
   components: {},
+  computed: {
+    saveOrEdit() {
+      return this.isEdit? "Edit" : "Save"
+    },
+    isEdit() {
+      return !!this.currentAnswer
+    }
+  },
   methods: {
     async SaveAnswer() {
       const answer = {
@@ -125,9 +134,9 @@ export default defineComponent({
           a: this.a,
           r: this.r,
         },
-      }
+      };
       await submitAnswer(this.questionId, answer);
-      this.$emit("savedAnswer", answer);
+      this.$emit("savedAnswer", answer, this.isEdit);
     },
   },
   data() {
@@ -138,6 +147,14 @@ export default defineComponent({
       r: "" as string,
     };
   },
+  mounted() {
+    if (this.currentAnswer) {
+      this.s = this.currentAnswer.answer.s;
+      this.t = this.currentAnswer.answer.t;
+      this.a = this.currentAnswer.answer.a;
+      this.r = this.currentAnswer.answer.r;
+    }
+  },
   props: {
     experience: {
       type: Object as PropType<Experience>,
@@ -146,6 +163,10 @@ export default defineComponent({
     questionId: {
       type: Number,
       required: true,
+    },
+    currentAnswer: {
+      type: Object as PropType<Answer>,
+      required: false,
     },
   },
 });

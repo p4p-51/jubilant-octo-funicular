@@ -98,8 +98,8 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
-import Question, { Answer, Experience, QuestionResponse } from "@/types/Question.interface";
-import { computed, defineComponent, onMounted, reactive, ref, watch } from "vue";
+import { Answer, QuestionResponse } from "@/types/Question.interface";
+import { onMounted, reactive, ref } from "vue";
 
 import { useRoute, useRouter } from "vue-router";
 import { getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
@@ -112,17 +112,14 @@ const goToGrad = async () => {
 };
 
 const saveResponse = (questionId: number) => {
-  alert("here?")
-  alert(questionId)
   questions.questions.forEach((question) => {
     if (question.questionId == questionId) {
-      alert("here")
       question.answerCount++
     }
   })
 }
 
-const selectedQuestionId = ref<number>(route.params.id as unknown as number);
+const selectedQuestionId = ref<number>();
 const addQuestionKey = ref<number>(0);
 const onQuestionClick = async (id: number) => {
   addQuestionKey.value++;
@@ -151,16 +148,20 @@ const questions = reactive<{ questions: QuestionResponse[] }>({
 const selectedQuestion = ref<QuestionResponse>();
 const getSelectedQuestion = async (questionId: number) => {
   selectedQuestionId.value = questionId;
-  const answers: Answer[] = await getQuestionAnswer(questionId);
-  const question = questions.questions.find((q) => q.questionId == questionId);
 
-  selectedQuestion.value = { ...question!, answers: answers };
+  const question = questions.questions.find((q) => q.questionId == questionId);
+  if (question!['answers'] == undefined) {
+    question!['answers'] = await getQuestionAnswer(questionId)
+  }
+
+  selectedQuestion.value = question
 };
 
 
 onMounted(async () => {
   questions.questions = await getQuestions();
-  await getSelectedQuestion(route.params.id as unknown as number);
+  selectedQuestionId.value = parseInt(route.params.id as unknown as string)
+  await getSelectedQuestion(selectedQuestionId.value);
 
   isLoaded.loaded = true;
 });
