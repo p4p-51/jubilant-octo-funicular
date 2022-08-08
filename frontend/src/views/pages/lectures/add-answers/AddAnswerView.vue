@@ -1,51 +1,34 @@
+//Deprecated
 <template>
   <div class="lecture-container">
-    <title-block
-      title="DIY Time!"
-      subtitle="Now that you’ve learnt all about how to give a good self introduction, let’s write your own!"
-      module="Self introduction"
-    />
-    <intro-diy />
+    <TitleBlock
+      module="Experience"
+      title="Adding answers to your interview profile"
+      subtitle="blah blac"
+    >
+      Now you understand how to answer behaviural interview questions using the
+      STAR method, it’s time for you to start praticing. First pick out a
+      question you want to answer, followed by a relevant experience. If you
+      forgot to add an experience, you can still do that as well.
+    </TitleBlock>
+    <AddAnswer></AddAnswer>
     <button class="go-button">Save and continue -></button>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
-
-.diy-time-view {
-  width: 100%;
-  height: 100%;
-
-  padding: 20px 40px;
-
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-between;
-}
-
-.go-button {
-  background-color: $c-primary;
-  color: $c-background;
-
-  align-self: flex-end;
-
-  margin-bottom: 70px;
-}
 </style>
 
 <script lang="ts">
-import IntroDiy from "@/components/IntroDiy.vue";
+import AddAnswer from "@/components/AddAnswer.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "DIYTimeView",
-  components: { TitleBlock, IntroDiy },
+  name: "AddAnswerView",
+  components: { AddAnswer, TitleBlock },
   data() {
     return {
       modules: [
