@@ -7,13 +7,18 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(async (config) => {
   const token = await firebase.auth().currentUser?.getIdToken(true);
-  alert(JSON.stringify(token));
   config.headers!.Authorization = "Bearer " + token;
   return config;
 });
 
-export default () => ({
-  async registerUser() {
-    return await axiosClient.post("/users/register");
-  },
-});
+const registerUser = async () => {
+  const { data } = await axiosClient.post("/users/register");
+  return data;
+};
+
+const getQuestions = async () => {
+  const { data } = await axiosClient.get("/questions");
+  return data;
+};
+
+export { registerUser, getQuestions };

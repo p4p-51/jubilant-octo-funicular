@@ -65,7 +65,7 @@ export default defineComponent({
   name: "ModuleBlock",
   props: {
     id: {
-      type: String,
+      type: Number,
       required: true,
     },
     title: {

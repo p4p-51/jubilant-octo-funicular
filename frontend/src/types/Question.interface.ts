@@ -3,11 +3,11 @@ export interface QuestionInterface {
   id: string;
 }
 export default interface Question {
-  id: string;
-  title: string;
+  questionId: number;
+  questionText: string;
   label: string;
   experiences: Experience[];
-  responses: Response[];
+  responses?: Response[];
 }
 
 export interface Experience {

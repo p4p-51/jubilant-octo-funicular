@@ -123,31 +123,23 @@
 import { ref } from "vue";
 import firebase from "firebase";
 import { useRouter } from "vue-router"; // import router
-import axios from "../apis/api";
+import { registerUser } from "../apis/api";
 
 const email = ref("");
 const password = ref("");
 const router = useRouter(); // get a reference to our vue router
-const register = () => {
+const register = async () => {
   console.log("registering", email, password);
-  firebase
-    .auth() // get the auth api
-    .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
-    .then((data) => {
-      const response = axios()
-        .registerUser()
-        .then((res) => {
-          return res;
-        });
-      return { data, response };
-    })
-    .then(({ data, response }) => {
-      alert(JSON.stringify(response));
-      router.push("/"); // redirect to home
-    })
-    .catch((error) => {
-      console.log(error.code);
-      alert(error.message);
-    });
+  try {
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email.value, password.value); // need .value because ref()
+    const newUser = await registerUser();
+    await router.push("/"); // redirect to home
+  } catch (error) {
+    // TODO: don't route them to home page
+    console.log(error.code);
+    alert(error.message);
+  }
 };
 </script>

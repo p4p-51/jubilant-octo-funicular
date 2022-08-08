@@ -9,11 +9,11 @@
         <div class="list">
           <qb-side-bar-question
             v-for="question in filterQuestions()"
-            :key="question.id"
+            :key="question.questionId"
             :numResponses="question.responses.length"
-            :title="question.title"
-            :id="question.id"
-            :isSelected="question.id === selectedQuestionId"
+            :title="question.questionText"
+            :id="question.questionId"
+            :isSelected="question.questionId === selectedQuestionId"
             @onQuestionClick="onQuestionClick"
           />
         </div>
@@ -112,8 +112,8 @@ export default defineComponent({
     goToGrad() {
       this.$router.push("/about");
     },
-    getSelectedQuestion(id: string) {
-      return this.questions.find((q) => q.id == id);
+    getSelectedQuestion(id: number) {
+      return this.questions.find((q) => q.questionId == id);
     },
     onQuestionClick(id: string) {
       this.addQuestionKey++;
@@ -126,7 +126,7 @@ export default defineComponent({
         return this.questions.filter((q) => {
           return (
             q.label.toLowerCase().includes(this.filter) ||
-            q.title.includes(this.filter)
+            q.questionText.includes(this.filter)
           );
         });
       }
@@ -138,8 +138,8 @@ export default defineComponent({
       filter: "" as string,
       questions: [
         {
-          id: "1",
-          title:
+          questionId: 1,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [
@@ -176,8 +176,8 @@ export default defineComponent({
           ],
         },
         {
-          id: "2",
-          title:
+          questionId: 2,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team SPECIAL",
           label: "Special",
           experiences: [
@@ -200,8 +200,8 @@ export default defineComponent({
           responses: [],
         },
         {
-          id: "3",
-          title:
+          questionId: 3,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [
@@ -251,8 +251,8 @@ export default defineComponent({
           ],
         },
         {
-          id: "5",
-          title:
+          questionId: 4,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [
@@ -275,8 +275,8 @@ export default defineComponent({
           responses: [],
         },
         {
-          id: "6",
-          title:
+          questionId: 7,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [
@@ -299,8 +299,8 @@ export default defineComponent({
           responses: [],
         },
         {
-          id: "7",
-          title:
+          questionId: 8,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [
@@ -323,8 +323,8 @@ export default defineComponent({
           responses: [],
         },
         {
-          id: "8",
-          title:
+          questionId: 9,
+          questionText:
             "Tell me about a time when you experienced a conflict in a team",
           label: "Conflict",
           experiences: [

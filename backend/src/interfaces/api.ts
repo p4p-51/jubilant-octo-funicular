@@ -244,9 +244,15 @@ export interface paths {
         200: {
           content: {
             'application/json': {
-              experience: components['schemas']['ExperienceId'];
+              experienceId: number;
               answer: components['schemas']['Answer'];
-            };
+            }[];
+          };
+        };
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
           };
         };
       };
@@ -266,6 +272,12 @@ export interface paths {
             'application/json': {
               success?: boolean;
             };
+          };
+        };
+        /** Something unexpected happened */
+        default: {
+          content: {
+            'application/json': components['schemas']['Error'];
           };
         };
       };
@@ -324,8 +336,7 @@ export interface paths {
         200: {
           content: {
             'application/json': {
-              userName: string;
-              avatar?: string;
+              user: components['schemas']['User'];
               progress: components['schemas']['ModuleStage'];
             };
           };
@@ -447,6 +458,23 @@ export interface paths {
       };
     };
   };
+  '/users/register': {
+    /** Register a user in the database */
+    post: {
+      responses: {
+        /** A single user. */
+        200: {
+          content: {
+            'application/json': {
+              user: components['schemas']['User'];
+              progress: components['schemas']['ModuleStage'];
+            };
+          };
+        };
+        default: components['responses']['DefaultError'];
+      };
+    };
+  };
 }
 
 export interface components {
@@ -487,6 +515,7 @@ export interface components {
       questionText: string;
       labelId: components['schemas']['Labels'];
     };
+    Uuid: string;
     Success: {
       success: boolean;
     };
@@ -496,6 +525,12 @@ export interface components {
     };
     /** @enum {string} */
     Labels: 'leadership' | 'teamwork' | 'conflict';
+    User: {
+      userId: number;
+      uuid: string;
+      userName?: string;
+      avatar?: string;
+    };
     SelfIntro: {
       /** @example my name is Bob, and I am a 3rd year SE student... */
       body: string;
@@ -528,6 +563,12 @@ export interface components {
     };
   };
   responses: {
+    /** The specified request was not successful */
+    DefaultError: {
+      content: {
+        'application/json': components['schemas']['Error'];
+      };
+    };
     /** The specified request was successful */
     Success: {
       content: {

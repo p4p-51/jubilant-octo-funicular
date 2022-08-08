@@ -2,13 +2,8 @@
   <div class="completed-question">
     <div class="title-container">
       <h5>{{ title }}</h5>
-      <p>
-        {{ responses.length }} answer{{ responses.length === 1 ? "" : "s" }}
-      </p>
+      <p>{{ answers }} answer{{ answers === 1 ? "" : "s" }}</p>
     </div>
-    <p>
-      {{ Object.values(responses[0].response).join(" ") }}
-    </p>
   </div>
 </template>
 
@@ -93,8 +88,8 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    responses: {
-      type: Array as PropType<Response[]>,
+    answers: {
+      type: Number,
       required: true,
     },
   },
