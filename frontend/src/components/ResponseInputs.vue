@@ -1,18 +1,18 @@
 <template>
   <div class="response-inputs">
     <h5>
-      Let me tell you about: <span>{{ experience.title }}</span>
+      Let me tell you about: <span>{{ experience.name }}</span>
     </h5>
 
     <div class="inputs">
       <p class="title"><b>S</b>ituation</p>
-      <textarea />
+      <textarea v-model="s" />
       <p class="title"><b>T</b>ask</p>
-      <textarea />
+      <textarea v-model="t" />
       <p class="title"><b>A</b>ction</p>
-      <textarea />
+      <textarea v-model="a" />
       <p class="title"><b>R</b>esult</p>
-      <textarea />
+      <textarea v-model="r" />
     </div>
     <button @click="SaveAnswer">Save</button>
   </div>
@@ -108,23 +108,43 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Response } from "@/types/Question.interface";
+import { Experience, Answer } from "@/types/Question.interface";
 import CollapsibleResponse from "./CollapsibleResponse.vue";
+import { submitAnswer } from "@/apis/api";
 
 export default defineComponent({
   name: "ResponseInputs",
   components: {},
   methods: {
-    SaveAnswer() {
-      this.$emit("savedAnswer");
+    async SaveAnswer() {
+      const answer = {
+        experienceId: this.experience.experienceId!,
+        answer: {
+          s: this.s,
+          t: this.t,
+          a: this.a,
+          r: this.r,
+        },
+      }
+      await submitAnswer(this.questionId, answer);
+      this.$emit("savedAnswer", answer);
     },
   },
   data() {
-    return {};
+    return {
+      s: "" as string,
+      t: "" as string,
+      a: "" as string,
+      r: "" as string,
+    };
   },
   props: {
     experience: {
       type: Object as PropType<Experience>,
+      required: true,
+    },
+    questionId: {
+      type: Number,
       required: true,
     },
   },

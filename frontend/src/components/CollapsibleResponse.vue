@@ -1,18 +1,19 @@
 <template>
   <div class="collapsible-response">
     <div class="header" @click="isOpen = !isOpen">
-      <h6>{{ response.experience.title }}</h6>
+      <h6>{{ response.experience.name }}</h6>
+<!--      <h6>SOME TITEL</h6>-->
       <img src="@/assets/icons/chevron-left.svg" :class="{ isOpen: isOpen }" />
     </div>
     <div :class="{ hidden: !isOpen }" class="content">
       <p class="star-title"><b>S</b>ituation</p>
-      <p class="star-content">{{ response.response.s }}</p>
+      <p class="star-content">{{ response.answer.s }}</p>
       <p class="star-title"><b>T</b>ask</p>
-      <p class="star-content">{{ response.response.t }}</p>
+      <p class="star-content">{{ response.answer.t }}</p>
       <p class="star-title"><b>A</b>ction</p>
-      <p class="star-content">{{ response.response.a }}</p>
+      <p class="star-content">{{ response.answer.a }}</p>
       <p class="star-title"><b>R</b>esult</p>
-      <p class="star-content">{{ response.response.r }}</p>
+      <p class="star-content">{{ response.answer.r }}</p>
     </div>
   </div>
 </template>
@@ -95,7 +96,7 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Response } from "@/types/Question.interface";
+import { Experience, Answer } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "CollapsibleResponse",
@@ -107,7 +108,7 @@ export default defineComponent({
   },
   props: {
     response: {
-      type: Object as PropType<Response>,
+      type: Object as PropType<Answer>,
       required: true,
     },
   },

@@ -10,7 +10,7 @@
       <input
         v-else
         class="title-input"
-        :value="experience.title"
+        :value="experience.name"
         @change="updateTitle"
       />
       <div v-for="label in labels" class="radio-line" :key="label.key">
@@ -68,7 +68,7 @@ export default defineComponent({
     saveExperience() {
       const newExp: Experience = {
         id: this.experience?.id,
-        title: this.experienceTitle,
+        name: this.experienceTitle,
         labels: this.experienceLabels,
       };
       this.$emit("saveExperience", newExp);
@@ -107,7 +107,7 @@ export default defineComponent({
   mounted() {
     if (this.experience) {
       this.experienceLabels = [...this.experience.labels];
-      this.experienceTitle = this.experience.title;
+      this.experienceTitle = this.experience.name;
     }
   },
 });

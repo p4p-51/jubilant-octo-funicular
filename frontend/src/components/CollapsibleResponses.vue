@@ -3,8 +3,8 @@
     <h5>My responses</h5>
 
     <collapsible-response
-      v-for="res in responses"
-      :key="res.id"
+      v-for="(res, key) in answers"
+      :key="key"
       :response="res"
     ></collapsible-response>
     <button class="add-response" @click="$emit('newResponse')">
@@ -56,7 +56,7 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Response } from "@/types/Question.interface";
+import { Experience, Answer } from "@/types/Question.interface";
 import CollapsibleResponse from "./CollapsibleResponse.vue";
 
 export default defineComponent({
@@ -66,8 +66,8 @@ export default defineComponent({
     return {};
   },
   props: {
-    responses: {
-      type: Array as PropType<Response[]>,
+    answers: {
+      type: Array as PropType<Answer[]>,
       required: true,
     },
   },

@@ -75,7 +75,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Response } from "@/types/Question.interface";
+import { Answer } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "ModuleBlock",

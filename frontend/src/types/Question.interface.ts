@@ -5,25 +5,32 @@ export interface QuestionInterface {
 export default interface Question {
   questionId: number;
   questionText: string;
-  label: string;
+  labelId: string;
   experiences: Experience[];
-  responses?: Response[];
+  answers?: Answer[];
+}
+
+export interface QuestionResponse extends Question {
+  answerCount: number;
 }
 
 export interface Experience {
   id: string;
-  title: string;
+  name: string;
   labels: string[];
+  experienceId?: number;
 }
 
-export interface Response {
-  experience: Experience;
-  response: {
+export interface Answer {
+  experienceId: number;
+  answer: {
     s: string;
     t: string;
     a: string;
     r: string;
   };
+  experience?: Experience
+  questionId?: number
 }
 
 export interface Label {

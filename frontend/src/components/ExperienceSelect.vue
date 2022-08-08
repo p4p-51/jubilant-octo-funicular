@@ -4,10 +4,10 @@
     <div
       class="option"
       v-for="experience in experiences"
-      :key="experience.id"
-      @click="$emit('onExperienceClick', experience.id)"
+      :key="experience.experienceId"
+      @click="$emit('onExperienceClick', experience.experienceId)"
     >
-      <p>{{ experience.title }}</p>
+      <p>{{ experience.name }}</p>
     </div>
     <p>I want to talk about a different experience</p>
   </div>
@@ -15,6 +15,7 @@
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
 .experience-selection {
   margin-top: 50px;
 
@@ -46,6 +47,7 @@
 
     cursor: pointer;
     transition: $animation;
+
     &:hover {
       border: solid 1px $c-primary;
       margin-right: 0;
@@ -61,6 +63,7 @@
 
     cursor: pointer;
     transition: $animation;
+
     &:hover {
       color: $c-primary;
       transform: scale(1.02);
@@ -77,7 +80,7 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Response } from "@/types/Question.interface";
+import { Experience, Answer } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "ExperienceSelect",

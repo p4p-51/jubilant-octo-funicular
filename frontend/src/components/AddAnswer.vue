@@ -86,22 +86,22 @@ export default defineComponent({
       experiences: [
         {
           id: "exp_id_1",
-          title: "enggen115",
+          name: "enggen115",
           labels: ["leadership", "conflict"],
         },
         {
           id: "exp_id_2",
-          title: "enggen204",
+          name: "enggen204",
           labels: ["leadership", "conflict"],
         },
         {
           id: "exp_id_3",
-          title: "enggen303",
+          name: "enggen303",
           labels: ["leadership", "conflict"],
         },
         {
           id: "exp_id_4",
-          title: "enggen403",
+          name: "enggen403",
           labels: ["leadership", "conflict"],
         },
       ] as Experience[],

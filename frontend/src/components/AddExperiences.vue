@@ -8,11 +8,11 @@
         </button>
         <div
           v-for="e in experiences"
-          :key="e.title"
+          :key="e.name"
           class="box experience"
           @click="selectExperience($event, e)"
         >
-          <p>{{ e.title }}</p>
+          <p>{{ e.name }}</p>
           <div class="actions">
             <div @click.stop="deleteExperience($event, e)" class="edit-icon">
               <img src="@/assets/icons/delete.svg" />
@@ -191,7 +191,7 @@ export default defineComponent({
     saveExperience(newExperience: Experience) {
       if (newExperience.id) {
         const oldExp = this.experiences.find((e) => e.id == newExperience.id);
-        oldExp!.title = newExperience.title;
+        oldExp!.name = newExperience.name;
         oldExp!.labels = newExperience.labels;
       } else {
         newExperience.id = "RANDOMID";
