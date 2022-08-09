@@ -20,7 +20,7 @@ class UserController extends BaseController {
 
 
   GetUser = async (req: Request, res: Response) => {
-    const userId: number = parseInt(req.params['userId']);
+    const userId: number = parseInt(res.locals['userId']);
     const user = await this.userService.getUser(userId, ['progress']);
 
     if (user === null) {
@@ -65,7 +65,7 @@ class UserController extends BaseController {
   }
 
   CompleteStage = async (req: Request, res: Response) => {
-    const userId: number = parseInt(req.params['userId']);
+    const userId: number = parseInt(res.locals['userId']);
     const module: IModuleId = req.body['moduleId'];
     const stage: number = parseInt(req.body['stage']);
 
@@ -92,7 +92,7 @@ class UserController extends BaseController {
   };
 
   PostIntro = async (req: Request, res: Response) => {
-    const userId: number = parseInt(req.params['userId']);
+    const userId: number = parseInt(res.locals['userId']);
     const intro: IUserIntro = {
       body: req.body['body'],
       attributes: req.body['attributes'],
@@ -107,7 +107,7 @@ class UserController extends BaseController {
   };
 
   GetIntro = async (req, res) => {
-    const userId: number = parseInt(req.params['userId']);
+    const userId: number = parseInt(res.locals['userId']);
     const userIntro = await this.userService.getUserIntro(userId);
 
     if (userIntro === null) {

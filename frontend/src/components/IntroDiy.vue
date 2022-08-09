@@ -2,7 +2,7 @@
   <div class="content-container">
     <div class="input-container">
       <h2>My self introduction</h2>
-      <textarea />
+      <textarea v-model="selfIntro"/>
     </div>
     <div class="checklist-container">
       <h2>Self checklist</h2>
@@ -159,11 +159,13 @@
 }
 </style>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "IntroDiy",
-  props: {},
-  components: {},
-});
+<script lang="ts" setup>
+import { onMounted, reactive, ref, watch } from "vue";
+
+const selfIntro = ref<string>("")
+
+onMounted(async () => {
+
+})
+
 </script>

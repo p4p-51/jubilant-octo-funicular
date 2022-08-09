@@ -82,13 +82,11 @@ const userController = new UserController();
 
 /**
  * @openapi
- *  /users/{userId}:
+ *  /users/me:
  *    get:
  *      description: Get the profile and progress of a user
  *      tags:
  *          - User
- *      parameters:
- *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *        default:
  *          description: Something unexpected happened
@@ -111,17 +109,15 @@ const userController = new UserController();
  *                  progress:
  *                    $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.get('/:userId', userController.GetUser);
+userRouter.get('/me', userController.GetUser);
 
 /**
  * @openapi
- *  /users/{userId}/complete:
+ *  /users/me/complete:
  *    post:
  *      description: Mark a module/stage as complete for a given using
  *      tags:
  *        - User
- *      parameters:
- *        - $ref: '#/components/parameters/userIdParam'
  *      requestBody:
  *        description: Request body
  *        required: true
@@ -151,17 +147,15 @@ userRouter.get('/:userId', userController.GetUser);
  *                  nextStage:
  *                    $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.post('/:userId/complete', userController.CompleteStage);
+userRouter.post('/me/complete', userController.CompleteStage);
 
 /**
  * @openapi
- * /users/{userId}/self-intro:
+ * /users/me/self-intro:
  *  post:
  *    description: Set a user self introduction
  *    tags:
  *      - User
- *    parameters:
- *      - $ref: '#/components/parameters/userIdParam'
  *    requestBody:
  *      description: User self intro
  *      required: true
@@ -182,8 +176,6 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *    description: Get a user's self introduction
  *    tags:
  *      - User
- *    parameters:
- *      - $ref: '#/components/parameters/userIdParam'
  *    responses:
  *      default:
  *        description: Something unexpected happened
@@ -198,12 +190,12 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *            schema:
  *              $ref: '#/components/schemas/SelfIntro'
  */
-userRouter.post('/:userId/self-intro', userController.PostIntro);
-userRouter.get('/:userId/self-intro', userController.GetIntro);
+userRouter.post('/me/self-intro', userController.PostIntro);
+userRouter.get('/me/self-intro', userController.GetIntro);
 
 /**
  * @openapi
- *  /users/{userId}/stats:
+ *  /users/me/stats:
  *    get:
  *      description: Get user stats
  *      tags:
@@ -224,7 +216,7 @@ userRouter.get('/:userId/self-intro', userController.GetIntro);
  *              schema:
  *                $ref: '#/components/schemas/Stats'
  */
-userRouter.get('/:userId/stats', userController.GetStats);
+userRouter.get('/me/stats', userController.GetStats);
 
 /**
  * @openapi

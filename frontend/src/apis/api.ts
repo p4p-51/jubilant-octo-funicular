@@ -52,6 +52,10 @@ const getExperiences = async () => {
   return data;
 };
 
+const getSelfInto = async() => {
+
+}
+
 
 export {
   registerUser,
