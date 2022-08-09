@@ -85,22 +85,22 @@ export default defineComponent({
       selectedId: "question_id_1" as string,
       experiences: [
         {
-          id: "exp_id_1",
+          experienceId: "exp_id_1",
           name: "enggen115",
           labels: ["leadership", "conflict"],
         },
         {
-          id: "exp_id_2",
+          experienceId: "exp_id_2",
           name: "enggen204",
           labels: ["leadership", "conflict"],
         },
         {
-          id: "exp_id_3",
+          experienceId: "exp_id_3",
           name: "enggen303",
           labels: ["leadership", "conflict"],
         },
         {
-          id: "exp_id_4",
+          experienceId: "exp_id_4",
           name: "enggen403",
           labels: ["leadership", "conflict"],
         },

@@ -34,7 +34,6 @@ const questionController = new QuestionController();
  *        required:
  *          - questionId
  *          - questionText
- *          - labelId
  *        properties:
  *          questionId:
  *            type: integer

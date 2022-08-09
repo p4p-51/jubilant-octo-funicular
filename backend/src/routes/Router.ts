@@ -76,7 +76,8 @@ router.use('/questions', QuestionRouter);
  *      schemas:
  *          Labels:
  *            type: string
- *            enum: [leadership, teamwork, conflict]
+ *          LabelText:
+ *            type: string
  */
 
 /**
@@ -104,6 +105,8 @@ router.use('/questions', QuestionRouter);
  *                properties:
  *                  label:
  *                    $ref: '#/components/schemas/Labels'
+ *                  labelText:
+ *                    $ref: '#/components/schemas/LabelText'
  *                  questions:
  *                    type: array
  *                    items:

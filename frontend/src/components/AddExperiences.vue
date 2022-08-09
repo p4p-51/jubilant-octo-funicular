@@ -25,11 +25,11 @@
         <p v-for="label in labels" :key="label">
           <span
             class="tick"
-            v-if="this.experienceAttributes.includes(label.key)"
+            v-if="this.experienceAttributes.includes(label.label)"
           >
             ✓
           </span>
-          <span class="dot" v-else>• </span>{{ label.key }}
+          <span class="dot" v-else>• </span>{{ label.label }}
         </p>
       </div>
     </div>
@@ -175,10 +175,15 @@
 import { Experience, Label } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import ExperienceModal from "@/components/ExperienceModal.vue";
+import { getExperiences, getLabels, putExperience, updateExperience } from "@/apis/api";
 
 export default defineComponent({
   name: "AddExperiences",
   components: { ExperienceModal },
+  async mounted() {
+    this.labels = await getLabels()
+    this.experiences = await getExperiences()
+  },
   methods: {
     selectExperience(event: Event, e: Experience) {
       this.selectedExperience = e;
@@ -188,13 +193,19 @@ export default defineComponent({
       this.selectedExperience = null;
       this.isModalOpen = true;
     },
-    saveExperience(newExperience: Experience) {
-      if (newExperience.id) {
-        const oldExp = this.experiences.find((e) => e.id == newExperience.id);
-        oldExp!.name = newExperience.name;
+    async saveExperience(newExperience: Experience) {
+      if (newExperience.experienceId) {
+        const oldExp = this.experiences.find((e) => e.experienceId == newExperience.experienceId);
+        let update: { name?: string } = {};
+        if ( oldExp!.name != newExperience.name) {
+          oldExp!.name = newExperience.name;
+          update['name'] = newExperience.name;
+        }
         oldExp!.labels = newExperience.labels;
+        const data = await updateExperience(oldExp!.experienceId!, {...update, labels: oldExp!.labels})
       } else {
-        newExperience.id = "RANDOMID";
+        const data = await putExperience(newExperience)
+        newExperience.experienceId = data.experienceId;
         this.experiences.push(newExperience);
       }
       this.isModalOpen = false;
@@ -224,35 +235,8 @@ export default defineComponent({
     return {
       isModalOpen: false,
       selectedExperience: null as Experience | null,
-      labels: [
-        {
-          key: "Leadership",
-          statement: "I was the leader",
-        },
-        {
-          key: "Conflict",
-          statement: "I experienced Conflict",
-        },
-        {
-          key: "Communication",
-          statement: "We did the talklkkkk",
-        },
-        {
-          key: "Teamwork",
-          statement: "There is no I in team",
-        },
-      ] as Label[],
+      labels: [] as Label[],
       experiences: [
-        // {
-        //   id: "23",
-        //   title: "ENGGEN 115 bridge",
-        //   labels: ["Conflict", "Leadership"],
-        // },
-        // {
-        //   id: "24213",
-        //   title: "My summer camp",
-        //   labels: ["Teamwork", "Leadership"],
-        // },
       ] as Experience[],
     };
   },

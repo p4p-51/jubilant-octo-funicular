@@ -51,25 +51,43 @@ class ExperienceController extends BaseController {
     }
   };
 
-  addLabel = async (req: Request, res: Response) => {
+  updateExperience = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['userId']);
     const experienceId: number = parseInt(req.params['experienceId']);
     const labels: ILabels[] = req.body['labels'];
+    const newName: string = req.body['name'];
     const userService = new UserService();
 
     const user = await userService.getUser(userId, ['experiences'], {
       'experiences.experienceId': experienceId,
     });
 
+    const value = {}
+
     if (user != null) {
-      const count = await userService.addToSetUser(
+      if (newName) {
+        const found = user['experiences'].find((exp) => {
+          return exp.name == newName
+        })
+        if (found) {
+          httpResponse(res, 400, `Name: ${newName} already exists`)
+          return
+        }
+        value['experiences.$.name'] = newName
+      }
+      if (labels){
+        value['experiences.$.labels']= labels
+      }
+
+      const count = await userService.setUser(
         userId,
-        { 'experiences.$.labels': { $each: labels } },
+        value,
         { 'experiences.experienceId': experienceId }
-      );
+      )
       res.status(200).json({ success: true });
     } else {
-      httpResponse(res, 404, `Cannot find experience with id ${experienceId}`);
+      httpResponse(res, 404, `Cannot find experience with id ${experienceId}, maybe you were supposed to craete a new one?`);
+      return
     }
   };
 

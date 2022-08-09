@@ -15,10 +15,9 @@ export interface QuestionResponse extends Question {
 }
 
 export interface Experience {
-  id: string;
+  experienceId?: number;
   name: string;
   labels: string[];
-  experienceId?: number;
 }
 
 export interface Answer {
@@ -34,6 +33,6 @@ export interface Answer {
 }
 
 export interface Label {
-  key: string;
-  statement: string;
+  label: string;
+  labelText: string;
 }

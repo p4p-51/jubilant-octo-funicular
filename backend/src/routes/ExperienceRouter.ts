@@ -95,11 +95,11 @@ router.put('/', controller.AddExperience);
 
 /**
  * @openapi
- *  /experiences/{experienceId}/labels:
+ *  /experiences/{experienceId}/:
  *    post:
  *      tags:
  *        - Experience
- *      description: Add a label to an experience
+ *      description: Change an experience's name or labels
  *      parameters:
  *        - $ref: '#/components/parameters/experienceIdParam'
  *      requestBody:
@@ -109,12 +109,12 @@ router.put('/', controller.AddExperience);
  *            schema:
  *              type: object
  *              properties:
+ *                name:
+ *                  type: string
  *                labels:
  *                  type: array
  *                  items:
  *                    $ref: '#/components/schemas/Labels'
- *              required:
- *                - labels
  *      responses:
  *        default:
  *          description: Something unexpected happened
@@ -125,6 +125,7 @@ router.put('/', controller.AddExperience);
  *        200:
  *          $ref: '#/components/responses/Success'
  *    delete:
+ *      deprecated: true
  *      tags:
  *        - Experience
  *      description: Remove certain labels from an experience
@@ -153,7 +154,7 @@ router.put('/', controller.AddExperience);
  *        200:
  *          $ref: '#/components/responses/Success'
  */
-router.post('/:experienceId/labels', controller.addLabel);
-router.delete('/:experienceId/labels', controller.deleteLabel);
+router.post('/:experienceId', controller.updateExperience);
+router.delete('/:experienceId', controller.deleteLabel);
 
 export default router;
