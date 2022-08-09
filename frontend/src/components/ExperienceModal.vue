@@ -71,7 +71,7 @@ export default defineComponent({
         name: this.experienceTitle,
         labels: this.experienceLabels,
       };
-      console.log(JSON.stringify(newExp))
+      console.log(JSON.stringify(newExp));
       this.$emit("saveExperience", newExp);
     },
     defaultValue(key: string, origin: boolean) {

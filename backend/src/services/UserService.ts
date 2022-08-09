@@ -57,6 +57,20 @@ class UserService {
     return user.length > 0 ? user[0] : null;
   };
 
+  pullFromUser = async (userId: number, array: string, value): Promise<boolean> => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const res = await userCollection.updateOne({
+      "user.userId": userId
+    }, {
+      $pull: {
+        [array]: { ...value }
+      }
+    })
+
+    return res.modifiedCount > 0
+  }
+
   getUserIntro = async (userId: number) => {
     return await this.getUser(userId, ["intro"]);
   };
@@ -97,7 +111,7 @@ class UserService {
       },
     });
 
-    return update.modifiedCount > 0;
+    return update.matchedCount > 0;
   };
 
   addToSetUser = async (

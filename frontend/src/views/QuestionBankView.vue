@@ -135,13 +135,15 @@ const otherQuestions = reactive<{ questions: QuestionResponse[] }>({
   questions: [],
 });
 
-const filter = ref<string>("")
+const filter = ref<string>("");
 const filtered = (questionSet: QuestionResponse[]): QuestionResponse[] => {
   return questionSet.filter((question) => {
-    return question.labelId.toLowerCase().includes(filter.value.toLowerCase()) ||
-      question.questionText.toLowerCase().includes(filter.value.toLowerCase());
-  })
-}
+    return (
+      question.labelId.toLowerCase().includes(filter.value.toLowerCase()) ||
+      question.questionText.toLowerCase().includes(filter.value.toLowerCase())
+    );
+  });
+};
 
 onMounted(async () => {
   questions.questions = await getQuestions();

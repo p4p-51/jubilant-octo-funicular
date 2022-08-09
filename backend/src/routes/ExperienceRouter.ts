@@ -125,25 +125,11 @@ router.put('/', controller.AddExperience);
  *        200:
  *          $ref: '#/components/responses/Success'
  *    delete:
- *      deprecated: true
  *      tags:
  *        - Experience
- *      description: Remove certain labels from an experience
+ *      description:  Delete the experience
  *      parameters:
  *        - $ref: '#/components/parameters/experienceIdParam'
- *      requestBody:
- *        description: The label to delete
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                labels:
- *                  type: array
- *                  items:
- *                    $ref: '#/components/schemas/Labels'
- *              required:
- *                - labels
  *      responses:
  *        default:
  *          description: Something unexpected happened

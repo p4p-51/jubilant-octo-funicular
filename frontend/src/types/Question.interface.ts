@@ -28,8 +28,8 @@ export interface Answer {
     a: string;
     r: string;
   };
-  experience?: Experience
-  questionId?: number
+  experience?: Experience;
+  questionId?: number;
 }
 
 export interface Label {

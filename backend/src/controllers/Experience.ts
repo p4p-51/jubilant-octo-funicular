@@ -94,7 +94,6 @@ class ExperienceController extends BaseController {
   deleteLabel = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['userId']);
     const experienceId: number = parseInt(req.params['experienceId']);
-    const labels: ILabels[] = req.body['labels'];
     const userService = new UserService();
 
     const user = await userService.getUser(userId, ['experiences'], {
@@ -102,18 +101,8 @@ class ExperienceController extends BaseController {
     });
 
     if (user != null) {
+      const result = await userService.pullFromUser(userId, "experiences", {experienceId})
 
-      const experienceLabels: ILabels[] = user['experiences'].find((experience) => (experience.experienceId == experienceId))['labels'];
-      const remainingLabels: ILabels[] = experienceLabels.filter(
-        (x) => !labels.includes(x)
-      );
-
-      //I should create function to delete from list instead of subtracting the two lists and the setting the labels to be the remainingLabls
-      const count = await userService.setUser(
-        userId,
-        { 'experiences.$.labels': remainingLabels},
-        { 'experiences.experienceId': experienceId }
-      );
       res.status(200).json({ success: true });
     } else {
       httpResponse(res, 404, `Cannot find experience with id ${experienceId}`);

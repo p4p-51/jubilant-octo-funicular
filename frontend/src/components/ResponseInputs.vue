@@ -118,11 +118,11 @@ export default defineComponent({
   components: {},
   computed: {
     saveOrEdit() {
-      return this.isEdit? "Edit" : "Save"
+      return this.isEdit ? "Edit" : "Save";
     },
     isEdit() {
-      return !!this.currentAnswer
-    }
+      return !!this.currentAnswer;
+    },
   },
   methods: {
     async SaveAnswer() {

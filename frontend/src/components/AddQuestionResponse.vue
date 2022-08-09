@@ -70,31 +70,21 @@ export default defineComponent({
     },
     currentAnswer(experienceId: number) {
       return this.question.answers?.find((answer) => {
-        return answer.experienceId == experienceId
-      })
+        return answer.experienceId == experienceId;
+      });
     },
     createNewResponse() {
       this.editMode = true;
     },
     savedAnswer(answer: Answer, isEdit: boolean) {
-      if (!isEdit) {
-        this.question.answers?.push(answer);
-        this.question.answerCount++;
-      } else {
-        this.question.answers?.forEach((ans) => {
-          if (ans.experienceId == answer.experienceId) {
-            ans.answer = answer.answer
-          }
-        })
-      }
-
       this.editMode = false;
       this.selectedExperienceId = null;
+      this.$emit("saveResponse", answer, isEdit);
     },
   },
   data() {
     return {
-      selectedExperienceId: null as string | null,
+      selectedExperienceId: null as number | null,
       editMode: false as boolean,
     };
   },

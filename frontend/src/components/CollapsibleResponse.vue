@@ -2,7 +2,7 @@
   <div class="collapsible-response">
     <div class="header" @click="isOpen = !isOpen">
       <h6>{{ response.experience.name }}</h6>
-<!--      <h6>SOME TITEL</h6>-->
+      <!--      <h6>SOME TITEL</h6>-->
       <img src="@/assets/icons/chevron-left.svg" :class="{ isOpen: isOpen }" />
     </div>
     <div :class="{ hidden: !isOpen }" class="content">

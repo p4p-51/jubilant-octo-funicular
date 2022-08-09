@@ -175,14 +175,20 @@
 import { Experience, Label } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import ExperienceModal from "@/components/ExperienceModal.vue";
-import { getExperiences, getLabels, putExperience, updateExperience } from "@/apis/api";
+import {
+  deleteExperience,
+  getExperiences,
+  getLabels,
+  putExperience,
+  updateExperience,
+} from "@/apis/api";
 
 export default defineComponent({
   name: "AddExperiences",
   components: { ExperienceModal },
   async mounted() {
-    this.labels = await getLabels()
-    this.experiences = await getExperiences()
+    this.labels = await getLabels();
+    this.experiences = await getExperiences();
   },
   methods: {
     selectExperience(event: Event, e: Experience) {
@@ -195,22 +201,28 @@ export default defineComponent({
     },
     async saveExperience(newExperience: Experience) {
       if (newExperience.experienceId) {
-        const oldExp = this.experiences.find((e) => e.experienceId == newExperience.experienceId);
+        const oldExp = this.experiences.find(
+          (e) => e.experienceId == newExperience.experienceId,
+        );
         let update: { name?: string } = {};
-        if ( oldExp!.name != newExperience.name) {
+        if (oldExp!.name != newExperience.name) {
           oldExp!.name = newExperience.name;
-          update['name'] = newExperience.name;
+          update["name"] = newExperience.name;
         }
         oldExp!.labels = newExperience.labels;
-        const data = await updateExperience(oldExp!.experienceId!, {...update, labels: oldExp!.labels})
+        const data = await updateExperience(oldExp!.experienceId!, {
+          ...update,
+          labels: oldExp!.labels,
+        });
       } else {
-        const data = await putExperience(newExperience)
+        const data = await putExperience(newExperience);
         newExperience.experienceId = data.experienceId;
         this.experiences.push(newExperience);
       }
       this.isModalOpen = false;
     },
-    deleteExperience(event: Event, experience: Experience) {
+    async deleteExperience(event: Event, experience: Experience) {
+      await deleteExperience(experience.experienceId!);
       this.experiences = this.experiences.filter((e) => {
         if (e !== experience) {
           return e;
@@ -236,8 +248,7 @@ export default defineComponent({
       isModalOpen: false,
       selectedExperience: null as Experience | null,
       labels: [] as Label[],
-      experiences: [
-      ] as Experience[],
+      experiences: [] as Experience[],
     };
   },
   props: {},

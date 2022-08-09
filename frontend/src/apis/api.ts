@@ -1,12 +1,13 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
+import { SelfIntro } from "@/types/User.interface";
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:9002",
 });
 
-axiosClient.interceptors.request.use(async (config) => {
+axiosClient.interceptors.request.use(async (config:AxiosRequestConfig) => {
   const token = await firebase.auth().currentUser?.getIdToken(true);
   config.headers!.Authorization = "Bearer " + token;
   return config;
@@ -28,7 +29,10 @@ const getQuestionAnswer = async (questionid: number) => {
 };
 
 const submitAnswer = async (questionId: number, answer: Answer) => {
-  const { data } = await axiosClient.post(`/questions/${questionId}/answers`, answer);
+  const { data } = await axiosClient.post(
+    `/questions/${questionId}/answers`,
+    answer,
+  );
   return data;
 };
 
@@ -42,8 +46,14 @@ const putExperience = async (experience: Experience) => {
   return data;
 };
 
-const updateExperience = async (experienceId: number, experience: { name?: string, labels?: string[]}) => {
-  const { data } = await axiosClient.post(`/experiences/${experienceId}/`, experience);
+const updateExperience = async (
+  experienceId: number,
+  experience: { name?: string; labels?: string[] },
+) => {
+  const { data } = await axiosClient.post(
+    `/experiences/${experienceId}/`,
+    experience,
+  );
   return data;
 };
 
@@ -52,10 +62,20 @@ const getExperiences = async () => {
   return data;
 };
 
-const getSelfInto = async() => {
+const deleteExperience = async (experienceId: number) => {
+  const { data } = await axiosClient.delete(`/experiences/${experienceId}/`);
+  return data;
+};
 
-}
+const getSelfInto = async () => {
+  const { data } = await axiosClient.get("/users/me/self-intro");
+  return data;
+};
 
+const submitSelfIntro = async (intro: SelfIntro) => {
+  const { data } = await axiosClient.post("/users/me/self-intro", intro);
+  return data;
+};
 
 export {
   registerUser,
@@ -66,4 +86,7 @@ export {
   putExperience,
   updateExperience,
   getExperiences,
+  deleteExperience,
+  getSelfInto,
+  submitSelfIntro,
 };
