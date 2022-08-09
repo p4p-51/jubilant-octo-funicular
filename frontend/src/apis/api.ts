@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
 import { SelfIntro } from "@/types/User.interface";
@@ -7,74 +7,104 @@ const axiosClient = axios.create({
   baseURL: "http://localhost:9002",
 });
 
-axiosClient.interceptors.request.use(async (config:AxiosRequestConfig) => {
+axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
   const token = await firebase.auth().currentUser?.getIdToken(true);
   config.headers!.Authorization = "Bearer " + token;
   return config;
 });
 
-const registerUser = async () => {
-  const { data } = await axiosClient.post("/users/register");
-  return data;
+type Error = { code: number; message: string };
+type ApiResponse<T> = [null, T] | [Error];
+
+const axiosCall = async <T>(
+  config: AxiosRequestConfig,
+): Promise<ApiResponse<T>> => {
+  try {
+    const { data } = await axiosClient.request(config);
+    return [null, data];
+  } catch (error) {
+    // Yea... I dont know what the fuck is going on here
+    const errorResponse: Error = (error as any)["response"]["data"];
+    return [errorResponse];
+  }
 };
 
-const getQuestions = async () => {
-  const { data } = await axiosClient.get("/questions");
-  return data;
+const registerUser = async (): Promise<ApiResponse<any>> => {
+  return axiosCall({ method: "get", url: "/users/register" });
 };
 
-const getQuestionAnswer = async (questionid: number) => {
-  const { data } = await axiosClient.get(`/questions/${questionid}/answers`);
-  return data;
+const getQuestions = async (): Promise<ApiResponse<any>> => {
+  return axiosCall({ method: "get", url: "/questions" });
 };
 
-const submitAnswer = async (questionId: number, answer: Answer) => {
-  const { data } = await axiosClient.post(
-    `/questions/${questionId}/answers`,
-    answer,
-  );
-  return data;
+const getQuestionAnswer = async (
+  questionId: number,
+): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "get",
+    url: `/questions/${questionId}/answers`,
+  });
 };
 
-const getLabels = async () => {
-  const { data } = await axiosClient.get(`/labels`);
-  return data;
+const submitAnswer = async (
+  questionId: number,
+  answer: Answer,
+): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "post",
+    url: `/questions/${questionId}/answers`,
+    data: answer,
+  });
 };
 
-const putExperience = async (experience: Experience) => {
-  const { data } = await axiosClient.put("/experiences", experience);
-  return data;
+const getLabels = async (): Promise<ApiResponse<any>> => {
+  return axiosCall({ method: "get", url: "/labels" });
+};
+
+const putExperience = async (
+  experience: Experience,
+): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "put",
+    url: "/experiences",
+    data: experience,
+  });
 };
 
 const updateExperience = async (
   experienceId: number,
   experience: { name?: string; labels?: string[] },
-) => {
-  const { data } = await axiosClient.post(
-    `/experiences/${experienceId}/`,
-    experience,
-  );
-  return data;
+): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "post",
+    url: `/experiences/${experienceId}`,
+    data: experience,
+  });
 };
 
-const getExperiences = async () => {
-  const { data } = await axiosClient.get(`/experiences`);
-  return data;
+const getExperiences = async (): Promise<ApiResponse<any>> => {
+  return axiosCall({ method: "get", url: "/experiences" });
 };
 
-const deleteExperience = async (experienceId: number) => {
-  const { data } = await axiosClient.delete(`/experiences/${experienceId}/`);
-  return data;
+const deleteExperience = async (
+  experienceId: number,
+): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "delete",
+    url: `/experiences/${experienceId}`,
+  });
 };
 
-const getSelfInto = async () => {
-  const { data } = await axiosClient.get("/users/me/self-intro");
-  return data;
+const getSelfInto = async (): Promise<ApiResponse<any>> => {
+  return axiosCall({ method: "get", url: "/users/me/self-intro" });
 };
 
-const submitSelfIntro = async (intro: SelfIntro) => {
-  const { data } = await axiosClient.post("/users/me/self-intro", intro);
-  return data;
+const submitSelfIntro = async (intro: SelfIntro): Promise<ApiResponse<any>> => {
+  return axiosCall({
+    method: "post",
+    url: "/users/me/self-intro",
+    data: intro,
+  });
 };
 
 export {
