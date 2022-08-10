@@ -187,8 +187,13 @@ export default defineComponent({
   name: "AddExperiences",
   components: { ExperienceModal },
   async mounted() {
-    this.labels = await getLabels();
-    this.experiences = await getExperiences();
+    const [labelError, labels] = await getLabels();
+    const [expError, experiences] = await getExperiences();
+    if (labelError || expError) {
+      alert("Error");
+    }
+    this.labels = labels;
+    this.experiences = experiences;
   },
   methods: {
     selectExperience(event: Event, e: Experience) {
@@ -204,30 +209,42 @@ export default defineComponent({
         const oldExp = this.experiences.find(
           (e) => e.experienceId == newExperience.experienceId,
         );
+
         let update: { name?: string } = {};
         if (oldExp!.name != newExperience.name) {
           oldExp!.name = newExperience.name;
           update["name"] = newExperience.name;
         }
         oldExp!.labels = newExperience.labels;
-        const data = await updateExperience(oldExp!.experienceId!, {
+        const [error, data] = await updateExperience(oldExp!.experienceId!, {
           ...update,
           labels: oldExp!.labels,
         });
+        if (error) {
+          alert("Updating experience failed");
+        }
       } else {
-        const data = await putExperience(newExperience);
-        newExperience.experienceId = data.experienceId;
-        this.experiences.push(newExperience);
+        const [error, data] = await putExperience(newExperience);
+        if (error) {
+          alert("Cannot create new experience");
+        } else {
+          newExperience.experienceId = data.experienceId;
+          this.experiences.push(newExperience);
+        }
       }
       this.isModalOpen = false;
     },
     async deleteExperience(event: Event, experience: Experience) {
-      await deleteExperience(experience.experienceId!);
-      this.experiences = this.experiences.filter((e) => {
-        if (e !== experience) {
-          return e;
-        }
-      });
+      const [error, data] = await deleteExperience(experience.experienceId!);
+      if (error) {
+        alert("cannot delete");
+      } else {
+        this.experiences = this.experiences.filter((e) => {
+          if (e !== experience) {
+            return e;
+          }
+        });
+      }
     },
   },
   computed: {

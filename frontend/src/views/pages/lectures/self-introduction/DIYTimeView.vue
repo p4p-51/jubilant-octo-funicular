@@ -48,6 +48,9 @@ import { SelfIntro } from "@/types/User.interface";
 const introDiy = ref<SelfIntro>();
 
 const submitIntro = async () => {
-  await submitSelfIntro({ ...introDiy.value! });
+  const [error, data] = await submitSelfIntro({ ...introDiy.value! });
+  if (error) {
+    alert("intro update failed")
+  }
 };
 </script>

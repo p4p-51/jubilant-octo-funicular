@@ -13,8 +13,8 @@ axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
   return config;
 });
 
-type Error = { code: number; message: string };
-type ApiResponse<T> = [null, T] | [Error];
+type errorResponse = { code: number; message: string };
+type ApiResponse<T> = [null, T] | [errorResponse];
 
 const axiosCall = async <T>(
   config: AxiosRequestConfig,
@@ -24,7 +24,7 @@ const axiosCall = async <T>(
     return [null, data];
   } catch (error) {
     // Yea... I dont know what the fuck is going on here
-    const errorResponse: Error = (error as any)["response"]["data"];
+    const errorResponse: errorResponse = (error as any)["response"]["data"];
     return [errorResponse];
   }
 };

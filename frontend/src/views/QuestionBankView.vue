@@ -146,8 +146,14 @@ const filtered = (questionSet: QuestionResponse[]): QuestionResponse[] => {
 };
 
 onMounted(async () => {
-  questions.questions = await getQuestions();
+  const [error, data] = await getQuestions();
+  if (error) {
+    alert("Cannot load questions from backend")
+    //Throw or try again?
+  }
+  questions.questions = data
   isLoaded.loaded = true;
+
   completedQuestions.questions = questions.questions.filter((question) => {
     return question["answerCount"] >= 1;
   });

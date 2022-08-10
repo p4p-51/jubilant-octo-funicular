@@ -154,7 +154,12 @@ const setSelectedQuestion = async (questionId: number) => {
 
   const question = questions.questions.find((q) => q.questionId == questionId);
   if (question!["answers"] == undefined) {
-    question!["answers"] = await getQuestionAnswer(questionId);
+    const [error, data] =  await getQuestionAnswer(questionId);
+    if (error) {
+      alert("cannot get saved answers to question")
+      question!["answers"] = []
+    }
+    question!["answers"] = data
   }
 
   selectedQuestion.value = question;

@@ -134,7 +134,10 @@ const register = async () => {
     const user = await firebase
       .auth()
       .createUserWithEmailAndPassword(email.value, password.value); // need .value because ref()
-    const newUser = await registerUser();
+    const [error, data] = await registerUser();
+    if (error) {
+      throw "Cannot register user"
+    }
     await router.push("/"); // redirect to home
   } catch (error) {
     // TODO: don't route them to home page

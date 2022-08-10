@@ -135,8 +135,12 @@ export default defineComponent({
           r: this.r,
         },
       };
-      await submitAnswer(this.questionId, answer);
-      this.$emit("savedAnswer", answer, this.isEdit);
+      const [error, data] = await submitAnswer(this.questionId, answer);
+      if (error) {
+        alert("cannot save answer");
+      } else {
+        this.$emit("savedAnswer", answer, this.isEdit);
+      }
     },
   },
   data() {

@@ -169,9 +169,15 @@ const staticAttributes = [
 ];
 
 onMounted(async () => {
-  const intro = await getSelfInto();
-  body.value = intro["body"];
-  attributes.value = intro["attributes"];
+  const [error, intro] = await getSelfInto();
+  if (error) {
+    alert("cannot get self intro");
+    body.value = "";
+    attributes.value = [];
+  } else {
+    body.value = intro["body"];
+    attributes.value = intro["attributes"];
+  }
 });
 
 defineExpose({
