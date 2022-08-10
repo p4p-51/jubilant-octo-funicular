@@ -1,7 +1,11 @@
 <template>
   <div class="signin-view">
     <div class="content-container">
-      <img src="@/assets/logo.svg" alt="logo" />
+      <img
+        src="@/assets/logo.svg"
+        alt="logo"
+        @click="this.$router.push('/landing')"
+      />
       <h1>Login to Your Account</h1>
       <input
         type="text"
@@ -56,6 +60,13 @@
     img {
       width: 60px;
       align-self: center;
+
+      cursor: pointer;
+      transition: $animation;
+
+      &:hover {
+        transform: scale(1.1) rotate(15deg);
+      }
     }
 
     h1 {

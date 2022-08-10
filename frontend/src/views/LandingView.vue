@@ -5,7 +5,7 @@
         <img src="@/assets/logo.svg" alt="logo" />
         <p>Funicular</p>
       </div>
-      <button>Sign in</button>
+      <button @click="this.$router.push('/signin')">Sign in</button>
     </header>
     <div class="main-content landing-content">
       <div class="text-container">
@@ -22,7 +22,7 @@
           tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
           swine strip steak.
         </p>
-        <button>Get started</button>
+        <button @click="this.$router.push('/register')">Get started</button>
       </div>
       <img src="@/assets/illustrations/landing.svg" />
     </div>
@@ -122,6 +122,8 @@
         height: 40px;
 
         margin-right: 15px;
+
+        transition: $animation;
       }
 
       p {
@@ -138,8 +140,9 @@
       transition: $animation;
 
       &:hover {
-        // TODO to replace animation
-        transform: scale(1.05);
+        img {
+          transform: scale(1.1) rotate(15deg);
+        }
       }
     }
 
