@@ -5,44 +5,93 @@
         <img src="@/assets/logo.svg" alt="logo" />
         <p>Funicular</p>
       </div>
-      <button>Sign in</button>
+      <button @click="this.$router.push('/signin')">Sign in</button>
     </header>
     <div class="main-content landing-content">
       <div class="text-container">
         <h1>Behavioural interviews made easy.</h1>
         <div class="middle-decoration">
-          <div></div>
-          <p>What we do</p>
+          <!-- <div></div> -->
+          <p>
+            Feeling prepared = Improved confidence = Successful interview = Job
+            offer
+          </p>
         </div>
         <p>
           Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
           tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
           swine strip steak.
         </p>
-        <button>Get started</button>
+        <button @click="this.$router.push('/register')">Get started</button>
       </div>
       <img src="@/assets/illustrations/landing.svg" />
     </div>
-    <div class="main-content features-list">
+    <!-- TODO Bring this back in when we have finalised content for feature set  -->
+    <!-- <div class="main-content features-list">
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
-    </div>
+    </div> -->
 
     <div class="main-content feature-block">
-      <h3>Title</h3>
-      <p>smetiing</p>
+      <div class="text">
+        <h3>What is a behaviural interview</h3>
+        <p>
+          Behavioural interviewing is a commonly used process in modern
+          industries for selecting the best candidates to hire for a position. A
+          typical example of a behavioural question might start with "Tell me
+          about a time when..."
+          <br />
+          <br />
+          Behavioural interviews focuses on your past experiences, providing you
+          a platform to express your skills, background and personality. You’re
+          also able to utilise this process to further understand the role and
+          the company’s values to see if the job’s the right fit for you.
+        </p>
+      </div>
+      <img src="@/assets/illustrations/person-money.svg" />
+    </div>
+    <div class="main-content feature-block reverse">
+      <div class="text">
+        <h3>Why and how to prepare for behavioural interviews?</h3>
+        <p>
+          Studies have shown that by practising and preparing for interviews,
+          you’ll become more confident and your interview performanc increases.
+          There are several techniques at your disposal to prepare, including
+          but not limited to written assignments, mock interviews, or online
+          videos.
+          <br />
+          <br />
+          Reading commonly asked questions and organising experiences are highly
+          effective ways to better understand your strengths and weaknesses to
+          formular responses
+        </p>
+      </div>
+      <img src="@/assets/illustrations/content-people.svg" />
     </div>
     <div class="main-content feature-block">
-      <h3>Title</h3>
-      <p>smetiing</p>
+      <div class="text">
+        <h3>What makes a ‘good’ response to behavioural interviews?</h3>
+        <p>
+          A good behavioural interview response must be specific, concise,
+          include action, demonstrate the your role, relevant, and demonstrate
+          results. The best way to achieve this is by telling a compelling
+          story. Each story should have a beginning, describing what the problem
+          was, a middle, describing what you did, and end, describing how the
+          situation turned out. A popular framework for this is the Situation,
+          Task, Action, Result (STAR) model.
+          <br />
+          <br />
+
+          An example of this would be:
+          <br />
+          Answer:...
+        </p>
+      </div>
+      <img src="@/assets/illustrations/girl-balloons.svg" />
     </div>
-    <div class="main-content feature-block">
-      <h3>Title</h3>
-      <p>smetiing</p>
-    </div>
-    <footer>footer</footer>
+    <footer>Whatever goes in the footer.</footer>
   </div>
 </template>
 
@@ -58,8 +107,6 @@
   flex-direction: column;
 
   header {
-    background: lightblue;
-
     padding: 45px 80px;
 
     display: flex;
@@ -75,6 +122,8 @@
         height: 40px;
 
         margin-right: 15px;
+
+        transition: $animation;
       }
 
       p {
@@ -91,8 +140,9 @@
       transition: $animation;
 
       &:hover {
-        // TODO to replace animation
-        transform: scale(1.05);
+        img {
+          transform: scale(1.1) rotate(15deg);
+        }
       }
     }
 
@@ -105,7 +155,7 @@
   }
 
   .main-content {
-    padding: 100px 200px;
+    margin: 100px 200px;
   }
 
   .landing-content {
@@ -113,7 +163,7 @@
     align-items: center;
     justify-content: space-between;
 
-    padding-top: 0;
+    margin-top: 0;
 
     .text-container {
       display: flex;
@@ -179,6 +229,55 @@
     > img {
       width: 800px;
     }
+  }
+
+  .features-list {
+    background: $c-bg-grey;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 240px;
+  }
+
+  .feature-block {
+    $image-margin: 100px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: solid 1px $c-grey-light;
+
+    padding: 100px 0;
+
+    display: flex;
+    align-items: center;
+
+    > img {
+      width: 500px;
+      margin-left: $image-margin;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 50px;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+
+      > img {
+        margin-right: $image-margin;
+      }
+    }
+  }
+
+  footer {
+    background: $c-bg-grey;
+    padding: 30px;
+
+    font-size: 12px;
   }
 }
 </style>
