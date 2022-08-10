@@ -11,8 +11,11 @@
       <div class="text-container">
         <h1>Behavioural interviews made easy.</h1>
         <div class="middle-decoration">
-          <div></div>
-          <p>What we do</p>
+          <!-- <div></div> -->
+          <p>
+            Feeling prepared = Improved confidence = Successful interview = Job
+            offer
+          </p>
         </div>
         <p>
           Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
@@ -23,69 +26,72 @@
       </div>
       <img src="@/assets/illustrations/landing.svg" />
     </div>
-    <div class="main-content features-list">
+    <!-- TODO Bring this back in when we have finalised content for feature set  -->
+    <!-- <div class="main-content features-list">
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
       <div class="feature-small">f</div>
-    </div>
+    </div> -->
 
     <div class="main-content feature-block">
       <div class="text">
-        <h3>Pork loin short loin pastrami short ribs frankfurter</h3>
+        <h3>What is a behaviural interview</h3>
         <p>
-          Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter
-          swine meatball tri-tip. Tri-tip meatball shank filet mignon,
-          burgdoggen pork chop chislic pastrami porchetta ball tip sirloin
-          shankle pancetta venison spare ribs. Ball tip tri-tip tongue turkey,
-          ham fatback tenderloin pastrami jerky sausage brisket beef bresaola
-          pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger.
-          Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck
-          pancetta flank tenderloin swine. Andouille venison porchetta, jowl
-          chislic pork loin filet mignon short ribs rump sausage kielbasa ground
-          round alcatra shank.
+          Behavioural interviewing is a commonly used process in modern
+          industries for selecting the best candidates to hire for a position. A
+          typical example of a behavioural question might start with "Tell me
+          about a time when..."
+          <br />
+          <br />
+          Behavioural interviews focuses on your past experiences, providing you
+          a platform to express your skills, background and personality. You’re
+          also able to utilise this process to further understand the role and
+          the company’s values to see if the job’s the right fit for you.
         </p>
       </div>
       <img src="@/assets/illustrations/person-money.svg" />
     </div>
     <div class="main-content feature-block reverse">
       <div class="text">
-        <h3>Ribeye shoulder spare ribs pig</h3>
+        <h3>Why and how to prepare for behavioural interviews?</h3>
         <p>
-          Andouille chislic turkey doner, beef ribs ground round porchetta
-          t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin
-          short loin bacon shankle. Prosciutto drumstick leberkas flank,
-          frankfurter corned beef shoulder sausage filet mignon beef ribs rump
-          pastrami. Drumstick brisket turkey t-bone picanha spare ribs short
-          ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin
-          frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork
-          loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen
-          tail cupim spare ribs. T-bone doner shank cupim.
+          Studies have shown that by practising and preparing for interviews,
+          you’ll become more confident and your interview performanc increases.
+          There are several techniques at your disposal to prepare, including
+          but not limited to written assignments, mock interviews, or online
+          videos.
+          <br />
+          <br />
+          Reading commonly asked questions and organising experiences are highly
+          effective ways to better understand your strengths and weaknesses to
+          formular responses
         </p>
       </div>
       <img src="@/assets/illustrations/content-people.svg" />
     </div>
     <div class="main-content feature-block">
       <div class="text">
-        <h3>Tail brisket shoulder shankle chicken buffalo</h3>
+        <h3>What makes a ‘good’ response to behavioural interviews?</h3>
         <p>
-          Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
-          tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
-          swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck
-          kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin
-          short loin pastrami short ribs frankfurter salami strip steak brisket
-          leberkas sirloin shoulder boudin pig. Pig fatback jerky shankle
-          sausage. Porchetta spare ribs turducken, tail salami cupim flank pork
-          loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin
-          chicken ground round bacon, kielbasa chuck kevin short ribs. Short
-          loin chuck salami pork chop fatback. Pork loin short loin pastrami
-          short ribs frankfurter salami strip steak brisket leberkas sirloin
-          shoulder boudin pig.
+          A good behavioural interview response must be specific, concise,
+          include action, demonstrate the your role, relevant, and demonstrate
+          results. The best way to achieve this is by telling a compelling
+          story. Each story should have a beginning, describing what the problem
+          was, a middle, describing what you did, and end, describing how the
+          situation turned out. A popular framework for this is the Situation,
+          Task, Action, Result (STAR) model.
+          <br />
+          <br />
+
+          An example of this would be:
+          <br />
+          Answer:...
         </p>
       </div>
       <img src="@/assets/illustrations/girl-balloons.svg" />
     </div>
-    <footer>footer</footer>
+    <footer>Whatever goes in the footer.</footer>
   </div>
 </template>
 
@@ -235,6 +241,12 @@
   .feature-block {
     $image-margin: 100px;
 
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: solid 1px $c-grey-light;
+
+    padding: 100px 0;
+
     display: flex;
     align-items: center;
 
@@ -256,6 +268,13 @@
         margin-right: $image-margin;
       }
     }
+  }
+
+  footer {
+    background: $c-bg-grey;
+    padding: 30px;
+
+    font-size: 12px;
   }
 }
 </style>
