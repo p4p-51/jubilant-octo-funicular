@@ -5,7 +5,6 @@ import debug from 'debug';
 import http from 'http';
 
 import app from './app';
-import { MongoAdapter } from './models/mongodb/MongoClient';
 import Config from './utils/config';
 import { logger } from './utils/logger';
 
