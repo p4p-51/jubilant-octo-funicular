@@ -147,7 +147,7 @@ const register = async () => {
       .createUserWithEmailAndPassword(email.value, password.value); // need .value because ref()
     const [error, data] = await registerUser();
     if (error) {
-      throw "Cannot register user"
+      throw "Cannot register user";
     }
     await router.push("/"); // redirect to home
   } catch (error) {

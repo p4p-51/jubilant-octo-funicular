@@ -50,7 +50,7 @@ const introDiy = ref<SelfIntro>();
 const submitIntro = async () => {
   const [error, data] = await submitSelfIntro({ ...introDiy.value! });
   if (error) {
-    alert("intro update failed")
+    alert("intro update failed");
   }
 };
 </script>

@@ -151,22 +151,23 @@ const questions = reactive<{ questions: QuestionResponse[] }>({
 const selectedQuestion = ref<QuestionResponse>();
 const setSelectedQuestion = async (questionId: number) => {
   selectedQuestionId.value = questionId;
-
+  //TODO: Fix this issue if the question cannot be found
   const question = questions.questions.find((q) => q.questionId == questionId);
   if (question!["answers"] == undefined) {
-    const [error, data] =  await getQuestionAnswer(questionId);
+    const [error, data] = await getQuestionAnswer(questionId);
     if (error) {
-      alert("cannot get saved answers to question")
-      question!["answers"] = []
+      alert("cannot get saved answers to question");
+      question!["answers"] = [];
     }
-    question!["answers"] = data
+    question!["answers"] = data;
   }
 
   selectedQuestion.value = question;
 };
 
 onMounted(async () => {
-  questions.questions = await getQuestions();
+  const [error, data] = await getQuestions();
+  questions.questions = data;
   selectedQuestionId.value = parseInt(route.params.id as unknown as string);
   await setSelectedQuestion(selectedQuestionId.value);
 

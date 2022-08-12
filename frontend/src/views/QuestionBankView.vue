@@ -148,10 +148,10 @@ const filtered = (questionSet: QuestionResponse[]): QuestionResponse[] => {
 onMounted(async () => {
   const [error, data] = await getQuestions();
   if (error) {
-    alert("Cannot load questions from backend")
+    alert("Cannot load questions from backend");
     //Throw or try again?
   }
-  questions.questions = data
+  questions.questions = data;
   isLoaded.loaded = true;
 
   completedQuestions.questions = questions.questions.filter((question) => {
