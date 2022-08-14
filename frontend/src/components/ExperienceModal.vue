@@ -10,27 +10,27 @@
       <input
         v-else
         class="title-input"
-        :value="experience.title"
+        :value="experience.name"
         @change="updateTitle"
       />
-      <div v-for="label in labels" class="radio-line" :key="label.key">
-        <p>{{ label.statement }}</p>
+      <div v-for="label in labels" class="radio-line" :key="label.label">
+        <p>{{ label.labelText }}</p>
         <div class="radio-group">
           <label>Yes</label>
           <input
             type="radio"
-            :name="label.key.toLowerCase()"
+            :name="label.label.toLowerCase()"
             :value="true"
-            :checked="defaultValue(label.key, true)"
-            @change="updateLabel($event, label.key)"
+            :checked="defaultValue(label.label, true)"
+            @change="updateLabel($event, label.label)"
           />
           <label>No</label>
           <input
             type="radio"
-            :name="label.key.toLowerCase()"
+            :name="label.label.toLowerCase()"
             :value="false"
-            :checked="defaultValue(label.key, false)"
-            @change="updateLabel($event, label.key)"
+            :checked="defaultValue(label.label, false)"
+            @change="updateLabel($event, label.label)"
           />
         </div>
       </div>
@@ -67,10 +67,11 @@ export default defineComponent({
     },
     saveExperience() {
       const newExp: Experience = {
-        id: this.experience?.id,
-        title: this.experienceTitle,
+        experienceId: this.experience?.experienceId,
+        name: this.experienceTitle,
         labels: this.experienceLabels,
       };
+      console.log(JSON.stringify(newExp));
       this.$emit("saveExperience", newExp);
     },
     defaultValue(key: string, origin: boolean) {
@@ -91,7 +92,7 @@ export default defineComponent({
   props: {
     experience: {
       type: Object as PropType<Experience>,
-      required: true,
+      required: false,
     },
     labels: {
       type: Array as PropType<Label[]>,
@@ -107,7 +108,7 @@ export default defineComponent({
   mounted() {
     if (this.experience) {
       this.experienceLabels = [...this.experience.labels];
-      this.experienceTitle = this.experience.title;
+      this.experienceTitle = this.experience.name;
     }
   },
 });

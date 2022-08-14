@@ -5,8 +5,8 @@
       subtitle="Now that you’ve learnt all about how to give a good self introduction, let’s write your own!"
       module="Self introduction"
     />
-    <intro-diy />
-    <button class="go-button">Save and continue -></button>
+    <intro-diy ref="introDiy" />
+    <button class="go-button" @click="submitIntro">Save and continue -></button>
   </div>
 </template>
 
@@ -37,40 +37,20 @@
 }
 </style>
 
-<script lang="ts">
+<script lang="ts" setup>
 import IntroDiy from "@/components/IntroDiy.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
+import { submitSelfIntro } from "@/apis/api";
+import { SelfIntro } from "@/types/User.interface";
 
-export default defineComponent({
-  name: "DIYTimeView",
-  components: { TitleBlock, IntroDiy },
-  data() {
-    return {
-      modules: [
-        {
-          name: "Self introduction",
-          id: "fjisaljio",
-          status: "done",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-          ],
-        },
-      ] as ModuleStatus[],
-    };
-  },
-});
+const introDiy = ref<SelfIntro>();
+
+const submitIntro = async () => {
+  const [error, data] = await submitSelfIntro({ ...introDiy.value! });
+  if (error) {
+    alert("intro update failed");
+  }
+};
 </script>

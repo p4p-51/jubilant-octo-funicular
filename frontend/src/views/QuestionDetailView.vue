@@ -1,27 +1,29 @@
 <template>
   <div class="question-detail-view">
     <title-block title="My question bank" />
-    <div class="content-container">
+    <div class="content-container" v-if="isLoaded.loaded">
       <div class="questions-container">
         <div class="search-bar">
-          <qb-search-bar @onChange="(s) => (this.filter = s.toLowerCase())" />
+          <qb-search-bar @onChange="(s) => (filter = s.toLowerCase())" />
         </div>
         <div class="list">
           <qb-side-bar-question
             v-for="question in filterQuestions()"
-            :key="question.id"
-            :numResponses="question.responses.length"
-            :title="question.title"
-            :id="question.id"
-            :isSelected="question.id === selectedQuestionId"
+            :key="question.questionId"
+            :numResponses="question.answerCount"
+            :title="question.questionText"
+            :id="question.questionId"
+            :isSelected="question.questionId === selectedQuestionId"
             @onQuestionClick="onQuestionClick"
           />
         </div>
       </div>
       <div class="answer-column">
         <add-question-response
-          v-bind="getSelectedQuestion(selectedQuestionId)"
+          v-if="isLoaded.loaded"
+          :question="selectedQuestion"
           :key="addQuestionKey"
+          @saveResponse="saveResponse"
         />
         <!-- <button @click="goToGrad" class="go-button">
           Save and continue ->
@@ -90,265 +92,85 @@
 }
 </style>
 
-<script lang="ts">
-import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
-import CompletedQuestion from "@/components/CompletedQuestion.vue";
-import OtherQuestion from "@/components/OtherQuestion.vue";
-import QbSearchBar from "@/components/QbSearchBar.vue";
+<script lang="ts" setup>
 import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
+import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
-import Question, { Experience } from "@/types/Question.interface";
-import { defineComponent } from "vue";
+import QbSearchBar from "@/components/QbSearchBar.vue";
+import { Answer, QuestionResponse } from "@/types/Question.interface";
+import { onMounted, reactive, ref } from "vue";
 
-export default defineComponent({
-  name: "QuestionDetailView",
-  components: {
-    TitleBlock,
-    QbSearchBar,
-    QbSideBarQuestion,
-    AddQuestionResponse,
-  },
-  methods: {
-    goToGrad() {
-      this.$router.push("/about");
-    },
-    getSelectedQuestion(id: string) {
-      return this.questions.find((q) => q.id == id);
-    },
-    onQuestionClick(id: string) {
-      this.addQuestionKey++;
-      this.selectedQuestionId = id;
-    },
-    filterQuestions() {
-      if (this.filter === "") {
-        return this.questions;
-      } else {
-        return this.questions.filter((q) => {
-          return (
-            q.label.toLowerCase().includes(this.filter) ||
-            q.title.includes(this.filter)
-          );
-        });
+import { useRoute, useRouter } from "vue-router";
+import { getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
+const router = useRouter();
+const route = useRoute();
+
+const goToGrad = async () => {
+  await router.push("/"); // redirect to home
+};
+
+const saveResponse = (answer: Answer, isEdit: boolean) => {
+  if (!isEdit) {
+    selectedQuestion.value!.answers!.push(answer);
+    selectedQuestion.value!.answerCount!++;
+  } else {
+    selectedQuestion.value?.answers?.forEach((ans) => {
+      if (ans.experienceId == answer.experienceId) {
+        ans.answer = answer.answer;
       }
-    },
-  },
-  data() {
-    return {
-      addQuestionKey: 0,
-      filter: "" as string,
-      questions: [
-        {
-          id: "1",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [
-            {
-              experience: {
-                id: "3",
-                title: "Summer internship 2022",
-                labels: ["Conflict", "Teamwork"],
-              },
-              response: {
-                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
-                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
-                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
-                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
-              },
-            },
-          ],
-        },
-        {
-          id: "2",
-          title:
-            "Tell me about a time when you experienced a conflict in a team SPECIAL",
-          label: "Special",
-          experiences: [
-            {
-              id: "1",
-              title: "2ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "2Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "2Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [],
-        },
-        {
-          id: "3",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [
-            {
-              experience: {
-                id: "1",
-                title: "ENGGEN 115 leadership",
-                labels: ["Conflict", "Teamwork"],
-              },
-              response: {
-                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
-                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
-                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
-                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
-              },
-            },
-            {
-              experience: {
-                id: "3",
-                title: "Summer internship 2022",
-                labels: ["Conflict", "Teamwork"],
-              },
-              response: {
-                s: "Bacon ipsum dolor amet tongue porchetta capicola biltong short ribs pork loin meatloaf salami chicken cow pork belly shankle leberkas jowl.",
-                t: "Burgdoggen leberkas pastrami salami jerky flank. Fatback brisket ribeye flank doner, chislic frankfurter. ",
-                a: "Mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs.",
-                r: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs",
-              },
-            },
-          ],
-        },
-        {
-          id: "5",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [],
-        },
-        {
-          id: "6",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [],
-        },
-        {
-          id: "7",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [],
-        },
-        {
-          id: "8",
-          title:
-            "Tell me about a time when you experienced a conflict in a team",
-          label: "Conflict",
-          experiences: [
-            {
-              id: "1",
-              title: "ENGGEN 115 leadership",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "2",
-              title: "Software camp for engineers",
-              labels: ["Conflict", "Teamwork"],
-            },
-            {
-              id: "3",
-              title: "Summer internship 2022",
-              labels: ["Conflict", "Teamwork"],
-            },
-          ],
-          responses: [],
-        },
-      ] as Question[],
-      selectedQuestionId: "1" as string,
-    };
-  },
+    });
+  }
+};
+
+const selectedQuestionId = ref<number>();
+const addQuestionKey = ref<number>(0);
+const onQuestionClick = async (id: number) => {
+  addQuestionKey.value++;
+  await setSelectedQuestion(id);
+};
+
+const filter = ref<string>("");
+const filterQuestions = () => {
+  if (filter.value === "") {
+    return questions.questions;
+  } else {
+    return questions.questions.filter((q) => {
+      return (
+        q.labelId.toLowerCase().includes(filter.value) ||
+        q.questionText.toLowerCase().includes(filter.value)
+      );
+    });
+  }
+};
+
+const isLoaded = reactive({ loaded: false });
+const questions = reactive<{ questions: QuestionResponse[] }>({
+  questions: [],
+});
+
+const selectedQuestion = ref<QuestionResponse>();
+const setSelectedQuestion = async (questionId: number) => {
+  selectedQuestionId.value = questionId;
+  //TODO: Fix this issue if the question cannot be found
+  const question = questions.questions.find((q) => q.questionId == questionId);
+  if (question!["answers"] == undefined) {
+    const [error, data] = await getQuestionAnswer(questionId);
+    if (error) {
+      alert("cannot get saved answers to question");
+      question!["answers"] = [];
+    }
+    question!["answers"] = data;
+  }
+
+  selectedQuestion.value = question;
+};
+
+onMounted(async () => {
+  const [error, data] = await getQuestions();
+  questions.questions = data;
+  selectedQuestionId.value = parseInt(route.params.id as unknown as string);
+  await setSelectedQuestion(selectedQuestionId.value);
+
+  isLoaded.loaded = true;
 });
 </script>

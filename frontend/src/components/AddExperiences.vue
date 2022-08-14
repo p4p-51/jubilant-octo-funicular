@@ -8,11 +8,11 @@
         </button>
         <div
           v-for="e in experiences"
-          :key="e.title"
+          :key="e.name"
           class="box experience"
           @click="selectExperience($event, e)"
         >
-          <p>{{ e.title }}</p>
+          <p>{{ e.name }}</p>
           <div class="actions">
             <div @click.stop="deleteExperience($event, e)" class="edit-icon">
               <img src="@/assets/icons/delete.svg" />
@@ -25,11 +25,11 @@
         <p v-for="label in labels" :key="label">
           <span
             class="tick"
-            v-if="this.experienceAttributes.includes(label.key)"
+            v-if="this.experienceAttributes.includes(label.label)"
           >
             ✓
           </span>
-          <span class="dot" v-else>• </span>{{ label.key }}
+          <span class="dot" v-else>• </span>{{ label.label }}
         </p>
       </div>
     </div>
@@ -175,10 +175,26 @@
 import { Experience, Label } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import ExperienceModal from "@/components/ExperienceModal.vue";
+import {
+  deleteExperience,
+  getExperiences,
+  getLabels,
+  putExperience,
+  updateExperience,
+} from "@/apis/api";
 
 export default defineComponent({
   name: "AddExperiences",
   components: { ExperienceModal },
+  async mounted() {
+    const [labelError, labels] = await getLabels();
+    const [expError, experiences] = await getExperiences();
+    if (labelError || expError) {
+      alert("Error");
+    }
+    this.labels = labels;
+    this.experiences = experiences;
+  },
   methods: {
     selectExperience(event: Event, e: Experience) {
       this.selectedExperience = e;
@@ -188,23 +204,47 @@ export default defineComponent({
       this.selectedExperience = null;
       this.isModalOpen = true;
     },
-    saveExperience(newExperience: Experience) {
-      if (newExperience.id) {
-        const oldExp = this.experiences.find((e) => e.id == newExperience.id);
-        oldExp!.title = newExperience.title;
+    async saveExperience(newExperience: Experience) {
+      if (newExperience.experienceId) {
+        const oldExp = this.experiences.find(
+          (e) => e.experienceId == newExperience.experienceId,
+        );
+
+        let update: { name?: string } = {};
+        if (oldExp!.name != newExperience.name) {
+          oldExp!.name = newExperience.name;
+          update["name"] = newExperience.name;
+        }
         oldExp!.labels = newExperience.labels;
+        const [error, data] = await updateExperience(oldExp!.experienceId!, {
+          ...update,
+          labels: oldExp!.labels,
+        });
+        if (error) {
+          alert("Updating experience failed");
+        }
       } else {
-        newExperience.id = "RANDOMID";
-        this.experiences.push(newExperience);
+        const [error, data] = await putExperience(newExperience);
+        if (error) {
+          alert("Cannot create new experience");
+        } else {
+          newExperience.experienceId = data.experienceId;
+          this.experiences.push(newExperience);
+        }
       }
       this.isModalOpen = false;
     },
-    deleteExperience(event: Event, experience: Experience) {
-      this.experiences = this.experiences.filter((e) => {
-        if (e !== experience) {
-          return e;
-        }
-      });
+    async deleteExperience(event: Event, experience: Experience) {
+      const [error, data] = await deleteExperience(experience.experienceId!);
+      if (error) {
+        alert("cannot delete");
+      } else {
+        this.experiences = this.experiences.filter((e) => {
+          if (e !== experience) {
+            return e;
+          }
+        });
+      }
     },
   },
   computed: {
@@ -224,36 +264,8 @@ export default defineComponent({
     return {
       isModalOpen: false,
       selectedExperience: null as Experience | null,
-      labels: [
-        {
-          key: "Leadership",
-          statement: "I was the leader",
-        },
-        {
-          key: "Conflict",
-          statement: "I experienced Conflict",
-        },
-        {
-          key: "Communication",
-          statement: "We did the talklkkkk",
-        },
-        {
-          key: "Teamwork",
-          statement: "There is no I in team",
-        },
-      ] as Label[],
-      experiences: [
-        // {
-        //   id: "23",
-        //   title: "ENGGEN 115 bridge",
-        //   labels: ["Conflict", "Leadership"],
-        // },
-        // {
-        //   id: "24213",
-        //   title: "My summer camp",
-        //   labels: ["Teamwork", "Leadership"],
-        // },
-      ] as Experience[],
+      labels: [] as Label[],
+      experiences: [] as Experience[],
     };
   },
   props: {},

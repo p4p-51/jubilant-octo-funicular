@@ -17,6 +17,20 @@ const userController = new UserController();
  *        schema:
  *          type: integer
  *    schemas:
+ *      User:
+ *        type: object
+ *        required:
+ *          - userId
+ *          - uuid
+ *        properties:
+ *          userId:
+ *            type: integer
+ *          uuid:
+ *            type: string
+ *          userName:
+ *            type: string
+ *          avatar:
+ *            type: string
  *      SelfIntro:
  *        type: object
  *        required:
@@ -68,13 +82,11 @@ const userController = new UserController();
 
 /**
  * @openapi
- *  /users/{userId}:
+ *  /users/me:
  *    get:
  *      description: Get the profile and progress of a user
  *      tags:
  *          - User
- *      parameters:
- *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *        default:
  *          description: Something unexpected happened
@@ -89,33 +101,23 @@ const userController = new UserController();
  *              schema:
  *                type: object
  *                required:
- *                  - userName
+ *                  - user
  *                  - progress
  *                properties:
- *                  userName:
- *                    type: string
- *                  avatar:
- *                    type: string
+ *                  user:
+ *                    $ref: '#/components/schemas/User'
  *                  progress:
  *                    $ref: '#/components/schemas/ModuleStage'
- *              example:
- *                userName: doge
- *                avatar: https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png
- *                progress:
- *                  module: self-intro
- *                  stage: 1
  */
-userRouter.get('/:userId', userController.GetUser);
+userRouter.get('/me', userController.GetUser);
 
 /**
  * @openapi
- *  /users/{userId}/complete:
+ *  /users/me/complete:
  *    post:
  *      description: Mark a module/stage as complete for a given using
  *      tags:
  *        - User
- *      parameters:
- *        - $ref: '#/components/parameters/userIdParam'
  *      requestBody:
  *        description: Request body
  *        required: true
@@ -145,17 +147,15 @@ userRouter.get('/:userId', userController.GetUser);
  *                  nextStage:
  *                    $ref: '#/components/schemas/ModuleStage'
  */
-userRouter.post('/:userId/complete', userController.CompleteStage);
+userRouter.post('/me/complete', userController.CompleteStage);
 
 /**
  * @openapi
- * /users/{userId}/self-intro:
+ * /users/me/self-intro:
  *  post:
  *    description: Set a user self introduction
  *    tags:
  *      - User
- *    parameters:
- *      - $ref: '#/components/parameters/userIdParam'
  *    requestBody:
  *      description: User self intro
  *      required: true
@@ -176,8 +176,6 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *    description: Get a user's self introduction
  *    tags:
  *      - User
- *    parameters:
- *      - $ref: '#/components/parameters/userIdParam'
  *    responses:
  *      default:
  *        description: Something unexpected happened
@@ -192,12 +190,12 @@ userRouter.post('/:userId/complete', userController.CompleteStage);
  *            schema:
  *              $ref: '#/components/schemas/SelfIntro'
  */
-userRouter.post('/:userId/self-intro', userController.PostIntro);
-userRouter.get('/:userId/self-intro', userController.GetIntro);
+userRouter.post('/me/self-intro', userController.PostIntro);
+userRouter.get('/me/self-intro', userController.GetIntro);
 
 /**
  * @openapi
- *  /users/{userId}/stats:
+ *  /users/me/stats:
  *    get:
  *      description: Get user stats
  *      tags:
@@ -218,6 +216,34 @@ userRouter.get('/:userId/self-intro', userController.GetIntro);
  *              schema:
  *                $ref: '#/components/schemas/Stats'
  */
-userRouter.get('/:userId/stats', userController.GetStats);
+userRouter.get('/me/stats', userController.GetStats);
+
+/**
+ * @openapi
+ *  /users/register:
+ *    post:
+ *      description: Register a user in the database
+ *      tags:
+ *        - User
+ *      responses:
+ *        default:
+ *          $ref: '#/components/responses/DefaultError'
+ *        200:
+ *          description: A single user.
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                required:
+ *                  - user
+ *                  - progress
+ *                properties:
+ *                  user:
+ *                    $ref: '#/components/schemas/User'
+ *                  progress:
+ *                    $ref: '#/components/schemas/ModuleStage'
+ */
+
+userRouter.post('/register', userController.Register);
 
 export default userRouter;

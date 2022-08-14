@@ -3,30 +3,36 @@ export interface QuestionInterface {
   id: string;
 }
 export default interface Question {
-  id: string;
-  title: string;
-  label: string;
+  questionId: number;
+  questionText: string;
+  labelId: string;
   experiences: Experience[];
-  responses: Response[];
+  answers?: Answer[];
+}
+
+export interface QuestionResponse extends Question {
+  answerCount: number;
 }
 
 export interface Experience {
-  id: string;
-  title: string;
+  experienceId?: number;
+  name: string;
   labels: string[];
 }
 
-export interface Response {
-  experience: Experience;
-  response: {
+export interface Answer {
+  experienceId: number;
+  answer: {
     s: string;
     t: string;
     a: string;
     r: string;
   };
+  experience?: Experience;
+  questionId?: number;
 }
 
 export interface Label {
-  key: string;
-  statement: string;
+  label: string;
+  labelText: string;
 }

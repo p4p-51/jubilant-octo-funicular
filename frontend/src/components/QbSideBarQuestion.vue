@@ -92,7 +92,7 @@ export default defineComponent({
       required: true,
     },
     id: {
-      type: String,
+      type: Number,
       required: true,
     },
     isSelected: {

@@ -1,20 +1,21 @@
 <template>
   <div class="add-question-response">
-    <h2>{{ title }}</h2>
+    <h2>{{ question.questionText }}</h2>
     <collapsible-responses
-      v-if="editMode === false && responses.length > 0"
-      :responses="responses"
+      v-if="editMode === false && question.answerCount > 0"
+      :answers="getAnswers()"
       @newResponse="createNewResponse"
     />
     <experience-select
       v-else-if="selectedExperienceId === null"
-      :experiences="experiences"
+      :experiences="question.experiences"
       @onExperienceClick="(id) => (this.selectedExperienceId = id)"
     />
-
     <response-inputs
       v-else
       :experience="getSelectedQuestion(selectedExperienceId)"
+      :questionId="question.questionId"
+      :current-answer="currentAnswer(selectedExperienceId)"
       @savedAnswer="savedAnswer"
     />
   </div>
@@ -42,14 +43,8 @@
 </style>
 
 <script lang="ts">
-import CompletedQuestion from "@/components/CompletedQuestion.vue";
-import OtherQuestion from "@/components/OtherQuestion.vue";
-import QbSearchBar from "@/components/QbSearchBar.vue";
-import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
-import Question from "@/types/Question.interface";
+import { Answer, QuestionResponse } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Response } from "@/types/Question.interface";
 import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import CollapsibleResponses from "./CollapsibleResponses.vue";
 import ResponseInputs from "./ResponseInputs.vue";
@@ -62,41 +57,40 @@ export default defineComponent({
     ResponseInputs,
   },
   methods: {
-    getSelectedQuestion(id: string) {
-      return this.experiences.find((q) => q.id == id);
+    getSelectedQuestion(id: number) {
+      return this.question.experiences.find((q) => q.experienceId == id);
+    },
+    getAnswers(): Answer[] {
+      return this.question.answers!.map((answer) => {
+        const matchingExperience = this.question.experiences.find((exp) => {
+          return exp.experienceId == answer.experienceId;
+        });
+        return { ...answer, experience: matchingExperience };
+      });
+    },
+    currentAnswer(experienceId: number) {
+      return this.question.answers?.find((answer) => {
+        return answer.experienceId == experienceId;
+      });
     },
     createNewResponse() {
       this.editMode = true;
     },
-    savedAnswer() {
+    savedAnswer(answer: Answer, isEdit: boolean) {
       this.editMode = false;
       this.selectedExperienceId = null;
+      this.$emit("saveResponse", answer, isEdit);
     },
   },
   data() {
     return {
-      selectedExperienceId: null as string | null,
+      selectedExperienceId: null as number | null,
       editMode: false as boolean,
     };
   },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    label: {
-      type: String,
-    },
-    experiences: {
-      type: Array as PropType<Experience[]>,
-      required: true,
-    },
-    responses: {
-      type: Array as PropType<Response[]>,
+    question: {
+      type: Object as PropType<QuestionResponse>,
       required: true,
     },
   },

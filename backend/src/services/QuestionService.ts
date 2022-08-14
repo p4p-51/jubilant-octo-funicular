@@ -3,8 +3,8 @@ import { MongoAdapter } from "../models/mongodb/MongoClient";
 class QuestionService {
   getQuestionIds = async (): Promise<number[]> => {
     const questionCollection = await MongoAdapter.getCollection("questions");
-    return await questionCollection.distinct("questionId")
-  }
+    return await questionCollection.distinct("questionId");
+  };
   getAllQuestionWithExperiences = async (userId: number) => {
     const questionCollection = await MongoAdapter.getCollection("questions");
 
@@ -12,15 +12,24 @@ class QuestionService {
       {
         $lookup: {
           from: "users",
-          let: { labelId: "$labelId" },
+          let: { labelId: "$labelId", questionId: "$questionId" },
           pipeline: [
             {
               $match: {
-                "userId": userId,
+                "user.userId": userId,
               },
             },
             {
               $project: {
+                "answerCount": {
+                  $size: {
+                    $filter: {
+                      input: "$answers",
+                      as: "item",
+                      cond: { $eq: ["$$item.questionId", "$$questionId"] },
+                    },
+                  },
+                },
                 "filteredExp": {
                   $filter: {
                     input: "$experiences",
@@ -33,13 +42,19 @@ class QuestionService {
           ],
           as: "user",
         },
-      }, {
+      },
+      {
         $project: {
           _id: 0,
           questionText: 1,
           questionId: 1,
           labelId: 1,
-          experiences: { $first: "$user.filteredExp" },
+          experiences: {
+            $ifNull: [{ $first: "$user.filteredExp" }, []],
+          },
+          answerCount: {
+            $ifNull: [{ $first: "$user.answerCount" }, 0],
+          },
         },
       },
     ]).toArray();

@@ -2,31 +2,23 @@
   <div class="content-container">
     <div class="input-container">
       <h2>My self introduction</h2>
-      <textarea />
+      <textarea v-model="body" />
     </div>
     <div class="checklist-container">
       <h2>Self checklist</h2>
       <p>Have you done the following?</p>
-      <label class="container"
-        >One
-        <input type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
-      <label class="container"
-        >Two
-        <input type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
-      <label class="container"
-        >Three
-        <input type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
-      <label class="container"
-        >Four
-        <input type="checkbox" />
-        <span class="checkmark"></span>
-      </label>
+      <div v-for="attribute in staticAttributes" v-bind:key="attribute">
+        <label class="container">
+          {{ attribute }}
+          <input
+            type="checkbox"
+            :id="attribute"
+            :value="attribute"
+            v-model="attributes"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -159,11 +151,37 @@
 }
 </style>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "IntroDiy",
-  props: {},
-  components: {},
+<script lang="ts" setup>
+import { onMounted, reactive, ref, watch } from "vue";
+import { getSelfInto } from "@/apis/api";
+
+const body = ref<string>("");
+const attributes = ref([]);
+const staticAttributes = [
+  "name",
+  "education",
+  "experience",
+  "past",
+  "present",
+  "future",
+  "goals",
+  "hobbies",
+];
+
+onMounted(async () => {
+  const [error, intro] = await getSelfInto();
+  if (error) {
+    alert("cannot get self intro");
+    body.value = "";
+    attributes.value = [];
+  } else {
+    body.value = intro["body"];
+    attributes.value = intro["attributes"];
+  }
+});
+
+defineExpose({
+  body,
+  attributes,
 });
 </script>

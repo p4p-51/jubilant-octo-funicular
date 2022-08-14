@@ -34,7 +34,6 @@ const questionController = new QuestionController();
  *        required:
  *          - questionId
  *          - questionText
- *          - labelId
  *        properties:
  *          questionId:
  *            type: integer
@@ -62,6 +61,8 @@ const questionController = new QuestionController();
  *     - Questions
  *    description: Get all the questions available, along with a list of the current user's relevant experiences
  *    responses:
+ *      default:
+ *        $ref: '#/components/responses/DefaultError'
  *      200:
  *        description: A list of questions, each with a list of relevant experiences
  *        content:

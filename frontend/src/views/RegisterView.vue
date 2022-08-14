@@ -22,7 +22,9 @@
       <button @click="register">Register</button>
       <p class="redirect">
         Already have an account?
-        <a><router-link to="/signin">Sign in</router-link></a>
+        <a>
+          <router-link to="/signin">Sign in</router-link>
+        </a>
       </p>
     </div>
   </div>
@@ -132,21 +134,26 @@
 import { ref } from "vue";
 import firebase from "firebase";
 import { useRouter } from "vue-router"; // import router
+import { registerUser } from "../apis/api";
+
 const email = ref("");
 const password = ref("");
 const router = useRouter(); // get a reference to our vue router
-const register = () => {
+const register = async () => {
   console.log("registering", email, password);
-  firebase
-    .auth() // get the auth api
-    .createUserWithEmailAndPassword(email.value, password.value) // need .value because ref()
-    .then((data) => {
-      console.log("Successfully registered!");
-      router.push("/"); // redirect to home
-    })
-    .catch((error) => {
-      console.log(error.code);
-      alert(error.message);
-    });
+  try {
+    const user = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email.value, password.value); // need .value because ref()
+    const [error, data] = await registerUser();
+    if (error) {
+      throw "Cannot register user";
+    }
+    await router.push("/"); // redirect to home
+  } catch (error) {
+    // TODO: don't route them to home page
+    console.log(error.code);
+    alert(error.message);
+  }
 };
 </script>

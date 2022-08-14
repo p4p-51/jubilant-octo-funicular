@@ -17,27 +17,28 @@ class QuestionController extends BaseController {
     this.questionService = new QuestionService()
   }
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questions = await this.questionService.getAllQuestionWithExperiences(userId)
 
     res.status(200).send(questions);
   };
   GetAnswer = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questionId: number = parseInt(req.params['questionId'])
+
+    const questionIds: number[] = await this.questionService.getQuestionIds()
+    if (!questionIds.includes(questionId)) {
+      httpResponse(res, 404, `Cannot find question with Id ${questionId}`)
+      return
+    }
 
     const answers = await new UserService().getAnswers(userId, questionId)
 
-    if (answers.length > 0) {
-      res.status(200).json(answers);
-      return
-    } else {
-      httpResponse(res, 404, "No answers found")
-    }
+    res.status(200).json(answers);
   };
 
   AnswerQuestion = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['uid']);
+    const userId: number = parseInt(res.locals['userId']);
     const questionId: number = parseInt(req.params['questionId'])
     const experienceId: number = parseInt(req.body['experienceId'])
     const answer: IAnswer = req.body['answer']

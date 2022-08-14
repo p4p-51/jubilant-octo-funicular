@@ -2,12 +2,11 @@ import express from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
 import { cert, initializeApp } from 'firebase-admin/app';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors'
 
 import serviceAccount from '../firebase.json';
 import { isAuthenticated } from './middleware/Authentication';
-import { MongoAdapter } from './models/mongodb/MongoClient';
 import router from './routes/Router';
-import Config from './utils/config';
 import spec from './utils/SwaggerDoc';
 
 initializeApp({
@@ -17,6 +16,11 @@ initializeApp({
 const app = express();
 const port = 3000;
 
+const corsOptions = {
+  origin: "http://localhost:8080"
+}
+
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

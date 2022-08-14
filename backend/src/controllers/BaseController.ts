@@ -1,7 +1,9 @@
 import { MongoAdapter } from '../models/mongodb/MongoClient';
 import Config from '../utils/config';
 
-MongoAdapter.build(Config.MONGODB_URI, 'main');
+const dbName = Config.ENV == "PROD" ? "prod" : "main"
+
+MongoAdapter.build(Config.MONGODB_URI, dbName);
 
 class BaseController {}
 

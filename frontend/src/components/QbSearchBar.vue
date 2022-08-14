@@ -2,7 +2,7 @@
   <div class="qb-search-bar">
     <input
       placeholder="Conflicts"
-      @change="$emit('onChange', $event.target.value)"
+      @keydown="$emit('onChange', $event.target.value)"
     /><img src="@/assets/icons/magnify.svg" />
   </div>
 </template>
@@ -52,10 +52,4 @@
 }
 </style>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "QbSearchBar",
-  components: {},
-});
-</script>
+<script lang="ts" setup></script>

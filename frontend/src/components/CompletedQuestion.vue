@@ -2,13 +2,8 @@
   <div class="completed-question">
     <div class="title-container">
       <h5>{{ title }}</h5>
-      <p>
-        {{ responses.length }} answer{{ responses.length === 1 ? "" : "s" }}
-      </p>
+      <p>{{ answers }} answer{{ answers === 1 ? "" : "s" }}</p>
     </div>
-    <p>
-      {{ Object.values(responses[0].response).join(" ") }}
-    </p>
   </div>
 </template>
 
@@ -80,7 +75,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Response } from "@/types/Question.interface";
+import { Answer } from "@/types/Question.interface";
 
 export default defineComponent({
   name: "ModuleBlock",
@@ -93,8 +88,8 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    responses: {
-      type: Array as PropType<Response[]>,
+    answers: {
+      type: Number,
       required: true,
     },
   },
