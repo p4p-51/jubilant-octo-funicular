@@ -8,7 +8,7 @@
     />
     <experience-select
       v-else-if="selectedExperienceId === null"
-      :experiences="question.experiences"
+      :experiences="emptyExperiences"
       @onExperienceClick="(id) => (this.selectedExperienceId = id)"
     />
     <response-inputs
@@ -43,7 +43,11 @@
 </style>
 
 <script lang="ts">
-import { Answer, QuestionResponse } from "@/types/Question.interface";
+import {
+  Answer,
+  Experience,
+  QuestionResponse,
+} from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import CollapsibleResponses from "./CollapsibleResponses.vue";
@@ -55,6 +59,19 @@ export default defineComponent({
     ExperienceSelect,
     CollapsibleResponses,
     ResponseInputs,
+  },
+  computed: {
+    emptyExperiences(): Experience[] {
+      return this.question.experiences.filter((experience) => {
+        let found = false;
+        this.question.answers?.forEach((answer) => {
+          if (answer.experienceId == experience.experienceId) {
+            found = true;
+          }
+        });
+        return !found;
+      });
+    },
   },
   methods: {
     getSelectedQuestion(id: number) {
