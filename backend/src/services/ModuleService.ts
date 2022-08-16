@@ -85,6 +85,26 @@ class ModuleService {
 
     return await this.getNextModule(moduleId);
   };
+
+  getModulesList = async () => {
+    const moduleStageCollection = await MongoAdapter.getCollection(
+      'moduleStage'
+    );
+
+    const modules = await moduleStageCollection.aggregate([
+      {
+        $group: {
+          _id: "$moduleId",
+        },
+      },
+    ]).toArray().then((documents) => {
+      return documents.map((document) => {
+        return document["_id"].toLowerCase()
+      })
+    })
+
+    return modules
+  }
 }
 
 export { ModuleService };

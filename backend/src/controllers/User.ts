@@ -64,6 +64,27 @@ class UserController extends BaseController {
     }
   }
 
+  SkipModules = async (req: Request, res:Response) => {
+    const userId: number = parseInt(res.locals['userId']);
+
+    const skipModules: IModuleId[] = req.body;
+
+    const modules: IModuleId[] = await new ModuleService().getModulesList()
+    const validModules: IModuleId[] = skipModules.filter((module) => modules.includes(module.toLowerCase()))
+
+    if (validModules.length == 0){
+      httpResponse(res, 400, "Invalid modules Ids")
+      return
+    }
+    const result = await this.userService.setUser(userId, {"user.skipModules": validModules})
+
+    if (result) {
+      res.status(200).json({success: true})
+      return
+    }
+    httpResponse(res, 500, "Cannot find the user")
+  }
+
   CompleteStage = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['userId']);
     const module: IModuleId = req.body['moduleId'];

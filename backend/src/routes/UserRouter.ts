@@ -195,6 +195,30 @@ userRouter.get('/me/self-intro', userController.GetIntro);
 
 /**
  * @openapi
+ *  /users/me/skip:
+ *    put:
+ *      description: Put a list of modules the user wants to skip
+ *      tags:
+ *        - User
+ *      requestBody:
+ *        description: List of moduleIds
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Module'
+ *      responses:
+ *        200:
+ *          $ref: '#/components/responses/Success'
+ *        default:
+ *          $ref: '#/components/responses/DefaultError'
+ */
+userRouter.put('/me/skip', userController.SkipModules)
+
+/**
+ * @openapi
  *  /users/me/stats:
  *    get:
  *      description: Get user stats
