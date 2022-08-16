@@ -91,7 +91,7 @@ class ExperienceController extends BaseController {
     }
   };
 
-  deleteLabel = async (req: Request, res: Response) => {
+  deleteExperience = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals['userId']);
     const experienceId: number = parseInt(req.params['experienceId']);
     const userService = new UserService();
@@ -101,9 +101,12 @@ class ExperienceController extends BaseController {
     });
 
     if (user != null) {
-      const result = await userService.pullFromUser(userId, "experiences", {experienceId})
-
-      res.status(200).json({ success: true });
+      const result = await userService.deleteExperience(userId, experienceId)
+      if (result) {
+        res.status(200).json({ success: true });
+      } else {
+        httpResponse(res, 500, `Found but cannot delete`)
+      }
     } else {
       httpResponse(res, 404, `Cannot find experience with id ${experienceId}`);
     }
