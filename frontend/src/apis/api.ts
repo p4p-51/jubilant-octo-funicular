@@ -14,7 +14,8 @@ axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
 });
 
 type errorResponse = { code: number; message: string };
-type ApiResponse<T> = [null, T] | [errorResponse];
+// type ApiResponse<T> = [null, T] | [errorResponse];
+type ApiResponse<T> = [null, T] | [AxiosError];
 
 const axiosCall = async <T>(
   config: AxiosRequestConfig,
@@ -24,23 +25,26 @@ const axiosCall = async <T>(
     return [null, data];
   } catch (error) {
     // Yea... I dont know what the fuck is going on here
-    const errorResponse: errorResponse = (error as any)["response"]["data"];
-    return [errorResponse];
+    // const errorResponse: errorResponse = (error as any)["response"]["data"];
+    if (error instanceof AxiosError) {
+      return [error as AxiosError];
+    }
+    throw "Um....";
   }
 };
 
 const registerUser = async (): Promise<ApiResponse<any>> => {
-  return axiosCall({ method: "get", url: "/users/register" });
+  return await axiosCall({ method: "get", url: "/users/register" });
 };
 
 const getQuestions = async (): Promise<ApiResponse<any>> => {
-  return axiosCall({ method: "get", url: "/questions" });
+  return await axiosCall({ method: "get", url: "/questions" });
 };
 
 const getQuestionAnswer = async (
   questionId: number,
 ): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "get",
     url: `/questions/${questionId}/answers`,
   });
@@ -50,7 +54,7 @@ const submitAnswer = async (
   questionId: number,
   answer: Answer,
 ): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "post",
     url: `/questions/${questionId}/answers`,
     data: answer,
@@ -58,13 +62,13 @@ const submitAnswer = async (
 };
 
 const getLabels = async (): Promise<ApiResponse<any>> => {
-  return axiosCall({ method: "get", url: "/labels" });
+  return await axiosCall({ method: "get", url: "/labels" });
 };
 
 const putExperience = async (
   experience: Experience,
 ): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "put",
     url: "/experiences",
     data: experience,
@@ -75,7 +79,7 @@ const updateExperience = async (
   experienceId: number,
   experience: { name?: string; labels?: string[] },
 ): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "post",
     url: `/experiences/${experienceId}`,
     data: experience,
@@ -83,24 +87,24 @@ const updateExperience = async (
 };
 
 const getExperiences = async (): Promise<ApiResponse<any>> => {
-  return axiosCall({ method: "get", url: "/experiences" });
+  return await axiosCall({ method: "get", url: "/experiences" });
 };
 
 const deleteExperience = async (
   experienceId: number,
 ): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "delete",
     url: `/experiences/${experienceId}`,
   });
 };
 
 const getSelfInto = async (): Promise<ApiResponse<any>> => {
-  return axiosCall({ method: "get", url: "/users/me/self-intro" });
+  return await axiosCall({ method: "get", url: "/users/me/self-intro" });
 };
 
 const submitSelfIntro = async (intro: SelfIntro): Promise<ApiResponse<any>> => {
-  return axiosCall({
+  return await axiosCall({
     method: "post",
     url: "/users/me/self-intro",
     data: intro,
