@@ -150,9 +150,14 @@ onMounted(async () => {
   if (error) {
     alert("Cannot load questions from backend");
     //Throw or try again?
+    return;
   }
   questions.questions = data;
-  isLoaded.loaded = true;
+
+  if (questions.questions.length <= 1) {
+    alert("No questions seem to be found? please contact");
+    throw "No questions found, the backend must be broken?";
+  }
 
   completedQuestions.questions = questions.questions.filter((question) => {
     return question["answerCount"] >= 1;
@@ -160,5 +165,7 @@ onMounted(async () => {
   otherQuestions.questions = questions.questions.filter((question) => {
     return question["answerCount"] < 1;
   });
+
+  isLoaded.loaded = true;
 });
 </script>
