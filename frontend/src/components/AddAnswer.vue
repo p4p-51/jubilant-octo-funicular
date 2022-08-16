@@ -2,7 +2,7 @@
   <div class="content-container">
     <div class="header"><h2>Lets get Started!</h2></div>
     <experience-select
-      :experiences="experiences"
+      :initialExperiences="experiences"
       @onExperinceClick="selectExperince()"
     />
     <!--    todo: refactor this-->

@@ -180,6 +180,7 @@ onMounted(async () => {
   }
 });
 
+// eslint-disable-next-line no-undef
 defineExpose({
   body,
   attributes,
