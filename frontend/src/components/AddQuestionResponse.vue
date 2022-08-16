@@ -8,7 +8,7 @@
     />
     <experience-select
       v-else-if="selectedExperienceId === null"
-      :experiences="emptyExperiences"
+      :initialExperiences="emptyExperiences"
       @onExperienceClick="(id) => (this.selectedExperienceId = id)"
     />
     <response-inputs
