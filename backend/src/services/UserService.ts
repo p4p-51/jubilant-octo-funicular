@@ -18,9 +18,7 @@ class UserService {
 
   createUser = async (user): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
-
     const newUser = await userCollection.insertOne(user);
-
     return newUser.acknowledged;
   };
 

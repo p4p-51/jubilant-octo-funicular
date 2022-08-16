@@ -95,6 +95,7 @@ class ModuleService {
     const feedbackCollection = await MongoAdapter.getCollection(
       "moduleFeedback",
     );
+    //skip modules could be abstracted up 1 level
     const skipModules: IModuleId[] = await new UserService().getSkipModules(userId);
     const nextModule: IModuleStage = await this.getNextModule(moduleId, skipModules)
 

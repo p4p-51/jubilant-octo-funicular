@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { ContentController } from '../controllers/Content';
+// import { ContentController } from '../controllers/Content';
 
 const contentRouter = Router();
-const contentController = new ContentController();
+// const contentController = new ContentController();
 
 /**
  * @openapi
@@ -45,7 +45,7 @@ const contentController = new ContentController();
  *                                              id:
  *                                                  type: integer
  */
-contentRouter.get('/', contentController.GetAllContent);
+// contentRouter.get('/', contentController.GetAllContent);
 
 /**
  * @openapi
@@ -88,6 +88,6 @@ contentRouter.get('/', contentController.GetAllContent);
  *                                          content:
  *                                              type: string
  */
-contentRouter.get('/:moduleId/:stageId', contentController.GetModuleStage);
+// contentRouter.get('/:moduleId/:stageId', contentController.GetModuleStage);
 
 export default contentRouter;
