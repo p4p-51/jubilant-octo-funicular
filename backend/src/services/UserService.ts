@@ -1,5 +1,6 @@
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
+import { IModuleId } from "../controllers/Module";
 
 class UserService {
   getUserId = async (
@@ -57,9 +58,14 @@ class UserService {
     return user.length > 0 ? user[0] : null;
   };
 
+  getSkipModules = async (userId: number): Promise<IModuleId[]> => {
+    const user = await this.getUser(userId)
+    return user['user']['skipModules']
+  };
+
   pullFromUser = async (
     userId: number,
-    arrayToPull: {[key:string]: any}
+    arrayToPull: { [key: string]: any },
   ): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
@@ -67,24 +73,25 @@ class UserService {
       "user.userId": userId,
     }, {
       $pull: {
-        ...arrayToPull
+        ...arrayToPull,
       },
     });
 
     return res.modifiedCount > 0;
   };
+
   deleteExperience = async (userId: number, experienceId: number) => {
     const userCollection = await MongoAdapter.getCollection("users");
 
     const pull = {
       experiences: {
-        experienceId: experienceId
+        experienceId: experienceId,
       },
       answers: {
-        experienceId: experienceId
-      }
-    }
-    return await this.pullFromUser(userId, pull)
+        experienceId: experienceId,
+      },
+    };
+    return await this.pullFromUser(userId, pull);
 
   };
 
@@ -152,7 +159,6 @@ class UserService {
     );
     return update.modifiedCount > 0;
   };
-
 
 
   setExperience = async (
