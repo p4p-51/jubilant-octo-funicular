@@ -9,8 +9,14 @@
     >
       <p>{{ experience.name }}</p>
     </div>
-    <p>I want to talk about a different experience</p>
+    <p @click="addNewExperience">I want to talk about a different experience</p>
   </div>
+  <experience-modal
+    v-if="isModalOpen"
+    @cancelExp="isModalOpen = false"
+    @saveExperience="saveExperience"
+    :labels="labels"
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -80,16 +86,81 @@ import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Answer } from "@/types/Question.interface";
+import { Experience, Answer, Label } from "@/types/Question.interface";
+import {
+  deleteExperience,
+  getExperiences,
+  getLabels,
+  putExperience,
+  updateExperience,
+} from "@/apis/api";
+import ExperienceModal from "@/components/ExperienceModal.vue";
 
 export default defineComponent({
   name: "ExperienceSelect",
-  components: {},
+  components: {
+    ExperienceModal,
+  },
+  async mounted() {
+    const [labelError, labels] = await getLabels();
+    const [expError, experiences] = await getExperiences();
+    if (labelError || expError) {
+      alert("Error");
+    }
+    this.labels = labels;
+    this.experiences = experiences;
+  },
   data() {
-    return {};
+    return {
+      experiences: this.initialExperiences,
+      isModalOpen: false,
+      selectedExperience: null as Experience | null,
+      labels: [] as Label[],
+    };
+  },
+  methods: {
+    selectExperience(event: Event, e: Experience) {
+      this.selectedExperience = e;
+      this.isModalOpen = true;
+    },
+    addNewExperience() {
+      console.log("REEEEEEEEEEE");
+      this.selectedExperience = null;
+      this.isModalOpen = true;
+    },
+    async saveExperience(newExperience: Experience) {
+      if (newExperience.experienceId) {
+        const oldExp = this.experiences.find(
+          (e) => e.experienceId == newExperience.experienceId,
+        );
+
+        let update: { name?: string } = {};
+        if (oldExp!.name != newExperience.name) {
+          oldExp!.name = newExperience.name;
+          update["name"] = newExperience.name;
+        }
+        oldExp!.labels = newExperience.labels;
+        const [error, data] = await updateExperience(oldExp!.experienceId!, {
+          ...update,
+          labels: oldExp!.labels,
+        });
+        if (error) {
+          alert("Updating experience failed");
+        }
+      } else {
+        const [error, data] = await putExperience(newExperience);
+        if (error) {
+          alert("Cannot create new experience");
+        } else {
+          newExperience.experienceId = data.experienceId;
+          this.experiences.push(newExperience);
+        }
+      }
+      this.isModalOpen = false;
+    },
   },
   props: {
-    experiences: {
+    initialExperiences: {
       type: Array as PropType<Experience[]>,
       required: true,
     },
