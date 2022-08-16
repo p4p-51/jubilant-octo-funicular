@@ -13,7 +13,7 @@ export async function isAuthenticated(req, res, next) {
     //   res.locals = { ...res.locals, userId};
     // }
     // res.locals = { ...res.locals, userId, email: token.email, uuid: token.uid };
-    res.locals = { ...res.locals, userId: "42069" };
+    res.locals = { ...res.locals, userId: "4" };
   } catch (err) {
     console.error(`${err.code} -  ${err.message}`);
     httpResponse(res, 401, "Unauthorized")

@@ -141,6 +141,6 @@ router.put('/', controller.AddExperience);
  *          $ref: '#/components/responses/Success'
  */
 router.post('/:experienceId', controller.updateExperience);
-router.delete('/:experienceId', controller.deleteLabel);
+router.delete('/:experienceId', controller.deleteExperience);
 
 export default router;

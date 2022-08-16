@@ -57,19 +57,36 @@ class UserService {
     return user.length > 0 ? user[0] : null;
   };
 
-  pullFromUser = async (userId: number, array: string, value): Promise<boolean> => {
+  pullFromUser = async (
+    userId: number,
+    arrayToPull: {[key:string]: any}
+  ): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
     const res = await userCollection.updateOne({
-      "user.userId": userId
+      "user.userId": userId,
     }, {
       $pull: {
-        [array]: { ...value }
-      }
-    })
+        ...arrayToPull
+      },
+    });
 
-    return res.modifiedCount > 0
-  }
+    return res.modifiedCount > 0;
+  };
+  deleteExperience = async (userId: number, experienceId: number) => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const pull = {
+      experiences: {
+        experienceId: experienceId
+      },
+      answers: {
+        experienceId: experienceId
+      }
+    }
+    return await this.pullFromUser(userId, pull)
+
+  };
 
   getUserIntro = async (userId: number) => {
     return await this.getUser(userId, ["intro"]);
@@ -135,6 +152,8 @@ class UserService {
     );
     return update.modifiedCount > 0;
   };
+
+
 
   setExperience = async (
     userId: number,
@@ -246,7 +265,7 @@ class UserService {
         return [];
       }
       return users[0]["answers"];
-    })
+    });
   };
 }
 
