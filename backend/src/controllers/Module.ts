@@ -23,6 +23,7 @@ class ModuleController extends BaseController {
 
   SubmitFeedback = async (req: Request, res: Response) => {
     const moduleId: IModuleId = req.params['moduleId'] as IModuleId;
+    const userId: number = parseInt(res.locals["userId"]);
     const feedback: IFeedback = {
       rating: parseInt(req.body['rating']),
       feedback: req.body['feedback'],
@@ -30,7 +31,8 @@ class ModuleController extends BaseController {
 
     const nextStage: IModuleStage = await this.moduleService.submitFeedback(
       feedback,
-      moduleId
+      moduleId,
+      userId
     );
 
     if (nextStage) {
@@ -40,6 +42,7 @@ class ModuleController extends BaseController {
 
   SubmitQuiz = async (req: Request, res: Response) => {
     const moduleId: IModuleId = req.params['moduleId'] as IModuleId;
+    const userId: number = parseInt(res.locals["userId"]);
 
     if (moduleId == 'grad') {
       httpResponse(res, 400, 'Cannot submit quiz for graduation');
@@ -63,8 +66,6 @@ class ModuleController extends BaseController {
       numQuestion,
     };
 
-    // Temp until auth is done
-    const userId = 1;
     const suc: boolean = await new UserService().addToSetUser(userId, {
       quizzes: { moduleId, ...quizAnswers },
     });
