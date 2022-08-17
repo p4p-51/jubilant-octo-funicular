@@ -54,6 +54,7 @@ export default defineComponent({
   align-items: center;
 
   .popup {
+    max-width: 400px;
     background: white;
     border-radius: 10px;
     padding: 20px;
@@ -63,6 +64,13 @@ export default defineComponent({
 
     box-sizing: border-box;
     padding: 40px 50px;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 400;
+      color: $c-black;
+      margin: 0;
+    }
 
     .buttons {
       width: 100%;
