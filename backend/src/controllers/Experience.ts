@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import { components } from "../interfaces/api";
-import { ExperienceService } from "../services/ExperienceService";
 import { UserService } from "../services/UserService";
 import { httpResponse } from "../utils/response";
 import { BaseController } from "./BaseController";
@@ -14,11 +13,9 @@ export type IExperience = components["schemas"]["Experience"];
  * Controller that handles all the experience related functions
  */
 class ExperienceController extends BaseController {
-  experienceService;
 
   constructor() {
     super();
-    this.experienceService = new ExperienceService();
   }
 
   GetAllExperiences = async (req: Request, res: Response) => {

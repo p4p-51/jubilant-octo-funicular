@@ -3,8 +3,9 @@ import { UserService } from "../services/UserService";
 import { httpResponse } from "../utils/response";
 
 export async function isAuthenticated(req, res, next) {
-  // Extract the token from "Authorization: Bearer <Token>"
+  // Extract the token from "Authorization: Bearer <Token>" header
   const authToken = req.headers['authorization'].split(" ")[1];
+
   try {
     // const token = await getAuth().verifyIdToken(authToken)
     // const userId = await new UserService().getUserId(token.uid)

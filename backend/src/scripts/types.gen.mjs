@@ -1,13 +1,18 @@
-import * as fs from 'fs';
-import openapiTS from 'openapi-typescript';
-import swaggerJsdoc from 'swagger-jsdoc';
+/**
+ * Script used to convert OpenAPI schema into typescript types
+ */
+
+
+import * as fs from "fs";
+import openapiTS from "openapi-typescript";
+import swaggerJsdoc from "swagger-jsdoc";
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Backend Docs',
-      version: '1.0.0',
+      title: "Backend Docs",
+      version: "1.0.0",
     },
     security: [
       {
@@ -15,17 +20,17 @@ const options = {
       },
     ],
   },
-  apis: ['./src/**/*.ts'], // files containing annotations as above
+  apis: ["./src/**/*.ts"], // files containing annotations as above
 };
 
 const spec = swaggerJsdoc(options);
 
 const generate = async () => {
   const output = await openapiTS(spec, {
-    prettierConfig: './.prettierrc.json',
+    prettierConfig: "./.prettierrc.json",
   });
 
-  fs.writeFile('./src/interfaces/api.ts', output, (err) => {
+  fs.writeFile("./src/interfaces/api.ts", output, (err) => {
     if (err) {
       console.log(err);
     }

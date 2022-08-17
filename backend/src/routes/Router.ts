@@ -102,6 +102,9 @@ router.use('/questions', QuestionRouter);
  *              type: array
  *              items:
  *                type: object
+ *                required:
+ *                  - label
+ *                  - labelText
  *                properties:
  *                  label:
  *                    $ref: '#/components/schemas/Labels'

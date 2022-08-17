@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-// import { ContentController } from '../controllers/Content';
-
 const contentRouter = Router();
+// Deprecated
+// import { ContentController } from '../controllers/Content';
 // const contentController = new ContentController();
 
 /**
