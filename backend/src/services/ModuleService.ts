@@ -3,9 +3,18 @@ import { Collection } from "mongodb";
 import { IFeedback, IModuleId, IModuleStage } from "../controllers/Module";
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { UserService } from "./UserService";
+import { logger } from "../utils/logger";
 
+/**
+ * Service that deals with the modules (feedback and stages) collection
+ */
 class ModuleService {
-  getNextStage = async (moduleStage: IModuleStage): Promise<IModuleStage> => {
+  /**
+   * Get the next stage of a given module/stage
+   * @param currentModuleStage the module/stage just completed
+   * @returns the next moduleStage or grad if there is no next stage
+   */
+  getNextStage = async (currentModuleStage: IModuleStage): Promise<IModuleStage> => {
     const moduleStageCollection = await MongoAdapter.getCollection(
       "moduleStage",
     );
@@ -13,11 +22,11 @@ class ModuleService {
     const stage = await moduleStageCollection
       .aggregate([
         {
-          $match: { moduleId: moduleStage.moduleId, stage: moduleStage.stage },
+          $match: { moduleId: currentModuleStage.moduleId, stage: currentModuleStage.stage },
         },
         {
           $lookup: {
-            from: "moduleStage",
+            from: "currentModuleStage",
             localField: "nextStage",
             foreignField: "_id",
             as: "nextStage",
@@ -36,7 +45,8 @@ class ModuleService {
       .toArray();
 
     if (stage.length === 0) {
-      throw `Cannot find moduleStage ${JSON.stringify(moduleStage)}`;
+      logger.logError(`Cannot find the moduleStage ${currentModuleStage}`);
+      throw `Cannot find moduleStage ${JSON.stringify(currentModuleStage)}`;
     }
 
     return stage[0]["nextStage"][0]
@@ -44,6 +54,12 @@ class ModuleService {
       : { moduleId: "grad", stage: 1 };
   };
 
+  /**
+   * Get the next module, ignoring the stage number
+   * @param module the current module
+   * @param skipModules an array of module to skip
+   * @returns the next ModuleStage (stage will be at 1)
+   */
   getNextModule = async (module: IModuleId, skipModules: IModuleId[] = null): Promise<IModuleStage> => {
     const moduleStageCollection: Collection = await MongoAdapter.getCollection(
       "moduleStage",
@@ -82,11 +98,18 @@ class ModuleService {
         break;
       }
       currentModuleId = nextModule.moduleId;
+      //Skip to next module if the found module is part of the skipped list
     } while (skipModules.includes(currentModuleId));
 
     return nextModule;
   };
 
+  /**
+   * Submit end of module feedback for data collection
+   * @param feedback the feedback (contains text and rating out of 5)
+   * @param moduleId the module it related to
+   * @param userId userid (current not used to log feedback)
+   */
   submitFeedback = async (
     feedback: IFeedback,
     moduleId: IModuleId,
@@ -95,15 +118,19 @@ class ModuleService {
     const feedbackCollection = await MongoAdapter.getCollection(
       "moduleFeedback",
     );
+    //skip modules could be abstracted up 1 level in the controller...
     const skipModules: IModuleId[] = await new UserService().getSkipModules(userId);
-    const nextModule: IModuleStage = await this.getNextModule(moduleId, skipModules)
+    const nextModule: IModuleStage = await this.getNextModule(moduleId, skipModules);
 
     await feedbackCollection.insertOne({ moduleId: moduleId, feedback });
 
-    return nextModule
+    return nextModule;
   };
 
-  getModulesList = async () => {
+  /**
+   * Get the lost of available modules
+   */
+  getModulesList = async (): Promise<IModuleId[]> => {
     const moduleStageCollection = await MongoAdapter.getCollection(
       "moduleStage",
     );

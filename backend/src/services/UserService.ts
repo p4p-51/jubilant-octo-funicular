@@ -2,7 +2,16 @@ import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
 import { IModuleId } from "../controllers/Module";
 
+/**
+ * Service that deals with the user collection
+ * Most stuff happens in here because most stuff is embedded in the user collection
+ */
 class UserService {
+  /**
+   * Get the numeric id of a user from their firebase Id
+   * @param uuid a user's firebase uid
+   * @returns userId or null if it's a new user and there is no Id
+   */
   getUserId = async (
     uuid: string,
   ): Promise<number> => {
@@ -16,14 +25,24 @@ class UserService {
     return user == null ? null : user["user"]["userId"];
   };
 
+  /**
+   * Creates a new user in the database
+   * @param user the default user
+   * @returns boolean - if insertion was acknowledged by mongodb
+   */
   createUser = async (user): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
-
     const newUser = await userCollection.insertOne(user);
-
     return newUser.acknowledged;
   };
 
+  /**
+   * Get a user
+   * @param userId
+   * @param projection The fields in which to project, can be experiences,
+   * answers, etc...
+   * @param query If we want to query something specific about the user
+   */
   getUser = async (
     userId: number,
     projection: string[] = null,
@@ -58,11 +77,20 @@ class UserService {
     return user.length > 0 ? user[0] : null;
   };
 
+  /**
+   * Get the modules the user wants to skip
+   * @param userId
+   */
   getSkipModules = async (userId: number): Promise<IModuleId[]> => {
-    const user = await this.getUser(userId)
-    return user['user']['skipModules']
+    const user = await this.getUser(userId);
+    return user["user"]["skipModules"];
   };
 
+  /**
+   * Function used to remove an element from a user's profile
+   * @param userId
+   * @param arrayToPull - key: array to pull from - value: condition to pull
+   */
   pullFromUser = async (
     userId: number,
     arrayToPull: { [key: string]: any },
@@ -80,9 +108,15 @@ class UserService {
     return res.modifiedCount > 0;
   };
 
+  /**
+   * Delete an experience from a user
+   * @param userId
+   * @param experienceId the numeric id of the experience
+   */
   deleteExperience = async (userId: number, experienceId: number) => {
     const userCollection = await MongoAdapter.getCollection("users");
 
+    // pull both the experience and answers associated with the experience
     const pull = {
       experiences: {
         experienceId: experienceId,
@@ -95,10 +129,18 @@ class UserService {
 
   };
 
+  /**
+   * Get the user's self-intro
+   * @param userId
+   */
   getUserIntro = async (userId: number) => {
     return await this.getUser(userId, ["intro"]);
   };
 
+  /**
+   * Get a list of the user's experience ids
+   * @param userId
+   */
   getUserExperienceIds = async (userId: number): Promise<number[]> => {
     const userCollection = await MongoAdapter.getCollection("users");
     return await userCollection.aggregate([
@@ -120,6 +162,13 @@ class UserService {
     });
   };
 
+  /**
+   * Function used to set a specific field on a user document
+   * @param userId
+   * @param value Key: the field to set to - value: the value to set the field
+   * to
+   * @param query a custom query when looking for the user
+   */
   setUser = async (
     userId: number,
     value: { [key: string]: any },
@@ -138,6 +187,12 @@ class UserService {
     return update.matchedCount > 0;
   };
 
+  /**
+   * Add an object to an array of the user document
+   * @param userId
+   * @param value key: the field to add to - value: the value to add to the field
+   * @param query a custom query when looking for the user
+   */
   addToSetUser = async (
     userId: number,
     value: { [key: string]: any },
@@ -160,7 +215,12 @@ class UserService {
     return update.modifiedCount > 0;
   };
 
-
+  /**
+   * Add or modify an experience if it already exists
+   * @param userId
+   * @param experienceId
+   * @param newExperience
+   */
   setExperience = async (
     userId: number,
     experienceId: number,
@@ -208,6 +268,13 @@ class UserService {
     return expId;
   };
 
+  /**
+   * Submit the answer to a given question and experience
+   * @param userId
+   * @param questionId
+   * @param experienceId
+   * @param answer
+   */
   findAndUpdateAnswer = async (userId: number, questionId: number, experienceId: number, answer: IAnswer): Promise<boolean> => {
     const userCollection = await MongoAdapter.getCollection("users");
 
@@ -246,6 +313,11 @@ class UserService {
     }
   };
 
+  /**
+   * Get all the users to a given questionId
+   * @param userId
+   * @param questionId
+   */
   getAnswers = async (userId: number, questionId: number) => {
     const userCollection = await MongoAdapter.getCollection("users");
 

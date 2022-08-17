@@ -1,19 +1,25 @@
-import { ObjectId } from 'mongodb';
+import { IFullLabel, ILabels } from "../controllers/Label";
+import { MongoAdapter } from "../models/mongodb/MongoClient";
 
-import { ILabels } from '../controllers/Label';
-import { MongoAdapter } from '../models/mongodb/MongoClient';
-
+/**
+ * Class that deals with the labels collection
+ */
 class LabelService {
-  getLabels = async () => {
-    const labelCollection = await MongoAdapter.getCollection('labels');
+  /**
+   * Get all the available label an experience can be tagged as and related
+   * questions
+   * @returns An array of labels and their questions
+   */
+  getLabels = async (): Promise<IFullLabel[]> => {
+    const labelCollection = await MongoAdapter.getCollection("labels");
     return await labelCollection
-      .aggregate([
+      .aggregate<IFullLabel>([
         {
           $lookup: {
-            from: 'questions',
-            localField: 'label',
-            foreignField: 'labelId',
-            as: 'questions',
+            from: "questions",
+            localField: "label",
+            foreignField: "labelId",
+            as: "questions",
           },
         },
         {
@@ -27,28 +33,6 @@ class LabelService {
         },
       ])
       .toArray();
-  };
-
-  getLabelIds = async (labels: ILabels[]): Promise<ObjectId[]> => {
-    //No longer needed as no label Object ID refs are stored
-    const labelCollection = await MongoAdapter.getCollection('labels');
-
-    const labelOIds = await labelCollection
-      .aggregate([
-        {
-          $match: {
-            label: {
-              $in: labels,
-            },
-          },
-        },
-      ])
-      .toArray();
-
-    const ids: ObjectId[] = [];
-    labelOIds.forEach((e) => ids.push(e._id));
-
-    return ids;
   };
 }
 
