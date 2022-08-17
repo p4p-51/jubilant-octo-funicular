@@ -86,8 +86,8 @@ export interface paths {
       };
     };
   };
-  '/experiences/{experienceId}/labels': {
-    /** Add a label to an experience */
+  '/experiences/{experienceId}/': {
+    /** Change an experience's name or labels */
     post: {
       parameters: {
         path: {
@@ -108,12 +108,13 @@ export interface paths {
       requestBody: {
         content: {
           'application/json': {
-            labels: components['schemas']['Labels'][];
+            name?: string;
+            labels?: components['schemas']['Labels'][];
           };
         };
       };
     };
-    /** Remove certain labels from an experience */
+    /** Delete the experience */
     delete: {
       parameters: {
         path: {
@@ -127,14 +128,6 @@ export interface paths {
         default: {
           content: {
             'application/json': components['schemas']['Error'];
-          };
-        };
-      };
-      /** The label to delete */
-      requestBody: {
-        content: {
-          'application/json': {
-            labels: components['schemas']['Labels'][];
           };
         };
       };
@@ -227,6 +220,7 @@ export interface paths {
             })[];
           };
         };
+        default: components['responses']['DefaultError'];
       };
     };
   };
@@ -300,7 +294,8 @@ export interface paths {
         200: {
           content: {
             'application/json': {
-              label?: components['schemas']['Labels'];
+              label: components['schemas']['Labels'];
+              labelText: components['schemas']['LabelText'];
               /**
                * @example [
                *   {
@@ -322,15 +317,9 @@ export interface paths {
       };
     };
   };
-  '/users/{userId}': {
+  '/users/me': {
     /** Get the profile and progress of a user */
     get: {
-      parameters: {
-        path: {
-          /** Numeric ID of the user */
-          userId: components['parameters']['userIdParam'];
-        };
-      };
       responses: {
         /** A single user. */
         200: {
@@ -350,15 +339,9 @@ export interface paths {
       };
     };
   };
-  '/users/{userId}/complete': {
+  '/users/me/complete': {
     /** Mark a module/stage as complete for a given using */
     post: {
-      parameters: {
-        path: {
-          /** Numeric ID of the user */
-          userId: components['parameters']['userIdParam'];
-        };
-      };
       responses: {
         /** user has successfully completed a stage */
         200: {
@@ -384,15 +367,9 @@ export interface paths {
       };
     };
   };
-  '/users/{userId}/self-intro': {
+  '/users/me/self-intro': {
     /** Get a user's self introduction */
     get: {
-      parameters: {
-        path: {
-          /** Numeric ID of the user */
-          userId: components['parameters']['userIdParam'];
-        };
-      };
       responses: {
         /** Get a users self intro */
         200: {
@@ -410,12 +387,6 @@ export interface paths {
     };
     /** Set a user self introduction */
     post: {
-      parameters: {
-        path: {
-          /** Numeric ID of the user */
-          userId: components['parameters']['userIdParam'];
-        };
-      };
       responses: {
         200: components['responses']['Success'];
         /** Something unexpected happened */
@@ -433,7 +404,22 @@ export interface paths {
       };
     };
   };
-  '/users/{userId}/stats': {
+  '/users/me/skip': {
+    /** Put a list of modules the user wants to skip */
+    put: {
+      responses: {
+        200: components['responses']['Success'];
+        default: components['responses']['DefaultError'];
+      };
+      /** List of moduleIds */
+      requestBody: {
+        content: {
+          'application/json': components['schemas']['Module'][];
+        };
+      };
+    };
+  };
+  '/users/me/stats': {
     /** Get user stats */
     get: {
       parameters: {
@@ -492,7 +478,7 @@ export interface components {
       labels?: components['schemas']['Labels'][];
     };
     /** @enum {string} */
-    Module: 'self-intro' | 'exp' | 'grad';
+    Module: 'self-intro' | 'exp' | 'grad' | 'sit';
     ModuleStage: {
       moduleId: components['schemas']['Module'];
       /** @example 1 */
@@ -513,7 +499,7 @@ export interface components {
       questionId: number;
       /** @example tell me about a time... */
       questionText: string;
-      labelId: components['schemas']['Labels'];
+      labelId?: components['schemas']['Labels'];
     };
     Uuid: string;
     Success: {
@@ -523,8 +509,8 @@ export interface components {
       code: number;
       message: string;
     };
-    /** @enum {string} */
-    Labels: 'leadership' | 'teamwork' | 'conflict';
+    Labels: string;
+    LabelText: string;
     User: {
       userId: number;
       uuid: string;

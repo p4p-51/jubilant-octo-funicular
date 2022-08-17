@@ -1,10 +1,22 @@
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 
+/**
+ * Service that deals with the questions collection
+ */
 class QuestionService {
+  /**
+   * Get all the question Ids
+   */
   getQuestionIds = async (): Promise<number[]> => {
     const questionCollection = await MongoAdapter.getCollection("questions");
     return await questionCollection.distinct("questionId");
   };
+
+  /**
+   * Get all the questions with the relavent experiences along with the number
+   * of answers for each question
+   * @param userId
+   */
   getAllQuestionWithExperiences = async (userId: number) => {
     const questionCollection = await MongoAdapter.getCollection("questions");
 
@@ -21,6 +33,7 @@ class QuestionService {
             },
             {
               $project: {
+                // Getting the number of answers for each question
                 "answerCount": {
                   $size: {
                     $filter: {
@@ -30,6 +43,7 @@ class QuestionService {
                     },
                   },
                 },
+                // Getting the relevant experiences
                 "filteredExp": {
                   $filter: {
                     input: "$experiences",
@@ -46,9 +60,8 @@ class QuestionService {
       {
         $project: {
           _id: 0,
-          questionText: 1,
-          questionId: 1,
-          labelId: 1,
+        },
+        $addFields: {
           experiences: {
             $ifNull: [{ $first: "$user.filteredExp" }, []],
           },

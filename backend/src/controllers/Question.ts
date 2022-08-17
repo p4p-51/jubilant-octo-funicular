@@ -1,68 +1,72 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
-import { BaseController } from './BaseController';
+import { BaseController } from "./BaseController";
 import { QuestionService } from "../services/QuestionService";
 import { components } from "../interfaces/api";
 import { UserService } from "../services/UserService";
 import { httpResponse } from "../utils/response";
 import * as http from "http";
 
-export type IAnswer = components['schemas']['Answer']
+export type IAnswer = components["schemas"]["Answer"]
 
+/**
+ * Controller that handles the Question APIs
+ */
 class QuestionController extends BaseController {
-  questionService
+  questionService;
 
   constructor() {
     super();
-    this.questionService = new QuestionService()
+    this.questionService = new QuestionService();
   }
+
   GetQuestionsWithExperiences = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['userId']);
-    const questions = await this.questionService.getAllQuestionWithExperiences(userId)
+    const userId: number = parseInt(res.locals["userId"]);
+    const questions = await this.questionService.getAllQuestionWithExperiences(userId);
 
     res.status(200).send(questions);
   };
   GetAnswer = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['userId']);
-    const questionId: number = parseInt(req.params['questionId'])
+    const userId: number = parseInt(res.locals["userId"]);
+    const questionId: number = parseInt(req.params["questionId"]);
 
-    const questionIds: number[] = await this.questionService.getQuestionIds()
+    const questionIds: number[] = await this.questionService.getQuestionIds();
     if (!questionIds.includes(questionId)) {
-      httpResponse(res, 404, `Cannot find question with Id ${questionId}`)
-      return
+      httpResponse(res, 404, `Cannot find question with Id ${questionId}`);
+      return;
     }
 
-    const answers = await new UserService().getAnswers(userId, questionId)
+    const answers = await new UserService().getAnswers(userId, questionId);
 
     res.status(200).json(answers);
   };
 
   AnswerQuestion = async (req: Request, res: Response) => {
-    const userId: number = parseInt(res.locals['userId']);
-    const questionId: number = parseInt(req.params['questionId'])
-    const experienceId: number = parseInt(req.body['experienceId'])
-    const answer: IAnswer = req.body['answer']
+    const userId: number = parseInt(res.locals["userId"]);
+    const questionId: number = parseInt(req.params["questionId"]);
+    const experienceId: number = parseInt(req.body["experienceId"]);
+    const answer: IAnswer = req.body["answer"];
 
-    const questionIds: number[] = await this.questionService.getQuestionIds()
+    const questionIds: number[] = await this.questionService.getQuestionIds();
     if (!questionIds.includes(questionId)) {
-      httpResponse(res, 404, `Cannot find question with Id ${questionId}`)
-      return
+      httpResponse(res, 404, `Cannot find question with Id ${questionId}`);
+      return;
     }
 
-    const experienceIds: number[] = await new UserService().getUserExperienceIds(userId)
+    const experienceIds: number[] = await new UserService().getUserExperienceIds(userId);
     if (!experienceIds.includes(experienceId)) {
-      httpResponse(res, 404, `Cannot find experience with Id ${experienceId}`)
-      return
+      httpResponse(res, 404, `Cannot find experience with Id ${experienceId}`);
+      return;
     }
 
-    const succ: boolean = await new UserService().findAndUpdateAnswer(userId, questionId, experienceId, answer)
+    const success: boolean = await new UserService().findAndUpdateAnswer(userId, questionId, experienceId, answer);
 
-    if (succ) {
+    if (success) {
       res.status(200).send({ success: true });
-      return
+      return;
     } else {
-      httpResponse(res, 500, `Update to answer not successful`)
-      return
+      httpResponse(res, 500, `Update to answer not successful`);
+      return;
     }
   };
 }

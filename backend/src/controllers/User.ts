@@ -10,6 +10,9 @@ import { CounterService } from "../services/CounterService";
 
 type IUserIntro = components["schemas"]["SelfIntro"];
 
+/**
+ * Controller that handles all the user APIs
+ */
 class UserController extends BaseController {
   userService: UserService;
 
@@ -69,7 +72,6 @@ class UserController extends BaseController {
 
   SkipModules = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals["userId"]);
-
     const skipModules: IModuleId[] = req.body;
 
     const modules: IModuleId[] = await new ModuleService().getModulesList();
@@ -77,29 +79,26 @@ class UserController extends BaseController {
     const validModules: IModuleId[] = skipModules.filter((module) => modules.includes(module.toLowerCase()));
 
     if (validModules.length == 0) {
-      httpResponse(res, 400, "Invalid modules Ids");
+      httpResponse(res, 400, "Request contained zero (0) valid module Ids");
       return;
     }
     const result = await this.userService.setUser(userId, { "user.skipModules": validModules });
 
-    if (result) {
-      res.status(200).json({ success: true });
+    if (!result) {
+      httpResponse(res, 500, "Cannot find the user");
       return;
     }
-    httpResponse(res, 500, "Cannot find the user");
+    res.status(200).json({ success: true });
   };
 
   CompleteStage = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals["userId"]);
-    const module: IModuleId = req.body["moduleId"];
-    const stage: number = parseInt(req.body["stage"]);
-
     const moduleStage: IModuleStage = {
-      moduleId: module,
-      stage: stage,
+      moduleId: req.body["moduleId"],
+      stage: parseInt(req.body["stage"]),
     };
 
-    const skipModules: IModuleId[] = await this.userService.getSkipModules(userId)
+    const skipModules: IModuleId[] = await this.userService.getSkipModules(userId);
 
     try {
       let nextStage: IModuleStage = await new ModuleService().getNextStage(
@@ -107,8 +106,8 @@ class UserController extends BaseController {
       );
 
       // If the next stage is part of the skipping modules, get the next module
-      let moduleId = nextStage.moduleId
-      if (skipModules.includes(nextStage.moduleId)){
+      let moduleId = nextStage.moduleId;
+      if (skipModules.includes(nextStage.moduleId)) {
         nextStage = await new ModuleService().getNextModule(nextStage.moduleId, skipModules);
       }
 
@@ -116,11 +115,11 @@ class UserController extends BaseController {
         progress: nextStage,
       });
 
-      if (success) {
-        res.status(200).json({ success: true, nextStage: nextStage });
+      if (!success) {
+        httpResponse(res, 500, "Cannot update user's new module");
         return;
       }
-      httpResponse(res, 500, "Cannot update user's new module");
+      res.status(200).json({ success: true, nextStage: nextStage });
 
     } catch {
       httpResponse(res, 404, "moduleStage not found");
@@ -135,11 +134,11 @@ class UserController extends BaseController {
     };
 
     const success: boolean = await this.userService.setUser(userId, { intro });
-    if (success) {
-      res.status(200).json({ success: true });
-    } else {
+    if (!success) {
       httpResponse(res, 404, "Cannot find user");
+      return;
     }
+    res.status(200).json({ success: true });
   };
 
   GetIntro = async (req, res) => {
@@ -148,11 +147,12 @@ class UserController extends BaseController {
 
     if (userIntro === null) {
       httpResponse(res, 404, `Cannot find user with id ${userId}`);
-    } else {
-      res.status(200).json(userIntro["intro"] ? userIntro["intro"] : {});
+      return;
     }
+    res.status(200).json(userIntro["intro"] ? userIntro["intro"] : {});
   };
 
+  // TODO
   GetStats = async (req, res) => {
     const body = {
       accuracy: {
