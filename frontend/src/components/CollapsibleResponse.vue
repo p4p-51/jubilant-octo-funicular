@@ -2,7 +2,6 @@
   <div class="collapsible-response">
     <div class="header" @click="isOpen = !isOpen">
       <h6>{{ response.experience.name }}</h6>
-      <!--      <h6>SOME TITEL</h6>-->
       <img src="@/assets/icons/chevron-left.svg" :class="{ isOpen: isOpen }" />
     </div>
     <div :class="{ hidden: !isOpen }" class="content">
@@ -14,6 +13,10 @@
       <p class="star-content">{{ response.answer.a }}</p>
       <p class="star-title"><b>R</b>esult</p>
       <p class="star-content">{{ response.answer.r }}</p>
+      <div class="buttons-container">
+        <button><img src="@/assets/icons/edit.svg" /></button>
+        <button><img src="@/assets/icons/delete.svg" /></button>
+      </div>
     </div>
   </div>
 </template>
@@ -83,6 +86,14 @@
       font-size: 12px;
 
       margin: 0;
+    }
+
+    .buttons-container {
+      grid-column: span 2;
+
+      display: flex;
+      justify-content: end;
+      align-items: center;
     }
   }
 }
