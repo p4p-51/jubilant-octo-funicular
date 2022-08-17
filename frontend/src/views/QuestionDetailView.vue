@@ -82,6 +82,11 @@
         padding: 10px 20px;
       }
     }
+
+    .answer-column {
+      width: 70%;
+      min-width: 350px;
+    }
   }
 }
 
