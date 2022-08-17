@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading" />
   <div class="add-experiences">
     <h2>List down some of your past teamwork experiences</h2>
     <div class="content">
@@ -182,11 +183,14 @@ import {
   putExperience,
   updateExperience,
 } from "@/apis/api";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default defineComponent({
   name: "AddExperiences",
-  components: { ExperienceModal },
+  components: { ExperienceModal, Loading },
   async mounted() {
+    this.isLoading = true;
     const [labelError, labels] = await getLabels();
     const [expError, experiences] = await getExperiences();
     if (labelError || expError) {
@@ -194,6 +198,7 @@ export default defineComponent({
     }
     this.labels = labels;
     this.experiences = experiences;
+    this.isLoading = false;
   },
   methods: {
     selectExperience(event: Event, e: Experience) {
@@ -205,6 +210,8 @@ export default defineComponent({
       this.isModalOpen = true;
     },
     async saveExperience(newExperience: Experience) {
+      this.isLoading = true;
+
       if (newExperience.experienceId) {
         const oldExp = this.experiences.find(
           (e) => e.experienceId == newExperience.experienceId,
@@ -232,9 +239,11 @@ export default defineComponent({
           this.experiences.push(newExperience);
         }
       }
+      this.isLoading = false;
       this.isModalOpen = false;
     },
     async deleteExperience(event: Event, experience: Experience) {
+      this.isLoading = true;
       const [error, data] = await deleteExperience(experience.experienceId!);
       if (error) {
         alert("cannot delete");
@@ -245,6 +254,8 @@ export default defineComponent({
           }
         });
       }
+
+      this.isLoading = false;
     },
   },
   computed: {
@@ -266,6 +277,7 @@ export default defineComponent({
       selectedExperience: null as Experience | null,
       labels: [] as Label[],
       experiences: [] as Experience[],
+      isLoading: false,
     };
   },
   props: {},

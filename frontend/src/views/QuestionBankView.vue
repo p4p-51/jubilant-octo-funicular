@@ -1,5 +1,6 @@
 <template>
-  <div class="question-bank-view" v-if="isLoaded.loaded">
+  <loading v-model:active="isLoading.loading" />
+  <div class="question-bank-view" v-if="!isLoading.loading">
     <title-block title="My question bank" />
     <div class="content-container">
       <div class="search-bar">
@@ -10,7 +11,7 @@
           <div class="title-container">
             <h2>Completed questions</h2>
           </div>
-          <div class="list" v-if="isLoaded.loaded">
+          <div class="list">
             <completed-question
               v-for="question in filtered(completedQuestions.questions)"
               :id="question.questionText"
@@ -117,12 +118,14 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { getQuestions } from "@/apis/api";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 interface QuestionResponse extends Question {
   answerCount: number;
 }
 
-const isLoaded = reactive({ loaded: false });
+const isLoading = reactive({ loading: true });
 
 const questions = reactive<{ questions: QuestionResponse[] }>({
   questions: [],
@@ -166,6 +169,6 @@ onMounted(async () => {
     return question["answerCount"] < 1;
   });
 
-  isLoaded.loaded = true;
+  isLoading.loading = false;
 });
 </script>

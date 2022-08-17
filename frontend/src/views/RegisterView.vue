@@ -1,4 +1,6 @@
 <template>
+  <loading v-model:active="isLoading.loading" />
+
   <div class="register-view">
     <div class="content-container">
       <img
@@ -131,15 +133,20 @@
 </style>
 
 <script setup>
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 import firebase from "firebase";
 import { useRouter } from "vue-router"; // import router
 import { registerUser } from "../apis/api";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+
+const isLoading = reactive({ loading: true });
 
 const email = ref("");
 const password = ref("");
 const router = useRouter(); // get a reference to our vue router
 const register = async () => {
+  isLoading.loading = true;
   console.log("registering", email, password);
   try {
     const user = await firebase
@@ -155,5 +162,6 @@ const register = async () => {
     console.log(error.code);
     alert(error.message);
   }
+  isLoading.loading = false;
 };
 </script>

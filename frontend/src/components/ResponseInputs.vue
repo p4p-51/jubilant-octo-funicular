@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading" />
   <div class="response-inputs">
     <h5>
       Let me tell you about: <span>{{ experience.name }}</span>
@@ -112,10 +113,12 @@ import { Experience, Answer } from "@/types/Question.interface";
 import CollapsibleResponse from "./CollapsibleResponse.vue";
 import { submitAnswer } from "@/apis/api";
 import router from "@/router";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default defineComponent({
   name: "ResponseInputs",
-  components: {},
+  components: { Loading },
   computed: {
     saveOrEdit() {
       return this.isEdit ? "Edit" : "Save";
@@ -126,6 +129,7 @@ export default defineComponent({
   },
   methods: {
     async SaveAnswer() {
+      this.isLoading = true;
       const answer = {
         experienceId: this.experience.experienceId!,
         answer: {
@@ -141,6 +145,7 @@ export default defineComponent({
       } else {
         this.$emit("savedAnswer", answer, this.isEdit);
       }
+      this.isLoading = false;
     },
   },
   data() {
@@ -149,6 +154,7 @@ export default defineComponent({
       t: "" as string,
       a: "" as string,
       r: "" as string,
+      isLoading: false,
     };
   },
   mounted() {

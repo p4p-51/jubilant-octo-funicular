@@ -1,4 +1,6 @@
 <template>
+  <loading v-model:active="isLoading" />
+
   <div class="experience-selection">
     <h5>Your relevant experiences:</h5>
     <div
@@ -95,13 +97,17 @@ import {
   updateExperience,
 } from "@/apis/api";
 import ExperienceModal from "@/components/ExperienceModal.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default defineComponent({
   name: "ExperienceSelect",
   components: {
     ExperienceModal,
+    Loading,
   },
   async mounted() {
+    this.isLoading = true;
     const [labelError, labels] = await getLabels();
     // const [expError, experiences] = await getExperiences();
     if (labelError) {
@@ -109,12 +115,14 @@ export default defineComponent({
     }
     this.labels = labels;
     // this.experiences = experiences;
+    this.isLoading = false;
   },
   data() {
     return {
       isModalOpen: false,
       selectedExperience: null as Experience | null,
       labels: [] as Label[],
+      isLoading: false,
     };
   },
   methods: {
@@ -123,11 +131,11 @@ export default defineComponent({
       this.isModalOpen = true;
     },
     addNewExperience() {
-      console.log("REEEEEEEEEEE");
       this.selectedExperience = null;
       this.isModalOpen = true;
     },
     async saveExperience(newExperience: Experience) {
+      this.isLoading = true;
       const [error, data] = await putExperience(newExperience);
       if (error) {
         alert("Cannot create new experience");
@@ -137,6 +145,7 @@ export default defineComponent({
         this.$emit("saveExperience", newExperience);
       }
       this.isModalOpen = false;
+      this.isLoading = false;
     },
   },
   computed: {

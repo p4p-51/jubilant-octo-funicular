@@ -1,7 +1,8 @@
 <template>
+  <loading v-model:active="isLoading.loading" />
   <div class="question-detail-view">
     <title-block title="My question bank" />
-    <div class="content-container" v-if="isLoaded.loaded">
+    <div class="content-container" v-if="!isLoading.loading">
       <div class="questions-container">
         <div class="search-bar">
           <qb-search-bar @onChange="(s) => (filter = s.toLowerCase())" />
@@ -20,7 +21,6 @@
       </div>
       <div class="answer-column">
         <add-question-response
-          v-if="isLoaded.loaded"
           :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
           @saveResponse="saveResponse"
@@ -104,14 +104,16 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
 import { Answer, QuestionResponse } from "@/types/Question.interface";
 import { onMounted, reactive, ref } from "vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 import { useRoute, useRouter } from "vue-router";
 import { getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
 const router = useRouter();
 const route = useRoute();
 
-const goToGrad = async () => {
-  await router.push("/"); // redirect to home
+const goToGrad = () => {
+  router.push("/"); // redirect to home
 };
 
 const saveResponse = (answer: Answer, isEdit: boolean) => {
@@ -148,13 +150,14 @@ const filterQuestions = () => {
   }
 };
 
-const isLoaded = reactive({ loaded: false });
+const isLoading = reactive({ loading: true });
 const questions = reactive<{ questions: QuestionResponse[] }>({
   questions: [],
 });
 
 const selectedQuestion = ref<QuestionResponse>();
 const setSelectedQuestion = async (questionId: number) => {
+  isLoading.loading = true;
   selectedQuestionId.value = questionId;
   //TODO: Fix this issue if the question cannot be found
   const question = questions.questions.find((q) => q.questionId == questionId);
@@ -168,9 +171,12 @@ const setSelectedQuestion = async (questionId: number) => {
   }
 
   selectedQuestion.value = question;
+  isLoading.loading = false;
 };
 
 onMounted(async () => {
+  isLoading.loading = true;
+
   const [error, data] = await getQuestions();
   questions.questions = data;
 
@@ -190,6 +196,6 @@ onMounted(async () => {
 
   await setSelectedQuestion(selectedQuestionId.value);
 
-  isLoaded.loaded = true;
+  isLoading.loading = false;
 });
 </script>
