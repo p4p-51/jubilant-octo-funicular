@@ -14,8 +14,8 @@
       <p class="star-title"><b>R</b>esult</p>
       <p class="star-content">{{ response.answer.r }}</p>
       <div class="buttons-container">
-        <button><img src="@/assets/icons/edit.svg" /></button>
-        <button><img src="@/assets/icons/delete.svg" /></button>
+        <button><img class="edit" src="@/assets/icons/edit.svg" /></button>
+        <button><img class="delete" src="@/assets/icons/delete.svg" /></button>
       </div>
     </div>
   </div>
@@ -94,6 +94,33 @@
       display: flex;
       justify-content: end;
       align-items: center;
+
+      column-gap: 15px;
+
+      button {
+        border-radius: 100%;
+
+        border: solid 2px $c-grey-light;
+
+        padding: 0;
+
+        height: 32px;
+        width: 32px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          height: 16px;
+          width: 16px;
+        }
+
+        .edit {
+          height: 14px;
+          width: 14px;
+        }
+      }
     }
   }
 }
