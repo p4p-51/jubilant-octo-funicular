@@ -19,6 +19,7 @@
       </div>
     </div>
   </div>
+  <confirmation-popup />
 </template>
 
 <style lang="scss" scoped>
@@ -135,10 +136,13 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import Question from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
 import { Experience, Answer } from "@/types/Question.interface";
+import ConfirmationPopup from "./popups/ConfirmationPopup.vue";
 
 export default defineComponent({
   name: "CollapsibleResponse",
-  components: {},
+  components: {
+    ConfirmationPopup,
+  },
   data() {
     return {
       isOpen: false,
