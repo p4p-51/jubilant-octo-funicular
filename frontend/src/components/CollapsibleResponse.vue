@@ -14,7 +14,9 @@
       <p class="star-title"><b>R</b>esult</p>
       <p class="star-content">{{ response.answer.r }}</p>
       <div class="buttons-container">
-        <button><img class="edit" src="@/assets/icons/edit.svg" /></button>
+        <button @click="this.$emit('edit')">
+          <img class="edit" src="@/assets/icons/edit.svg" />
+        </button>
         <button @click="promptConfirmation()">
           <img class="delete" src="@/assets/icons/delete.svg" />
         </button>

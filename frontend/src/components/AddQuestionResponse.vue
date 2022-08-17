@@ -5,6 +5,7 @@
       v-if="editMode === false && question.answerCount > 0"
       :answers="getAnswers()"
       @newResponse="createNewResponse"
+      @edit="editResponse"
     />
     <experience-select
       v-else-if="selectedExperienceId === null"
@@ -74,6 +75,11 @@ export default defineComponent({
     },
   },
   methods: {
+    editResponse(res: Answer) {
+      console.log(res.experience?.experienceId);
+      this.editMode = true;
+      this.selectedExperienceId = res.experience!.experienceId!;
+    },
     getSelectedQuestion(id: number) {
       return this.question.experiences.find((q) => q.experienceId == id);
     },
