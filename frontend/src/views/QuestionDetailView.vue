@@ -24,6 +24,7 @@
           :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
           @saveResponse="saveResponse"
+          @deleteResponse="deleteResponse"
         />
         <!-- <button @click="goToGrad" class="go-button">
           Save and continue ->
@@ -108,7 +109,7 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
 import { useRoute, useRouter } from "vue-router";
-import { getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
+import { deleteAnswer, getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
 const router = useRouter();
 const route = useRoute();
 
@@ -116,6 +117,23 @@ const goToGrad = () => {
   router.push("/"); // redirect to home
 };
 
+const deleteResponse = async (answer: Answer) => {
+  isLoading.loading = true;
+  const [error, data] = await deleteAnswer(
+    answer.questionId!,
+    answer.experienceId,
+  );
+  selectedQuestion.value!.answers = selectedQuestion.value?.answers?.filter(
+    (ans) => {
+      return !(
+        ans.experienceId == answer.experienceId &&
+        ans.questionId == answer.questionId
+      );
+    },
+  );
+  selectedQuestion.value!.answerCount--;
+  isLoading.loading = false;
+};
 const saveResponse = (answer: Answer, isEdit: boolean) => {
   if (!isEdit) {
     selectedQuestion.value!.answers!.push(answer);

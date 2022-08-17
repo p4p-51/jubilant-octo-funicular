@@ -7,6 +7,7 @@
       :key="key"
       :response="res"
       @edit="this.$emit('edit', res)"
+      @delete="this.$emit('delete', res)"
     ></collapsible-response>
     <button class="add-response" @click="$emit('newResponse')">
       + Add a new response
@@ -16,6 +17,7 @@
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
 .collapsible-responses {
   margin-top: 50px;
 

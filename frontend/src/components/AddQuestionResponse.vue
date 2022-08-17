@@ -7,6 +7,7 @@
       :answers="getAnswers()"
       @newResponse="createNewResponse"
       @edit="editResponse"
+      @delete="deleteResponse"
     />
     <experience-select
       v-else-if="selectedExperienceId === null"
@@ -93,12 +94,14 @@ export default defineComponent({
       }
       this.isLoading = false;
     },
+    deleteResponse(response: Answer) {
+      this.$emit("deleteResponse", response);
+    },
     onExperienceClick(id: number) {
       console.log("this should be id", id);
       return (this.selectedExperienceId = id);
     },
     editResponse(res: Answer) {
-      console.log(res.experience?.experienceId);
       this.editMode = true;
       this.selectedExperienceId = res.experience!.experienceId!;
     },

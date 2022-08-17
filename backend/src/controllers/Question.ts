@@ -69,6 +69,26 @@ class QuestionController extends BaseController {
       return;
     }
   };
+
+  DeleteAnswer = async (req: Request, res: Response) => {
+    const userId: number = parseInt(res.locals["userId"]);
+    const questionId: number = parseInt(req.params["questionId"]);
+    const experienceId: number = parseInt(req.body["experienceId"]);
+
+    const success: boolean = await new UserService().pullFromUser(userId,
+      {
+        "answers": {
+            questionId,
+            experienceId
+        },
+      },
+    );
+
+    if (!success) {
+      httpResponse(res, 400, "Cannot delete")
+    }
+    res.status(200).json({success: true})
+  };
 }
 
 export { QuestionController };

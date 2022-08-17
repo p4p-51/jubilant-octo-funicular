@@ -151,9 +151,34 @@ router.get('/', questionController.GetQuestionsWithExperiences);
  *              properties:
  *                success:
  *                  type: boolean
+ *
+ *  delete:
+ *    tags:
+ *      - Questions
+ *    description: Delete an question's answer
+ *    parameters:
+ *      - $ref: '#/components/parameters/questionIdParam'
+ *    requestBody:
+ *      description: The experience id
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - experienceId
+ *            properties:
+ *              experienceId:
+ *                type: integer
+ *    responses:
+ *      200:
+ *        $ref: '#/components/responses/Success'
+ *      default:
+ *        $ref: '#/components/responses/DefaultError'
+ *
  */
-
 router.get('/:questionId/answers', questionController.GetAnswer);
 router.post('/:questionId/answers', questionController.AnswerQuestion);
+router.delete('/:questionId/answers', questionController.DeleteAnswer)
 
 export default router;

@@ -61,6 +61,17 @@ const submitAnswer = async (
   });
 };
 
+const deleteAnswer = async (
+  questionId: number,
+  experienceId: number,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "delete",
+    url: `/questions/${questionId}/answers`,
+    data: {experienceId},
+  });
+};
+
 const getLabels = async (): Promise<ApiResponse<any>> => {
   return await axiosCall({ method: "get", url: "/labels" });
 };
@@ -116,6 +127,7 @@ export {
   getQuestions,
   getQuestionAnswer,
   submitAnswer,
+  deleteAnswer,
   getLabels,
   putExperience,
   updateExperience,
