@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading.loading" />
   <div class="lecture-container">
     <title-block
       title="DIY Time!"
@@ -41,16 +42,21 @@
 import IntroDiy from "@/components/IntroDiy.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, ref, watch, reactive } from "vue";
 import { submitSelfIntro } from "@/apis/api";
 import { SelfIntro } from "@/types/User.interface";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 const introDiy = ref<SelfIntro>();
+const isLoading = reactive({ loading: false });
 
 const submitIntro = async () => {
+  isLoading.loading = true;
   const [error, data] = await submitSelfIntro({ ...introDiy.value! });
   if (error) {
     alert("intro update failed");
   }
+  isLoading.loading = false;
 };
 </script>
