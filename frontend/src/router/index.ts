@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { UsefulRoutes } from "./routes";
 import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -21,12 +22,9 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
   },
   {
-    path: "/questions",
-    name: "question bank",
-    component: () =>
-      import(
-        /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
-      ),
+    path: "/",
+    name: "home",
+    component: HomeView,
   },
   {
     path: "/settings",
@@ -34,70 +32,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "settings" */ "../views/pages/SettingsView.vue"
-      ),
+        ),
   },
   {
-    path: "/lecture",
-    name: "lecture",
+    path: "/plan/create",
+    name: "create your study plan",
     component: () =>
-      import(/* webpackChunkName: "lecture" */ "../views/LectureView.vue"),
-    children: [
-      {
-        path: "self-intro",
-        component: () =>
-          import(
-            "../views/pages/lectures/self-introduction/SelfIntroLectureView.vue"
-          ),
-      },
-      {
-        path: "self-intro/diy",
-        name: "self-intro/diy",
-        component: () =>
-          import(
-            /* webpackChunkName: "diy" */ "../views/pages/lectures/self-introduction/DIYTimeView.vue"
-          ),
-      },
-      {
-        path: "build-profile",
-        name: "build profile",
-        component: () =>
-          import(
-            /* webpackChunkName: "build-profile" */ "../views/pages/lectures/build-profile/BuildProfileView.vue"
-          ),
-      },
-      {
-        path: "structuring-responses",
-        component: () =>
-          import(
-            "../views/pages/lectures/structuring-responses/StructuringResponsesLectureView.vue"
-          ),
-      },
-      {
-        path: "add-answers",
-        name: "Add answer",
-        component: () =>
-          import(
-            /* webpackChunkName: "add" */ "../views/pages/lectures/add-answers/AddAnswerView.vue"
-          ),
-      },
-    ],
+      import(
+        /* webpackChunkName: "study-plan" */ "../views/CreatePlanView.vue"
+        ),
   },
-  // SEPARATOR (Above this line are tidied routes)
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/lecture/end",
-    name: "module-end",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "module-end" */ "../views/ModuleEndView.vue"),
-  },
-
   {
     path: "/plan/done",
     name: "study-plan",
@@ -110,24 +54,77 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "study-plan" */ "../views/LectureIntroView.vue"
-      ),
+        ),
   },
   {
-    path: "/plan/create",
-    name: "create your study plan",
+    path: "/lecture",
+    name: "lecture",
+    component: () =>
+      import(/* webpackChunkName: "lecture" */ "../views/LectureView.vue"),
+    children: [
+      {
+        path: ":moduleId/quiz/:type",
+        component: () =>
+          import(
+            "../views/QuizView.vue"
+            ),
+      },
+      {
+        path: ":moduleId/content",
+        component: () =>
+          import(
+            "../views/pages/lectures/self-introduction/SelfIntroLectureView.vue"
+            ),
+      },
+      {
+        path: ":moduleId/feedback",
+        component: () =>
+          import(
+            "../views/ModuleEndView.vue"
+            ),
+      },
+      //Special lecture routes
+      {
+        path: UsefulRoutes.selfIntroDiyRoute(),
+        component: () =>
+          import (
+            "../views/pages/lectures/self-introduction/DIYTimeView.vue"
+            )
+      },
+      {
+        path: UsefulRoutes.buildProfileRoute(),
+        name: "build profile",
+        component: () =>
+          import(
+            /* webpackChunkName: "build-profile" */ "../views/pages/lectures/build-profile/BuildProfileView.vue"
+            ),
+      },
+      {
+        path: UsefulRoutes.addAnswerRoute(),
+        component: () =>
+          import(
+            /* webpackChunkName: "add" */ "../views/pages/lectures/add-answers/AddAnswerView.vue"
+            ),
+      },
+    ],
+  },
+  // SEPARATOR (Above this line are tidied routes)
+
+  {
+    path: "/questions",
+    name: "question bank",
     component: () =>
       import(
-        /* webpackChunkName: "study-plan" */ "../views/CreatePlanView.vue"
-      ),
+        /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
+        ),
   },
-
   {
     path: "/questions/:id",
     name: "question detail",
     component: () =>
       import(
         /* webpackChunkName: "question-detail" */ "../views/QuestionDetailView.vue"
-      ),
+        ),
   },
   {
     path: "/graduation",
@@ -135,14 +132,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "graduation" */ "../views/GraduationView.vue"
-      ),
-  },
-
-  {
-    path: "/lecture/quiz",
-    name: "quiz",
-    component: () =>
-      import(/* webpackChunkName: "quiz" */ "../views/QuizView.vue"),
+        ),
   },
 ];
 
