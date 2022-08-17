@@ -20,6 +20,7 @@ class QuestionService {
   getAllQuestionWithExperiences = async (userId: number) => {
     const questionCollection = await MongoAdapter.getCollection("questions");
 
+
     return await questionCollection.aggregate([
       {
         $lookup: {
@@ -33,7 +34,6 @@ class QuestionService {
             },
             {
               $project: {
-                // Getting the number of answers for each question
                 "answerCount": {
                   $size: {
                     $filter: {
@@ -43,7 +43,6 @@ class QuestionService {
                     },
                   },
                 },
-                // Getting the relevant experiences
                 "filteredExp": {
                   $filter: {
                     input: "$experiences",
@@ -58,9 +57,6 @@ class QuestionService {
         },
       },
       {
-        $project: {
-          _id: 0,
-        },
         $addFields: {
           experiences: {
             $ifNull: [{ $first: "$user.filteredExp" }, []],
@@ -69,6 +65,11 @@ class QuestionService {
             $ifNull: [{ $first: "$user.answerCount" }, 0],
           },
         },
+      },
+      {
+        $project: {
+          _id: 0,
+        }
       },
     ]).toArray();
   };
