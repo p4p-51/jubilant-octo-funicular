@@ -143,7 +143,14 @@ export default defineComponent({
       if (error) {
         alert("cannot save answer");
       } else {
-        this.$emit("savedAnswer", answer, this.isEdit);
+        this.$emit(
+          "savedAnswer",
+          {
+            ...answer,
+            questionId: this.questionId,
+          },
+          this.isEdit,
+        );
       }
       this.isLoading = false;
     },

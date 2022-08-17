@@ -32,6 +32,7 @@
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
 .collapsible-response {
   border: solid 1px $c-grey-light;
   box-sizing: border-box;
@@ -162,6 +163,7 @@ export default defineComponent({
       this.isConfirming = true;
     },
     confirmDelete() {
+      this.isOpen = false;
       this.$emit("delete", this.response);
       this.isConfirming = false;
     },
