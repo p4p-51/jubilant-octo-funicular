@@ -21,7 +21,7 @@
       <div class="answer-column">
         <add-question-response
           v-if="isLoaded.loaded"
-          :question="selectedQuestion"
+          :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
           @saveResponse="saveResponse"
         />
