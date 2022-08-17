@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading.loading" />
   <div class="content-container">
     <div class="input-container">
       <h2>My self introduction</h2>
@@ -154,6 +155,8 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref, watch } from "vue";
 import { getSelfInto } from "@/apis/api";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 const body = ref<string>("");
 const attributes = ref([]);
@@ -168,6 +171,8 @@ const staticAttributes = [
   "hobbies",
 ];
 
+const isLoading = reactive({ loading: true });
+
 onMounted(async () => {
   const [error, intro] = await getSelfInto();
   if (error) {
@@ -178,6 +183,8 @@ onMounted(async () => {
     body.value = intro["body"];
     attributes.value = intro["attributes"];
   }
+
+  isLoading.loading = false;
 });
 
 // eslint-disable-next-line no-undef
