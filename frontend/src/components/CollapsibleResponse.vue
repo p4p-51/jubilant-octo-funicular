@@ -15,11 +15,17 @@
       <p class="star-content">{{ response.answer.r }}</p>
       <div class="buttons-container">
         <button><img class="edit" src="@/assets/icons/edit.svg" /></button>
-        <button><img class="delete" src="@/assets/icons/delete.svg" /></button>
+        <button @click="promptConfirmation()">
+          <img class="delete" src="@/assets/icons/delete.svg" />
+        </button>
       </div>
     </div>
   </div>
-  <confirmation-popup />
+  <confirmation-popup
+    v-if="isConfirming"
+    @yes="confirmDelete()"
+    @no="cancelDelete()"
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -146,7 +152,20 @@ export default defineComponent({
   data() {
     return {
       isOpen: false,
+      isConfirming: false,
     };
+  },
+  methods: {
+    promptConfirmation() {
+      this.isConfirming = true;
+    },
+    confirmDelete() {
+      this.$emit("delete", this.response);
+      this.isConfirming = false;
+    },
+    cancelDelete() {
+      this.isConfirming = false;
+    },
   },
   props: {
     response: {

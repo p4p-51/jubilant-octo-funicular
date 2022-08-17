@@ -5,8 +5,8 @@
         {{ text }}
       </h3>
       <div class="buttons" :class="{ reverse: reverseEmphasis }">
-        <button class="no">{{ noText }}</button>
-        <button class="yes">{{ yesText }}</button>
+        <button class="no" @click="this.$emit('no')">{{ noText }}</button>
+        <button class="yes" @click="this.$emit('yes')">{{ yesText }}</button>
       </div>
     </div>
   </div>
