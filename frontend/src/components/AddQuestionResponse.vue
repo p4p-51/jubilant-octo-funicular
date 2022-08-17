@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading" />
   <div class="add-question-response">
     <h2>{{ question.questionText }}</h2>
     <collapsible-responses
@@ -55,6 +56,8 @@ import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import CollapsibleResponses from "./CollapsibleResponses.vue";
 import ResponseInputs from "./ResponseInputs.vue";
 import { putExperience } from "@/apis/api";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default defineComponent({
   name: "AddQuestionResponse",
@@ -62,6 +65,7 @@ export default defineComponent({
     ExperienceSelect,
     CollapsibleResponses,
     ResponseInputs,
+    Loading,
   },
   computed: {
     emptyExperiences(): Experience[] {
@@ -79,6 +83,7 @@ export default defineComponent({
   },
   methods: {
     async saveExperience(newExperience: Experience) {
+      this.isLoading = true;
       const [error, data] = await putExperience(newExperience);
       if (error) {
         alert("Cannot create new experience");
@@ -86,6 +91,7 @@ export default defineComponent({
         newExperience.experienceId = data.experienceId;
         this.question.experiences.push(newExperience);
       }
+      this.isLoading = false;
     },
     onExperienceClick(id: number) {
       console.log("this should be id", id);
@@ -128,6 +134,7 @@ export default defineComponent({
       selectedExperienceId: null as number | null,
       editMode: false as boolean,
       question: this.initialQuestion,
+      isLoading: false,
     };
   },
   props: {
