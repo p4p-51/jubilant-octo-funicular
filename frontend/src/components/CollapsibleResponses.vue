@@ -6,6 +6,7 @@
       v-for="(res, key) in answers"
       :key="key"
       :response="res"
+      @edit="this.$emit('edit', res)"
     ></collapsible-response>
     <button class="add-response" @click="$emit('newResponse')">
       + Add a new response
