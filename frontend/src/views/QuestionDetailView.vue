@@ -21,7 +21,7 @@
       <div class="answer-column">
         <add-question-response
           v-if="isLoaded.loaded"
-          :question="selectedQuestion"
+          :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
           @saveResponse="saveResponse"
         />
@@ -168,7 +168,21 @@ const setSelectedQuestion = async (questionId: number) => {
 onMounted(async () => {
   const [error, data] = await getQuestions();
   questions.questions = data;
+
+  let doesQuestionExist = false;
   selectedQuestionId.value = parseInt(route.params.id as unknown as string);
+
+  questions.questions.forEach((q) => {
+    if (q.questionId == selectedQuestionId.value) {
+      doesQuestionExist = true;
+    }
+  });
+
+  console.log("question does exist", doesQuestionExist);
+  if (!doesQuestionExist) {
+    router.push("/questions");
+  }
+
   await setSelectedQuestion(selectedQuestionId.value);
 
   isLoaded.loaded = true;

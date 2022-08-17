@@ -10,7 +10,8 @@
     <experience-select
       v-else-if="selectedExperienceId === null"
       :initialExperiences="emptyExperiences"
-      @onExperienceClick="(id) => (this.selectedExperienceId = id)"
+      @onExperienceClick="onExperienceClick"
+      @saveExperience="saveExperience"
     />
     <response-inputs
       v-else
@@ -53,6 +54,7 @@ import { defineComponent, PropType } from "vue";
 import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import CollapsibleResponses from "./CollapsibleResponses.vue";
 import ResponseInputs from "./ResponseInputs.vue";
+import { putExperience } from "@/apis/api";
 
 export default defineComponent({
   name: "AddQuestionResponse",
@@ -63,6 +65,7 @@ export default defineComponent({
   },
   computed: {
     emptyExperiences(): Experience[] {
+      console.log("anythingv");
       return this.question.experiences.filter((experience) => {
         let found = false;
         this.question.answers?.forEach((answer) => {
@@ -75,12 +78,27 @@ export default defineComponent({
     },
   },
   methods: {
+    async saveExperience(newExperience: Experience) {
+      const [error, data] = await putExperience(newExperience);
+      if (error) {
+        alert("Cannot create new experience");
+      } else {
+        newExperience.experienceId = data.experienceId;
+        this.question.experiences.push(newExperience);
+      }
+    },
+    onExperienceClick(id: number) {
+      console.log("this should be id", id);
+      return (this.selectedExperienceId = id);
+    },
     editResponse(res: Answer) {
       console.log(res.experience?.experienceId);
       this.editMode = true;
       this.selectedExperienceId = res.experience!.experienceId!;
     },
     getSelectedQuestion(id: number) {
+      console.log("getSelected question id", id);
+      console.log("getSelected question exp", this.question.experiences);
       return this.question.experiences.find((q) => q.experienceId == id);
     },
     getAnswers(): Answer[] {
@@ -109,10 +127,11 @@ export default defineComponent({
     return {
       selectedExperienceId: null as number | null,
       editMode: false as boolean,
+      question: this.initialQuestion,
     };
   },
   props: {
-    question: {
+    initialQuestion: {
       type: Object as PropType<QuestionResponse>,
       required: true,
     },

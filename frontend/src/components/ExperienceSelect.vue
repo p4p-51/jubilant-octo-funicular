@@ -103,16 +103,15 @@ export default defineComponent({
   },
   async mounted() {
     const [labelError, labels] = await getLabels();
-    const [expError, experiences] = await getExperiences();
-    if (labelError || expError) {
+    // const [expError, experiences] = await getExperiences();
+    if (labelError) {
       alert("Error");
     }
     this.labels = labels;
-    this.experiences = experiences;
+    // this.experiences = experiences;
   },
   data() {
     return {
-      experiences: this.initialExperiences,
       isModalOpen: false,
       selectedExperience: null as Experience | null,
       labels: [] as Label[],
@@ -129,34 +128,20 @@ export default defineComponent({
       this.isModalOpen = true;
     },
     async saveExperience(newExperience: Experience) {
-      if (newExperience.experienceId) {
-        const oldExp = this.experiences.find(
-          (e) => e.experienceId == newExperience.experienceId,
-        );
-
-        let update: { name?: string } = {};
-        if (oldExp!.name != newExperience.name) {
-          oldExp!.name = newExperience.name;
-          update["name"] = newExperience.name;
-        }
-        oldExp!.labels = newExperience.labels;
-        const [error, data] = await updateExperience(oldExp!.experienceId!, {
-          ...update,
-          labels: oldExp!.labels,
-        });
-        if (error) {
-          alert("Updating experience failed");
-        }
+      const [error, data] = await putExperience(newExperience);
+      if (error) {
+        alert("Cannot create new experience");
       } else {
-        const [error, data] = await putExperience(newExperience);
-        if (error) {
-          alert("Cannot create new experience");
-        } else {
-          newExperience.experienceId = data.experienceId;
-          this.experiences.push(newExperience);
-        }
+        newExperience.experienceId = data.experienceId;
+        // this.experiences.push(newExperience);
+        this.$emit("saveExperience", newExperience);
       }
       this.isModalOpen = false;
+    },
+  },
+  computed: {
+    experiences() {
+      return this.initialExperiences;
     },
   },
   props: {
