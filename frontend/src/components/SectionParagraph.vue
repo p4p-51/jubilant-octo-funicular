@@ -1,8 +1,8 @@
 <template>
   <div class="section-paragraph">
-    <SectionTitle> {{ title }} </SectionTitle>
-
-    <p>
+    <SectionTitle> {{ title }}</SectionTitle>
+    <p v-if="this.body != null" v-html="this.body" />
+    <p v-else>
       <slot />
     </p>
   </div>
@@ -21,12 +21,17 @@ p {
 <script lang="ts">
 import { defineComponent } from "vue";
 import SectionTitle from "./SectionTitle.vue";
+
 export default defineComponent({
   name: "SectionParagraph",
   props: {
     title: {
       type: String,
       required: true,
+    },
+    body: {
+      type: String,
+      default: null,
     },
   },
   components: {

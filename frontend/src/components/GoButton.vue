@@ -1,26 +1,26 @@
 <template>
   <button class="go-button" @click="submit">
-    {{text}}
+    {{ text }}
   </button>
 </template>
 
 <script lang="ts" setup>
 import { RoutesManager } from "@/router/routes";
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute } from "vue-router";
+import { defineProps } from "vue";
 
 const props = defineProps({
   text: {
     type: String,
-    default: "All done!! ->"
+    default: "All done!! ->",
   },
-})
+});
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
 const submit = async () => {
-  const nextRoute = await  RoutesManager.nextLocation(route.fullPath)
-  await router.push(nextRoute)
-}
-
+  const nextRoute = await RoutesManager.nextLocation(route.fullPath);
+  await router.push(nextRoute);
+};
 </script>

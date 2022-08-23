@@ -1,5 +1,5 @@
 <template>
-  <progress-side-bar :modules="modules"></progress-side-bar>
+<!--  <progress-side-bar :modules="modules"></progress-side-bar>-->
   <div class="quiz-view">
     <title-block v-bind="titleBlock" />
     <div class="content-container">
@@ -68,7 +68,6 @@ import QuestionForQuiz from "@/types/QuizQuestion.interface";
 import { DataExtractor, IModuleId, RoutesManager } from "@/router/routes";
 import GoButton from "@/components/GoButton.vue";
 
-
 export default defineComponent({
   name: "QuizView",
   components: {
@@ -100,7 +99,10 @@ export default defineComponent({
     }
 
     try {
-      this.quizQuestions = DataExtractor.getQuizQuestions(this.moduleId, this.type);
+      this.quizQuestions = DataExtractor.getQuizQuestions(
+        this.moduleId,
+        this.type,
+      );
     } catch {
       console.log("Cannot get questions for module");
       this.$router.push("/");
@@ -114,7 +116,7 @@ export default defineComponent({
         module: "",
         title: "",
         subtitle: "",
-      } as { module: string, title: string, subtitle: string },
+      } as { module: string; title: string; subtitle: string },
       modules: [
         {
           name: "Self introduction",

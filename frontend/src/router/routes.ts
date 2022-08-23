@@ -115,7 +115,86 @@ const routeData = {
         },
         {
           route: "content",
-          content: {},
+          content: [
+            {
+              type: "TitleBlock",
+              props: {
+                title: "What makes a good self introduction?",
+                subtitle: "How to introduce yourself in a hurry",
+                module: "Self introduction",
+                body:
+                  "The aim of this module is for you to understand how the answer the age old\n" +
+                  "      question - “Tell me about yourself”. While not explicitly a behavioural\n" +
+                  "      interview questions, it’ll almost certainly be the first question you’re\n" +
+                  "      asked during an interview.\n" +
+                  "      <br />\n" +
+                  "      First, we must understand what is a elevator pitch elements of a ‘good’\n" +
+                  "      answer and how it can be structured to impress your interviewer.\n" +
+                  "      <br />\n" +
+                  "      By this end of this module, you’ll have understood the structure of how to\n" +
+                  "      answer, gone through a couple of examples and multiple choice questions,\n" +
+                  "      and lastly, written your own compelling self introduction.",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What is an elevator pitch?",
+                body:
+                  " It's a short, memorable description of what you do, your experiences, and\n" +
+                  "      … The goal is for the recruiter to understand you and your background\n" +
+                  "      beyond your CV. Recruiters may also use your answer as a segway for follow\n" +
+                  "      up questions, diving deepering into your history and what makes you tick.",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What should I include?",
+                body:
+                  "It is recommended that your answer includes the following, introduction,\n" +
+                  "      your past, present, and future, while coviering a range of topics\n" +
+                  "      including relevant job experiences, hobbies, passion etc. <br /><br />Your\n" +
+                  "      introduction should include your name, education and the role you’re\n" +
+                  "      applying for. This is just to make sure that you’re speaking to the right\n" +
+                  "      person for the right role. <br /><br />“The past” section is for you to\n" +
+                  "      tell them how you got to were you are now. Here you could mention any\n" +
+                  "      previous job or internship experiences and/or why you decided to study\n" +
+                  "      your chosen degree.<br /><br />“The present” should focus on where you are\n" +
+                  "      now, are you currently studying or working, what are your hobbies and\n" +
+                  "      interests are outside of study or work, or perhaps a recent\n" +
+                  "      accomplishment. <br /><br />“The future” is about your goals and\n" +
+                  "      aspirations. How does the job help you reach that goal? <br /><br />This\n" +
+                  "      isn’t the only way to build your response, of course, and you can tweak it\n" +
+                  "      as you see fit. If there’s a particularly potent story about what brought\n" +
+                  "      you into this field, for example, you might decide to start with that\n" +
+                  "      “past” story and then get into what you’re doing in the present.<br /><br />Whatever\n" +
+                  "      order you pick, make sure you ultimately tie it to the job and company.\n" +
+                  "      You want to be absolutely certain your interviewer is left with the\n" +
+                  "      impression that it “makes sense that [you’re] sitting here talking to me\n" +
+                  "      about this role.”<br /><br />Aim for it to be between a minute or two, any\n" +
+                  "      longer and the recruit will begin to lose interest. <br /><br />You should\n" +
+                  "      practice your introduction but you don’t want to memeorise it word for\n" +
+                  "      work. Otherwise it’ll come off robotic and unnatural. Keep memorisation to\n" +
+                  "      the key points if necessary. <br />\n" +
+                  "      <br />\n" +
+                  "      Additional resources.<br />\n" +
+                  "      <a\n" +
+                  "        href=\"https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself\"\n" +
+                  "      >https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself </a\n" +
+                  "      ><br />\n" +
+                  "      <a\n" +
+                  "        href=\"https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples\"\n" +
+                  "      >https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples</a\n" +
+                  "      ><br />\n" +
+                  "      <a\n" +
+                  "        href=\"https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself\"\n" +
+                  "      >\n" +
+                  "        https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a\n" +
+                  "      ><br />",
+              },
+            },
+          ],
         },
         {
           route: "diy",
@@ -138,7 +217,7 @@ const routeData = {
           content: {},
         },
         {
-          route: "information",
+          route: "content",
           content: {},
         },
         {
@@ -162,7 +241,7 @@ const routeData = {
           content: {},
         },
         {
-          route: "information",
+          route: "content",
           content: {},
         },
         {
@@ -186,7 +265,7 @@ const routeData = {
           content: {},
         },
         {
-          route: "information",
+          route: "content",
           content: {},
         },
         {
@@ -266,11 +345,25 @@ class DataExtractor {
     const data = routeData["lecture"][moduleId]["stages"];
 
     const stage = data.find((stage) => {
-      return (stage.route = `quiz/${type}`);
+      return stage.route == `quiz/${type}`;
     });
 
     return stage!["content"] as QuestionForQuiz;
   };
+
+  static getModuleContent = (moduleId: IModuleId) => {
+    const data = routeData["lecture"][moduleId]["stages"];
+
+    const stage = data.find((stage) => {
+      return stage.route == "content";
+    });
+
+    return stage!["content"];
+  };
+
+  static progressBar = () => {
+
+  }
 }
 
 export { routeData, RoutesManager, DataExtractor };

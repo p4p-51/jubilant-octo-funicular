@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "settings" */ "../views/pages/SettingsView.vue"
-      ),
+        ),
   },
   {
     path: "/plan/create",
@@ -39,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "study-plan" */ "../views/CreatePlanView.vue"
-      ),
+        ),
   },
   {
     path: "/plan/done",
@@ -53,7 +53,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "study-plan" */ "../views/LectureIntroView.vue"
-      ),
+        ),
   },
   {
     path: "/lecture",
@@ -68,9 +68,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: ":moduleId/content",
         component: () =>
-          import(
-            "../views/pages/lectures/self-introduction/SelfIntroLectureView.vue"
-          ),
+          import("../views/pages/lectures/LectureContentView.vue"),
       },
       {
         path: ":moduleId/feedback",
@@ -88,14 +86,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import(
             /* webpackChunkName: "build-profile" */ "../views/pages/lectures/build-profile/BuildProfileView.vue"
-          ),
+            ),
       },
       {
         path: RoutesManager.addAnswerRoute(),
         component: () =>
           import(
             /* webpackChunkName: "add" */ "../views/pages/lectures/add-answers/AddAnswerView.vue"
-          ),
+            ),
       },
     ],
   },
@@ -107,7 +105,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "question-bank" */ "../views/QuestionBankView.vue"
-      ),
+        ),
   },
   {
     path: "/questions/:id",
@@ -115,7 +113,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "question-detail" */ "../views/QuestionDetailView.vue"
-      ),
+        ),
   },
   {
     path: "/graduation",
@@ -123,7 +121,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(
         /* webpackChunkName: "graduation" */ "../views/GraduationView.vue"
-      ),
+        ),
   },
 ];
 
