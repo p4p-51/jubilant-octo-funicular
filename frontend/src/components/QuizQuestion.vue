@@ -2,7 +2,7 @@
   <div class="quiz-question" :class="{ disable: show }">
     <h6>Question {{ questionNumber }}</h6>
 
-    <h3>What is the best way to learn Vue?</h3>
+    <h3>{{question.title}}</h3>
 
     <div class="options">
       <quiz-option
