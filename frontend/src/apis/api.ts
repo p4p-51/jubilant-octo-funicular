@@ -122,6 +122,17 @@ const submitSelfIntro = async (intro: SelfIntro): Promise<ApiResponse<any>> => {
   });
 };
 
+const trackProgress = async (
+  moduleId: string,
+  stage: number,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "post",
+    url: "/users/me/complete",
+    data: { moduleId, stage },
+  });
+};
+
 export {
   registerUser,
   getQuestions,
@@ -135,4 +146,5 @@ export {
   deleteExperience,
   getSelfInto,
   submitSelfIntro,
+  trackProgress,
 };

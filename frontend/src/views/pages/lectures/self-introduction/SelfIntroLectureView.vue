@@ -65,9 +65,7 @@
         https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a
       ><br />
     </section-paragraph>
-    <button class="go-button" @click="this.$router.push('self-intro/diy')">
-      Gotcha! ->
-    </button>
+    <go-button class="go-button" />
   </div>
 </template>
 
@@ -80,10 +78,11 @@ import SectionParagraph from "@/components/SectionParagraph.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
+import GoButton from "@/components/GoButton.vue";
 
 export default defineComponent({
   name: "SelfIntroLectureView",
-  components: { TitleBlock, SectionParagraph },
+  components: { TitleBlock, SectionParagraph, GoButton },
   data() {
     return {
       modules: [

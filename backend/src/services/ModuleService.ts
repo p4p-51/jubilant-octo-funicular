@@ -26,7 +26,7 @@ class ModuleService {
         },
         {
           $lookup: {
-            from: "currentModuleStage",
+            from: "moduleStage",
             localField: "nextStage",
             foreignField: "_id",
             as: "nextStage",

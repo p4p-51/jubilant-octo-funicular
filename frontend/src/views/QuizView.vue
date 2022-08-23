@@ -11,9 +11,7 @@
         :key="i"
       />
     </div>
-    <button class="go-button" @click="this.$router.push('/lecture/end')">
-      All done! ->
-    </button>
+    <go-button class="go-button" />
   </div>
 </template>
 
@@ -67,12 +65,14 @@ import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
-import { DataExtractor, IModuleId } from "@/router/routes";
+import { DataExtractor, IModuleId, RoutesManager } from "@/router/routes";
+import GoButton from "@/components/GoButton.vue";
 
 
 export default defineComponent({
   name: "QuizView",
   components: {
+    GoButton,
     TitleBlock,
     QuizQuestion,
     ProgressSideBar,

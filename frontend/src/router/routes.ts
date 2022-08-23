@@ -1,13 +1,14 @@
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
+import { trackProgress } from "@/apis/api";
 
-const routesManager = {
-  "lecture": {
+const routeData = {
+  lecture: {
     "self-intro": {
       route: "self-intro",
       stages: [
         {
-          "route": "quiz/prelim",
-          "content": [
+          route: "quiz/prelim",
+          content: [
             {
               title: "Self-intro 1",
               options: [
@@ -113,124 +114,163 @@ const routesManager = {
           ] as QuestionForQuiz[],
         },
         {
-          "route": "information",
-          "content": {},
+          route: "content",
+          content: {},
         },
         {
-          "route": "diy",
-          "content": {},
+          route: "diy",
+          content: {},
         },
         {
-          "route": "quiz/end",
-          "content": {},
+          route: "quiz/end",
+          content: {},
         },
         {
-          "route": "feedback",
+          route: "feedback",
         },
       ],
     },
-    "experiences": {
+    experiences: {
       route: "experiences",
       stages: [
         {
-          "route": "quiz/prelim",
-          "content": {},
+          route: "quiz/prelim",
+          content: {},
         },
         {
-          "route": "information",
-          "content": {},
+          route: "information",
+          content: {},
         },
         {
-          "route": "build-profile",
-          "content": {},
+          route: "build-profile",
+          content: {},
         },
         {
-          "route": "quiz/end",
-          "content": {},
+          route: "quiz/end",
+          content: {},
         },
         {
-          "route": "feedback",
+          route: "feedback",
         },
       ],
     },
-    "responses": {
+    responses: {
       route: "responses",
       stages: [
         {
-          "route": "quiz/prelim",
-          "content": {},
+          route: "quiz/prelim",
+          content: {},
         },
         {
-          "route": "information",
-          "content": {},
+          route: "information",
+          content: {},
         },
         {
-          "route": "add-answer",
-          "content": {},
+          route: "add-answer",
+          content: {},
         },
         {
-          "route": "quiz/end",
-          "content": {},
+          route: "quiz/end",
+          content: {},
         },
         {
-          "route": "feedback",
+          route: "feedback",
         },
       ],
     },
-    "mannerism": {
+    mannerism: {
       route: "mannerism",
       stages: [
         {
-          "route": "quiz/prelim",
-          "content": {},
+          route: "quiz/prelim",
+          content: {},
         },
         {
-          "route": "information",
-          "content": {},
+          route: "information",
+          content: {},
         },
         {
-          "route": "quiz/end",
-          "content": {},
+          route: "quiz/end",
+          content: {},
         },
         {
-          "route": "feedback",
+          route: "feedback",
         },
       ],
     },
   },
 };
 
-export type IModuleId = keyof typeof routesManager["lecture"]
+export type IModuleId = keyof typeof routeData["lecture"];
 
-class UsefulRoutes {
-  static fullRoute = (moduleId: IModuleId, stage: number) => {
-    const base = routesManager["lecture"][moduleId];
+class RoutesManager {
+  static fullLectureRoute = (moduleId: IModuleId, stage: number) => {
+    const base = routeData["lecture"][moduleId];
     return `${base["route"]}/${base["stages"][stage - 1]["route"]}`;
   };
 
   static selfIntroDiyRoute = () => {
-    return UsefulRoutes.fullRoute("self-intro", 3);
+    return RoutesManager.fullLectureRoute("self-intro", 3);
   };
 
   static buildProfileRoute = () => {
-    return UsefulRoutes.fullRoute("experiences", 3);
+    return RoutesManager.fullLectureRoute("experiences", 3);
   };
 
   static addAnswerRoute() {
-    return UsefulRoutes.fullRoute("responses", 3);
+    return RoutesManager.fullLectureRoute("responses", 3);
+  }
+
+  static async nextLocation(currentRoute: string): Promise<string> {
+    // the Full route will look something like
+    // /lecture/:moduleId/:something
+    // we need to convert this into moduleId and stage number
+
+    const arr = currentRoute.split("/");
+    // Remove leading "/"
+    arr.splice(0, 1);
+    const paths = arr.splice(0, 2);
+    paths.push(arr.join("/"));
+
+    const stages = routeData["lecture"][paths[1] as IModuleId]["stages"];
+
+    const stage = stages.findIndex((stage) => {
+      return stage.route == paths[2];
+    });
+
+    // Stage number id 1-indexed
+    const [error, data] = await trackProgress(paths[1], stage + 1);
+    if (error) {
+      alert(JSON.stringify(error));
+      return "/";
+    }
+    const nextModuleStage = data.nextStage;
+
+    if (nextModuleStage["moduleId"] == "grad") {
+      return "/graduation";
+    }
+
+    const nextRoute = RoutesManager.fullLectureRoute(
+      nextModuleStage["moduleId"],
+      nextModuleStage["stage"],
+    );
+    return `/lecture/${nextRoute}`;
   }
 }
 
 class DataExtractor {
-  static getQuizQuestions = (moduleId: IModuleId, type: string): QuestionForQuiz => {
-    const data = routesManager["lecture"][moduleId]["stages"];
+  static getQuizQuestions = (
+    moduleId: IModuleId,
+    type: string,
+  ): QuestionForQuiz => {
+    const data = routeData["lecture"][moduleId]["stages"];
 
     const stage = data.find((stage) => {
-      return stage.route = `quiz/${type}`;
+      return (stage.route = `quiz/${type}`);
     });
 
     return stage!["content"] as QuestionForQuiz;
   };
 }
 
-export { routesManager, UsefulRoutes, DataExtractor };
+export { routeData, RoutesManager, DataExtractor };
