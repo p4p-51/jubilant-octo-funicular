@@ -1,13 +1,16 @@
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
 import { trackProgress } from "@/apis/api";
+import ModuleStatus from "@/types/ModuleStatus.interface";
 
 const routeData = {
   lecture: {
     "self-intro": {
       route: "self-intro",
+      name: "Self Introduction",
       stages: [
         {
           route: "quiz/prelim",
+          name: "Preliminary Quiz",
           content: [
             {
               title: "Self-intro 1",
@@ -115,6 +118,7 @@ const routeData = {
         },
         {
           route: "content",
+          name: "Lecture",
           content: [
             {
               type: "TitleBlock",
@@ -198,82 +202,102 @@ const routeData = {
         },
         {
           route: "diy",
+          name: "Your own Intro!",
           content: {},
         },
         {
           route: "quiz/end",
+          name: "Review Quiz",
           content: {},
         },
         {
           route: "feedback",
+          name: "Feedback",
         },
       ],
     },
     experiences: {
       route: "experiences",
+      name: "Organising Past Experiences",
       stages: [
         {
           route: "quiz/prelim",
+          name: "Preliminary Quiz",
           content: {},
         },
         {
           route: "content",
+          name: "Lecture",
           content: {},
         },
         {
           route: "build-profile",
+          name: "Build your own profile",
           content: {},
         },
         {
           route: "quiz/end",
+          name: "Review Quiz",
           content: {},
         },
         {
           route: "feedback",
+          name: "Feedback",
         },
       ],
     },
     responses: {
       route: "responses",
+      name: "How to respond",
       stages: [
         {
           route: "quiz/prelim",
+          name: "Preliminary Quiz",
           content: {},
         },
         {
           route: "content",
+          name: "lecture",
           content: {},
         },
         {
           route: "add-answer",
+          name: "Add your own responses",
           content: {},
         },
         {
           route: "quiz/end",
+          name: "Review Quiz",
           content: {},
         },
         {
           route: "feedback",
+          name: "Feedback",
         },
       ],
     },
     mannerism: {
       route: "mannerism",
+      name: "Mannerisms",
       stages: [
         {
           route: "quiz/prelim",
+          name: "Prelimanry Quiz",
           content: {},
         },
         {
           route: "content",
+          name: "Lecture",
           content: {},
         },
         {
           route: "quiz/end",
+          name: "Review Quiz",
           content: {},
         },
         {
           route: "feedback",
+          name: "Feedback",
         },
       ],
     },
@@ -361,9 +385,33 @@ class DataExtractor {
     return stage!["content"];
   };
 
-  static progressBar = () => {
+  static progressBar = (): ModuleStatus[] => {
+    const modules: ModuleStatus[] = [];
 
-  }
+    for (const [key, value] of Object.entries(routeData["lecture"])) {
+      const module: ModuleStatus = {
+        id: key,
+        name: value["name"],
+        status: "done",
+        url: `/lecture/${value["route"]}`,
+      };
+
+      module["children"] = value["stages"].map((stage) => {
+        const child: ModuleStatus = {
+          id: stage["route"],
+          name: stage["name"],
+          status: "done",
+          url: `${module["url"]}/${stage['route']}`
+        }
+
+        return child
+      })
+
+      modules.push(module)
+    }
+
+    return modules;
+  };
 }
 
 export { routeData, RoutesManager, DataExtractor };

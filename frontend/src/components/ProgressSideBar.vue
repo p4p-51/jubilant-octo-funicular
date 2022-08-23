@@ -22,16 +22,25 @@
 </template>
 
 <script lang="ts">
+import { DataExtractor } from "@/router/routes";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "ProgressSideBar",
   props: {
-    modules: {
-      type: Array as PropType<ModuleStatus[]>,
-      required: true,
-    },
+    // modules: {
+    //   type: Array as PropType<ModuleStatus[]>,
+    //   required: true,
+    // },
+  },
+  data(){
+    return {
+      modules: [] as ModuleStatus[]
+    }
+  },
+  mounted() {
+     this.modules = DataExtractor.progressBar()
   },
 });
 </script>
