@@ -22,25 +22,22 @@
 </template>
 
 <script lang="ts">
-import { DataExtractor } from "@/router/routes";
+import { DataExtractor, RoutesManager } from "@/router/routes";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent, PropType } from "vue";
+import { routeStore } from "@/router/route.store";
 
 export default defineComponent({
   name: "ProgressSideBar",
-  props: {
-    // modules: {
-    //   type: Array as PropType<ModuleStatus[]>,
-    //   required: true,
-    // },
-  },
-  data(){
+  props: {},
+  data() {
     return {
-      modules: [] as ModuleStatus[]
-    }
+      modules: [] as ModuleStatus[],
+    };
   },
   mounted() {
-     this.modules = DataExtractor.progressBar()
+    routeStore.update(RoutesManager.pathToModuleStage(this.$route.fullPath))
+    this.modules = DataExtractor.progressBar();
   },
 });
 </script>
@@ -110,6 +107,7 @@ export default defineComponent({
 
   .done {
     color: rgba($c-primary, 0.3);
+
     a {
       color: rgba($c-primary, 0.3);
     }

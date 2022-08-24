@@ -25,7 +25,7 @@
       sausage kielbasa ground round alcatra shank.
     </TitleBlock>
     <add-experiences />
-    <button @click="goToQuestions" class="go-button">Save and continue</button>
+    <go-button class="go-button">Save and continue</go-button>
   </div>
 </template>
 
@@ -53,8 +53,8 @@
 
 <script lang="ts">
 import TitleBlock from "@/components/TitleBlock.vue";
-
 import AddExperiences from "@/components/AddExperiences.vue";
+import GoButton from "@/components/GoButton.vue"
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 
@@ -63,6 +63,7 @@ export default defineComponent({
   components: {
     TitleBlock,
     AddExperiences,
+    GoButton,
   },
   methods: {
     goToQuestions() {

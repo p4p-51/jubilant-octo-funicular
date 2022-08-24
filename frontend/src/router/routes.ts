@@ -391,6 +391,10 @@ class DataExtractor {
   static progressBar = (): ModuleStatus[] => {
     const modules: ModuleStatus[] = [];
 
+    let found = false;
+    let status: ModuleStatus["status"] = found ? "future" : "done";
+    let moduleStatus: ModuleStatus["status"] = found ? "future" : "done";
+
     for (const [key, value] of Object.entries(routeData["lecture"])) {
       const module: ModuleStatus = {
         id: key,
@@ -399,17 +403,25 @@ class DataExtractor {
         url: `/lecture/${value["route"]}`,
       };
 
-      module["children"] = value["stages"].map((stage) => {
+      module["children"] = value["stages"].map((stage, index) => {
+        if (index + 1 == routeStore.stage && key == routeStore.moduleId) {
+          found = true;
+          status = "current";
+          moduleStatus = "current";
+        }
         const child: ModuleStatus = {
           id: stage["route"],
           name: stage["name"],
-          status: "done",
+          status: status,
           url: `${module["url"]}/${stage["route"]}`,
         };
 
+        status = found ? "future" : "done";
         return child;
       });
 
+      module["status"] = moduleStatus;
+      moduleStatus = found ? "future" : "done";
       modules.push(module);
     }
 
