@@ -34,7 +34,7 @@ const axiosCall = async <T>(
 };
 
 const registerUser = async (): Promise<ApiResponse<any>> => {
-  return await axiosCall({ method: "get", url: "/users/register" });
+  return await axiosCall({ method: "post", url: "/users/register" });
 };
 
 const getQuestions = async (): Promise<ApiResponse<any>> => {
@@ -133,6 +133,10 @@ const trackProgress = async (
   });
 };
 
+const getUser = async (): Promise<ApiResponse<any>> => {
+  return await axiosCall({ method: "get", url: "/users/me" });
+};
+
 export {
   registerUser,
   getQuestions,
@@ -147,4 +151,5 @@ export {
   getSelfInto,
   submitSelfIntro,
   trackProgress,
+  getUser,
 };

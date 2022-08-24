@@ -1,6 +1,7 @@
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
 import { trackProgress } from "@/apis/api";
 import ModuleStatus from "@/types/ModuleStatus.interface";
+import { routeStore } from "@/router/route.store";
 
 const routeData = {
   lecture: {
@@ -304,12 +305,35 @@ const routeData = {
   },
 };
 
-export type IModuleId = keyof typeof routeData["lecture"];
+export type ILectureModuleId = keyof typeof routeData["lecture"];
+export type IModuleId = ILectureModuleId | "grad"
+export type IModuleStage = {
+  moduleId: IModuleId;
+  stage: number;
+}
 
 class RoutesManager {
-  static fullLectureRoute = (moduleId: IModuleId, stage: number) => {
+  static fullLectureRoute = (moduleId: ILectureModuleId, stage: number) => {
     const base = routeData["lecture"][moduleId];
     return `${base["route"]}/${base["stages"][stage - 1]["route"]}`;
+  };
+
+  static pathToModuleStage = (path: string): IModuleStage => {
+    const arr = path.split("/");
+    // Remove leading "/"
+    arr.splice(0, 1);
+    const paths = arr.splice(0, 2);
+    paths.push(arr.join("/"));
+
+    if (paths[0] != "lecture") {
+      throw "Cannot get modulestage from non-lecture";
+    }
+    const stages = routeData["lecture"][paths[1] as ILectureModuleId]["stages"];
+
+    const stage = stages.findIndex((stage) => {
+      return stage.route == paths[2];
+    });
+    return { moduleId: paths[1] as IModuleId, stage: stage + 1 };
   };
 
   static selfIntroDiyRoute = () => {
@@ -325,45 +349,24 @@ class RoutesManager {
   }
 
   static async nextLocation(currentRoute: string): Promise<string> {
-    // the Full route will look something like
-    // /lecture/:moduleId/:something
-    // we need to convert this into moduleId and stage number
+    const currentModuleStage: IModuleStage = RoutesManager.pathToModuleStage(currentRoute);
 
-    const arr = currentRoute.split("/");
-    // Remove leading "/"
-    arr.splice(0, 1);
-    const paths = arr.splice(0, 2);
-    paths.push(arr.join("/"));
-
-    const stages = routeData["lecture"][paths[1] as IModuleId]["stages"];
-
-    const stage = stages.findIndex((stage) => {
-      return stage.route == paths[2];
-    });
-
-    // Stage number id 1-indexed
-    const [error, data] = await trackProgress(paths[1], stage + 1);
+    const [error, data] = await trackProgress(
+      currentModuleStage.moduleId,
+      currentModuleStage.stage,
+    );
     if (error) {
       alert(JSON.stringify(error));
       return "/";
     }
-    const nextModuleStage = data.nextStage;
-
-    if (nextModuleStage["moduleId"] == "grad") {
-      return "/graduation";
-    }
-
-    const nextRoute = RoutesManager.fullLectureRoute(
-      nextModuleStage["moduleId"],
-      nextModuleStage["stage"],
-    );
-    return `/lecture/${nextRoute}`;
+    routeStore.update(data.nextStage);
+    return routeStore.path();
   }
 }
 
 class DataExtractor {
   static getQuizQuestions = (
-    moduleId: IModuleId,
+    moduleId: ILectureModuleId,
     type: string,
   ): QuestionForQuiz => {
     const data = routeData["lecture"][moduleId]["stages"];
@@ -375,7 +378,7 @@ class DataExtractor {
     return stage!["content"] as QuestionForQuiz;
   };
 
-  static getModuleContent = (moduleId: IModuleId) => {
+  static getModuleContent = (moduleId: ILectureModuleId) => {
     const data = routeData["lecture"][moduleId]["stages"];
 
     const stage = data.find((stage) => {
@@ -401,13 +404,13 @@ class DataExtractor {
           id: stage["route"],
           name: stage["name"],
           status: "done",
-          url: `${module["url"]}/${stage['route']}`
-        }
+          url: `${module["url"]}/${stage["route"]}`,
+        };
 
-        return child
-      })
+        return child;
+      });
 
-      modules.push(module)
+      modules.push(module);
     }
 
     return modules;

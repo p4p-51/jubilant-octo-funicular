@@ -65,7 +65,7 @@ import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
-import { DataExtractor, IModuleId, RoutesManager } from "@/router/routes";
+import { DataExtractor, ILectureModuleId, RoutesManager } from "@/router/routes";
 import GoButton from "@/components/GoButton.vue";
 
 export default defineComponent({
@@ -77,7 +77,7 @@ export default defineComponent({
     ProgressSideBar,
   },
   mounted() {
-    this.moduleId = this.$route.params.moduleId as IModuleId;
+    this.moduleId = this.$route.params.moduleId as ILectureModuleId;
     this.type = this.$route.params.type as string;
 
     if (this.type != "prelim" && this.type != "end") {
@@ -110,7 +110,7 @@ export default defineComponent({
   },
   data() {
     return {
-      moduleId: null as IModuleId | null,
+      moduleId: null as ILectureModuleId | null,
       type: null as string | null,
       titleBlock: {
         module: "",

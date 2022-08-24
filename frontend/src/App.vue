@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <NavBar v-if="isLoggedIn" @signOut="signOut" />
-
     <router-view />
   </div>
 </template>
@@ -30,12 +29,6 @@ const signOut = () => {
   router.push("/");
 };
 
-// export default defineComponent({
-//   name: "App",
-//   components: {
-//     NavBar,
-//   },
-// });
 </script>
 
 <style scoped lang="scss">
