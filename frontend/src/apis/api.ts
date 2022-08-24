@@ -3,8 +3,13 @@ import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
 import { SelfIntro } from "@/types/User.interface";
 
+const LOCAL_URL = "http://localhost:9002";
+const PROD_URL = "https://api.funicular.merc.dev/";
+
+const BASE_URL = process.env.NODE_ENV === "development" ? LOCAL_URL : PROD_URL;
+
 const axiosClient = axios.create({
-  baseURL: "http://localhost:9002",
+  baseURL: BASE_URL,
 });
 
 axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
