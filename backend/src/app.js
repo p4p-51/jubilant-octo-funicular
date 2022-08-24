@@ -6,9 +6,9 @@ import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 
 import serviceAccount from "../firebase.json";
-import { isAuthenticated } from "./middleware/Authentication";
-import router from "./routes/Router";
-import spec from "./utils/SwaggerDoc";
+import { isAuthenticated } from './middleware/Authentication';
+import router from './routes/Router';
+import spec from './utils/SwaggerDoc';
 
 initializeApp({
   credential: cert(serviceAccount),
@@ -18,7 +18,7 @@ const app = express();
 const port = 3000;
 
 const corsOptions = {
-  origin: "http://localhost:8080",
+  origin: '*',
 };
 
 app.use(logger("dev"));
