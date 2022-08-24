@@ -68,7 +68,7 @@ const deleteAnswer = async (
   return await axiosCall({
     method: "delete",
     url: `/questions/${questionId}/answers`,
-    data: {experienceId},
+    data: { experienceId },
   });
 };
 
