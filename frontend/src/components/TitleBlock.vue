@@ -4,12 +4,16 @@
     <h1>{{ title }}</h1>
     <h3>{{ subtitle }}</h3>
 
-    <p><slot /></p>
+    <p v-if="this.body != null" v-html="this.body" />
+    <p v-else>
+      <slot />
+    </p>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
 .title-block {
   h2 {
     font-size: 16px;
@@ -52,6 +56,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+
 export default defineComponent({
   name: "TitleBlock",
   components: {},
@@ -65,6 +70,10 @@ export default defineComponent({
     },
     subtitle: {
       type: String as PropType<string>,
+    },
+    body: {
+      type: String,
+      default: null,
     },
   },
 });

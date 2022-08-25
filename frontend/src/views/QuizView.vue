@@ -1,11 +1,7 @@
 <template>
-  <progress-side-bar :modules="modules"></progress-side-bar>
+<!--  <progress-side-bar :modules="modules"></progress-side-bar>-->
   <div class="quiz-view">
-    <title-block
-      module="Self introduction"
-      title="Review quiz"
-      subtitle="Let’s see what you’ve learnt!"
-    />
+    <title-block v-bind="titleBlock" />
     <div class="content-container">
       <quiz-question
         class="question-block"
@@ -15,9 +11,7 @@
         :key="i"
       />
     </div>
-    <button class="go-button" @click="this.$router.push('/lecture/end')">
-      All done! ->
-    </button>
+    <go-button class="go-button" />
   </div>
 </template>
 
@@ -71,16 +65,58 @@ import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
+import { DataExtractor, ILectureModuleId, RoutesManager } from "@/router/routes";
+import GoButton from "@/components/GoButton.vue";
 
 export default defineComponent({
   name: "QuizView",
   components: {
+    GoButton,
     TitleBlock,
     QuizQuestion,
     ProgressSideBar,
   },
+  mounted() {
+    this.moduleId = this.$route.params.moduleId as ILectureModuleId;
+    this.type = this.$route.params.type as string;
+
+    if (this.type != "prelim" && this.type != "end") {
+      this.$router.push("/");
+    }
+
+    let words = this.moduleId.split("-");
+    words = words.map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+    this.titleBlock.module = words.join(" ");
+
+    if (this.type == "prelim") {
+      this.titleBlock.title = "Preliminary Quiz";
+      this.titleBlock.subtitle = "Let's see what you know";
+    } else {
+      this.titleBlock.title = "Review Quiz";
+      this.titleBlock.subtitle = "Let’s see what you’ve learnt!";
+    }
+
+    try {
+      this.quizQuestions = DataExtractor.getQuizQuestions(
+        this.moduleId,
+        this.type,
+      );
+    } catch {
+      console.log("Cannot get questions for module");
+      this.$router.push("/");
+    }
+  },
   data() {
     return {
+      moduleId: null as ILectureModuleId | null,
+      type: null as string | null,
+      titleBlock: {
+        module: "",
+        title: "",
+        subtitle: "",
+      } as { module: string; title: string; subtitle: string },
       modules: [
         {
           name: "Self introduction",
@@ -235,110 +271,7 @@ export default defineComponent({
           url: "#",
         },
       ] as ModuleStatus[],
-      quizQuestions: [
-        {
-          title: "What is the best way to learn Vue?",
-          options: [
-            {
-              id: "1",
-              text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-              isCorrect: true,
-              explanation:
-                "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "2",
-              text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "3",
-              text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "4",
-              text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-          ],
-          answer: "1",
-        },
-        {
-          title: "What is the best way to learn Vue?",
-          options: [
-            {
-              id: "1",
-              text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-              isCorrect: true,
-              explanation:
-                "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "2",
-              text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "3",
-              text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "4",
-              text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-          ],
-          answer: "3",
-        },
-        {
-          title: "What is the best way to learn Vue?",
-          options: [
-            {
-              id: "1",
-              text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-              isCorrect: true,
-              explanation:
-                "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "2",
-              text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "3",
-              text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-            {
-              id: "4",
-              text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-              isCorrect: false,
-              explanation:
-                "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-            },
-          ],
-          answer: "4",
-        },
-      ] as QuestionForQuiz[],
+      quizQuestions: null as QuestionForQuiz | null,
     };
   },
 });

@@ -140,7 +140,7 @@ import { registerUser } from "../apis/api";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
-const isLoading = reactive({ loading: true });
+const isLoading = reactive({ loading: false});
 
 const email = ref("");
 const password = ref("");

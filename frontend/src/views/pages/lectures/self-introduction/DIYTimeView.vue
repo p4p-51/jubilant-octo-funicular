@@ -7,7 +7,7 @@
       module="Self introduction"
     />
     <intro-diy ref="introDiy" />
-    <button class="go-button" @click="submitIntro">Save and continue -></button>
+    <go-button class="go-button" @click="submitIntro" :text="'Save and continue ->'"></go-button>
   </div>
 </template>
 
@@ -47,11 +47,13 @@ import { submitSelfIntro } from "@/apis/api";
 import { SelfIntro } from "@/types/User.interface";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import GoButton from "@/components/GoButton.vue";
 
 const introDiy = ref<SelfIntro>();
 const isLoading = reactive({ loading: false });
 
 const submitIntro = async () => {
+  alert("submit")
   isLoading.loading = true;
   const [error, data] = await submitSelfIntro({ ...introDiy.value! });
   if (error) {

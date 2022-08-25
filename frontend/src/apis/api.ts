@@ -2,6 +2,8 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
 import { SelfIntro } from "@/types/User.interface";
+import { routeStore } from "@/stores/route.store";
+import { firebaseStore } from "@/stores/firebase.store";
 
 const LOCAL_URL = "http://localhost:9002";
 const PROD_URL = "https://api.funicular.merc.dev/";
@@ -12,12 +14,6 @@ const axiosClient = axios.create({
   baseURL: BASE_URL,
 });
 
-axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const token = await firebase.auth().currentUser?.getIdToken(true);
-  config.headers!.Authorization = "Bearer " + token;
-  return config;
-});
-
 type errorResponse = { code: number; message: string };
 // type ApiResponse<T> = [null, T] | [errorResponse];
 type ApiResponse<T> = [null, T] | [AxiosError];
@@ -25,8 +21,12 @@ type ApiResponse<T> = [null, T] | [AxiosError];
 const axiosCall = async <T>(
   config: AxiosRequestConfig,
 ): Promise<ApiResponse<T>> => {
+  const authConfig: AxiosRequestConfig = {
+    ...config,
+    headers: { "Authorization": "bearer " + firebaseStore.authToken },
+  };
   try {
-    const { data } = await axiosClient.request(config);
+    const { data } = await axiosClient.request(authConfig);
     return [null, data];
   } catch (error) {
     // Yea... I dont know what the fuck is going on here
@@ -39,7 +39,7 @@ const axiosCall = async <T>(
 };
 
 const registerUser = async (): Promise<ApiResponse<any>> => {
-  return await axiosCall({ method: "get", url: "/users/register" });
+  return await axiosCall({ method: "post", url: "/users/register" });
 };
 
 const getQuestions = async (): Promise<ApiResponse<any>> => {
@@ -127,6 +127,21 @@ const submitSelfIntro = async (intro: SelfIntro): Promise<ApiResponse<any>> => {
   });
 };
 
+const trackProgress = async (
+  moduleId: string,
+  stage: number,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "post",
+    url: "/users/me/complete",
+    data: { moduleId, stage },
+  });
+};
+
+const getUser = async (): Promise<ApiResponse<any>> => {
+  return await axiosCall({ method: "get", url: "/users/me" });
+};
+
 export {
   registerUser,
   getQuestions,
@@ -140,4 +155,6 @@ export {
   deleteExperience,
   getSelfInto,
   submitSelfIntro,
+  trackProgress,
+  getUser,
 };
