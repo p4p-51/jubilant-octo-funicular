@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <NavBar v-if="isLoggedIn" @signOut="signOut" />
-    <router-view />
+    <NavBar v-if="firebaseStore.isLoggedIn" @signOut="signOut" />
+    <router-view v-if="isLoaded" />
   </div>
 </template>
 
@@ -10,22 +10,25 @@ import "./assets/css/styles.scss";
 import NavBar from "./components/NavBar.vue";
 
 import firebase from "firebase";
-import { ref } from "vue"; // used for conditional rendering
+import { onBeforeMount, onMounted, ref } from "vue"; // used for conditional rendering
 import { useRouter } from "vue-router";
+import { firebaseStore } from "@/stores/firebase.store";
+
 const router = useRouter();
-const isLoggedIn = ref(true);
-// runs after firebase is initialized
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user) {
-    isLoggedIn.value = true; // if we have a user
-    // router.push("/");
-  } else {
-    isLoggedIn.value = false; // if we do not
-    router.push("/signin");
-  }
+const isLoaded = ref(false)
+
+onBeforeMount(() => {
+  firebase.auth().onAuthStateChanged(async function(user) {
+    await firebaseStore.update(user)
+    if (!firebaseStore.isLoggedIn) {
+      await router.push("/register");
+    }
+    isLoaded.value = true
+  });
 });
+
 const signOut = () => {
-  firebase.auth().signOut();
+  firebaseStore.signOut();
   router.push("/");
 };
 

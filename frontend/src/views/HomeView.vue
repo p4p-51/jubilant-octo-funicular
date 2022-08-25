@@ -15,7 +15,7 @@ import { defineComponent } from "vue";
 import { getUser } from "@/apis/api";
 import { IModuleStage } from "@/types/User.interface";
 import { ILectureModuleId, RoutesManager } from "@/router/routes";
-import { routeStore } from "@/router/route.store";
+import { routeStore } from "@/stores/route.store";
 
 export default defineComponent({
   name: "HomeView",

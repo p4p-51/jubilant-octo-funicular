@@ -25,19 +25,18 @@
 import { DataExtractor, RoutesManager } from "@/router/routes";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent, PropType } from "vue";
-import { routeStore } from "@/router/route.store";
+import { routeStore } from "@/stores/route.store";
 
 export default defineComponent({
   name: "ProgressSideBar",
   props: {},
-  data() {
-    return {
-      modules: [] as ModuleStatus[],
-    };
+  computed: {
+    modules() {
+      return DataExtractor.progressBar(routeStore);
+    }
   },
   mounted() {
     routeStore.update(RoutesManager.pathToModuleStage(this.$route.fullPath))
-    this.modules = DataExtractor.progressBar();
   },
 });
 </script>

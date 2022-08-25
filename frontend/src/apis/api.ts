@@ -2,15 +2,11 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
 import { SelfIntro } from "@/types/User.interface";
+import { routeStore } from "@/stores/route.store";
+import { firebaseStore } from "@/stores/firebase.store";
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:9002",
-});
-
-axiosClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
-  const token = await firebase.auth().currentUser?.getIdToken(true);
-  config.headers!.Authorization = "Bearer " + token;
-  return config;
 });
 
 type errorResponse = { code: number; message: string };
@@ -20,8 +16,12 @@ type ApiResponse<T> = [null, T] | [AxiosError];
 const axiosCall = async <T>(
   config: AxiosRequestConfig,
 ): Promise<ApiResponse<T>> => {
+  const authConfig: AxiosRequestConfig = {
+    ...config,
+    headers: { "Authorization": "bearer " + firebaseStore.authToken },
+  };
   try {
-    const { data } = await axiosClient.request(config);
+    const { data } = await axiosClient.request(authConfig);
     return [null, data];
   } catch (error) {
     // Yea... I dont know what the fuck is going on here

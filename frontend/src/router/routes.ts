@@ -1,7 +1,7 @@
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
 import { trackProgress } from "@/apis/api";
 import ModuleStatus from "@/types/ModuleStatus.interface";
-import { routeStore } from "@/router/route.store";
+import { routeStore } from "@/stores/route.store";
 
 const routeData = {
   lecture: {
@@ -388,7 +388,7 @@ class DataExtractor {
     return stage!["content"];
   };
 
-  static progressBar = (): ModuleStatus[] => {
+  static progressBar = (routeStoreRef: any): ModuleStatus[] => {
     const modules: ModuleStatus[] = [];
 
     let found = false;
@@ -404,7 +404,7 @@ class DataExtractor {
       };
 
       module["children"] = value["stages"].map((stage, index) => {
-        if (index + 1 == routeStore.stage && key == routeStore.moduleId) {
+        if (index + 1 == routeStoreRef.stage && key == routeStoreRef.moduleId) {
           found = true;
           status = "current";
           moduleStatus = "current";

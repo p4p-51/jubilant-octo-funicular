@@ -55,6 +55,7 @@ class UserController extends BaseController {
         user: {
           uuid: uuid,
           userId: newUserId,
+          skipModules: [],
         },
       };
 
