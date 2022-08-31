@@ -2,22 +2,14 @@
   <div class="module-end-view">
     <div class="header">
       <h1>Yay! You did it! 🎉</h1>
-      <h3>Finished module: <span>Organising past experiences</span></h3>
+      <h3>Finished module: <span>{{ currentModule.name }}</span></h3>
     </div>
     <div class="content">
       <div class="progress">
-        <ModuleItem name="Finding the right examples" moduleType="past" />
-        <ModuleItem name="Listening for the correct cues" moduleType="past" />
-        <ModuleItem name="Organising past experiences" moduleType="current" />
-        <ModuleItem name="Structuring responses" moduleType="next" />
         <ModuleItem
-          name="Porchetta capicola ham, brisket jerky"
-          moduleType="future"
-        />
-        <ModuleItem name="Frankfurter pig ham hock" moduleType="future" />
-        <ModuleItem
-          name="Bacon venison tenderloin salami"
-          moduleType="future"
+          v-for="module in moduleStatus"
+          :module-type="module.status"
+          :name="module.name"
         />
       </div>
       <div class="survey">
@@ -38,12 +30,12 @@
           </div>
         </div>
         <h4>Any other feedback? (Optional)</h4>
-        <textarea />
+        <textarea v-model="feedback"/>
       </div>
     </div>
     <div class="footer">
-      <p>Up Next: <span>Next Module Name</span></p>
-      <button>Next lesson -></button>
+      <p>Up Next: <span>{{ nextModuleName }}</span></p>
+      <go-button @click="submitFeedback" text="Submit and Next"/>
     </div>
   </div>
 </template>
@@ -210,13 +202,59 @@
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
 import { defineComponent } from "vue";
+import { DataExtractor, ILectureModuleId } from "@/router/routes";
+import ModuleStatus from "@/types/ModuleStatus.interface";
+import { routeStore } from "@/stores/route.store";
+import GoButton from  "@/components/GoButton.vue"
+import { submitFeedback } from "@/apis/api";
+
+export type ModuleItemProgress = "done" | "current" | "next" | "future"
+
+type ModuleItem = Omit<ModuleStatus, "status"> & { "status": ModuleItemProgress }
+
 
 export default defineComponent({
   name: "ModuleEndView",
-  components: { ModuleItem },
+  components: { ModuleItem, GoButton},
+  methods: {
+    async submitFeedback() {
+      const [error, data] = await submitFeedback(
+        this.currentModule.id as ILectureModuleId,
+        this.numStars,
+        this.feedback
+      )
+      if (error) {
+        alert("Feedback Not submitted, please try again")
+        return
+      }
+    }
+  },
+  mounted() {
+    const moduleStatus: ModuleItem[] = DataExtractor.progressBar(routeStore);
+    const index = moduleStatus.findIndex((module) => {
+      return module.status == "current";
+    });
+
+    if (!(index == -1 || index + 1 >= moduleStatus.length)) {
+      moduleStatus[index + 1]["status"] = "next";
+    }
+    this.moduleStatus = moduleStatus
+
+    this.currentModule = this.moduleStatus.find((module) => {
+      return module.status == "current";
+    })!;
+
+    this.nextModuleName= this.moduleStatus.find((module) => {
+      return module.status == "next";
+    })?.name ?? "Graduation";
+  },
   data() {
     return {
       numStars: 0 as number,
+      feedback: "" as String,
+      moduleStatus: {} as ModuleItem[],
+      currentModule: {} as ModuleItem,
+      nextModuleName: "" as String
     };
   },
 });

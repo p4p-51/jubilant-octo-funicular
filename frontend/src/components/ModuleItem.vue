@@ -2,7 +2,7 @@
   <div
     class="module-item"
     :class="{
-      past: moduleType === 'past',
+      done: moduleType === 'done',
       current: moduleType === 'current',
       next: moduleType === 'next',
       future: moduleType === 'future',
@@ -45,7 +45,7 @@
     visibility: hidden;
   }
 
-  &.past {
+  &.done{
     border: solid 1px $c-grey-light;
     background: $c-bg-grey;
 
@@ -98,7 +98,7 @@ export default defineComponent({
       required: true,
     },
     moduleType: {
-      type: String as PropType<"past" | "current" | "next" | "future">,
+      type: String as PropType<"done" | "current" | "next" | "future">,
       required: true,
     },
   },

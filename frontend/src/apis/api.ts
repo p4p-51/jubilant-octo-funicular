@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import firebase from "firebase";
 import { Answer, Experience } from "@/types/Question.interface";
 import { SelfIntro } from "@/types/User.interface";
+import { ILectureModuleId, IModuleId } from "@/router/routes";
 
 const LOCAL_URL = "http://localhost:9002";
 const PROD_URL = "https://api.funicular.merc.dev/";
@@ -140,6 +141,18 @@ const getUser = async (): Promise<ApiResponse<any>> => {
   return await axiosCall({ method: "get", url: "/users/me" });
 };
 
+const submitFeedback = async(
+  moduleId: ILectureModuleId,
+  rating: Number,
+  feedback: String,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "post",
+    url: `modules/${moduleId}/feedback`,
+    data: {rating, feedback}
+  })
+}
+
 export {
   registerUser,
   getQuestions,
@@ -155,4 +168,5 @@ export {
   submitSelfIntro,
   trackProgress,
   getUser,
+  submitFeedback,
 };

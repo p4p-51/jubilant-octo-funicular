@@ -53,7 +53,6 @@ const introDiy = ref<SelfIntro>();
 const isLoading = reactive({ loading: false });
 
 const submitIntro = async () => {
-  alert("submit")
   isLoading.loading = true;
   const [error, data] = await submitSelfIntro({ ...introDiy.value! });
   if (error) {
