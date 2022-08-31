@@ -139,8 +139,9 @@ import { useRouter } from "vue-router"; // import router
 import { registerUser } from "../apis/api";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import { firebaseStore } from "@/stores/firebase.store.ts";
 
-const isLoading = reactive({ loading: false});
+const isLoading = reactive({ loading: false });
 
 const email = ref("");
 const password = ref("");
@@ -154,7 +155,8 @@ const register = async () => {
       .createUserWithEmailAndPassword(email.value, password.value); // need .value because ref()
     const [error, data] = await registerUser();
     if (error) {
-      throw "Cannot register user";
+      await firebase.auth().currentUser.delete();
+      alert("There was an error creating your account, please try again :(");
     }
     await router.push("/"); // redirect to home
   } catch (error) {

@@ -23,7 +23,7 @@ onBeforeMount(() => {
     if (!firebaseStore.isLoggedIn) {
       await router.push("/register");
     }
-    isLoaded.value = true
+    isLoaded.value = true;
   });
 });
 
