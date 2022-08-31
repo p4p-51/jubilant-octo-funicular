@@ -141,17 +141,17 @@ const getUser = async (): Promise<ApiResponse<any>> => {
   return await axiosCall({ method: "get", url: "/users/me" });
 };
 
-const submitFeedback = async(
+const submitFeedback = async (
   moduleId: ILectureModuleId,
-  rating: Number,
-  feedback: String,
+  rating: number,
+  feedback: string,
 ): Promise<ApiResponse<any>> => {
   return await axiosCall({
     method: "post",
     url: `modules/${moduleId}/feedback`,
-    data: {rating, feedback}
-  })
-}
+    data: { rating, feedback },
+  });
+};
 
 export {
   registerUser,

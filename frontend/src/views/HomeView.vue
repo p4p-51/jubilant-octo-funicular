@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <router-link to="/diy">diy</router-link>
     <br />
     <router-link :to="routeStore.path()">Continue</router-link>
     <br />
+    <router-link to="/lecture/self-intro/quiz/prelim">Start Over</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
@@ -26,16 +26,16 @@ export default defineComponent({
     if (routeStore.moduleId == null) {
       const [error, data] = await getUser();
       if (error) {
-        alert("This error should not occur, please refresh your page")
-        return
+        alert("This error should not occur, please refresh your page");
+        return;
       }
       routeStore.update(data["progress"]);
     }
   },
   data() {
     return {
-      routeStore
-    }
-  }
+      routeStore,
+    };
+  },
 });
 </script>

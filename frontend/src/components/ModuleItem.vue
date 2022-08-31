@@ -45,7 +45,7 @@
     visibility: hidden;
   }
 
-  &.done{
+  &.done {
     border: solid 1px $c-grey-light;
     background: $c-bg-grey;
 

@@ -4,25 +4,14 @@
       module="Organising past experiences"
       title="Building your interview
     profile"
-      subtitle="blah blah something something"
+      subtitle="Tell me about a time when..."
     >
-      Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail
-      salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine
-      strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin
-      short ribs. Short loin chuck salami pork chop fatback. Pork loin short
-      loin pastrami short ribs frankfurter salami strip steak brisket leberkas
-      sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon
-      kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank
-      filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip
-      sirloin shankle pancetta venison spare ribs.
-      <br />
-      <br />
-      Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky
-      sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky
-      shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef
-      pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille
-      venison porchetta, jowl chislic pork loin filet mignon short ribs rump
-      sausage kielbasa ground round alcatra shank.
+      Now you’ve learnt how to introduce yourself, lets go into adding and categorizing previous experiences.
+      Experiences can range from your previous team at work or university group projects.
+      <br>
+      <br>
+      We'll use the experiences later down the line to prompt you when answering different interview questions. Be sure to
+      add labels to your questions, as this will help you organise them later.
     </TitleBlock>
     <add-experiences />
     <go-button class="go-button">Save and continue</go-button>
@@ -54,7 +43,7 @@
 <script lang="ts">
 import TitleBlock from "@/components/TitleBlock.vue";
 import AddExperiences from "@/components/AddExperiences.vue";
-import GoButton from "@/components/GoButton.vue"
+import GoButton from "@/components/GoButton.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
 
@@ -69,164 +58,6 @@ export default defineComponent({
     goToQuestions() {
       this.$router.push("/lecture/quiz");
     },
-  },
-  data() {
-    return {
-      modules: [
-        {
-          name: "Self introduction",
-          id: "fjisaljio",
-          status: "done",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Organising Past Experiences",
-          id: "fsafsafsa",
-          status: "current",
-          url: "/lecture/prem-quiz",
-          children: [
-            {
-              name: "Prelimiary Quiz",
-              id: "fafwqa",
-              status: "done",
-              url: "/lecture/prem-quiz",
-            },
-            {
-              name: "Lecture",
-              id: "fafwqa",
-              status: "done",
-              url: "/lecture",
-            },
-            {
-              name: "Build your own profile",
-              id: "fafwqa",
-              status: "current",
-              url: "/lecture/build-profile",
-            },
-            {
-              name: "Review quiz",
-              id: "fafwqa",
-              status: "future",
-              url: "/lecture/quiz",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Another module here",
-          id: "fjisaljio",
-          status: "future",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Yet another module",
-          id: "fjisaljio",
-          status: "future",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Graduation",
-          id: "dsadasfwqa",
-          status: "future",
-          url: "#",
-        },
-      ] as ModuleStatus[],
-    };
   },
 });
 </script>
