@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { RoutesManager } from "./routes";
 import HomeView from "../views/HomeView.vue";
@@ -98,7 +99,6 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   // SEPARATOR (Above this line are tidied routes)
-
   {
     path: "/questions",
     name: "question bank",

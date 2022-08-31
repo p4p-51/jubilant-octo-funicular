@@ -15,11 +15,11 @@ import { useRouter } from "vue-router";
 import { firebaseStore } from "@/stores/firebase.store";
 
 const router = useRouter();
-const isLoaded = ref(false)
+const isLoaded = ref(false);
 
 onBeforeMount(() => {
-  firebase.auth().onAuthStateChanged(async function(user) {
-    await firebaseStore.update(user)
+  firebase.auth().onAuthStateChanged(async function (user) {
+    await firebaseStore.update(user);
     if (!firebaseStore.isLoggedIn) {
       await router.push("/register");
     }
@@ -31,7 +31,6 @@ const signOut = () => {
   firebaseStore.signOut();
   router.push("/");
 };
-
 </script>
 
 <style scoped lang="scss">

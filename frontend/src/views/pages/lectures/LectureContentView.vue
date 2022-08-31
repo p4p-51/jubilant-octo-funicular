@@ -21,10 +21,11 @@ import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
 import GoButton from "@/components/GoButton.vue";
 import { DataExtractor, ILectureModuleId } from "@/router/routes";
+import SectionExample from "@/components/SectionExample.vue";
 
 export default defineComponent({
   name: "SelfIntroLectureView",
-  components: { TitleBlock, SectionParagraph, GoButton },
+  components: { SectionExample, TitleBlock, SectionParagraph, GoButton },
   mounted() {
     this.moduleId = this.$route.params.moduleId as ILectureModuleId;
     this.content = DataExtractor.getModuleContent(this.moduleId)!;

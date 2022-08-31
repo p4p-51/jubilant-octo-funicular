@@ -19,7 +19,7 @@ const moduleController = new ModuleController();
  *    schemas:
  *      Module:
  *        type: string
- *        enum: [self-intro, experiences, responses, mannerism]
+ *        enum: [self-intro, experiences, responses, mannerism, grad]
  *      ModuleStage:
  *        type: object
  *        required:

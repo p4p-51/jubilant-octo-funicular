@@ -4,7 +4,7 @@
       <input
         v-if="!experience"
         class="title-input"
-        placeholder="Your experience here"
+        placeholder="Your experience here (ENGGEN 115 Truss Project)"
         @change="updateTitle"
       />
       <input

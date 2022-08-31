@@ -6,7 +6,7 @@
 
     <div class="links-container">
       <router-link
-        to="/plan/create"
+        :to="routeStore.path()"
         class="link"
         :class="{ isActive: currentRouteName.includes('plan') }"
       >
@@ -150,20 +150,20 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { routeStore } from "@/stores/route.store";
 
 export default defineComponent({
   name: "NavBar",
   components: {},
-  data() {
-    console.log("yoooo");
-    console.log(this.$route);
-    console.log(this.$router.currentRoute.value.path);
-    return {};
-  },
   computed: {
     currentRouteName() {
       return this.$route.fullPath;
     },
+  },
+  data() {
+    return {
+      routeStore: routeStore
+    }
   },
   methods: {
     signOut() {

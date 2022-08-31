@@ -33,10 +33,10 @@ export default defineComponent({
   computed: {
     modules() {
       return DataExtractor.progressBar(routeStore);
-    }
+    },
   },
   mounted() {
-    routeStore.update(RoutesManager.pathToModuleStage(this.$route.fullPath))
+    routeStore.update(RoutesManager.pathToModuleStage(this.$route.fullPath));
   },
 });
 </script>

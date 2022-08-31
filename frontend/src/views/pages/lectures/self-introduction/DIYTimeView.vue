@@ -7,7 +7,11 @@
       module="Self introduction"
     />
     <intro-diy ref="introDiy" />
-    <go-button class="go-button" @click="submitIntro" :text="'Save and continue ->'"></go-button>
+    <go-button
+      class="go-button"
+      @click="submitIntro"
+      :text="'Save and continue ->'"
+    />
   </div>
 </template>
 

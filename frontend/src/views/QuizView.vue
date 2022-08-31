@@ -1,12 +1,11 @@
 <template>
-<!--  <progress-side-bar :modules="modules"></progress-side-bar>-->
   <div class="quiz-view">
     <title-block v-bind="titleBlock" />
     <div class="content-container">
       <quiz-question
         class="question-block"
         v-for="(question, i) in quizQuestions"
-        :question="quizQuestions[0]"
+        :question="question"
         :questionNumber="i + 1"
         :key="i"
       />
@@ -65,7 +64,11 @@ import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import { defineComponent } from "vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
-import { DataExtractor, ILectureModuleId, RoutesManager } from "@/router/routes";
+import {
+  DataExtractor,
+  ILectureModuleId,
+  RoutesManager,
+} from "@/router/routes";
 import GoButton from "@/components/GoButton.vue";
 
 export default defineComponent({
@@ -74,7 +77,6 @@ export default defineComponent({
     GoButton,
     TitleBlock,
     QuizQuestion,
-    ProgressSideBar,
   },
   mounted() {
     this.moduleId = this.$route.params.moduleId as ILectureModuleId;

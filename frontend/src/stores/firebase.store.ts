@@ -3,7 +3,7 @@ import firebase from "firebase";
 
 export const firebaseStore = reactive({
   isLoggedIn: false,
-  authToken: "" as String,
+  authToken: "" as string,
   async update(user: firebase.User | null) {
     if (user) {
       this.authToken = await user.getIdToken(true);

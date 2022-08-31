@@ -1,3 +1,4 @@
+/* tslint:disable */
 import QuestionForQuiz from "@/types/QuizQuestion.interface";
 import { trackProgress } from "@/apis/api";
 import ModuleStatus from "@/types/ModuleStatus.interface";
@@ -14,106 +15,72 @@ const routeData = {
           name: "Preliminary Quiz",
           content: [
             {
-              title: "Self-intro 1",
+              title: "What should you NOT include in your self-introduction?",
               options: [
                 {
                   id: "1",
-                  text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-                  isCorrect: true,
-                  explanation:
-                    "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "Education",
+                  explanation: "Filler",
                 },
                 {
                   id: "2",
-                  text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "Marital Status",
+                  explanation: "",
                 },
                 {
                   id: "3",
-                  text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "Relevant Job Experiences",
+                  explanation: "",
                 },
                 {
                   id: "4",
-                  text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "Significant Achievements",
+                  explanation: "",
                 },
               ],
-              answer: "1",
+              answer: "2",
             },
             {
-              title: "What is the best way to learn Vue?",
+              title: "How long should a self-introduction be?",
               options: [
                 {
                   id: "1",
-                  text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-                  isCorrect: true,
-                  explanation:
-                    "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "30 Seconds",
+                  explanation: "",
                 },
                 {
                   id: "2",
-                  text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "1 Minute",
+                  explanation: "",
                 },
                 {
                   id: "3",
-                  text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "1-2 Minutes",
+                  explanation: "",
                 },
                 {
                   id: "4",
-                  text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-                },
-              ],
-              answer: "3",
-            },
-            {
-              title: "What is the best way to learn Vue?",
-              options: [
-                {
-                  id: "1",
-                  text: "Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin short ribs. Short loin chuck salami pork chop fatback. Pork loin short loin pastrami short ribs frankfurter salami strip steak brisket leberkas sirloin shoulder boudin pig. Ribeye shoulder spare ribs pig. Filet mignon kielbasa pig, frankfurter swine meatball tri-tip. Tri-tip meatball shank filet mignon, burgdoggen pork chop chislic pastrami porchetta ball tip sirloin shankle pancetta venison spare ribs.",
-                  isCorrect: true,
-                  explanation:
-                    "This is correct because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-                },
-                {
-                  id: "2",
-                  text: "Ball tip tri-tip tongue turkey, ham fatback tenderloin pastrami jerky sausage brisket beef bresaola pig frankfurter. Pork frankfurter jerky shoulder leberkas hamburger. Bresaola ribeye tail kielbasa corned beef pastrami shankle cow chuck pancetta flank tenderloin swine. Andouille venison porchetta, jowl chislic pork loin filet mignon short ribs rump sausage kielbasa ground round alcatra shank.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-                },
-                {
-                  id: "3",
-                  text: "Andouille chislic turkey doner, beef ribs ground round porchetta t-bone pancetta drumstick rump kielbasa. Doner cupim flank tenderloin short loin bacon shankle. Prosciutto drumstick leberkas flank, frankfurter corned beef shoulder sausage filet mignon beef ribs rump pastrami. Drumstick brisket turkey t-bone picanha spare ribs short ribs hamburger cupim pork chop burgdoggen shank. Kevin sirloin frankfurter salami ball tip alcatra short ribs, jerky tri-tip pork loin prosciutto meatball. Turducken kevin jerky ball tip burgdoggen tail cupim spare ribs. T-bone doner shank cupim.",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
-                },
-                {
-                  id: "4",
-                  text: "Bacon ipsum dolor amet venison cupim pig cow. Corned beef pork belly leberkas turducken, sirloin frankfurter pork loin ham porchetta spare ribs venison shankle. Hamburger turducken capicola spare ribs. Pork loin sausage ground round porchetta pancetta chuck ham pig hamburger boudin leberkas tenderloin jowl shank brisket. Tail brisket shoulder shankle chicken buffalo capicola turkey filet mignon strip steak pig sirloin salami tenderloin turducken",
-                  isCorrect: false,
-                  explanation:
-                    "This is incorrect because  Bresaola ribeye tail kielbasa corned beef pastrami ",
+                  text: "As long as it is required",
+                  explanation: "",
                 },
               ],
               answer: "4",
+            },
+            {
+              title: "What is the point of a self-introduction?",
+              options: [
+                {
+                  id: "1",
+                  text: "For the recruiter to get to know you and understand your skills and experiences",
+                  explanation: "",
+                },
+                {
+                  id: "2",
+                  text: "In case you go on a date before your job interview so you can reuse the same phrases\n",
+                  explanation: "",
+                },
+              ],
+              answer: "1",
             },
           ] as QuestionForQuiz[],
         },
@@ -199,6 +166,26 @@ const routeData = {
                   "      ><br />",
               },
             },
+            {
+              type: "SectionExample",
+              props: {
+                title: "An example",
+                bad: {
+                  text: "I was born in Cincinnati. My mother was a nurse, and my father\n" +
+                    "was a lawyer. I went to the local high school and then attended\n" +
+                    "the state college and graduated with a major in English. I worked\n" +
+                    "for four years at a high-tech company, where I was a customer\n" +
+                    "service rep. Then I moved to a large company and worked there\n" +
+                    "for two years as a help desk rep. I was at my last company for one\n" +
+                    "year as a manager of customer service.\n",
+                  explanations: "",
+                },
+                good: {
+                  text: "I have a total of seven years in the customer service field. In my last job I managed a team of 14 reps. I have excellent communication and interpersonal skills, and that allows me to work with a broad range of people at various levels. My background includes working in Fortune 500 companies as well as smaller companies. My strength is my ability to organize and coordinate projects, making sure deadlines are met.\n",
+                  explanations: "",
+                },
+              },
+            },
           ],
         },
         {
@@ -209,7 +196,76 @@ const routeData = {
         {
           route: "quiz/end",
           name: "Review Quiz",
-          content: {},
+          content: [
+            {
+              title: "What should you NOT include in your self-introduction?",
+              options: [
+                {
+                  id: "1",
+                  text: "Education",
+                  explanation: "Filler",
+                },
+                {
+                  id: "2",
+                  text: "Marital Status",
+                  explanation: "",
+                },
+                {
+                  id: "3",
+                  text: "Relevant Job Experiences",
+                  explanation: "",
+                },
+                {
+                  id: "4",
+                  text: "Significant Achievements",
+                  explanation: "",
+                },
+              ],
+              answer: "2",
+            },
+            {
+              title: "How long should a self-introduction be?",
+              options: [
+                {
+                  id: "1",
+                  text: "30 Seconds",
+                  explanation: "",
+                },
+                {
+                  id: "2",
+                  text: "1 Minute",
+                  explanation: "",
+                },
+                {
+                  id: "3",
+                  text: "1-2 Minutes",
+                  explanation: "",
+                },
+                {
+                  id: "4",
+                  text: "As long as it is required",
+                  explanation: "",
+                },
+              ],
+              answer: "4",
+            },
+            {
+              title: "What is the point of a self-introduction?",
+              options: [
+                {
+                  id: "1",
+                  text: "For the recruiter to get to know you and understand your skills and experiences",
+                  explanation: "",
+                },
+                {
+                  id: "2",
+                  text: "In case you go on a date before your job interview so you can reuse the same phrases\n",
+                  explanation: "",
+                },
+              ],
+              answer: "1",
+            },
+          ] as QuestionForQuiz[],
         },
         {
           route: "feedback",
@@ -224,11 +280,6 @@ const routeData = {
         {
           route: "quiz/prelim",
           name: "Preliminary Quiz",
-          content: {},
-        },
-        {
-          route: "content",
-          name: "Lecture",
           content: {},
         },
         {
@@ -249,7 +300,7 @@ const routeData = {
     },
     responses: {
       route: "responses",
-      name: "How to respond",
+      name: "How to respond (STAR)",
       stages: [
         {
           route: "quiz/prelim",
@@ -259,7 +310,55 @@ const routeData = {
         {
           route: "content",
           name: "lecture",
-          content: {},
+          content: [
+            {
+              type: "TitleBlock",
+              props: {
+                title: "How to structure a good response?",
+                subtitle: "How to introduce yourself in a hurry",
+                module: "Self introduction",
+                body: "A good behavioural interview response must be specific, concise, include\n      action, demonstrate the your role, relevant, and demonstrate results. The\n      STAR (Situation, task, action, and result) model is an easy and initiative\n      strategy for structuring stories in response to interview questions."
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title:"STAR Technique",
+                body:
+                  "S - The goal here is to set the stage and give context to the situation.\n" +
+                  "      The example you should be specific and concise. Enough details should be\n" +
+                  "      provided so the recruiter can paint a picture of the situation.\n" +
+                  "      <br /><br />T - Here you should focus on highlighting your\n" +
+                  "      responsibilities or roles in the situation. What were the goals and\n" +
+                  "      objectives you set out to do? <br /><br />A - Describe and explains the\n" +
+                  "      actions you took to handle the situation and overcome the tasks at hand.\n" +
+                  "      This is your opportunity to showcase specific step you took, dig deep to\n" +
+                  "      make sure you provide enough information about exactly what you did. Be\n" +
+                  "      careful that you don’t describe what the team or group did when talking\n" +
+                  "      about a project, but what you actually did. Use the word “I,” not “we”\n" +
+                  "      when describing actions.<br /><br />The part is crucial for the overall\n" +
+                  "      success of your response, try identify and discuss a few impactful actions\n" +
+                  "      you took throughout the situation<br /><br />R - Discuss the outcomes of\n" +
+                  "      the actions you took and how you made a difference. Did you complete your\n" +
+                  "      tasks and achieve your goals, if not, what did you learn in the process\n" +
+                  "      and what will you do differently? Take credit for your actions and try to\n" +
+                  "      quantify the result with numbers if possible. <br /><br />"
+              }
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "Common questions and examples",
+                body: "<ul>\n" +
+                  "        <li>Tell me about a time when…</li>\n" +
+                  "        <li>What do you do when…</li>\n" +
+                  "        <li>Have you ever…</li>\n" +
+                  "        <li>Give me an example of…</li>\n" +
+                  "        <li>Describe a situation…</li>\n" +
+                  "      </ul>"
+              }
+            }
+          ],
         },
         {
           route: "add-answer",
@@ -341,7 +440,7 @@ class RoutesManager {
   };
 
   static buildProfileRoute = () => {
-    return RoutesManager.fullLectureRoute("experiences", 3);
+    return RoutesManager.fullLectureRoute("experiences", 2);
   };
 
   static addAnswerRoute() {
@@ -388,6 +487,12 @@ class DataExtractor {
     return stage!["content"];
   };
 
+  static moduleNames = (): string[] => {
+    return  Object.values(routeData["lecture"]).map((module) => {
+      return module.name
+    })
+  }
+
   static progressBar = (routeStoreRef: any): ModuleStatus[] => {
     const modules: ModuleStatus[] = [];
 
@@ -395,7 +500,7 @@ class DataExtractor {
     let status: ModuleStatus["status"] = found ? "future" : "done";
     let moduleStatus: ModuleStatus["status"] = found ? "future" : "done";
 
-    for (const [key , value] of Object.entries(routeData["lecture"])) {
+    for (const [key, value] of Object.entries(routeData["lecture"])) {
       const module: ModuleStatus = {
         id: key,
         name: value["name"],
