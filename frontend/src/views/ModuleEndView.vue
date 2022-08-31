@@ -30,12 +30,12 @@
           </div>
         </div>
         <h4>Any other feedback? (Optional)</h4>
-        <textarea />
+        <textarea v-model="feedback"/>
       </div>
     </div>
     <div class="footer">
       <p>Up Next: <span>{{ nextModuleName }}</span></p>
-      <button>Next lesson -></button>
+      <go-button @click="submitFeedback" text="Submit and Next"/>
     </div>
   </div>
 </template>
@@ -202,9 +202,11 @@
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
 import { defineComponent } from "vue";
-import { DataExtractor } from "@/router/routes";
+import { DataExtractor, ILectureModuleId } from "@/router/routes";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { routeStore } from "@/stores/route.store";
+import GoButton from  "@/components/GoButton.vue"
+import { submitFeedback } from "@/apis/api";
 
 export type ModuleItemProgress = "done" | "current" | "next" | "future"
 
@@ -213,7 +215,20 @@ type ModuleItem = Omit<ModuleStatus, "status"> & { "status": ModuleItemProgress 
 
 export default defineComponent({
   name: "ModuleEndView",
-  components: { ModuleItem },
+  components: { ModuleItem, GoButton},
+  methods: {
+    async submitFeedback() {
+      const [error, data] = await submitFeedback(
+        this.currentModule.id as ILectureModuleId,
+        this.numStars,
+        this.feedback
+      )
+      if (error) {
+        alert("Feedback Not submitted, please try again")
+        return
+      }
+    }
+  },
   mounted() {
     const moduleStatus: ModuleItem[] = DataExtractor.progressBar(routeStore);
     const index = moduleStatus.findIndex((module) => {
@@ -236,6 +251,7 @@ export default defineComponent({
   data() {
     return {
       numStars: 0 as number,
+      feedback: "" as String,
       moduleStatus: {} as ModuleItem[],
       currentModule: {} as ModuleItem,
       nextModuleName: "" as String

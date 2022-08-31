@@ -395,7 +395,7 @@ class DataExtractor {
     let status: ModuleStatus["status"] = found ? "future" : "done";
     let moduleStatus: ModuleStatus["status"] = found ? "future" : "done";
 
-    for (const [key, value] of Object.entries(routeData["lecture"])) {
+    for (const [key , value] of Object.entries(routeData["lecture"])) {
       const module: ModuleStatus = {
         id: key,
         name: value["name"],
