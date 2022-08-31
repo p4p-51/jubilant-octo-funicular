@@ -26,7 +26,8 @@ export default defineComponent({
     if (routeStore.moduleId == null) {
       const [error, data] = await getUser();
       if (error) {
-        alert("error LMAO");
+        alert("This error should not occur, please refresh your page")
+        return
       }
       routeStore.update(data["progress"]);
     }

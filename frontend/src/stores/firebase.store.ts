@@ -6,8 +6,8 @@ export const firebaseStore = reactive({
   authToken: "" as String,
   async update(user: firebase.User | null) {
     if (user) {
-      this.isLoggedIn = true;
       this.authToken = await user.getIdToken(true);
+      this.isLoggedIn = true;
     } else {
       this.isLoggedIn = false;
     }
