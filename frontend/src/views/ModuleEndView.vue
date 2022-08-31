@@ -2,22 +2,14 @@
   <div class="module-end-view">
     <div class="header">
       <h1>Yay! You did it! 🎉</h1>
-      <h3>Finished module: <span>Organising past experiences</span></h3>
+      <h3>Finished module: <span>{{ currentModule.name }}</span></h3>
     </div>
     <div class="content">
       <div class="progress">
-        <ModuleItem name="Finding the right examples" moduleType="past" />
-        <ModuleItem name="Listening for the correct cues" moduleType="past" />
-        <ModuleItem name="Organising past experiences" moduleType="current" />
-        <ModuleItem name="Structuring responses" moduleType="next" />
         <ModuleItem
-          name="Porchetta capicola ham, brisket jerky"
-          moduleType="future"
-        />
-        <ModuleItem name="Frankfurter pig ham hock" moduleType="future" />
-        <ModuleItem
-          name="Bacon venison tenderloin salami"
-          moduleType="future"
+          v-for="module in moduleStatus"
+          :module-type="module.status"
+          :name="module.name"
         />
       </div>
       <div class="survey">
@@ -42,7 +34,7 @@
       </div>
     </div>
     <div class="footer">
-      <p>Up Next: <span>Next Module Name</span></p>
+      <p>Up Next: <span>{{ nextModuleName }}</span></p>
       <button>Next lesson -></button>
     </div>
   </div>
@@ -210,13 +202,43 @@
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
 import { defineComponent } from "vue";
+import { DataExtractor } from "@/router/routes";
+import ModuleStatus from "@/types/ModuleStatus.interface";
+import { routeStore } from "@/stores/route.store";
+
+export type ModuleItemProgress = "done" | "current" | "next" | "future"
+
+type ModuleItem = Omit<ModuleStatus, "status"> & { "status": ModuleItemProgress }
+
 
 export default defineComponent({
   name: "ModuleEndView",
   components: { ModuleItem },
+  mounted() {
+    const moduleStatus: ModuleItem[] = DataExtractor.progressBar(routeStore);
+    const index = moduleStatus.findIndex((module) => {
+      return module.status == "current";
+    });
+
+    if (!(index == -1 || index + 1 >= moduleStatus.length)) {
+      moduleStatus[index + 1]["status"] = "next";
+    }
+    this.moduleStatus = moduleStatus
+
+    this.currentModule = this.moduleStatus.find((module) => {
+      return module.status == "current";
+    })!;
+
+    this.nextModuleName= this.moduleStatus.find((module) => {
+      return module.status == "next";
+    })?.name ?? "Graduation";
+  },
   data() {
     return {
       numStars: 0 as number,
+      moduleStatus: {} as ModuleItem[],
+      currentModule: {} as ModuleItem,
+      nextModuleName: "" as String
     };
   },
 });
