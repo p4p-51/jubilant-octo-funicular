@@ -5,4 +5,3 @@ export default interface ModuleStatus {
   children?: ModuleStatus[];
   url: string;
 }
-

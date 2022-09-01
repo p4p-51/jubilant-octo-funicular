@@ -152,15 +152,15 @@ const routeData = {
                   "      <br />\n" +
                   "      Additional resources.<br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself\"\n" +
+                  '        href="https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself"\n' +
                   "      >https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself </a\n" +
                   "      ><br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples\"\n" +
+                  '        href="https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples"\n' +
                   "      >https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples</a\n" +
                   "      ><br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself\"\n" +
+                  '        href="https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself"\n' +
                   "      >\n" +
                   "        https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a\n" +
                   "      ><br />",
@@ -171,7 +171,8 @@ const routeData = {
               props: {
                 title: "An example",
                 bad: {
-                  text: "I was born in Cincinnati. My mother was a nurse, and my father\n" +
+                  text:
+                    "I was born in Cincinnati. My mother was a nurse, and my father\n" +
                     "was a lawyer. I went to the local high school and then attended\n" +
                     "the state college and graduated with a major in English. I worked\n" +
                     "for four years at a high-tech company, where I was a customer\n" +
@@ -317,13 +318,13 @@ const routeData = {
                 title: "How to structure a good response?",
                 subtitle: "How to introduce yourself in a hurry",
                 module: "Self introduction",
-                body: "A good behavioural interview response must be specific, concise, include\n      action, demonstrate the your role, relevant, and demonstrate results. The\n      STAR (Situation, task, action, and result) model is an easy and initiative\n      strategy for structuring stories in response to interview questions."
+                body: "A good behavioural interview response must be specific, concise, include\n      action, demonstrate the your role, relevant, and demonstrate results. The\n      STAR (Situation, task, action, and result) model is an easy and initiative\n      strategy for structuring stories in response to interview questions.",
               },
             },
             {
               type: "SectionParagraph",
               props: {
-                title:"STAR Technique",
+                title: "STAR Technique",
                 body:
                   "S - The goal here is to set the stage and give context to the situation.\n" +
                   "      The example you should be specific and concise. Enough details should be\n" +
@@ -342,22 +343,23 @@ const routeData = {
                   "      the actions you took and how you made a difference. Did you complete your\n" +
                   "      tasks and achieve your goals, if not, what did you learn in the process\n" +
                   "      and what will you do differently? Take credit for your actions and try to\n" +
-                  "      quantify the result with numbers if possible. <br /><br />"
-              }
+                  "      quantify the result with numbers if possible. <br /><br />",
+              },
             },
             {
               type: "SectionParagraph",
               props: {
                 title: "Common questions and examples",
-                body: "<ul>\n" +
+                body:
+                  "<ul>\n" +
                   "        <li>Tell me about a time when…</li>\n" +
                   "        <li>What do you do when…</li>\n" +
                   "        <li>Have you ever…</li>\n" +
                   "        <li>Give me an example of…</li>\n" +
                   "        <li>Describe a situation…</li>\n" +
-                  "      </ul>"
-              }
-            }
+                  "      </ul>",
+              },
+            },
           ],
         },
         {
@@ -405,11 +407,11 @@ const routeData = {
 };
 
 export type ILectureModuleId = keyof typeof routeData["lecture"];
-export type IModuleId = ILectureModuleId | "grad"
+export type IModuleId = ILectureModuleId | "grad";
 export type IModuleStage = {
   moduleId: IModuleId;
   stage: number;
-}
+};
 
 class RoutesManager {
   static fullLectureRoute = (moduleId: ILectureModuleId, stage: number) => {
@@ -448,7 +450,8 @@ class RoutesManager {
   }
 
   static async nextLocation(currentRoute: string): Promise<string> {
-    const currentModuleStage: IModuleStage = RoutesManager.pathToModuleStage(currentRoute);
+    const currentModuleStage: IModuleStage =
+      RoutesManager.pathToModuleStage(currentRoute);
 
     const [error, data] = await trackProgress(
       currentModuleStage.moduleId,
@@ -488,10 +491,10 @@ class DataExtractor {
   };
 
   static moduleNames = (): string[] => {
-    return  Object.values(routeData["lecture"]).map((module) => {
-      return module.name
-    })
-  }
+    return Object.values(routeData["lecture"]).map((module) => {
+      return module.name;
+    });
+  };
 
   static progressBar = (routeStoreRef: any): ModuleStatus[] => {
     const modules: ModuleStatus[] = [];

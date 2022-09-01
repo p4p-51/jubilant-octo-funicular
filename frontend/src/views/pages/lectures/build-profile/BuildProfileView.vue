@@ -6,12 +6,14 @@
     profile"
       subtitle="Tell me about a time when..."
     >
-      Now you’ve learnt how to introduce yourself, lets go into adding and categorizing previous experiences.
-      Experiences can range from your previous team at work or university group projects.
-      <br>
-      <br>
-      We'll use the experiences later down the line to prompt you when answering different interview questions. Be sure to
-      add labels to your questions, as this will help you organise them later.
+      Now you’ve learnt how to introduce yourself, lets go into adding and
+      categorizing previous experiences. Experiences can range from your
+      previous team at work or university group projects.
+      <br />
+      <br />
+      We'll use the experiences later down the line to prompt you when answering
+      different interview questions. Be sure to add labels to your questions, as
+      this will help you organise them later.
     </TitleBlock>
     <add-experiences />
     <go-button class="go-button">Save and continue</go-button>

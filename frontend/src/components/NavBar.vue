@@ -162,8 +162,8 @@ export default defineComponent({
   },
   data() {
     return {
-      routeStore: routeStore
-    }
+      routeStore: routeStore,
+    };
   },
   methods: {
     signOut() {

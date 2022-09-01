@@ -168,7 +168,6 @@
 
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
-import ProgressSideBar from "@/components/ProgressSideBar.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
 import ModuleStatus from "@/types/ModuleStatus.interface";
 import { defineComponent } from "vue";
@@ -177,11 +176,11 @@ import { routeStore } from "@/stores/route.store";
 
 export default defineComponent({
   name: "GraduationView",
-  components: { ModuleItem, SectionTitle, ProgressSideBar },
+  components: { ModuleItem, SectionTitle },
   computed: {
     moduleList() {
-      return  DataExtractor.moduleNames()
-    }
+      return DataExtractor.moduleNames();
+    },
   },
   methods: {
     goToGrad() {
