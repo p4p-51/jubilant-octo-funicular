@@ -21,7 +21,6 @@ class UserController extends BaseController {
     this.userService = new UserService();
   }
 
-
   GetUser = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals["userId"]);
     const user = await this.userService.getUser(userId, ["progress"]);
@@ -153,23 +152,23 @@ class UserController extends BaseController {
     res.status(200).json(userIntro["intro"] ? userIntro["intro"] : {});
   };
 
-  // TODO
   GetStats = async (req, res) => {
-    const body = {
-      accuracy: {
-        before: 90,
-        after: 100,
-      },
-      numExperiences: 4,
-      numQuestionsAnswered: 16,
-      completedModules: [
-        "Self Introduction",
-        "Thinking of Experiences",
-        "Organising Situations",
-        "Mannerisms",
-      ],
-    };
-    res.status(200).send(body);
+    let userId: number = parseInt(res.locals["userId"]);
+    userId = 8;
+    const stats = await this.userService.getStats(userId);
+
+    const prelim = stats["accuracy"].find((i) => {
+      return i["_id"] == "prelim";
+    });
+    const end = stats["accuracy"].find((i) => {
+      return i["_id"] == "end";
+    });
+
+    stats["accuracy"] = {};
+    stats["accuracy"]["prelim"] = Math.ceil((prelim ? prelim["accuracy"] : 0 )* 100);
+    stats["accuracy"]["end"] = Math.ceil((end ? end["accuracy"] : 0) * 100);
+
+    res.status(200).json(stats);
   };
 }
 

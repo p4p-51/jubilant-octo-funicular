@@ -345,6 +345,61 @@ class UserService {
       return users[0]["answers"];
     });
   };
+
+  getStats = async (userId: number) => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const res = await userCollection.aggregate([
+      {
+        $match: {
+          "user.userId": userId,
+        },
+      }, {
+        $project: {
+          numQuestionsAnswered: {
+            $size: "$answers",
+          },
+          numExperiences: {
+            $size: "$experiences",
+          },
+          quizzes: 1,
+        },
+      }, {
+        $unwind: "$quizzes",
+        preserveNullAndEmptyArrays: true
+      }, {
+        $group: {
+          _id: "$quizzes.stage",
+          id: { $first: "$_id" },
+          numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
+          numExperiences: { $first: "$numExperiences" },
+          numCorrect: { $sum: "$quizzes.numCorrect" },
+          numQuestion: { $sum: "$quizzes.numQuestion" },
+        },
+      },
+      {
+        $group: {
+          _id: "$id",
+          numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
+          numExperiences: { $first: "$numExperiences" },
+          accuracy: {
+            $push: {
+              _id: "$$ROOT._id",
+              accuracy: {
+                $divide: ["$$ROOT.numCorrect", "$$ROOT.numQuestion"]
+              },
+            },
+          },
+        },
+      }, {
+      $project: {
+        _id: 0
+      }
+      }
+    ]).toArray();
+
+    return res[0];
+  };
 }
 
 export { UserService };
