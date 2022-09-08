@@ -19,7 +19,7 @@
 @import "@/assets/css/theme.scss";
 
 .collapsible-responses {
-  margin-top: 50px;
+  margin-top: 20px;
 
   display: flex;
   flex-direction: column;
@@ -30,7 +30,7 @@
   max-width: 800px;
 
   h5 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
     color: $c-black;
@@ -52,14 +52,8 @@
 </style>
 
 <script lang="ts">
-import CompletedQuestion from "@/components/CompletedQuestion.vue";
-import OtherQuestion from "@/components/OtherQuestion.vue";
-import QbSearchBar from "@/components/QbSearchBar.vue";
-import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
-import Question from "@/types/Question.interface";
+import { Answer } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import { Experience, Answer } from "@/types/Question.interface";
 import CollapsibleResponse from "./CollapsibleResponse.vue";
 
 export default defineComponent({
