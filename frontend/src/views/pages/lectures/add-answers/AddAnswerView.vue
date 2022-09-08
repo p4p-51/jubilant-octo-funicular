@@ -31,15 +31,12 @@
         </div>
       </div>
       <div class="answer-column">
-        <!-- <add-question-response
+        <add-question-response
           :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
           @saveResponse="saveResponse"
           @deleteResponse="deleteResponse"
-        /> -->
-        <!-- <button @click="goToGrad" class="go-button">
-          Save and continue ->
-        </button> -->
+        />
       </div>
     </div>
     <button class="go-button">Save and continue -></button>
@@ -48,6 +45,50 @@
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
+.content-container {
+  flex: 1;
+  width: 100%;
+
+  display: flex;
+
+  .questions-container {
+    width: 350px;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    .search-bar {
+      margin-left: 20px;
+      margin-bottom: 20px;
+
+      .qb-search-bar {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    .list {
+      overflow-y: scroll;
+
+      flex: 1;
+      flex-grow: 1;
+      flex-basis: 0;
+
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+
+      padding: 10px 20px;
+    }
+  }
+
+  .answer-column {
+    width: 70%;
+    min-width: 350px;
+  }
+}
 </style>
 
 <!-- <script lang="ts">
@@ -100,10 +141,6 @@ import { deleteAnswer, getQuestionAnswer, getQuestions } from "@/apis/api"; // i
 import { useRoute, useRouter } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-
-const goToGrad = () => {
-  router.push("/"); // redirect to home
-};
 
 const deleteResponse = async (answer: Answer) => {
   isLoading.loading = true;
@@ -201,10 +238,10 @@ onMounted(async () => {
     }
   });
 
-  // console.log("question does exist", doesQuestionExist);
-  // if (!doesQuestionExist) {
-  //   router.push("/questions");
-  // }
+  console.log("question does exist", doesQuestionExist);
+  if (!doesQuestionExist) {
+    selectedQuestionId.value = 0;
+  }
 
   await setSelectedQuestion(selectedQuestionId.value);
 
