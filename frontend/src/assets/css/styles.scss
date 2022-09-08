@@ -26,9 +26,11 @@ button {
     cursor: pointer;
     transition: $animation;
 
-    &:hover {
-        transform: scale(1.05);        
+    &:hover:enabled{
+        transform: scale(1.05);
     }
+
+
 }
 
 ::-webkit-scrollbar-track

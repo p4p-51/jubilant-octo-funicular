@@ -31,6 +31,11 @@ class ExperienceController extends BaseController {
     const name = req.body["name"];
     const labels = req.body["labels"];
 
+    if (!name) {
+      httpResponse(res, 400, "Cannot have empty experience name")
+      return
+    }
+
     // This new experience Id can be moved inside the UserService's setExperience
     // But maybe lead to circular dependency, and we're not going to run out anyway...
     let experienceId: number =

@@ -2,16 +2,10 @@
   <div class="modal">
     <div class="popup">
       <input
-        v-if="!experience"
         class="title-input"
-        placeholder="Your experience here (ENGGEN 115 Truss Project)"
-        @change="updateTitle"
-      />
-      <input
-        v-else
-        class="title-input"
-        :value="experience.name"
-        @change="updateTitle"
+        :placeholder="experience ? '' : 'Your experience here (ENGGEN 115 Truss Project)'"
+        :value="experience ? experience.name : ''"
+        @keyup="updateTitle"
       />
       <div v-for="label in labels" class="radio-line" :key="label.label">
         <p>{{ label.labelText }}</p>
@@ -36,7 +30,9 @@
       </div>
       <div class="buttons">
         <button class="cancel" @click="cancelExperience">Cancel</button>
-        <button class="save" @click="saveExperience">Save</button>
+        <button class="save" :disabled="isDisabled" @click="saveExperience">
+          Save
+        </button>
       </div>
     </div>
   </div>
@@ -51,6 +47,7 @@ export default defineComponent({
   methods: {
     updateTitle(event: Event) {
       this.experienceTitle = (event.target as HTMLTextAreaElement).value;
+      this.isDisabled = !this.experienceTitle;
     },
     updateLabel(event: Event, label: string) {
       const add = (event.target as ButtonHTMLAttributes).value;
@@ -103,12 +100,14 @@ export default defineComponent({
     return {
       experienceTitle: "" as string,
       experienceLabels: [] as string[],
+      isDisabled: true,
     };
   },
   mounted() {
     if (this.experience) {
       this.experienceLabels = [...this.experience.labels];
       this.experienceTitle = this.experience.name;
+      this.isDisabled = false;
     }
   },
 });
@@ -187,6 +186,12 @@ export default defineComponent({
     .save {
       color: $c-background;
       background: $c-primary;
+
+      &:disabled {
+        color: $c-grey-dark;
+        background-color: $c-grey-light;
+        border-color: $c-grey-dark;
+      }
     }
   }
 }
