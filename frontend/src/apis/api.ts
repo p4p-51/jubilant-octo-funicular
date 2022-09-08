@@ -96,7 +96,7 @@ const updateExperience = async (
 ): Promise<ApiResponse<any>> => {
   return await axiosCall({
     method: "post",
-    url: `/experiences/${experienceId}`,
+    url: `/experiences/${experienceId}/`,
     data: experience,
   });
 };
@@ -110,7 +110,7 @@ const deleteExperience = async (
 ): Promise<ApiResponse<any>> => {
   return await axiosCall({
     method: "delete",
-    url: `/experiences/${experienceId}`,
+    url: `/experiences/${experienceId}/`,
   });
 };
 
