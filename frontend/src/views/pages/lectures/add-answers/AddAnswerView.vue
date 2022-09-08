@@ -39,7 +39,7 @@
         />
       </div>
     </div>
-    <button class="go-button">Save and continue -></button>
+    <go-button class="go-button" text="Save and continue ->" />
   </div>
 </template>
 
@@ -108,6 +108,7 @@
 
 <script lang="ts" setup>
 import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
+import GoButton from "@/components/GoButton.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
 import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
