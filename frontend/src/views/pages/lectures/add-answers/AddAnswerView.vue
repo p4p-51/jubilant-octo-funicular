@@ -13,7 +13,7 @@
       forgot to add an experience, you can still do that as well.
     </TitleBlock>
     <!-- <AddAnswer></AddAnswer> -->
-    <div class="content-container" v-if="!isLoading.loading">
+    <div class="content-container">
       <div class="questions-container">
         <div class="search-bar">
           <qb-search-bar @onChange="(s) => (filter = s.toLowerCase())" />
@@ -30,7 +30,7 @@
           />
         </div>
       </div>
-      <div class="answer-column">
+      <div class="answer-column" v-if="!isLoading.loading">
         <add-question-response
           :initialQuestion="selectedQuestion"
           :key="addQuestionKey"
@@ -51,6 +51,8 @@
   width: 100%;
 
   display: flex;
+
+  min-height: 350px;
 
   .questions-container {
     width: 350px;
@@ -129,6 +131,7 @@ export default defineComponent({
 });
 </script> -->
 <script lang="ts" setup>
+import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
 import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
 import TitleBlock from "@/components/TitleBlock.vue";
@@ -240,7 +243,7 @@ onMounted(async () => {
 
   console.log("question does exist", doesQuestionExist);
   if (!doesQuestionExist) {
-    selectedQuestionId.value = 0;
+    selectedQuestionId.value = questions.questions[0].questionId;
   }
 
   await setSelectedQuestion(selectedQuestionId.value);

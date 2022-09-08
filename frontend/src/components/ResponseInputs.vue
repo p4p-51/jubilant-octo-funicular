@@ -23,7 +23,7 @@
 @import "@/assets/css/theme.scss";
 
 .response-inputs {
-  margin-top: 50px;
+  margin-top: 20px;
 
   display: flex;
   flex-direction: column;
@@ -33,8 +33,10 @@
   width: 95%;
   max-width: 800px;
 
+  height: 100%;
+
   h5 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
     color: $c-black;
@@ -54,12 +56,12 @@
 
     display: grid;
     grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
     column-gap: 30px;
     row-gap: 20px;
     align-items: center;
 
     transition: $animation;
-    overflow: hidden;
 
     &.hidden {
       visibility: hidden;
@@ -81,8 +83,6 @@
 
       margin: 0;
 
-      height: 60px;
-
       max-width: 100%;
 
       border: solid 1px $c-grey-light;
@@ -102,17 +102,9 @@
 </style>
 
 <script lang="ts">
-import CompletedQuestion from "@/components/CompletedQuestion.vue";
-import OtherQuestion from "@/components/OtherQuestion.vue";
-import QbSearchBar from "@/components/QbSearchBar.vue";
-import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
-import Question from "@/types/Question.interface";
-import { defineComponent, PropType } from "vue";
-import { Experience, Answer } from "@/types/Question.interface";
-import CollapsibleResponse from "./CollapsibleResponse.vue";
 import { submitAnswer } from "@/apis/api";
-import router from "@/router";
+import { Answer, Experience } from "@/types/Question.interface";
+import { defineComponent, PropType } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
