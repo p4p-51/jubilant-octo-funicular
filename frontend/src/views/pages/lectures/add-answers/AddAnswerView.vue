@@ -89,47 +89,23 @@
   .answer-column {
     width: 70%;
     min-width: 350px;
+
+    max-height: 100%;
+    overflow-y: scroll;
+
+    ::v-deep .response-inputs {
+      position: relative;
+
+      button {
+        position: absolute;
+        top: 0;
+        margin-top: -10px;
+      }
+    }
   }
 }
 </style>
 
-<!-- <script lang="ts">
-import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
-import ModuleStatus from "@/types/ModuleStatus.interface";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "AddAnswerView",
-  components: { AddQuestionResponse, TitleBlock },
-  data() {
-    return {
-      modules: [
-        {
-          name: "Self introduction",
-          id: "fjisaljio",
-          status: "done",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-          ],
-        },
-      ] as ModuleStatus[],
-    };
-  },
-});
-</script> -->
 <script lang="ts" setup>
 import AddQuestionResponse from "@/components/AddQuestionResponse.vue";
 import QbSearchBar from "@/components/QbSearchBar.vue";
