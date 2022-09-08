@@ -133,18 +133,20 @@
 
       margin-top: 30px;
 
+      row-gap: 32px;
+
       p {
         font-size: 20px;
         color: $c-black;
 
-        height: 90px;
-        line-height: 0;
+        // height: 90px;
 
         margin: 0;
 
         span {
           font-size: 40px;
           color: $c-primary;
+          line-height: 0;
         }
       }
     }
@@ -169,10 +171,8 @@
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
-import ModuleStatus from "@/types/ModuleStatus.interface";
-import { defineComponent } from "vue";
 import { DataExtractor } from "@/router/routes";
-import { routeStore } from "@/stores/route.store";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GraduationView",
