@@ -119,8 +119,8 @@ class ModuleService {
       "moduleFeedback",
     );
     //skip modules could be abstracted up 1 level in the controller...
-    const skipModules: IModuleId[] = await new UserService().getSkipModules(userId);
-    const nextModule: IModuleStage = await this.getNextModule(moduleId, skipModules);
+    // const skipModules: IModuleId[] = await new UserService().getSkipModules(userId);
+    const nextModule: IModuleStage = await this.getNextModule(moduleId);
 
     await feedbackCollection.insertOne({ moduleId: moduleId, feedback });
 

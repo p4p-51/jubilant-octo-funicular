@@ -18,7 +18,9 @@
         @onOptionClick="selectOption"
       />
     </div>
-    <button @click="submitAnswer">Submit</button>
+    <button :disabled="show || selectedOption == null" @click="submitAnswer">
+      Submit
+    </button>
   </div>
 </template>
 
@@ -70,6 +72,13 @@
   > button {
     align-self: flex-end;
     margin-top: 20px;
+
+    &:disabled {
+      pointer-events: none;
+
+      color: $c-grey-light;
+      border-color: $c-grey-light;
+    }
   }
 }
 </style>
@@ -92,6 +101,8 @@ export default defineComponent({
     },
     submitAnswer() {
       this.show = true;
+      const correct = this.selectedOption === this.question.answer;
+      this.$emit("submitQuestion", correct);
     },
   },
   props: {
