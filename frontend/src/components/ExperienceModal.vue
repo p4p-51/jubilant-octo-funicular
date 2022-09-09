@@ -3,7 +3,9 @@
     <div class="popup">
       <input
         class="title-input"
-        :placeholder="experience ? '' : 'Your experience here (ENGGEN 115 Truss Project)'"
+        :placeholder="
+          experience ? '' : 'Your experience here (ENGGEN 115 Truss Project)'
+        "
         :value="experience ? experience.name : ''"
         @keyup="updateTitle"
       />
@@ -39,8 +41,8 @@
 </template>
 
 <script lang="ts">
-import { ButtonHTMLAttributes, defineComponent, PropType } from "vue";
 import { Experience, Label } from "@/types/Question.interface";
+import { ButtonHTMLAttributes, defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "ExperienceModal",
