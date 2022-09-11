@@ -39,6 +39,8 @@
 
     .question-block {
       align-self: center;
+      width: 900px;
+      max-width: 100%;
     }
   }
 }
