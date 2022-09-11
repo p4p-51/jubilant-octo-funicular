@@ -11,25 +11,36 @@ import NavBar from "./components/NavBar.vue";
 
 import firebase from "firebase";
 import { onBeforeMount, onMounted, ref } from "vue"; // used for conditional rendering
-import { useRouter } from "vue-router";
+import router, { isRouteUnguarded } from "./router";
 import { firebaseStore } from "@/stores/firebase.store";
 
-const router = useRouter();
 const isLoaded = ref(false);
 
 onBeforeMount(() => {
   firebase.auth().onAuthStateChanged(async function (user) {
-    await firebaseStore.update(user);
-    if (!firebaseStore.isLoggedIn) {
-      await router.push("/register");
+    const currentPath = router.currentRoute.value.path;
+
+    if (user != null) {
+      // if they on an unguarded page
+      if (isRouteUnguarded(currentPath)) {
+        router.push("/");
+      }
+    } else {
+      //not signed in
+      //if they on a guarded page
+      if (!isRouteUnguarded(currentPath)) {
+        router.push("/landing");
+      }
     }
+    await firebaseStore.update(user);
+
     isLoaded.value = true;
   });
 });
 
 const signOut = () => {
   firebaseStore.signOut();
-  router.push("/");
+  router.push("/landing");
 };
 </script>
 
