@@ -2,26 +2,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import { RoutesManager } from "./routes";
+import firebase from "firebase";
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/signin",
-    name: "signin",
-    component: () =>
-      import(/* webpackChunkName: "signin" */ "../views/SignInView.vue"),
-  },
-  {
-    path: "/register",
-    name: "register",
-    component: () =>
-      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
-  },
-  {
-    path: "/landing",
-    name: "landing",
-    component: () =>
-      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
-  },
+const guardedRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: HomeView,
@@ -125,9 +108,34 @@ const routes: Array<RouteRecordRaw> = [
   },
 ];
 
+const unguardedRoutes: Array<RouteRecordRaw> = [
+  {
+    path: "/signin",
+    name: "signin",
+    component: () =>
+      import(/* webpackChunkName: "signin" */ "../views/SignInView.vue"),
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
+  },
+  {
+    path: "/landing",
+    name: "landing",
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
+  },
+];
+
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: [...unguardedRoutes, ...guardedRoutes],
 });
+
+export const isRouteUnguarded = (route: string): boolean => {
+  return !!unguardedRoutes.find((r) => r.path === route);
+};
 
 export default router;

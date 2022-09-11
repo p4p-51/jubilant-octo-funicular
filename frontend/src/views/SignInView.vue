@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading.loading" />
   <div class="signin-view">
     <div class="content-container">
       <img
@@ -140,8 +141,13 @@
 
 <script lang="ts" setup>
 import firebase from "firebase";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router"; // import router
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { firebaseStore } from "@/stores/firebase.store";
+
+const isLoading = reactive({ loading: false });
 
 const email = ref("");
 const password = ref("");
@@ -150,15 +156,20 @@ const errMsg = ref(); // ERROR MESSAGE
 
 const router = useRouter(); // get a reference to our vue router
 
-const signIn = () => {
+const signIn = async () => {
+  isLoading.loading = true;
+  console.log("TRUE");
+
   // we also renamed this method
   console.log("signing in", email, password);
 
-  firebase
+  await firebase
     .auth()
     .signInWithEmailAndPassword(email.value, password.value) // THIS LINE CHANGED
-    .then((data) => {
+    .then(async (data) => {
+      await firebaseStore.update(data.user);
       console.log("Successfully logged in!");
+
       router.push("/");
     })
     .catch((error) => {
@@ -179,5 +190,6 @@ const signIn = () => {
           break;
       }
     });
+  isLoading.loading = false;
 };
 </script>
