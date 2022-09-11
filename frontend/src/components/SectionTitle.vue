@@ -10,8 +10,8 @@ h2 {
   font-size: 20px;
   font-weight: 400;
 
-  margin-bottom: 5px;
-  margin-top: 40px;
+  margin-bottom: 3px;
+  margin-top: 20px;
 }
 
 .underline {
@@ -20,7 +20,7 @@ h2 {
 
   background-color: $c-primary;
 
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 </style>
 
