@@ -22,22 +22,16 @@ onBeforeMount(() => {
 
     if (user != null) {
       // if they on an unguarded page
-
       if (isRouteUnguarded(currentPath)) {
         router.push("/");
       }
-      //redirect to "/"
     } else {
       //not signed in
       //if they on a guarded page
       if (!isRouteUnguarded(currentPath)) {
         router.push("/landing");
       }
-      //redirect to "landing"
     }
-    // if (!firebaseStore.isLoggedIn) {
-    //   await router.push("/register");
-    // }
     await firebaseStore.update(user);
 
     isLoaded.value = true;
@@ -46,7 +40,7 @@ onBeforeMount(() => {
 
 const signOut = () => {
   firebaseStore.signOut();
-  router.push("/");
+  router.push("/landing");
 };
 </script>
 
