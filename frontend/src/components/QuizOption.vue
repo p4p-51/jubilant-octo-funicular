@@ -56,8 +56,8 @@ export default defineComponent({
 
   display: flex;
   align-items: flex-start;
-  margin-right: 20px;
-  margin-left: 0;
+  padding-right: 20px;
+  padding-left: 0;
 
   .letter {
     font-size: 20px;
@@ -90,12 +90,12 @@ export default defineComponent({
     transition: $animation;
   }
 
+  transition: $animation;
   &:hover {
-    transition: $animation;
     cursor: pointer;
 
-    margin-left: 20px;
-    margin-right: 0;
+    padding-left: 20px;
+    padding-right: 0;
 
     .letter {
       color: $c-primary;
