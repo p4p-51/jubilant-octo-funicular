@@ -6,6 +6,41 @@ import { routeStore } from "@/stores/route.store";
 
 const routeData = {
   lecture: {
+    welcome: {
+      route: "welcome",
+      name: "Welcome",
+      stages: [
+        {
+          route: "content",
+          name: "Behavioural interviews",
+          content: [
+            {
+              type: "TitleBlock",
+              props: {
+                title: "Let's get started with behavioural interviews",
+                subtitle: "First... what are behavioural interviews?",
+                module: "Welcome",
+                body: 'Behavioural interviewing is a commonly used process in modern industries for selecting the best candidates to hire for a position. A typical example of a behavioural question might start with "Tell me about a time when..."<br/> <br/> Behavioural interviews focuses on your past experiences, providing you a platform to express your skills, background and personality. You’re also able to utilise this process to further understand the role and the company’s values to see if the job’s the right fit for you.',
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "Why and how to prepare for behavioural interviews?",
+                body: "Studies have shown that by practising and preparing for interviews, you’ll become more confident and your interview performanc increases. There are several techniques at your disposal to prepare, including but not limited to written assignments, mock interviews, or online videos.<br/><br/>Reading commonly asked questions and organising experiences are highly effective ways to better understand your strengths and weaknesses to formular responses",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What are we doing here today?",
+                body: "We will be walking you through each of the most important aspects of behavioural interviews. Each module will begin with a preliminary quiz to test your knowledge, and also end with a quiz to see what you have learnt! <br/> <br/>Within each module, there will be useful information, as well as interactive material which will help you build your very own interview profile and become an interviewing-superstar. <br/> <br/>Now let's get started!",
+              },
+            },
+          ],
+        },
+      ],
+    },
     "self-intro": {
       route: "self-intro",
       name: "Self Introduction",
