@@ -6,6 +6,125 @@ import { routeStore } from "@/stores/route.store";
 
 const routeData = {
   lecture: {
+    welcome: {
+      route: "welcome",
+      name: "Welcome",
+      stages: [
+        {
+          route: "content",
+          name: "Behavioural interviews",
+          content: [
+            {
+              type: "TitleBlock",
+              props: {
+                title: "What makes a good self introduction?",
+                subtitle: "How to introduce yourself in a hurry",
+                module: "Self introduction",
+                body:
+                  "The aim of this module is for you to understand how the answer the age old\n" +
+                  "      question - “Tell me about yourself”. While not explicitly a behavioural\n" +
+                  "      interview questions, it’ll almost certainly be the first question you’re\n" +
+                  "      asked during an interview.\n" +
+                  "      <br />\n" +
+                  "      First, we must understand what is a elevator pitch elements of a ‘good’\n" +
+                  "      answer and how it can be structured to impress your interviewer.\n" +
+                  "      <br />\n" +
+                  "      By this end of this module, you’ll have understood the structure of how to\n" +
+                  "      answer, gone through a couple of examples and multiple choice questions,\n" +
+                  "      and lastly, written your own compelling self introduction.",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What is an elevator pitch?",
+                body:
+                  " It's a short, memorable description of what you do, your experiences, and\n" +
+                  "      … The goal is for the recruiter to understand you and your background\n" +
+                  "      beyond your CV. Recruiters may also use your answer as a segway for follow\n" +
+                  "      up questions, diving deepering into your history and what makes you tick.",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What should I include?",
+                body:
+                  "It is recommended that your answer includes the following, introduction,\n" +
+                  "      your past, present, and future, while coviering a range of topics\n" +
+                  "      including relevant job experiences, hobbies, passion etc. <br /><br />Your\n" +
+                  "      introduction should include your name, education and the role you’re\n" +
+                  "      applying for. This is just to make sure that you’re speaking to the right\n" +
+                  "      person for the right role. <br /><br />“The past” section is for you to\n" +
+                  "      tell them how you got to where you are now. Here you could mention any\n" +
+                  "      previous job or internship experiences and/or why you decided to study\n" +
+                  "      your chosen degree.<br /><br />“The present” should focus on where you are\n" +
+                  "      now, are you currently studying or working, what are your hobbies and\n" +
+                  "      interests are outside of study or work, or perhaps a recent\n" +
+                  "      accomplishment. <br /><br />“The future” is about your goals and\n" +
+                  "      aspirations. How does the job help you reach that goal? <br /><br />This\n" +
+                  "      isn’t the only way to build your response, of course, and you can tweak it\n" +
+                  "      as you see fit. If there’s a particularly potent story about what brought\n" +
+                  "      you into this field, for example, you might decide to start with that\n" +
+                  "      “past” story and then get into what you’re doing in the present.<br /><br />Whatever\n" +
+                  "      order you pick, make sure you ultimately tie it to the job and company.\n" +
+                  "      You want to be absolutely certain your interviewer is left with the\n" +
+                  "      impression that it “makes sense that [you’re] sitting here talking to me\n" +
+                  "      about this role.”<br /><br /> There isn't a set amount of time a self-intro needs to be.\n" +
+                  "      You may have already been in communication with the interviewer through emails, therefore they might also know a bit about you, or it could be the first time you've met, in which case, you might need to explain a bit more. Regardless, it should follow a similar format as outlined above <br /><br />You should\n" +
+                  "      practice your introduction but you don’t want to memeorise it word for\n" +
+                  "      work. Otherwise it’ll come off robotic and unnatural. Keep memorisation to\n" +
+                  "      the key points if necessary. <br />\n" +
+                  "      <br />\n" +
+                  "      Additional resources.<br />\n" +
+                  "      <a\n" +
+                  '        href="https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself"\n' +
+                  "      >https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself </a\n" +
+                  "      ><br />\n" +
+                  "      <a\n" +
+                  '        href="https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples"\n' +
+                  "      >https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples</a\n" +
+                  "      ><br />\n" +
+                  "      <a\n" +
+                  '        href="https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself"\n' +
+                  "      >\n" +
+                  "        https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a\n" +
+                  "      ><br />",
+              },
+            },
+            {
+              type: "SectionExample",
+              props: {
+                title: "An example",
+                bad: {
+                  text:
+                    "I was born in Cincinnati. My mother was a nurse, and my father\n" +
+                    "was a lawyer. I went to the local high school and then attended\n" +
+                    "the state college and graduated with a major in English. I worked\n" +
+                    "for four years at a high-tech company, where I was a customer\n" +
+                    "service rep. Then I moved to a large company and worked there\n" +
+                    "for two years as a help desk rep. I was at my last company for one\n" +
+                    "year as a manager of customer service.\n",
+                  explanations: [
+                    "Walk-through of resume - Does not go into detail or specifics",
+                    "Can be improved by example of type of companies you've worked for",
+                    "lacks personal characteristics and strengths",
+                  ],
+                },
+                good: {
+                  text: "I have a total of seven years in the customer service field. In my last job I managed a team of 14 reps. I have excellent communication and interpersonal skills, and that allows me to work with a broad range of people at various levels. My background includes working in Fortune 500 companies as well as smaller companies. My strength is my ability to organize and coordinate projects, making sure deadlines are met.\n",
+                  explanations: [
+                    "Presents a good summary of what you have to offer",
+                    "Interview knows the number of years of experiences and types of companies you've worked at",
+                    "Answer provides a good blend of knowledge-based skills, transferable skills and personality traits",
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      ],
+    },
     "self-intro": {
       route: "self-intro",
       name: "Self Introduction",
