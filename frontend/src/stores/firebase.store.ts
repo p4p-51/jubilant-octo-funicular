@@ -2,7 +2,6 @@ import { reactive } from "vue";
 import firebase from "firebase";
 
 export const firebaseStore = reactive({
-  isLoggingIn: false,
   isLoggedIn: false,
   authToken: "" as string,
   async update(user: firebase.User | null) {
