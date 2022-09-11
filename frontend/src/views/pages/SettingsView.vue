@@ -12,7 +12,7 @@
         <p>{{ email }}</p>
       </div>
     </div>
-    <button>Log out</button>
+    <button @click="signOut">Log out</button>
   </div>
 </template>
 
@@ -94,6 +94,11 @@ export default defineComponent({
       email: firebaseStore.user?.email,
       name: firebaseStore.user?.displayName,
     };
+  },
+  methods: {
+    signOut() {
+      firebaseStore.signOut();
+    },
   },
 });
 </script>
