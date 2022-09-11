@@ -20,22 +20,26 @@ const routeData = {
                 {
                   id: "1",
                   text: "Education",
-                  explanation: "Your education status is extremely important if you're just starting out. If you'd have formal education in the specific area that's okay as well, tell the interview how you learn the relavent skills",
+                  explanation:
+                    "Your education status is extremely important if you're just starting out. If you'd have formal education in the specific area that's okay as well, tell the interview how you learn the relavent skills",
                 },
                 {
                   id: "2",
                   text: "Marital Status",
-                  explanation: "Marital status should not be included, this does not reflect on your skills. Other things to not include include: age, gender, race etc..",
+                  explanation:
+                    "Marital status should not be included, this does not reflect on your skills. Other things to not include include: age, gender, race etc..",
                 },
                 {
                   id: "3",
                   text: "Relevant Job Experiences",
-                  explanation: "This is extremely important if you're someone who is experienced, it's okay if you don't have a previous job experience, you can talk about something else like an achievement instead ",
+                  explanation:
+                    "This is extremely important if you're someone who is experienced, it's okay if you don't have a previous job experience, you can talk about something else like an achievement instead ",
                 },
                 {
                   id: "4",
                   text: "Significant Achievements",
-                  explanation: "This can be included if you've recently done something that you're proud of and is relevant to the company or job",
+                  explanation:
+                    "This can be included if you've recently done something that you're proud of and is relevant to the company or job",
                 },
               ],
               answer: "2",
@@ -51,17 +55,20 @@ const routeData = {
                 {
                   id: "2",
                   text: "1 Minute",
-                  explanation: "While this seems like the most sensible answer, it really depends on the situation!",
+                  explanation:
+                    "While this seems like the most sensible answer, it really depends on the situation!",
                 },
                 {
                   id: "3",
                   text: "2 Minutes",
-                  explanation: "If you're always talking for 2 minutes, you must have lots of experience and achievements! But sometimes it might be a bit too long if you've told them before",
+                  explanation:
+                    "If you're always talking for 2 minutes, you must have lots of experience and achievements! But sometimes it might be a bit too long if you've told them before",
                 },
                 {
                   id: "4",
                   text: "As long as it is required",
-                  explanation: "The duration of the self introduction really depends on your situation with the interviewer. If they already know a bit about you, it's okay for it be short and concise, otherwise, you may wish to go into a bit of detail",
+                  explanation:
+                    "The duration of the self introduction really depends on your situation with the interviewer. If they already know a bit about you, it's okay for it be short and concise, otherwise, you may wish to go into a bit of detail",
                 },
               ],
               answer: "4",
@@ -77,7 +84,8 @@ const routeData = {
                 {
                   id: "2",
                   text: "In case you go on a date before your job interview so you can reuse the same phrases\n",
-                  explanation: "A Job interview is not like a date, but good luck for your date though!",
+                  explanation:
+                    "A Job interview is not like a date, but good luck for your date though!",
                 },
               ],
               answer: "1",
@@ -88,17 +96,20 @@ const routeData = {
                 {
                   id: "1",
                   text: "Favourite childhood memory, University study, Retirement plan",
-                  explanation: "While this option covers a large aspect of your self, try and keep it relevant to the job",
+                  explanation:
+                    "While this option covers a large aspect of your self, try and keep it relevant to the job",
                 },
                 {
                   id: "2",
                   text: "Past relevant experiences, Current studies and/or work, Future career goals and aspirations",
-                  explanation: "Bingo! It's important to tell the interview about all aspects of you, past, present, and future",
+                  explanation:
+                    "Bingo! It's important to tell the interview about all aspects of you, past, present, and future",
                 },
                 {
                   id: "3",
                   text: "Full Name, List of qualifications and achievements, Reasons why you'd like to work at the company",
-                  explanation: "Explaining your reasons why you'd like to work at the company does not tell the interview about yourself, which is what they're after",
+                  explanation:
+                    "Explaining your reasons why you'd like to work at the company does not tell the interview about yourself, which is what they're after",
                 },
               ],
               answer: "2",
@@ -173,15 +184,15 @@ const routeData = {
                   "      <br />\n" +
                   "      Additional resources.<br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself\"\n" +
+                  '        href="https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself"\n' +
                   "      >https://www.indeed.com/career-advice/interviewing/interview-question-tell-me-about-yourself </a\n" +
                   "      ><br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples\"\n" +
+                  '        href="https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples"\n' +
                   "      >https://www.themuse.com/advice/tell-me-about-yourself-interview-question-answer-examples</a\n" +
                   "      ><br />\n" +
                   "      <a\n" +
-                  "        href=\"https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself\"\n" +
+                  '        href="https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself"\n' +
                   "      >\n" +
                   "        https://www.seek.co.nz/career-advice/article/how-to-answer-so-tell-me-about-yourself </a\n" +
                   "      ><br />",
@@ -203,7 +214,7 @@ const routeData = {
                   explanations: [
                     "Walk-through of resume - Does not go into detail or specifics",
                     "Can be improved by example of type of companies you've worked for",
-                    "lacks personal characteristics and strengths"
+                    "lacks personal characteristics and strengths",
                   ],
                 },
                 good: {
@@ -211,7 +222,7 @@ const routeData = {
                   explanations: [
                     "Presents a good summary of what you have to offer",
                     "Interview knows the number of years of experiences and types of companies you've worked at",
-                    "Answer provides a good blend of knowledge-based skills, transferable skills and personality traits"
+                    "Answer provides a good blend of knowledge-based skills, transferable skills and personality traits",
                   ],
                 },
               },
@@ -317,44 +328,56 @@ const routeData = {
                 {
                   id: "1",
                   text: "Situation - Give context to the situation you're able to discuss",
-                  explanation: "Excellent! Before you dive in, you want to provide the context to the interviewer",
+                  explanation:
+                    "Excellent! Before you dive in, you want to provide the context to the interviewer",
                 },
                 {
                   id: "2",
                   text: "Size - What was the size of the team you're working with? The larger the team, the more complex the project must have been",
-                  explanation: "While the size of the team would be important if you were in a leadership role, it does not always apply",
-                }, {
+                  explanation:
+                    "While the size of the team would be important if you were in a leadership role, it does not always apply",
+                },
+                {
                   id: "3",
                   text: "Stakeholders - Who were the stakeholders involved and how did they have an impact",
-                  explanation: "Stakeholders and communication is extremely important, only discuss it if you worked directly with them or is important to the question ",
-                }, {
+                  explanation:
+                    "Stakeholders and communication is extremely important, only discuss it if you worked directly with them or is important to the question ",
+                },
+                {
                   id: "4",
                   text: "Story - Create a story to hook the interviewer in",
-                  explanation: "Overall STAR is used to create a story/narrative, however the S does not stand for story specifically",
+                  explanation:
+                    "Overall STAR is used to create a story/narrative, however the S does not stand for story specifically",
                 },
               ],
               answer: "1",
-            }, {
+            },
+            {
               title: "What does the T stand for in STAR?",
               options: [
                 {
                   id: "1",
                   text: "Time - How long did the project expect to take and how long did it take?",
-                  explanation: "You might not be discussing a project or the time frame may be irrelevant, so this would not be necessary",
+                  explanation:
+                    "You might not be discussing a project or the time frame may be irrelevant, so this would not be necessary",
                 },
                 {
                   id: "2",
                   text: "Task - What where you assigned to do? Describe the responsibilities and goals you had",
-                  explanation: "Great! You should be as specific as possible when describing the task you worked on",
-                }, {
+                  explanation:
+                    "Great! You should be as specific as possible when describing the task you worked on",
+                },
+                {
                   id: "3",
                   text: "Team - Who was on your team? Did you get to select the team members you work or were they randomly assigned?",
-                  explanation: "Talking about your team may be useful if you're discussing teamwork or conflict",
+                  explanation:
+                    "Talking about your team may be useful if you're discussing teamwork or conflict",
                 },
                 {
                   id: "4",
                   text: "Technology - What cutting edge technology did you use and why did you choose it?",
-                  explanation: "While this does show you're constantly learning new technology, remember to always answer the question",
+                  explanation:
+                    "While this does show you're constantly learning new technology, remember to always answer the question",
                 },
               ],
               answer: "2",
@@ -365,95 +388,123 @@ const routeData = {
                 {
                   id: "1",
                   text: "Ability/Accreditation - What are you good at and why were you qualified to do the job?",
-                  explanation: "You're ability and accreditation are not required when talking about certain situation, they're not interested in how you got there, but what you did",
-                }, {
+                  explanation:
+                    "You're ability and accreditation are not required when talking about certain situation, they're not interested in how you got there, but what you did",
+                },
+                {
                   id: "2",
                   text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
                   explanation: "",
-                }, {
+                },
+                {
                   id: "3",
                   text: "Admin - ",
-                }, {
+                },
+                {
                   id: "4",
                   text: "Action - What specifically did you do and how did it contribute to the end result",
-                  explanation: "A for Awesome! Remember to talk about what you did and not your team or group",
+                  explanation:
+                    "A for Awesome! Remember to talk about what you did and not your team or group",
                 },
               ],
               answer: "4",
-            }, {
+            },
+            {
               title: "What does the R stand for in STAR",
               options: [
                 {
                   id: "1",
                   text: "Results - What did you achieve in the end?",
-                  explanation: "Rad!, Results don't always have to positive, it's okay to fail but they want to know what you've learnt from the experience",
-                }, {
+                  explanation:
+                    "Rad!, Results don't always have to positive, it's okay to fail but they want to know what you've learnt from the experience",
+                },
+                {
                   id: "2",
                   text: "Responsibilities - How did you take responsibility in this project?",
-                  explanation: "Responsibilities are important, however, this would likely fall under the T of STAR",
-                }, {
+                  explanation:
+                    "Responsibilities are important, however, this would likely fall under the T of STAR",
+                },
+                {
                   id: "3",
                   text: "Reason - Why did you select this particular experience to talk about for this interview question",
-                  explanation: "If your experience answers the questions, its not necessary to justify how it meets it",
-                }, {
+                  explanation:
+                    "If your experience answers the questions, its not necessary to justify how it meets it",
+                },
+                {
                   id: "4",
                   text: "Records - Are there any records to back up and of the claims you've made? how can you prove things",
-                  explanation: "It'll be impossible to prove everything, interviewers may ask you for specific details instead",
+                  explanation:
+                    "It'll be impossible to prove everything, interviewers may ask you for specific details instead",
                 },
               ],
               answer: "1",
-            }, {
+            },
+            {
               title: "What is the STAR Method?",
               options: [
                 {
                   id: "1",
                   text: "A structured way of answers interview Questions",
                   explanation: "Nice one",
-                }, {
+                },
+                {
                   id: "2",
                   text: "A way to present yourself, like a star, during and interview",
                   explanation: "A star is bright, much like your future :)",
-                }, {
+                },
+                {
                   id: "3",
                   text: "Something we came up with for this project",
-                  explanation: "We wish! But the STAR method has been around for a long time before we came along",
+                  explanation:
+                    "We wish! But the STAR method has been around for a long time before we came along",
                 },
               ],
               answer: "1",
-            }, {
+            },
+            {
               title: "What is the best way to prepare using the STAR Method?",
               options: [
                 {
                   id: "1",
                   text: "Practice answering common interview questions",
                   explanation: "Practice makes perfect!",
-                }, {
+                },
+                {
                   id: "2",
                   text: "You don't need to, you only need to know what it stands for",
-                  explanation: "Practicing will help you understand and adapt during real interviews",
-                }, {
+                  explanation:
+                    "Practicing will help you understand and adapt during real interviews",
+                },
+                {
                   id: "3",
                   text: "Using this tool!",
                   explanation: "This should also be the correct answers!",
                 },
               ],
               answer: "1",
-            }, {
+            },
+            {
               title: "What is NOT true about using the STAR Method?",
               options: [
                 {
                   id: "1",
                   text: "It provides a way to structure a response",
-                  explanation: "This structure will help you answer during an actual interview",
-                }, {
+                  explanation:
+                    "This structure will help you answer during an actual interview",
+                },
+                {
                   id: "2",
                   text: "It will guarantee interview success",
-                  explanation: "Unfortunately, this is not true, while it helps you structure your answers, you'll still need an answer the interview is satisfied with",
-                }, {
+                  explanation:
+                    "Unfortunately, this is not true, while it helps you structure your answers, you'll still need an answer the interview is satisfied with",
+                },
+                {
                   id: "3",
                   text: "It tells the interview a story",
-                  explanation: "Story telling is important part of using the STAR method",
-                }, {
+                  explanation:
+                    "Story telling is important part of using the STAR method",
+                },
+                {
                   id: "4",
                   text: "Practicing the STAR method is a must",
                   explanation: "Remember, practice makes perfect!",
@@ -493,95 +544,114 @@ const routeData = {
                 {
                   id: "1",
                   text: "Suit and Tie",
-                  explanation: "Not all offices have suit and tie dress codes, you want to dress like if you're working there"
+                  explanation:
+                    "Not all offices have suit and tie dress codes, you want to dress like if you're working there",
                 },
                 {
                   id: "2",
                   text: "Your hypebeast outfit",
-                  explanation: "Everyone will know you got that swagger, but do you have the skills?"
+                  explanation:
+                    "Everyone will know you got that swagger, but do you have the skills?",
                 },
                 {
                   id: "3",
                   text: "Casual everyday outfit",
-                  explanation: "Tricked you! while this may seem the most appropriate answers, it actually depends!"
+                  explanation:
+                    "Tricked you! while this may seem the most appropriate answers, it actually depends!",
                 },
                 {
                   id: "4",
                   text: "It Depends",
-                  explanation: "Correct - Best to ask the interview beforehand what you should wear"
+                  explanation:
+                    "Correct - Best to ask the interview beforehand what you should wear",
                 },
               ],
-              answer: "4"
-            }, {
-              title: "What's NOT an advantage of arriving early to an in-person interview?",
+              answer: "4",
+            },
+            {
+              title:
+                "What's NOT an advantage of arriving early to an in-person interview?",
               options: [
                 {
                   id: "1",
                   text: "Gives you spare time to go to the bathroom",
-                  explanation: "Should you need to go, you'll have time"
+                  explanation: "Should you need to go, you'll have time",
                 },
                 {
                   id: "2",
                   text: "Gives you spare time to look for the location",
-                  explanation: "Sometimes the location can be a bit tricky to find, getting there early means you can find it without worrying"
+                  explanation:
+                    "Sometimes the location can be a bit tricky to find, getting there early means you can find it without worrying",
                 },
                 {
                   id: "3",
                   text: "Gives you spare time to calm your nerves",
-                  explanation: "If you arrive early, you can take some time to relax and do some breathing exercises to calm down"
+                  explanation:
+                    "If you arrive early, you can take some time to relax and do some breathing exercises to calm down",
                 },
                 {
                   id: "4",
                   text: "Gives you spare time to listen in on the interview before yours",
-                  explanation: "While it does seem like a good idea, you wouldn't want other candidates to snoop during your interview either right?"
+                  explanation:
+                    "While it does seem like a good idea, you wouldn't want other candidates to snoop during your interview either right?",
                 },
               ],
-              answer: "4"
-            }, {
-              title: "Where is the best place for lighting for an online interview",
+              answer: "4",
+            },
+            {
+              title:
+                "Where is the best place for lighting for an online interview",
               options: [
                 {
                   id: "1",
                   text: "In front/above",
-                  explanation: "This is the perfect position, it will make sure your face is lit"
+                  explanation:
+                    "This is the perfect position, it will make sure your face is lit",
                 },
                 {
                   id: "2",
                   text: "Below/Behind",
-                  explanation: "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera"
+                  explanation:
+                    "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera",
                 },
                 {
                   id: "1",
                   text: "To the side",
-                  explanation: "If your light it to the side, half your face will be unevenly light"
+                  explanation:
+                    "If your light it to the side, half your face will be unevenly light",
                 },
               ],
-              answer: "1"
-            }, {
+              answer: "1",
+            },
+            {
               title: "What should you NOT do before your online interview?",
               options: [
                 {
                   id: "1",
                   text: "Play a high-intensity video game",
-                  explanation: "Playing video games is probably not the best idea before an interview"
+                  explanation:
+                    "Playing video games is probably not the best idea before an interview",
                 },
                 {
                   id: "2",
                   text: "Test your mic and camera",
-                  explanation: "Testing equipment is really important as this is the method of verbal and visual communication between you and the interviewer"
+                  explanation:
+                    "Testing equipment is really important as this is the method of verbal and visual communication between you and the interviewer",
                 },
                 {
                   id: "3",
                   text: "Research the company",
-                  explanation: "Research the company and prepare questions you have about the role is a must"
+                  explanation:
+                    "Research the company and prepare questions you have about the role is a must",
                 },
                 {
                   id: "4",
                   text: "Stay hydrated",
-                  explanation: "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview"
-                }
-              ]
-            }
+                  explanation:
+                    "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview",
+                },
+              ],
+            },
           ] as QuestionForQuiz[],
         },
         {
@@ -641,9 +711,11 @@ const routeData = {
             {
               type: "SectionExample",
               props: {
-                title: "Example: Tell me about a time when you had to adapt quickly to a change",
+                title:
+                  "Example: Tell me about a time when you had to adapt quickly to a change",
                 bad: {
-                  text: "Change is something that happens every day in this industry. A\n" +
+                  text:
+                    "Change is something that happens every day in this industry. A\n" +
                     "policy difference can make everyone jump, and we have very lit-\n" +
                     "tle power over the situation. That has been one of the most frus-\n" +
                     "trating things about my current job. There were just too many\n" +
@@ -659,7 +731,8 @@ const routeData = {
                   ],
                 },
                 good: {
-                  text: "When I ran the numbers on a certain food item, I discovered that\n" +
+                  text:
+                    "When I ran the numbers on a certain food item, I discovered that\n" +
                     "sales were declining. I had to move quickly to come up with a\n" +
                     "plan to turn the sales around. Using demographics, I discovered\n" +
                     "that we were off on our target market. I immediately put togeth-\n" +
@@ -669,8 +742,8 @@ const routeData = {
                     "end of the month sales rose significantly",
                   explanation: [
                     "Clear situation, task, action and result",
-                    "Provided specific example"
-                  ]
+                    "Provided specific example",
+                  ],
                 },
               },
             },
@@ -711,45 +784,52 @@ const routeData = {
                 title: "How-to Interview",
                 subtitle: "A simple list of interview dos & don'ts",
                 module: "Mannerism",
-                body: "Now you're practise for your interview, what are some of the other things you should know? Here's a bit of advice we have for your interview that's not related to your responses"
-              }
-            }, {
+                body: "Now you're practise for your interview, what are some of the other things you should know? Here's a bit of advice we have for your interview that's not related to your responses",
+              },
+            },
+            {
               type: "SectionParagraph",
               props: {
                 title: "Interview Behaviour",
-                body: "This section is split into two sub-sections, one for in-persons interviews and online interviews. It's recommend that you read through both as the tips may be applicable to both!"
-              }
-            }, {
+                body: "This section is split into two sub-sections, one for in-persons interviews and online interviews. It's recommend that you read through both as the tips may be applicable to both!",
+              },
+            },
+            {
               type: "SectionParagraph",
               props: {
                 title: "In-person Interviewers",
-                body: "Here are some tips if you're interviewing in person <ul>" +
+                body:
+                  "Here are some tips if you're interviewing in person <ul>" +
                   "<li>Dress appropriatly - If you're under or overdressed you'll stick out like a sore thumb. Avoid this by noting down the dresscode of the company, if you're unsure, ask your interview or dress smart casual</li>" +
                   "<li>Arrive early - Try getting there 10-15 minutes before your scheduled start time. It'll give you some wiggle room if you're unable to find the meeting room or need to go to the bath room</li>" +
-                  "</ul>"
-              }
-            }, {
+                  "</ul>",
+              },
+            },
+            {
               type: "SectionParagraph",
               props: {
                 title: "Online Interviews",
-                body: "Here are some tips if you're interviewing online <ul>" +
+                body:
+                  "Here are some tips if you're interviewing online <ul>" +
                   "<li>Find a suitable space - Make sure you're in a quiet room with a good internet connection, ventilation, and close the door behind you; You'd hate if someone busts through as you're talking</li>" +
                   "<li>Remove distractions - Mute your phone and close any applications that might distract you</li>" +
                   "<li>Test your mic and camera - Make sure the microphone picks up your voice and the camera has good lighting. The best position for a light is above or infront of you</li>" +
                   "<li>Arrive early - Just like in-person interviews, try and arrive a bit early. Just in case your mic or camera stops working, you might have a chance to fix it</li>" +
-                  "</ul>"
-              }
-            }, {
+                  "</ul>",
+              },
+            },
+            {
               type: "SectionParagraph",
               props: {
                 title: "Other tips",
-                body: "Here are some other tips we have for your interviews <ul>" +
+                body:
+                  "Here are some other tips we have for your interviews <ul>" +
                   "<li>Research the company and your interviewer</li>" +
                   "<li>Prepare and ask questions</li>" +
                   "<li>Be kind and respectful to everyone you meet</li>" +
-                  "</ul>"
-              }
-            }
+                  "</ul>",
+              },
+            },
           ],
         },
         {
