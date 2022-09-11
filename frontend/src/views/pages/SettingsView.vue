@@ -5,11 +5,11 @@
     <div class="account-info-container">
       <div class="info">
         <h6>Name</h6>
-        <p>Displawy name</p>
+        <p>{{ name || "Unnamed User" }}</p>
       </div>
       <div class="info">
         <h6>Email</h6>
-        <p>Email address</p>
+        <p>{{ email }}</p>
       </div>
     </div>
     <button>Log out</button>
@@ -82,11 +82,18 @@
 <script lang="ts">
 import TitleBlock from "@/components/TitleBlock.vue";
 import { defineComponent } from "vue";
+import { firebaseStore } from "@/stores/firebase.store";
 
 export default defineComponent({
   name: "SettingsView",
   components: {
     TitleBlock,
+  },
+  data() {
+    return {
+      email: firebaseStore.user?.email,
+      name: firebaseStore.user?.displayName,
+    };
   },
 });
 </script>
