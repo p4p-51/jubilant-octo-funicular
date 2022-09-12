@@ -7,7 +7,8 @@ import firebase from "firebase";
 const guardedRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    component: HomeView,
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
   },
   {
     path: "/settings",

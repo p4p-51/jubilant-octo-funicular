@@ -1,6 +1,6 @@
 <template>
   <div class="landing-view">
-    <header>
+    <header v-if="!firebaseStore.isLoggedIn">
       <div class="logo">
         <img src="@/assets/logo.svg" alt="logo" />
         <p>Funicular</p>
@@ -22,7 +22,20 @@
           tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
           swine strip steak.
         </p>
-        <button @click="this.$router.push('/register')">Get started</button>
+        <div v-if="!firebaseStore.isLoggedIn">
+          <button @click="this.$router.push('/register')">Get started</button>
+        </div>
+        <div class="progress-continue" v-else>
+          <button
+            v-if="routeStore.moduleId !== 'welcome'"
+            @click="this.$router.push(routeStore.path())"
+          >
+            Continue
+          </button>
+          <button @click="this.$router.push('/lecture/welcome/content')">
+            From the beginning
+          </button>
+        </div>
       </div>
       <img src="@/assets/illustrations/landing.svg" />
     </div>
@@ -181,6 +194,11 @@
         margin: 0;
       }
 
+      .progress-continue {
+        display: flex;
+        gap: 15px;
+      }
+
       .middle-decoration {
         display: flex;
         align-items: center;
@@ -284,8 +302,33 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { firebaseStore } from "@/stores/firebase.store";
+import router from "@/router";
+import { routeStore } from "@/stores/route.store";
+import { getUser } from "@/apis/api";
 
 export default defineComponent({
   name: "LandingView",
+  data() {
+    return {
+      firebaseStore,
+      routeStore,
+    };
+  },
+  async mounted() {
+    if (!firebaseStore.isLoggedIn) {
+      return;
+    }
+
+    if (routeStore.moduleId == null) {
+      const [error, data] = await getUser();
+
+      if (error) {
+        alert("This error should not occur, please refresh your page");
+        return;
+      }
+      routeStore.update(data["progress"]);
+    }
+  },
 });
 </script>
