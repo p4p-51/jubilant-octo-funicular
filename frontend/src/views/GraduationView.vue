@@ -41,12 +41,21 @@
     <div class="footer">
       <section-title>Further practice</section-title>
       <p>
-        Pig fatback jerky shankle sausage. Porchetta spare ribs turducken, tail
-        salami cupim flank pork loin pig meatloaf brisket turkey ham hock swine
-        strip steak. Sirloin chicken ground round bacon, kielbasa chuck kevin
-        short ribs. Short loin chuck salami pork chop fatback. Pork loin short
-        loin pastrami short ribs frankfurter salami strip steak brisket leberkas
-        sirloin shoulder boudin pig.
+        If you'd like to practice further, we suggest you try out our question
+        bank! <br />
+        Our question bank contains a list of common and popular behaviour
+        interview questions. You can search questions by topics such as
+        "leadership" or "teamwork" so you can practice exactly the kind of
+        questions you want <br />
+        <br />
+
+        We also highly recommend the book "Boost your Interview IQ" by Carole
+        Martin, you can find it
+        <a
+          href="https://libgen.is/book/index.php?md5=53E540631EA64D539F4B0D7E962D7148"
+          target="_blank"
+          >here</a
+        >
       </p>
     </div>
     <button @click="goToGrad" class="next">Go to question bank -></button>
@@ -133,18 +142,20 @@
 
       margin-top: 30px;
 
+      row-gap: 32px;
+
       p {
         font-size: 20px;
         color: $c-black;
 
-        height: 90px;
-        line-height: 0;
+        // height: 90px;
 
         margin: 0;
 
         span {
           font-size: 40px;
           color: $c-primary;
+          line-height: 0;
         }
       }
     }
@@ -169,10 +180,8 @@
 <script lang="ts">
 import ModuleItem from "@/components/ModuleItem.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
-import ModuleStatus from "@/types/ModuleStatus.interface";
-import { defineComponent } from "vue";
 import { DataExtractor } from "@/router/routes";
-import { routeStore } from "@/stores/route.store";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "GraduationView",

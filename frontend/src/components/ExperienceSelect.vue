@@ -25,7 +25,7 @@
 @import "@/assets/css/theme.scss";
 
 .experience-selection {
-  margin-top: 50px;
+  margin-top: 20px;
 
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
   max-width: 800px;
 
   h5 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
     color: $c-black;
@@ -81,22 +81,10 @@
 </style>
 
 <script lang="ts">
-import CompletedQuestion from "@/components/CompletedQuestion.vue";
-import OtherQuestion from "@/components/OtherQuestion.vue";
-import QbSearchBar from "@/components/QbSearchBar.vue";
-import QbSideBarQuestion from "@/components/QbSideBarQuestion.vue";
-import TitleBlock from "@/components/TitleBlock.vue";
-import Question from "@/types/Question.interface";
-import { defineComponent, PropType } from "vue";
-import { Experience, Answer, Label } from "@/types/Question.interface";
-import {
-  deleteExperience,
-  getExperiences,
-  getLabels,
-  putExperience,
-  updateExperience,
-} from "@/apis/api";
+import { getLabels, putExperience } from "@/apis/api";
 import ExperienceModal from "@/components/ExperienceModal.vue";
+import { Experience, Label } from "@/types/Question.interface";
+import { defineComponent, PropType } from "vue";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 

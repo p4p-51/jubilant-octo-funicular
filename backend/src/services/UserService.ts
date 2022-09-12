@@ -1,6 +1,6 @@
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
-import { IModuleId } from "../controllers/Module";
+import { IModuleId, IQuizAnswer } from "../controllers/Module";
 
 /**
  * Service that deals with the user collection
@@ -266,6 +266,43 @@ class UserService {
     }
 
     return expId;
+  };
+
+  AddOrUpdateQuiz = async (userId: number, moduleId: IModuleId, quizAnswer: IQuizAnswer) => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const quizDoc = {
+      moduleId,
+      ...quizAnswer,
+    };
+
+    const existingAnswer = await userCollection.findOne({
+        "user.userId": userId,
+        quizzes: {
+          $elemMatch: {
+            moduleId,
+            stage: quizAnswer.stage,
+          },
+        },
+      },
+    );
+
+    if (existingAnswer === null) {
+      return await this.addToSetUser(userId, { quizzes: quizDoc });
+    } else {
+      const res = await userCollection.findOneAndUpdate({
+        "user.userId": userId,
+        quizzes: {
+          $elemMatch: {
+            moduleId,
+            stage: quizAnswer.stage,
+          },
+        },
+      }, {
+        $set: { "quizzes.$": quizDoc },
+      });
+      return !!res.ok;
+    }
   };
 
   /**

@@ -16,14 +16,16 @@
 
 .title-block {
   h2 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
     color: $c-secondary;
+
+    margin-bottom: 5px;
   }
 
   h1 {
-    font-size: 36px;
+    font-size: 22px;
     font-weight: 400;
 
     color: $c-black;
@@ -32,7 +34,7 @@
   }
 
   h3 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 
     color: $c-grey-dark;

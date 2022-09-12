@@ -96,7 +96,7 @@ const updateExperience = async (
 ): Promise<ApiResponse<any>> => {
   return await axiosCall({
     method: "post",
-    url: `/experiences/${experienceId}`,
+    url: `/experiences/${experienceId}/`,
     data: experience,
   });
 };
@@ -110,7 +110,7 @@ const deleteExperience = async (
 ): Promise<ApiResponse<any>> => {
   return await axiosCall({
     method: "delete",
-    url: `/experiences/${experienceId}`,
+    url: `/experiences/${experienceId}/`,
   });
 };
 
@@ -150,6 +150,19 @@ const submitFeedback = async (
     method: "post",
     url: `modules/${moduleId}/feedback`,
     data: { rating, feedback },
+  });
+};
+
+export const submitQuiz = async (
+  moduleId: ILectureModuleId,
+  stage: string,
+  numQuestion: number,
+  numCorrect: number,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "post",
+    url: `modules/${moduleId}/quiz`,
+    data: { stage, numQuestion, numCorrect },
   });
 };
 

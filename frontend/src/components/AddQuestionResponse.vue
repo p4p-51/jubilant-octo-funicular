@@ -40,25 +40,25 @@
   align-items: flex-start;
 
   h2 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
   }
 }
 </style>
 
 <script lang="ts">
+import { putExperience } from "@/apis/api";
+import ExperienceSelect from "@/components/ExperienceSelect.vue";
 import {
   Answer,
   Experience,
   QuestionResponse,
 } from "@/types/Question.interface";
 import { defineComponent, PropType } from "vue";
-import ExperienceSelect from "@/components/ExperienceSelect.vue";
-import CollapsibleResponses from "./CollapsibleResponses.vue";
-import ResponseInputs from "./ResponseInputs.vue";
-import { putExperience } from "@/apis/api";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import CollapsibleResponses from "./CollapsibleResponses.vue";
+import ResponseInputs from "./ResponseInputs.vue";
 
 export default defineComponent({
   name: "AddQuestionResponse",
