@@ -23,6 +23,7 @@
       </div>
       <div class="checklist">
         <h3>Your experiences</h3>
+        <div>Try to cover all of the below elements!</div>
         <p v-for="label in labels" :key="label">
           <span
             class="tick"
@@ -51,7 +52,7 @@
   width: 100%;
 
   > h2 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
 
     margin-bottom: 5px;
@@ -147,12 +148,22 @@
       box-sizing: border-box;
 
       h3 {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 400;
+      }
+
+      > div {
+        font-size: 12px;
+        color: $c-grey-dark;
+        line-height: 1.1;
+
+        margin-top: -15px;
       }
 
       p {
         margin-left: 20px;
+
+        font-size: 14px;
 
         .dot {
           color: orange;

@@ -6,6 +6,41 @@ import { routeStore } from "@/stores/route.store";
 
 const routeData = {
   lecture: {
+    welcome: {
+      route: "welcome",
+      name: "Welcome",
+      stages: [
+        {
+          route: "content",
+          name: "Behavioural interviews",
+          content: [
+            {
+              type: "TitleBlock",
+              props: {
+                title: "Let's get started with behavioural interviews",
+                subtitle: "First... what are behavioural interviews?",
+                module: "Welcome",
+                body: 'Behavioural interviewing is a commonly used process in modern industries for selecting the best candidates to hire for a position. A typical example of a behavioural question might start with "Tell me about a time when..."<br/> <br/> Behavioural interviews focuses on your past experiences, providing you a platform to express your skills, background and personality. You’re also able to utilise this process to further understand the role and the company’s values to see if the job’s the right fit for you.',
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "Why and how to prepare for behavioural interviews?",
+                body: "Studies have shown that by practising and preparing for interviews, you’ll become more confident and your interview performanc increases. There are several techniques at your disposal to prepare, including but not limited to written assignments, mock interviews, or online videos.<br/><br/>Reading commonly asked questions and organising experiences are highly effective ways to better understand your strengths and weaknesses to formular responses",
+              },
+            },
+            {
+              type: "SectionParagraph",
+              props: {
+                title: "What are we doing here today?",
+                body: "We will be walking you through each of the most important aspects of behavioural interviews. Each module will begin with a preliminary quiz to test your knowledge, and also end with a quiz to see what you have learnt! <br/> <br/>Within each module, there will be useful information, as well as interactive material which will help you build your very own interview profile and become an interviewing-superstar. <br/> <br/>Now let's get started!",
+              },
+            },
+          ],
+        },
+      ],
+    },
     "self-intro": {
       route: "self-intro",
       name: "Self Introduction",
@@ -323,191 +358,82 @@ const routeData = {
           name: "Preliminary Quiz",
           content: [
             {
-              title: "What does the S stand for in STAR?",
+              title:
+                "When the interviewer says 'Tell me about a time when...', what should you talk about?",
               options: [
                 {
                   id: "1",
-                  text: "Situation - Give context to the situation you're able to discuss",
+                  text: "Recount a historical event to do with the relevant topic",
                   explanation:
-                    "Excellent! Before you dive in, you want to provide the context to the interviewer",
+                    "The interviewer would prefer to hear about something which involves you, so they can understand more about you",
                 },
                 {
                   id: "2",
-                  text: "Size - What was the size of the team you're working with? The larger the team, the more complex the project must have been",
+                  text: "Recount one of your personal experiences to do with the relevant topic",
                   explanation:
-                    "While the size of the team would be important if you were in a leadership role, it does not always apply",
+                    "Indeed! Talking about your personal past experiences will best help the interviewer to get to know you better",
                 },
                 {
                   id: "3",
-                  text: "Stakeholders - Who were the stakeholders involved and how did they have an impact",
+                  text: "Recount an observation you have made while studying your discipline",
                   explanation:
-                    "Stakeholders and communication is extremely important, only discuss it if you worked directly with them or is important to the question ",
+                    "The interviewer would prefer to hear about something which involves you, so they can understand more about you",
                 },
                 {
                   id: "4",
-                  text: "Story - Create a story to hook the interviewer in",
+                  text: "Hypothesize a personal experience to do with the relevant topic",
                   explanation:
-                    "Overall STAR is used to create a story/narrative, however the S does not stand for story specifically",
-                },
-              ],
-              answer: "1",
-            },
-            {
-              title: "What does the T stand for in STAR?",
-              options: [
-                {
-                  id: "1",
-                  text: "Time - How long did the project expect to take and how long did it take?",
-                  explanation:
-                    "You might not be discussing a project or the time frame may be irrelevant, so this would not be necessary",
-                },
-                {
-                  id: "2",
-                  text: "Task - What where you assigned to do? Describe the responsibilities and goals you had",
-                  explanation:
-                    "Great! You should be as specific as possible when describing the task you worked on",
-                },
-                {
-                  id: "3",
-                  text: "Team - Who was on your team? Did you get to select the team members you work or were they randomly assigned?",
-                  explanation:
-                    "Talking about your team may be useful if you're discussing teamwork or conflict",
-                },
-                {
-                  id: "4",
-                  text: "Technology - What cutting edge technology did you use and why did you choose it?",
-                  explanation:
-                    "While this does show you're constantly learning new technology, remember to always answer the question",
+                    "The interviewer would prefer to hear about something which you have already done, rather than a hypothetical situation",
                 },
               ],
               answer: "2",
             },
             {
-              title: "What does the A stand for in STAR",
+              title:
+                "What is most important thing that the interviewer is trying to find out in a behavioural interview?",
               options: [
                 {
                   id: "1",
-                  text: "Ability/Accreditation - What are you good at and why were you qualified to do the job?",
+                  text: "What type of person you were in the past",
                   explanation:
-                    "You're ability and accreditation are not required when talking about certain situation, they're not interested in how you got there, but what you did",
+                    "While the interviewer would definitely like to get to know about your past, it is for the purpose of determining what you would be like in the future as an fellow colleague",
                 },
                 {
                   id: "2",
-                  text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
-                  explanation: "",
+                  text: "What type of person you are now",
+                  explanation:
+                    "While the interviewer is definitely interested in what kind of person you are, what they really want to know is if you will be a good fellow employee to the company",
                 },
                 {
                   id: "3",
-                  text: "Admin - ",
+                  text: "How technically skilled you are for the role you're applying for",
+                  explanation:
+                    "Skills are definitely important when applying for jobs, but it is not the focus of a behavioural interview",
                 },
                 {
                   id: "4",
-                  text: "Action - What specifically did you do and how did it contribute to the end result",
+                  text: "Whether you are likely to be a good colleague to work with",
                   explanation:
-                    "A for Awesome! Remember to talk about what you did and not your team or group",
+                    "When the interviewer is talking to you, they are trying to gauge what you would be like as a fellow employee of the company",
                 },
               ],
               answer: "4",
             },
             {
-              title: "What does the R stand for in STAR",
+              title:
+                "Is it true that what you talk about must include elements of teamwork?",
               options: [
                 {
                   id: "1",
-                  text: "Results - What did you achieve in the end?",
+                  text: "Yes, teamwork is an important part of working at a company",
                   explanation:
-                    "Rad!, Results don't always have to positive, it's okay to fail but they want to know what you've learnt from the experience",
+                    "Teamwork is important, but so are your other skills such as problem solving, time management, etc.",
                 },
                 {
                   id: "2",
-                  text: "Responsibilities - How did you take responsibility in this project?",
+                  text: "No, I can talk about other things which don't involve teamwork",
                   explanation:
-                    "Responsibilities are important, however, this would likely fall under the T of STAR",
-                },
-                {
-                  id: "3",
-                  text: "Reason - Why did you select this particular experience to talk about for this interview question",
-                  explanation:
-                    "If your experience answers the questions, its not necessary to justify how it meets it",
-                },
-                {
-                  id: "4",
-                  text: "Records - Are there any records to back up and of the claims you've made? how can you prove things",
-                  explanation:
-                    "It'll be impossible to prove everything, interviewers may ask you for specific details instead",
-                },
-              ],
-              answer: "1",
-            },
-            {
-              title: "What is the STAR Method?",
-              options: [
-                {
-                  id: "1",
-                  text: "A structured way of answers interview Questions",
-                  explanation: "Nice one",
-                },
-                {
-                  id: "2",
-                  text: "A way to present yourself, like a star, during and interview",
-                  explanation: "A star is bright, much like your future :)",
-                },
-                {
-                  id: "3",
-                  text: "Something we came up with for this project",
-                  explanation:
-                    "We wish! But the STAR method has been around for a long time before we came along",
-                },
-              ],
-              answer: "1",
-            },
-            {
-              title: "What is the best way to prepare using the STAR Method?",
-              options: [
-                {
-                  id: "1",
-                  text: "Practice answering common interview questions",
-                  explanation: "Practice makes perfect!",
-                },
-                {
-                  id: "2",
-                  text: "You don't need to, you only need to know what it stands for",
-                  explanation:
-                    "Practicing will help you understand and adapt during real interviews",
-                },
-                {
-                  id: "3",
-                  text: "Using this tool!",
-                  explanation: "This should also be the correct answers!",
-                },
-              ],
-              answer: "1",
-            },
-            {
-              title: "What is NOT true about using the STAR Method?",
-              options: [
-                {
-                  id: "1",
-                  text: "It provides a way to structure a response",
-                  explanation:
-                    "This structure will help you answer during an actual interview",
-                },
-                {
-                  id: "2",
-                  text: "It will guarantee interview success",
-                  explanation:
-                    "Unfortunately, this is not true, while it helps you structure your answers, you'll still need an answer the interview is satisfied with",
-                },
-                {
-                  id: "3",
-                  text: "It tells the interview a story",
-                  explanation:
-                    "Story telling is important part of using the STAR method",
-                },
-                {
-                  id: "4",
-                  text: "Practicing the STAR method is a must",
-                  explanation: "Remember, practice makes perfect!",
+                    "Indeed! While teamwork is indeed an important element to show, you can also reveal important qualities about yourself by talking about other experiences",
                 },
               ],
               answer: "2",
@@ -522,7 +448,89 @@ const routeData = {
         {
           route: "quiz/end",
           name: "Review Quiz",
-          content: {},
+          content: [
+            {
+              title:
+                "When the interviewer says 'Tell me about a time when...', what should you talk about?",
+              options: [
+                {
+                  id: "1",
+                  text: "Recount a historical event to do with the relevant topic",
+                  explanation:
+                    "The interviewer would prefer to hear about something which involves you, so they can understand more about you",
+                },
+                {
+                  id: "2",
+                  text: "Recount one of your personal experiences to do with the relevant topic",
+                  explanation:
+                    "Indeed! Talking about your personal past experiences will best help the interviewer to get to know you better",
+                },
+                {
+                  id: "3",
+                  text: "Recount an observation you have made while studying your discipline",
+                  explanation:
+                    "The interviewer would prefer to hear about something which involves you, so they can understand more about you",
+                },
+                {
+                  id: "4",
+                  text: "Hypothesize a personal experience to do with the relevant topic",
+                  explanation:
+                    "The interviewer would prefer to hear about something which you have already done, rather than a hypothetical situation",
+                },
+              ],
+              answer: "2",
+            },
+            {
+              title:
+                "What is most important thing that the interviewer is trying to find out in a behavioural interview?",
+              options: [
+                {
+                  id: "1",
+                  text: "What type of person you were in the past",
+                  explanation:
+                    "While the interviewer would definitely like to get to know about your past, it is for the purpose of determining what you would be like in the future as an fellow colleague",
+                },
+                {
+                  id: "2",
+                  text: "What type of person you are now",
+                  explanation:
+                    "While the interviewer is definitely interested in what kind of person you are, what they really want to know is if you will be a good fellow employee to the company",
+                },
+                {
+                  id: "3",
+                  text: "How technically skilled you are for the role you're applying for",
+                  explanation:
+                    "Skills are definitely important when applying for jobs, but it is not the focus of a behavioural interview",
+                },
+                {
+                  id: "4",
+                  text: "Whether you are likely to be a good colleague to work with",
+                  explanation:
+                    "When the interviewer is talking to you, they are trying to gauge what you would be like as a fellow employee of the company",
+                },
+              ],
+              answer: "4",
+            },
+            {
+              title:
+                "Is it true that what you talk about must include elements of teamwork?",
+              options: [
+                {
+                  id: "1",
+                  text: "Yes, teamwork is an important part of working at a company",
+                  explanation:
+                    "Teamwork is important, but so are your other skills such as problem solving, time management, etc.",
+                },
+                {
+                  id: "2",
+                  text: "No, I can talk about other things which don't involve teamwork",
+                  explanation:
+                    "Indeed! While teamwork is indeed an important element to show, you can also reveal important qualities about yourself by talking about other experiences",
+                },
+              ],
+              answer: "2",
+            },
+          ] as QuestionForQuiz[],
         },
         {
           route: "feedback",
