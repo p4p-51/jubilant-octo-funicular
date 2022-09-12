@@ -154,7 +154,6 @@ class UserController extends BaseController {
 
   GetStats = async (req, res) => {
     let userId: number = parseInt(res.locals["userId"]);
-    userId = 8;
     const stats = await this.userService.getStats(userId);
 
     const prelim = stats["accuracy"].find((i) => {

@@ -401,10 +401,14 @@ class UserService {
           },
           quizzes: 1,
         },
-      }, {
-        $unwind: "$quizzes",
-        preserveNullAndEmptyArrays: true
-      }, {
+      },
+      {
+        $unwind: {
+          path: "$quizzes",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
         $group: {
           _id: "$quizzes.stage",
           id: { $first: "$_id" },
@@ -423,16 +427,25 @@ class UserService {
             $push: {
               _id: "$$ROOT._id",
               accuracy: {
-                $divide: ["$$ROOT.numCorrect", "$$ROOT.numQuestion"]
+                $cond: {
+                  if: {
+                    $ne: ["$$ROOT.numQuestion", 0],
+                  },
+                  then: {
+                    $divide: ["$$ROOT.numCorrect", "$$ROOT.numQuestion"],
+                  },
+                  else: 0,
+                },
               },
             },
           },
         },
-      }, {
-      $project: {
-        _id: 0
-      }
-      }
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
     ]).toArray();
 
     return res[0];
