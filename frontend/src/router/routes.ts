@@ -1481,11 +1481,18 @@ class DataExtractor {
     let moduleStatus: ModuleStatus["status"] = found ? "future" : "done";
 
     for (const [key, value] of Object.entries(routeData["lecture"])) {
+      const baseUrl = `/lecture/${value["route"]}`;
+      let url = "";
+      if (value["route"] == "experiences") {
+        url = `${baseUrl}/build-profile`;
+      } else {
+        url = `${baseUrl}/content`;
+      }
       const module: ModuleStatus = {
         id: key,
         name: value["name"],
         status: "done",
-        url: `/lecture/${value["route"]}`,
+        url,
       };
 
       module["children"] = value["stages"].map((stage, index) => {
@@ -1498,7 +1505,7 @@ class DataExtractor {
           id: stage["route"],
           name: stage["name"],
           status: status,
-          url: `${module["url"]}/${stage["route"]}`,
+          url: `${baseUrl}/${stage["route"]}`,
         };
 
         status = found ? "future" : "done";
