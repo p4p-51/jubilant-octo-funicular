@@ -8,9 +8,10 @@
         :question="question"
         :questionNumber="i + 1"
         :key="i"
+        @submitQuestion="submitQuestion($event, i)"
       />
     </div>
-    <go-button class="go-button" />
+    <go-button @click="submit" class="go-button" :disabled="isDisabled" />
   </div>
 </template>
 
@@ -72,6 +73,7 @@ import {
   RoutesManager,
 } from "@/router/routes";
 import GoButton from "@/components/GoButton.vue";
+import { submitQuiz } from "@/apis/api";
 
 export default defineComponent({
   name: "QuizView",
@@ -79,6 +81,29 @@ export default defineComponent({
     GoButton,
     TitleBlock,
     QuizQuestion,
+  },
+  methods: {
+    async submit() {
+      const [error, data] = await submitQuiz(
+        this.moduleId!,
+        this.type!,
+        this.quizAnswers.length,
+        this.quizAnswers.filter((ans) => {
+          return ans == 2;
+        }).length,
+      );
+      if (error) {
+        alert("Quiz was not submitted, please try it again");
+        this.$router.go(0);
+      }
+    },
+    // status 0 = unanswered, 1 = incorrect, 2 = correct
+    submitQuestion(status: number, i: number) {
+      this.quizAnswers[i] = status;
+      this.isDisabled = this.quizAnswers.some((ans) => {
+        return ans == 0;
+      });
+    },
   },
   mounted() {
     this.moduleId = this.$route.params.moduleId as ILectureModuleId;
@@ -111,6 +136,8 @@ export default defineComponent({
       console.log("Cannot get questions for module");
       this.$router.push("/");
     }
+
+    this.quizAnswers = Array(this.quizQuestions!.length).fill(0);
   },
   data() {
     return {
@@ -121,161 +148,9 @@ export default defineComponent({
         title: "",
         subtitle: "",
       } as { module: string; title: string; subtitle: string },
-      modules: [
-        {
-          name: "Self introduction",
-          id: "fjisaljio",
-          status: "done",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "done",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Organising Past Experiences",
-          id: "fsafsafsa",
-          status: "current",
-          url: "/lecture/prem-quiz",
-          children: [
-            {
-              name: "Prelimiary Quiz",
-              id: "fafwqa",
-              status: "done",
-              url: "/lecture/prem-quiz",
-            },
-            {
-              name: "Lecture",
-              id: "fafwqa",
-              status: "done",
-              url: "/lecture",
-            },
-            {
-              name: "Build your own profile",
-              id: "fafwqa",
-              status: "done",
-              url: "/lecture/build-profile",
-            },
-            {
-              name: "Review quiz",
-              id: "fafwqa",
-              status: "current",
-              url: "/lecture/quiz",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Another module here",
-          id: "fjisaljio",
-          status: "future",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Yet another module",
-          id: "fjisaljio",
-          status: "future",
-          url: "#",
-          children: [
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-            {
-              name: "Some sort of child",
-              id: "fafwqa",
-              status: "future",
-              url: "#",
-            },
-          ] as ModuleStatus[],
-        },
-        {
-          name: "Graduation",
-          id: "dsadasfwqa",
-          status: "future",
-          url: "#",
-        },
-      ] as ModuleStatus[],
-      quizQuestions: null as QuestionForQuiz | null,
+      quizQuestions: null as QuestionForQuiz[] | null,
+      quizAnswers: [] as number[],
+      isDisabled: true as boolean,
     };
   },
 });

@@ -99,7 +99,7 @@ class UserController extends BaseController {
       stage: parseInt(req.body["stage"]),
     };
 
-    const skipModules: IModuleId[] = await this.userService.getSkipModules(userId);
+    // const skipModules: IModuleId[] = await this.userService.getSkipModules(userId);
 
     try {
       let nextStage: IModuleStage = await new ModuleService().getNextStage(
@@ -108,9 +108,9 @@ class UserController extends BaseController {
 
       // If the next stage is part of the skipping modules, get the next module
       let moduleId = nextStage.moduleId;
-      if (skipModules.includes(nextStage.moduleId)) {
-        nextStage = await new ModuleService().getNextModule(nextStage.moduleId, skipModules);
-      }
+      // if (skipModules.includes(nextStage.moduleId)) {
+      //   nextStage = await new ModuleService().getNextModule(nextStage.moduleId, skipModules);
+      // }
 
       const success: boolean = await this.userService.setUser(userId, {
         progress: nextStage,

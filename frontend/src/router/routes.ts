@@ -918,14 +918,14 @@ class DataExtractor {
   static getQuizQuestions = (
     moduleId: ILectureModuleId,
     type: string,
-  ): QuestionForQuiz => {
+  ): QuestionForQuiz[] => {
     const data = routeData["lecture"][moduleId]["stages"];
 
     const stage = data.find((stage) => {
       return stage.route == `quiz/${type}`;
     });
 
-    return stage!["content"] as QuestionForQuiz;
+    return stage!["content"] as QuestionForQuiz[];
   };
 
   static getModuleContent = (moduleId: ILectureModuleId) => {
