@@ -57,10 +57,9 @@ class ModuleService {
   /**
    * Get the next module, ignoring the stage number
    * @param module the current module
-   * @param skipModules an array of module to skip
    * @returns the next ModuleStage (stage will be at 1)
    */
-  getNextModule = async (module: IModuleId, skipModules: IModuleId[] = null): Promise<IModuleStage> => {
+  getNextModule = async (module: IModuleId): Promise<IModuleStage> => {
     const moduleStageCollection: Collection = await MongoAdapter.getCollection(
       "moduleStage",
     );
@@ -68,38 +67,30 @@ class ModuleService {
     let currentModuleId = module;
     let nextModule;
 
-    do {
-      const stages: number[] = await moduleStageCollection
-        .aggregate([
-          {
-            $match: {
-              moduleId: currentModuleId,
+    const stages: number[] = await moduleStageCollection
+      .aggregate([
+        {
+          $match: {
+            moduleId: currentModuleId,
+          },
+        },
+        {
+          $group: {
+            _id: "$moduleId",
+            stages: {
+              $push: "$stage",
             },
           },
-          {
-            $group: {
-              _id: "$moduleId",
-              stages: {
-                $push: "$stage",
-              },
-            },
-          },
-        ])
-        .toArray()
-        .then((res) => {
-          return res[0]["stages"];
-        });
+        },
+      ])
+      .toArray()
+      .then((res) => {
+        return res[0]["stages"];
+      });
 
-      const lastStage: number = Math.max(...stages);
+    const lastStage: number = Math.max(...stages);
 
-      nextModule = await this.getNextStage({ moduleId: currentModuleId, stage: lastStage });
-
-      if (nextModule.moduleId == "grad") {
-        break;
-      }
-      currentModuleId = nextModule.moduleId;
-      //Skip to next module if the found module is part of the skipped list
-    } while (skipModules.includes(currentModuleId));
+    nextModule = await this.getNextStage({ moduleId: currentModuleId, stage: lastStage });
 
     return nextModule;
   };
