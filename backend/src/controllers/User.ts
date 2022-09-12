@@ -42,7 +42,7 @@ class UserController extends BaseController {
 
       let newUser = {
         progress: {
-          "moduleId": "self-intro",
+          "moduleId": "welcome",
           "stage": 1,
         },
         intro: {
