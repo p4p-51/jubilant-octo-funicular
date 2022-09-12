@@ -51,6 +51,7 @@ const userController = new UserController();
  *          - accuracy
  *          - numExperiences
  *          - numQuestionsAnswered
+ *          - hasSelfIntro
  *        properties:
  *          accuracy:
  *            type: object
@@ -72,6 +73,8 @@ const userController = new UserController();
  *          numQuestionsAnswered:
  *            type: integer
  *            minimum: 0
+ *          hasSelfIntro:
+ *            type: boolean
  */
 
 /**

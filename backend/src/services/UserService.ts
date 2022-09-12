@@ -399,6 +399,15 @@ class UserService {
           numExperiences: {
             $size: "$experiences",
           },
+          hasSelfIntro:{
+            $cond: {
+              if: {
+                $ne: ["$intro.body", ""]
+              },
+              then: true,
+              else: false
+            }
+          },
           quizzes: 1,
         },
       },
@@ -414,6 +423,7 @@ class UserService {
           id: { $first: "$_id" },
           numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
           numExperiences: { $first: "$numExperiences" },
+          hasSelfIntro: { $first: "$hasSelfIntro"},
           numCorrect: { $sum: "$quizzes.numCorrect" },
           numQuestion: { $sum: "$quizzes.numQuestion" },
         },
@@ -423,6 +433,7 @@ class UserService {
           _id: "$id",
           numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
           numExperiences: { $first: "$numExperiences" },
+          hasSelfIntro: { $first: "$hasSelfIntro"},
           accuracy: {
             $push: {
               _id: "$$ROOT._id",
