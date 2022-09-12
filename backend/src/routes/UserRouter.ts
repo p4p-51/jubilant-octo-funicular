@@ -51,19 +51,19 @@ const userController = new UserController();
  *          - accuracy
  *          - numExperiences
  *          - numQuestionsAnswered
- *          - completedModules
+ *          - hasSelfIntro
  *        properties:
  *          accuracy:
  *            type: object
  *            required:
- *              - before
- *              - after
+ *              - prelim
+ *              - end
  *            properties:
- *              before:
+ *              prelim:
  *                type: integer
  *                minimum: 0
  *                maximum: 100
- *              after:
+ *              end:
  *                type: integer
  *                minimum: 0
  *                maximum: 100
@@ -73,11 +73,8 @@ const userController = new UserController();
  *          numQuestionsAnswered:
  *            type: integer
  *            minimum: 0
- *          completedModules:
- *            type: array
- *            items:
- *              type: string
- *            example: ["Self Introduction", "Organising Situations", "Structuring Responses", "Allocating Situations", "Mannerisms"]
+ *          hasSelfIntro:
+ *            type: boolean
  */
 
 /**
@@ -224,8 +221,6 @@ userRouter.put('/me/skip', userController.SkipModules)
  *      description: Get user stats
  *      tags:
  *          - User
- *      parameters:
- *          - $ref: '#/components/parameters/userIdParam'
  *      responses:
  *        default:
  *          description: Something unexpected happened

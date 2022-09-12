@@ -1,4 +1,5 @@
 <template>
+  <loading v-model:active="isLoading" />
   <div class="graduation-view">
     <div class="header">
       <h1>Yay! You've graduate 🎉</h1>
@@ -21,18 +22,20 @@
         <div class="items">
           <p>
             Your quiz accuracy has improved from
-            <span>{{ accuracy.before }}</span
-            >% to <span>{{ accuracy.after }}</span
+            <span>{{ stats.accuracy.prelim }}</span
+            >% to <span>{{ stats.accuracy.end }}</span
             >%
           </p>
           <p>
-            You have documented <span>{{ numExperiences }}</span> experiences
+            You have documented
+            <span>{{ stats.numExperiences }}</span> experiences
           </p>
           <p>
-            You have added answers to <span>{{ numResponses }}</span> interview
-            questions to your interview portfolio
+            You have added answers to
+            <span>{{ stats.numQuestionsAnswered }}</span> interview questions to
+            your interview portfolio
           </p>
-          <p v-if="hasSelfIntro">
+          <p v-if="stats.hasSelfIntro">
             You have written one hella awesome self introduction
           </p>
         </div>
@@ -182,14 +185,28 @@ import ModuleItem from "@/components/ModuleItem.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
 import { DataExtractor } from "@/router/routes";
 import { defineComponent } from "vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+import { graduationData } from "@/apis/api";
 
 export default defineComponent({
   name: "GraduationView",
-  components: { ModuleItem, SectionTitle },
+  components: { ModuleItem, SectionTitle, Loading },
   computed: {
     moduleList() {
       return DataExtractor.moduleNames();
     },
+  },
+  async mounted() {
+    const [error, data] = await graduationData();
+    if (error) {
+      alert("Cannot get graduation data");
+      this.isLoading = false;
+      return;
+    }
+    this.stats = data;
+
+    this.isLoading = false;
   },
   methods: {
     goToGrad() {
@@ -198,13 +215,16 @@ export default defineComponent({
   },
   data() {
     return {
-      accuracy: {
-        before: 20,
-        after: 80,
+      stats: {
+        accuracy: {
+          prelim: 0,
+          end: 0,
+        },
+        numExperiences: 0,
+        numQuestionsAnswered: 0,
+        hasSelfIntro: true,
       },
-      numExperiences: 8,
-      numResponses: 16,
-      hasSelfIntro: true,
+      isLoading: true,
     };
   },
 });

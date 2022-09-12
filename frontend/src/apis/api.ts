@@ -166,6 +166,13 @@ export const submitQuiz = async (
   });
 };
 
+export const graduationData = async (): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "get",
+    url: "users/me/stats",
+  });
+};
+
 export {
   registerUser,
   getQuestions,
