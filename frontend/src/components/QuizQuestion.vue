@@ -101,7 +101,8 @@ export default defineComponent({
     },
     submitAnswer() {
       this.show = true;
-      const correct = this.selectedOption === this.question.answer;
+      const correct: number =
+        this.selectedOption === this.question.answer ? 2 : 1;
       this.$emit("submitQuestion", correct);
     },
   },

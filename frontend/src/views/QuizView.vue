@@ -73,6 +73,7 @@ import {
   RoutesManager,
 } from "@/router/routes";
 import GoButton from "@/components/GoButton.vue";
+import { submitQuiz } from "@/apis/api";
 
 export default defineComponent({
   name: "QuizView",
@@ -82,14 +83,26 @@ export default defineComponent({
     QuizQuestion,
   },
   methods: {
-    submit() {
-      alert("submitting");
+    async submit() {
+      const [error, data] = await submitQuiz(
+        this.moduleId!,
+        this.type!,
+        this.quizAnswers.length,
+        this.quizAnswers.filter((ans) => {
+          return ans == 2;
+        }).length,
+      );
+      if (error) {
+        alert("Quiz was not submitted, please try it again");
+        this.$router.go(0);
+      }
     },
-    submitQuestion(correct: boolean, i: number) {
-      alert(this.quizAnswers.length)
-      this.quizAnswers[i] = correct;
-      alert(this.quizAnswers.length)
-      this.isDisabled = this.quizAnswers.length != this.quizQuestions!.length
+    // status 0 = unanswered, 1 = incorrect, 2 = correct
+    submitQuestion(status: number, i: number) {
+      this.quizAnswers[i] = status;
+      this.isDisabled = this.quizAnswers.some((ans) => {
+        return ans == 0;
+      });
     },
   },
   mounted() {
@@ -124,7 +137,7 @@ export default defineComponent({
       this.$router.push("/");
     }
 
-    this.quizAnswers = Array.apply(null, Array(this.quizAnswers.length)).map(function () {});
+    this.quizAnswers = Array(this.quizQuestions!.length).fill(0);
   },
   data() {
     return {
@@ -136,7 +149,7 @@ export default defineComponent({
         subtitle: "",
       } as { module: string; title: string; subtitle: string },
       quizQuestions: null as QuestionForQuiz[] | null,
-      quizAnswers: [] as any[],
+      quizAnswers: [] as number[],
       isDisabled: true as boolean,
     };
   },
