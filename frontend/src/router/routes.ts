@@ -650,11 +650,14 @@ const routeData = {
                 {
                   id: "2",
                   text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
-                  explanation: "",
+                  explanation:
+                    "If the story involves an application, try to give only a brief explanation in S in STAR",
                 },
                 {
                   id: "3",
-                  text: "Admin - ",
+                  text: "Admin - What administrative tasks did you take on?",
+                  explanation:
+                    "While administrative tasks are impressive, your interviewer also wants to hear about other actions you took.",
                 },
                 {
                   id: "4",
@@ -946,11 +949,14 @@ const routeData = {
                 {
                   id: "2",
                   text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
-                  explanation: "",
+                  explanation:
+                    "If the story involves an application, try to give only a brief explanation in S in STAR",
                 },
                 {
                   id: "3",
-                  text: "Admin - ",
+                  text: "Admin - What administrative tasks did you take on?",
+                  explanation:
+                    "While administrative tasks are impressive, your interviewer also wants to hear about other actions you took.",
                 },
                 {
                   id: "4",
