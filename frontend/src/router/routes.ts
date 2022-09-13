@@ -8,7 +8,7 @@ const routeData = {
   lecture: {
     welcome: {
       route: "welcome",
-      name: "Welcome",
+      name: "Course introduction",
       stages: [
         {
           route: "content",
@@ -1163,7 +1163,7 @@ const routeData = {
                     "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera",
                 },
                 {
-                  id: "1",
+                  id: "3",
                   text: "To the side",
                   explanation:
                     "If your light it to the side, half your face will be unevenly light",
@@ -1199,6 +1199,7 @@ const routeData = {
                     "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview",
                 },
               ],
+              answer: "1",
             },
           ] as QuestionForQuiz[],
         },
@@ -1341,7 +1342,7 @@ const routeData = {
                     "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera",
                 },
                 {
-                  id: "1",
+                  id: "3",
                   text: "To the side",
                   explanation:
                     "If your light it to the side, half your face will be unevenly light",
@@ -1377,6 +1378,7 @@ const routeData = {
                     "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview",
                 },
               ],
+              answer: "1",
             },
           ] as QuestionForQuiz[],
         },
