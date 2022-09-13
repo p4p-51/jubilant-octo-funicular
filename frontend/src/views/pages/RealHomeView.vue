@@ -24,9 +24,56 @@
   height: 100%;
   width: 100%;
 
+  justify-content: space-between;
+
   .content {
     width: 55%;
     min-width: 600px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 0 100px;
+    box-sizing: border-box;
+
+    h1 {
+      font-size: 64px;
+      color: $c-black;
+
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+
+      font-weight: 400;
+      color: $c-grey-dark;
+      margin-top: 0;
+    }
+
+    .continue-prompt {
+      margin-top: 60px;
+
+      > p {
+        font-size: 16px;
+
+        > span {
+          color: $c-secondary;
+          font-weight: 500;
+
+          margin-left: 5px;
+        }
+      }
+
+      button {
+        color: $c-bg-grey;
+
+        background: $c-primary;
+      }
+    }
   }
 
   .illustration-container {
@@ -44,6 +91,11 @@
 @media (max-width: 1080px) {
   .illustration-container {
     visibility: hidden;
+    display: none;
+  }
+
+  .content {
+    min-width: 100% !important;
   }
 }
 </style>
