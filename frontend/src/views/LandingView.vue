@@ -18,9 +18,10 @@
           </p>
         </div>
         <p>
-          Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
-          tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
-          swine strip steak.
+          Funicular is a digitalised tool for behavioural interview practice. It
+          utilises a combination of lectures and interactive content to help you
+          feel confident and perform at your best in your next behavioural
+          interview!
         </p>
         <button @click="this.$router.push('/register')">Get started</button>
       </div>
