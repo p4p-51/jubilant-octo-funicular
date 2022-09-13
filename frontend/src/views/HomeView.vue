@@ -4,7 +4,7 @@
     <br />
     <router-link :to="routeStore.path()">Continue</router-link>
     <br />
-    <router-link to="/lecture/self-intro/quiz/prelim">Start Over</router-link>
+    <router-link to="/lecture/welcome/content">Start Over</router-link>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>

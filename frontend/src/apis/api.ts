@@ -153,6 +153,26 @@ const submitFeedback = async (
   });
 };
 
+export const submitQuiz = async (
+  moduleId: ILectureModuleId,
+  stage: string,
+  numQuestion: number,
+  numCorrect: number,
+): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "post",
+    url: `modules/${moduleId}/quiz`,
+    data: { stage, numQuestion, numCorrect },
+  });
+};
+
+export const graduationData = async (): Promise<ApiResponse<any>> => {
+  return await axiosCall({
+    method: "get",
+    url: "users/me/stats",
+  });
+};
+
 export {
   registerUser,
   getQuestions,

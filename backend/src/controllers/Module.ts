@@ -69,13 +69,12 @@ class ModuleController extends BaseController {
       numQuestion,
     };
 
-    const success: boolean = await new UserService().addToSetUser(userId, {
-      quizzes: { moduleId, ...quizAnswers },
-    });
+    const success: boolean = await new UserService().AddOrUpdateQuiz(userId, moduleId, quizAnswers);
 
     if (success) {
       res.status(200).send({ success: true });
     } else {
+      //TODO: change this
       httpResponse(res, 500, "Cannot submit quiz");
     }
   };

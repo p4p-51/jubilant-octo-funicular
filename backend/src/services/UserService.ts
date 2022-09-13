@@ -1,6 +1,6 @@
 import { MongoAdapter } from "../models/mongodb/MongoClient";
 import { IAnswer } from "../controllers/Question";
-import { IModuleId } from "../controllers/Module";
+import { IModuleId, IQuizAnswer } from "../controllers/Module";
 
 /**
  * Service that deals with the user collection
@@ -268,6 +268,43 @@ class UserService {
     return expId;
   };
 
+  AddOrUpdateQuiz = async (userId: number, moduleId: IModuleId, quizAnswer: IQuizAnswer) => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const quizDoc = {
+      moduleId,
+      ...quizAnswer,
+    };
+
+    const existingAnswer = await userCollection.findOne({
+        "user.userId": userId,
+        quizzes: {
+          $elemMatch: {
+            moduleId,
+            stage: quizAnswer.stage,
+          },
+        },
+      },
+    );
+
+    if (existingAnswer === null) {
+      return await this.addToSetUser(userId, { quizzes: quizDoc });
+    } else {
+      const res = await userCollection.findOneAndUpdate({
+        "user.userId": userId,
+        quizzes: {
+          $elemMatch: {
+            moduleId,
+            stage: quizAnswer.stage,
+          },
+        },
+      }, {
+        $set: { "quizzes.$": quizDoc },
+      });
+      return !!res.ok;
+    }
+  };
+
   /**
    * Submit the answer to a given question and experience
    * @param userId
@@ -344,6 +381,85 @@ class UserService {
       }
       return users[0]["answers"];
     });
+  };
+
+  getStats = async (userId: number) => {
+    const userCollection = await MongoAdapter.getCollection("users");
+
+    const res = await userCollection.aggregate([
+      {
+        $match: {
+          "user.userId": userId,
+        },
+      }, {
+        $project: {
+          numQuestionsAnswered: {
+            $size: "$answers",
+          },
+          numExperiences: {
+            $size: "$experiences",
+          },
+          hasSelfIntro:{
+            $cond: {
+              if: {
+                $ne: ["$intro.body", ""]
+              },
+              then: true,
+              else: false
+            }
+          },
+          quizzes: 1,
+        },
+      },
+      {
+        $unwind: {
+          path: "$quizzes",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $group: {
+          _id: "$quizzes.stage",
+          id: { $first: "$_id" },
+          numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
+          numExperiences: { $first: "$numExperiences" },
+          hasSelfIntro: { $first: "$hasSelfIntro"},
+          numCorrect: { $sum: "$quizzes.numCorrect" },
+          numQuestion: { $sum: "$quizzes.numQuestion" },
+        },
+      },
+      {
+        $group: {
+          _id: "$id",
+          numQuestionsAnswered: { $first: "$numQuestionsAnswered" },
+          numExperiences: { $first: "$numExperiences" },
+          hasSelfIntro: { $first: "$hasSelfIntro"},
+          accuracy: {
+            $push: {
+              _id: "$$ROOT._id",
+              accuracy: {
+                $cond: {
+                  if: {
+                    $ne: ["$$ROOT.numQuestion", 0],
+                  },
+                  then: {
+                    $divide: ["$$ROOT.numCorrect", "$$ROOT.numQuestion"],
+                  },
+                  else: 0,
+                },
+              },
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+    ]).toArray();
+
+    return res[0];
   };
 }
 

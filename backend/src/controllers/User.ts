@@ -21,7 +21,6 @@ class UserController extends BaseController {
     this.userService = new UserService();
   }
 
-
   GetUser = async (req: Request, res: Response) => {
     const userId: number = parseInt(res.locals["userId"]);
     const user = await this.userService.getUser(userId, ["progress"]);
@@ -42,7 +41,7 @@ class UserController extends BaseController {
 
       let newUser = {
         progress: {
-          "moduleId": "self-intro",
+          "moduleId": "welcome",
           "stage": 1,
         },
         intro: {
@@ -99,7 +98,7 @@ class UserController extends BaseController {
       stage: parseInt(req.body["stage"]),
     };
 
-    const skipModules: IModuleId[] = await this.userService.getSkipModules(userId);
+    // const skipModules: IModuleId[] = await this.userService.getSkipModules(userId);
 
     try {
       let nextStage: IModuleStage = await new ModuleService().getNextStage(
@@ -108,9 +107,9 @@ class UserController extends BaseController {
 
       // If the next stage is part of the skipping modules, get the next module
       let moduleId = nextStage.moduleId;
-      if (skipModules.includes(nextStage.moduleId)) {
-        nextStage = await new ModuleService().getNextModule(nextStage.moduleId, skipModules);
-      }
+      // if (skipModules.includes(nextStage.moduleId)) {
+      //   nextStage = await new ModuleService().getNextModule(nextStage.moduleId, skipModules);
+      // }
 
       const success: boolean = await this.userService.setUser(userId, {
         progress: nextStage,
@@ -153,23 +152,22 @@ class UserController extends BaseController {
     res.status(200).json(userIntro["intro"] ? userIntro["intro"] : {});
   };
 
-  // TODO
   GetStats = async (req, res) => {
-    const body = {
-      accuracy: {
-        before: 90,
-        after: 100,
-      },
-      numExperiences: 4,
-      numQuestionsAnswered: 16,
-      completedModules: [
-        "Self Introduction",
-        "Thinking of Experiences",
-        "Organising Situations",
-        "Mannerisms",
-      ],
-    };
-    res.status(200).send(body);
+    let userId: number = parseInt(res.locals["userId"]);
+    const stats = await this.userService.getStats(userId);
+
+    const prelim = stats["accuracy"].find((i) => {
+      return i["_id"] == "prelim";
+    });
+    const end = stats["accuracy"].find((i) => {
+      return i["_id"] == "end";
+    });
+
+    stats["accuracy"] = {};
+    stats["accuracy"]["prelim"] = Math.ceil((prelim ? prelim["accuracy"] : 0 )* 100);
+    stats["accuracy"]["end"] = Math.ceil((end ? end["accuracy"] : 0) * 100);
+
+    res.status(200).json(stats);
   };
 }
 

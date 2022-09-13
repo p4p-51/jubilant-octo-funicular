@@ -224,6 +224,9 @@ export default defineComponent({
   components: { ModuleItem, GoButton },
   methods: {
     async submitFeedback() {
+      if (this.numStars == 0 && this.feedback == "") {
+        return;
+      }
       const [error, data] = await submitFeedback(
         this.currentModule.id as ILectureModuleId,
         this.numStars,
@@ -246,9 +249,7 @@ export default defineComponent({
     }
     this.moduleStatus = moduleStatus;
 
-    this.currentModule = this.moduleStatus.find((module) => {
-      return module.status == "current";
-    })!;
+    this.currentModule = this.moduleStatus[index];
 
     this.nextModuleName =
       this.moduleStatus.find((module) => {
@@ -259,7 +260,7 @@ export default defineComponent({
     return {
       numStars: 0 as number,
       feedback: "" as string,
-      moduleStatus: {} as IModuleItem[],
+      moduleStatus: [] as IModuleItem[],
       currentModule: {} as IModuleItem,
       nextModuleName: "" as string,
     };
