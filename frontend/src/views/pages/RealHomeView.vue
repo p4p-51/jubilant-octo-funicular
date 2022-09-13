@@ -1,7 +1,7 @@
 <template>
   <div class="real-home-view">
     <div class="content">
-      <h1>Hi, there</h1>
+      <h1>Hi, {{ firebaseStore.user?.email?.split("@")[0] || "there" }}</h1>
       <h2>Ready to take your behavioural skills to the next level?</h2>
 
       <div class="continue-prompt">
