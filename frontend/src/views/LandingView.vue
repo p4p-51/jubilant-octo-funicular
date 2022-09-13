@@ -83,16 +83,11 @@
           situation turned out. A popular framework for this is the Situation,
           Task, Action, Result (STAR) model.
           <br />
-          <br />
-
-          An example of this would be:
-          <br />
-          Answer:...
         </p>
       </div>
       <img src="@/assets/illustrations/girl-balloons.svg" />
     </div>
-    <footer>Whatever goes in the footer.</footer>
+    <footer>P4P-51 2022</footer>
   </div>
 </template>
 
