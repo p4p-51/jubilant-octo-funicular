@@ -8,7 +8,7 @@ const guardedRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: () =>
-      import(/* webpackChunkName: "landing" */ "../views/LandingView.vue"),
+      import(/* webpackChunkName: "home" */ "../views/pages/RealHomeView.vue"),
   },
   {
     path: "/settings",
