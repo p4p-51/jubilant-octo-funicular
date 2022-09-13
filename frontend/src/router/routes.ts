@@ -775,7 +775,7 @@ const routeData = {
         },
         {
           route: "content",
-          name: "lecture",
+          name: "Lecture",
           content: [
             {
               type: "TitleBlock",
@@ -843,7 +843,7 @@ const routeData = {
                     "we were doing something and then a week later changed it back\n" +
                     "to the way it had been before. That can be very frustrating for an\n" +
                     "employee.",
-                  explanation: [
+                  explanations: [
                     "Negative, whiny tone",
                     "Bad mouthing former employer",
                     "No specific example of change",
@@ -859,7 +859,7 @@ const routeData = {
                     "to reach the right customers. The new plan included coupons,\n" +
                     "two-for-ones, and special displays to attract customers. By the\n" +
                     "end of the month sales rose significantly",
-                  explanation: [
+                  explanations: [
                     "Clear situation, task, action and result",
                     "Provided specific example",
                   ],

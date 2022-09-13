@@ -65,7 +65,7 @@
 
   > p {
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
 
     align-self: flex-end;
 
