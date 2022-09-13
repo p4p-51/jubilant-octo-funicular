@@ -7,16 +7,19 @@
       <div class="continue-prompt">
         <p>Current module: <span>Welcome</span></p>
         <div class="buttons">
-          <button
-            v-if="routeStore.moduleId !== 'welcome'"
-            @click="this.$router.push(routeStore.path())"
-          >
-            Continue where you left off ->
+          <button @click="this.$router.push(routeStore.path())">
+            {{
+              routeStore.moduleId !== "welcome"
+                ? "Continue where you left off "
+                : "Let's get started "
+            }}->
           </button>
           <img
+            v-if="routeStore.moduleId !== 'welcome'"
             src="@/assets/icons/refresh.svg"
             alt="Start from the beginning"
             title="Start from the beginning"
+            @click="this.$router.push('/lecture/welcome/content')"
           />
         </div>
       </div>

@@ -1392,7 +1392,7 @@ const routeData = {
 };
 
 export type ILectureModuleId = keyof typeof routeData["lecture"];
-export type IModuleId = ILectureModuleId | "grad";
+export type IModuleId = ILectureModuleId | "grad" | "welcome";
 export type IModuleStage = {
   moduleId: IModuleId;
   stage: number;
