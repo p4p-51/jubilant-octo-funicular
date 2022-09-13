@@ -18,9 +18,10 @@
           </p>
         </div>
         <p>
-          Pig fatback jerky shankle sausage. Porchetta spare ribs turducken,
-          tail salami cupim flank pork loin pig meatloaf brisket turkey ham hock
-          swine strip steak.
+          Funicular is a digitalised tool for behavioural interview practice. It
+          utilises a combination of lectures and interactive content to help you
+          feel confident and perform at your best in your next behavioural
+          interview!
         </p>
         <div v-if="!firebaseStore.isLoggedIn">
           <button @click="this.$router.push('/register')">Get started</button>
@@ -95,16 +96,11 @@
           situation turned out. A popular framework for this is the Situation,
           Task, Action, Result (STAR) model.
           <br />
-          <br />
-
-          An example of this would be:
-          <br />
-          Answer:...
         </p>
       </div>
       <img src="@/assets/illustrations/girl-balloons.svg" />
     </div>
-    <footer>Whatever goes in the footer.</footer>
+    <footer>P4P-51 2022</footer>
   </div>
 </template>
 

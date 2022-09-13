@@ -5,7 +5,7 @@
     <TitleBlock
       module="Experience"
       title="Adding answers to your interview profile"
-      subtitle="blah blac"
+      subtitle="Now that you know how to structure a response, let's write your own!"
     >
       Now you understand how to answer behaviural interview questions using the
       STAR method, it’s time for you to start praticing. First pick out a
@@ -36,6 +36,7 @@
           :key="addQuestionKey"
           @saveResponse="saveResponse"
           @deleteResponse="deleteResponse"
+          @saveNewExperience="saveNewExperience"
         />
       </div>
     </div>
@@ -119,6 +120,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 
 import { deleteAnswer, getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
 import { useRoute, useRouter } from "vue-router";
+import Experience from "@/types/Experience.Interface";
 const router = useRouter();
 const route = useRoute();
 
@@ -200,6 +202,13 @@ const setSelectedQuestion = async (questionId: number) => {
 
   selectedQuestion.value = question;
   isLoading.loading = false;
+};
+
+const saveNewExperience = (newExperience: Experience) => {
+  questions.questions.forEach((q) => {
+    if (newExperience.labels.includes(q.labelId))
+      q.experiences.push(newExperience);
+  });
 };
 
 onMounted(async () => {

@@ -50,6 +50,8 @@ export default defineComponent({
   margin-left: 15px;
   padding-right: 30px;
   height: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
 
   box-sizing: border-box;
 
@@ -57,6 +59,7 @@ export default defineComponent({
 
   > ul {
     list-style: none;
+    margin-bottom: 60px;
   }
 
   a {

@@ -65,7 +65,7 @@
 
   > p {
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
 
     align-self: flex-end;
 
@@ -129,7 +129,6 @@ export default defineComponent({
         alert("Cannot create new experience");
       } else {
         newExperience.experienceId = data.experienceId;
-        // this.experiences.push(newExperience);
         this.$emit("saveExperience", newExperience);
       }
       this.isModalOpen = false;

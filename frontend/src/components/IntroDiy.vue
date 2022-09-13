@@ -79,8 +79,6 @@
   }
 
   .checklist-container {
-    width: 400px;
-
     /* The container */
     .container {
       display: block;

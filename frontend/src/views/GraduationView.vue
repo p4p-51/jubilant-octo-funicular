@@ -2,7 +2,7 @@
   <loading v-model:active="isLoading" />
   <div class="graduation-view">
     <div class="header">
-      <h1>Yay! You've graduate 🎉</h1>
+      <h1>Yay! You've graduated 🎉</h1>
     </div>
     <div class="content">
       <div class="progress">
@@ -20,7 +20,7 @@
       <div class="achievements">
         <section-title>Your achievements</section-title>
         <div class="items">
-          <p>
+          <p v-if="stats.accuracy.end > stats.accuracy.prelim">
             Your quiz accuracy has improved from
             <span>{{ stats.accuracy.prelim }}</span
             >% to <span>{{ stats.accuracy.end }}</span

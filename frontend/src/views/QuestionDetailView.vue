@@ -25,6 +25,7 @@
           :key="addQuestionKey"
           @saveResponse="saveResponse"
           @deleteResponse="deleteResponse"
+          @saveNewExperience="saveNewExperience"
         />
         <!-- <button @click="goToGrad" class="go-button">
           Save and continue ->
@@ -110,6 +111,7 @@ import "vue-loading-overlay/dist/vue-loading.css";
 
 import { useRoute, useRouter } from "vue-router";
 import { deleteAnswer, getQuestionAnswer, getQuestions } from "@/apis/api"; // import router
+import Experience from "@/types/Experience.Interface";
 const router = useRouter();
 const route = useRoute();
 
@@ -190,6 +192,13 @@ const setSelectedQuestion = async (questionId: number) => {
 
   selectedQuestion.value = question;
   isLoading.loading = false;
+};
+
+const saveNewExperience = (newExperience: Experience) => {
+  questions.questions.forEach((q) => {
+    if (newExperience.labels.includes(q.labelId))
+      q.experiences.push(newExperience);
+  });
 };
 
 onMounted(async () => {

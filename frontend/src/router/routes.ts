@@ -8,7 +8,7 @@ const routeData = {
   lecture: {
     welcome: {
       route: "welcome",
-      name: "Welcome",
+      name: "Course introduction",
       stages: [
         {
           route: "content",
@@ -650,11 +650,14 @@ const routeData = {
                 {
                   id: "2",
                   text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
-                  explanation: "",
+                  explanation:
+                    "If the story involves an application, try to give only a brief explanation in S in STAR",
                 },
                 {
                   id: "3",
-                  text: "Admin - ",
+                  text: "Admin - What administrative tasks did you take on?",
+                  explanation:
+                    "While administrative tasks are impressive, your interviewer also wants to hear about other actions you took.",
                 },
                 {
                   id: "4",
@@ -772,7 +775,7 @@ const routeData = {
         },
         {
           route: "content",
-          name: "lecture",
+          name: "Lecture",
           content: [
             {
               type: "TitleBlock",
@@ -840,7 +843,7 @@ const routeData = {
                     "we were doing something and then a week later changed it back\n" +
                     "to the way it had been before. That can be very frustrating for an\n" +
                     "employee.",
-                  explanation: [
+                  explanations: [
                     "Negative, whiny tone",
                     "Bad mouthing former employer",
                     "No specific example of change",
@@ -856,7 +859,7 @@ const routeData = {
                     "to reach the right customers. The new plan included coupons,\n" +
                     "two-for-ones, and special displays to attract customers. By the\n" +
                     "end of the month sales rose significantly",
-                  explanation: [
+                  explanations: [
                     "Clear situation, task, action and result",
                     "Provided specific example",
                   ],
@@ -946,11 +949,14 @@ const routeData = {
                 {
                   id: "2",
                   text: "Application - What was the end application you achieved? Did it meet the expectations of the stakeholders?",
-                  explanation: "",
+                  explanation:
+                    "If the story involves an application, try to give only a brief explanation in S in STAR",
                 },
                 {
                   id: "3",
-                  text: "Admin - ",
+                  text: "Admin - What administrative tasks did you take on?",
+                  explanation:
+                    "While administrative tasks are impressive, your interviewer also wants to hear about other actions you took.",
                 },
                 {
                   id: "4",
@@ -1157,7 +1163,7 @@ const routeData = {
                     "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera",
                 },
                 {
-                  id: "1",
+                  id: "3",
                   text: "To the side",
                   explanation:
                     "If your light it to the side, half your face will be unevenly light",
@@ -1193,6 +1199,7 @@ const routeData = {
                     "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview",
                 },
               ],
+              answer: "1",
             },
           ] as QuestionForQuiz[],
         },
@@ -1335,7 +1342,7 @@ const routeData = {
                     "If there is a light behind you, it'll cast a shadow on your face, making it hard for the camera",
                 },
                 {
-                  id: "1",
+                  id: "3",
                   text: "To the side",
                   explanation:
                     "If your light it to the side, half your face will be unevenly light",
@@ -1371,6 +1378,7 @@ const routeData = {
                     "During an interview, you'll be taking a lot, so it's important to stay hydrated before and throughout the interview",
                 },
               ],
+              answer: "1",
             },
           ] as QuestionForQuiz[],
         },

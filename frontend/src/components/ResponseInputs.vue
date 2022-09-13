@@ -63,6 +63,8 @@
 
     transition: $animation;
 
+    flex: 1;
+
     &.hidden {
       visibility: hidden;
       height: 0;
@@ -88,6 +90,7 @@
       border: solid 1px $c-grey-light;
 
       resize: vertical;
+      align-self: stretch;
 
       &:focus {
         outline: solid 1px $c-primary;
@@ -113,7 +116,7 @@ export default defineComponent({
   components: { Loading },
   computed: {
     saveOrEdit() {
-      return this.isEdit ? "Edit" : "Save";
+      return "Save";
     },
     isEdit() {
       return !!this.currentAnswer;
