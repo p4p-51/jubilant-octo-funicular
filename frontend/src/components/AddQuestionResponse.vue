@@ -83,16 +83,8 @@ export default defineComponent({
     },
   },
   methods: {
-    async saveExperience(newExperience: Experience) {
-      this.isLoading = true;
-      const [error, data] = await putExperience(newExperience);
-      if (error) {
-        alert("Cannot create new experience");
-      } else {
-        newExperience.experienceId = data.experienceId;
-        this.question.experiences.push(newExperience);
-      }
-      this.isLoading = false;
+    saveExperience(newExperience: Experience) {
+      this.$emit("saveNewExperience", newExperience);
     },
     deleteResponse(response: Answer) {
       this.$emit("deleteResponse", response);

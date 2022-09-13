@@ -129,7 +129,6 @@ export default defineComponent({
         alert("Cannot create new experience");
       } else {
         newExperience.experienceId = data.experienceId;
-        // this.experiences.push(newExperience);
         this.$emit("saveExperience", newExperience);
       }
       this.isModalOpen = false;
