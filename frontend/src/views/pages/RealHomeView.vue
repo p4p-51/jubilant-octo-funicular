@@ -1,12 +1,24 @@
 <template>
   <div class="real-home-view">
     <div class="content">
-      <h1>Hi, name</h1>
+      <h1>Hi, there</h1>
       <h2>Ready to take your behavioural skills to the next level?</h2>
 
       <div class="continue-prompt">
         <p>Current module: <span>Welcome</span></p>
-        <button>Let's get started or something</button>
+        <div class="buttons">
+          <button
+            v-if="routeStore.moduleId !== 'welcome'"
+            @click="this.$router.push(routeStore.path())"
+          >
+            Continue where you left off ->
+          </button>
+          <img
+            src="@/assets/icons/refresh.svg"
+            alt="Start from the beginning"
+            title="Start from the beginning"
+          />
+        </div>
       </div>
     </div>
     <div class="illustration-container">
@@ -68,10 +80,27 @@
         }
       }
 
-      button {
-        color: $c-bg-grey;
+      .buttons {
+        display: flex;
+        align-items: center;
 
-        background: $c-primary;
+        button {
+          color: $c-bg-grey;
+
+          background: $c-primary;
+        }
+
+        img {
+          margin-left: 15px;
+          transform: scaleX(-1);
+
+          cursor: pointer;
+          transition: $animation;
+
+          &:hover {
+            transform: scaleX(-1) scale(1.1) rotate(20deg);
+          }
+        }
       }
     }
   }
@@ -99,3 +128,36 @@
   }
 }
 </style>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import { firebaseStore } from "@/stores/firebase.store";
+import router from "@/router";
+import { routeStore } from "@/stores/route.store";
+import { getUser } from "@/apis/api";
+
+export default defineComponent({
+  name: "RealHomeView",
+  data() {
+    return {
+      firebaseStore,
+      routeStore,
+    };
+  },
+  async mounted() {
+    if (!firebaseStore.isLoggedIn) {
+      return;
+    }
+
+    if (routeStore.moduleId == null) {
+      const [error, data] = await getUser();
+
+      if (error) {
+        alert("This error should not occur, please refresh your page");
+        return;
+      }
+      routeStore.update(data["progress"]);
+    }
+  },
+});
+</script>
