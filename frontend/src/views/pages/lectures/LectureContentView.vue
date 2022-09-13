@@ -1,18 +1,29 @@
 <template>
   <div class="lecture-container">
-    <component
-      v-for="(component, i) in this.content"
-      :key="i"
-      :is="component.type"
-      v-bind="component.props"
-    >
-    </component>
+    <div class="content-container">
+      <component
+        v-for="(component, i) in this.content"
+        :key="i"
+        :is="component.type"
+        v-bind="component.props"
+      >
+      </component>
+    </div>
     <go-button class="go-button" />
   </div>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/css/theme.scss";
+
+.content-container {
+  flex: 1;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 </style>
 
 <script lang="ts">
