@@ -5,7 +5,10 @@
       <h2>Ready to take your behavioural skills to the next level?</h2>
 
       <div class="continue-prompt">
-        <p>Current module: <span>Welcome</span></p>
+        <p>
+          Current module:
+          <span>{{ DataExtractor.getModuleName(routeStore.moduleId) }}</span>
+        </p>
         <div class="buttons">
           <button @click="this.$router.push(routeStore.path())">
             {{
@@ -138,6 +141,7 @@ import { firebaseStore } from "@/stores/firebase.store";
 import router from "@/router";
 import { routeStore } from "@/stores/route.store";
 import { getUser } from "@/apis/api";
+import { DataExtractor } from "@/router/routes";
 
 export default defineComponent({
   name: "RealHomeView",
@@ -145,6 +149,7 @@ export default defineComponent({
     return {
       firebaseStore,
       routeStore,
+      DataExtractor,
     };
   },
   async mounted() {

@@ -1465,6 +1465,13 @@ class DataExtractor {
     return stage!["content"] as QuestionForQuiz[];
   };
 
+  static getModuleName = (moduleId: ILectureModuleId | "grad"): string => {
+    if (moduleId === "grad") {
+      return "Graduation";
+    }
+    return routeData["lecture"][moduleId]["name"];
+  };
+
   static getModuleContent = (moduleId: ILectureModuleId) => {
     const data = routeData["lecture"][moduleId]["stages"];
 
