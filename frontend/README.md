@@ -49,3 +49,8 @@ Do note that a locally hosted frontend of the application connects to a locally 
 ## How to set up the backend?
 
 Please find the [backend Readme here](https://github.com/p4p-51/jubilant-octo-funicular/blob/main/backend/README.md).
+
+# The Stack
+
+Funicular's frontend is implemented in Vue. TypeScript is enabled, and SCSS is used. It's deployed on Netlify right now. That's all!
+
