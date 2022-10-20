@@ -18,7 +18,7 @@
               :key="question.questionId"
               :title="question.questionText"
               :answers="question.answerCount"
-              @click="this.$router.push(`/questions/${question.questionId}`)"
+              @click="navigateToQuestion(question)"
             />
           </div>
         </div>
@@ -32,7 +32,7 @@
               :id="question.questionId"
               :key="question.questionId"
               :title="question.questionText"
-              @click="this.$router.push(`/questions/${question.questionId}`)"
+              @click="navigateToQuestion(question)"
             />
           </div>
         </div>
@@ -120,6 +120,11 @@ import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { getQuestions } from "@/apis/api";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import router from "@/router";
+
+const navigateToQuestion = (question: Question) => {
+  router.push(`/questions/${question.questionId}`);
+};
 
 interface QuestionResponse extends Question {
   answerCount: number;
